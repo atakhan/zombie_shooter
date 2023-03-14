@@ -1,29 +1,37 @@
 #include <raylib-cpp.hpp>
 
+#include "modules/Player/Player.h"
+#include "modules/Bullet/Bullet.h"
+#include "modules/Enemy/Enemy.h"
+#include "modules/Collider/Collider.h"
+#include "modules/Game/Game.h"
+
+#include <iostream>
+#include <vector>
+#include <iterator>
+
 int main() {
-    
-    // Initialization
-    int screenWidth = 800;
-    int screenHeight = 450;
+  int screenWidth = 1024;
+  int screenHeight = 1024;
 
-    raylib::Color textColor(LIGHTGRAY);
-    raylib::Window w(screenWidth, screenHeight, "Raylib C++ Starter Kit Example");
-    
-    SetTargetFPS(60);
+  raylib::Color textColor(LIGHTGRAY);
+  raylib::Window window(screenWidth, screenHeight, "Zombie Shooter");
+  
+  SetTargetFPS(60);
 
-    // Main game loop
-    while (!w.ShouldClose()) // Detect window close button or ESC key
-    {
-        // Update
+  Game game = Game();
 
-        // TODO: Update your variables here
+  while (!window.ShouldClose()) {
+      
+      game.Update();
 
-        // Draw
-        BeginDrawing();
+      BeginDrawing();
         ClearBackground(RAYWHITE);
-        textColor.DrawText("Congrats! You created your first window!", 190, 200, 20);
-        EndDrawing();
-    }
+        game.Draw();
+      EndDrawing();
+      
+      game.tick++;
+  }
 
-    return 0;
+  return 0;
 }
