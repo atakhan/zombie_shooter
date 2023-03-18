@@ -67,6 +67,10 @@ void Game::Draw() {
 }
 
 void Game::Update() {
+  UpdateMusicStream(gameSounds->getBackgroundMusic());
+  PlayMusicStream(gameSounds->getBackgroundMusic());
+  float timePlayed = GetMusicTimePlayed(gameSounds->getBackgroundMusic())/GetMusicTimeLength(gameSounds->getBackgroundMusic());
+  if (timePlayed > 1.0f) timePlayed = 1.0f;
   if (!isOver) {
     player.Update(killed);
     enemy.spawn(enemy_texture, enemies, &tick, killed, &spawnTime);
@@ -76,4 +80,8 @@ void Game::Update() {
       Restart();
     }
   }
+}
+
+Game::~Game() {
+  delete gameSounds;
 }

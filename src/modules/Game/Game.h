@@ -3,6 +3,7 @@
 
 #include "../Bullet/Bullet.h"
 #include "../Player/Player.h"
+#include "../GameSound/GameSound.h"
 #include "../Collider/Collider.h"
 #include <raylib-cpp.hpp>
 
@@ -19,13 +20,19 @@ public:
   Texture2D game_bg;
   Texture2D enemy_texture;
 
+  GameSound *gameSounds = new GameSound();
+
+
   Game();
+  ~Game();
 
   void Restart();
   void DrawStats();
   void DrawGameOver();
   void Draw();
   void Update();
+
+  // void setGameSound();
 
 };
 

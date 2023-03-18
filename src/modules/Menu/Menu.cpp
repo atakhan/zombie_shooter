@@ -2,5 +2,5 @@
 #include <iostream>
 
 Menu::Menu() {
- 
+    
 }
