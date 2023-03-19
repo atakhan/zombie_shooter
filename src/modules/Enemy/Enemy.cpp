@@ -80,12 +80,23 @@ void Enemy::draw() {
 }
 
 void Enemy::spawn(Texture2D texture, std::vector<Enemy> &enemies, int *tick, int killed, int *spawnTime) {
-  if (*tick == *spawnTime) {    
+  if (*tick == *spawnTime) {
+    counterSpawnZombie++;
     Enemy enemy = Enemy(SpriteAnimation(texture, 17, 1, 17));
     (killed == 0)
       ? enemy.speed = 1
       : enemy.speed = 1 + (killed / 4);
     enemies.push_back(enemy);
+    if (counterSpawnZombie % 7 == 0 || counterSpawnZombie == 1) {
+      gameSound->ZombieSound(gameSound->getZombieSound());
+     
+      // srand(time(NULL)); // инициализация генератора случайных чисел
+    
+      int randomNumber = 4; // получение случайного индекса от 0 до 9
+      if (randomNumber <= 4) {
+        gameSound->PlayScreamSound(randomNumber);
+      }
+    }
     if (*spawnTime > 30) {
       *spawnTime -= 1;
     }

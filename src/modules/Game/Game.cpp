@@ -25,11 +25,11 @@ void Game::DrawStats() {
   
   // enemies count
   std::string ec = std::to_string(enemies.size());
-  raylib::DrawText(ec, 300, 10, 16, DARKGREEN);
+  raylib::DrawText(ec, 300, 10, 16, RED);
 
   // killed enemies count
   std::string kec = std::to_string(killed);
-  raylib::DrawText(kec, 400, 10, 16, DARKGREEN);
+  raylib::DrawText(kec, 400, 10, 16, RED);
 }
 
 void Game::DrawGameOver() {
@@ -67,10 +67,8 @@ void Game::Draw() {
 }
 
 void Game::Update() {
-  UpdateMusicStream(gameSounds->getBackgroundMusic());
-  PlayMusicStream(gameSounds->getBackgroundMusic());
-  float timePlayed = GetMusicTimePlayed(gameSounds->getBackgroundMusic())/GetMusicTimeLength(gameSounds->getBackgroundMusic());
-  if (timePlayed > 1.0f) timePlayed = 1.0f;
+  gameSounds->PlayBgMusic(gameSounds->getBackgroundMusic());
+  gameSounds->PlayIsDeadSounds(gameSounds->getDeadPlayerSound(), isOver);
   if (!isOver) {
     player.Update(killed);
     enemy.spawn(enemy_texture, enemies, &tick, killed, &spawnTime);

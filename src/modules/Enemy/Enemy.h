@@ -2,6 +2,7 @@
 #define ENEMY_H
 #include "../Bullet/Bullet.h"
 #include "../SpriteAnimation/SpriteAnimation.h"
+#include "../GameSound/GameSound.h"
 #include <raylib-cpp.hpp>
 
 #define SPAWN_TIME 60
@@ -17,6 +18,8 @@ public:
   float speed = 1;
   float angle;
   SpriteAnimation sprite;
+  GameSound *gameSound = new GameSound();
+  int counterSpawnZombie = 0;
 
   Enemy();
   Enemy(SpriteAnimation sprite);

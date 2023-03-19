@@ -15,9 +15,10 @@ public:
   Color color;
   std::vector<Bullet> bullets;
   int speed;
-
+  GameSound *gameSound = new GameSound();
   SpriteAnimation sprite;
-
+  bool isMove;
+  bool isShoot;
   int activeAnimation;
 
   Player();

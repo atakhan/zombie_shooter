@@ -1,6 +1,7 @@
 #ifndef SPRITE_ANIMATION_H
 #define SPRITE_ANIMATION_H
 
+#include "../GameSound/GameSound.h"
 #include <iostream>
 #include <raylib-cpp.hpp>
 
@@ -15,6 +16,7 @@ public:
   int framesCounter;
   int currentFrame;
   int currentLine;
+  GameSound *gameSound = new GameSound();
   
   
   SpriteAnimation();

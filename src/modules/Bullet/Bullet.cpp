@@ -21,6 +21,7 @@ bool Bullet::WallCollider() {
 void Bullet::update() {
   pos.x += vel.x;
   pos.y += vel.y;
+  
 }
 
 void Bullet::draw() {

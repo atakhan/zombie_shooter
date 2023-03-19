@@ -15,27 +15,37 @@ Player::Player(SpriteAnimation _sprite) : sprite()
   sprite = _sprite;
   sprite.SetCurrentFrame(4);
   sprite.SetCurrentLine(6);
+  isMove = false;
 }
 
 void Player::UpdateAnimation() {
   if (IsKeyDown(KEY_W) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) {
     sprite.PlayAnimation(5, 7, 0);
+    isMove = true;
   } else if (IsKeyDown(KEY_D) && IsKeyDown(KEY_W)) {
     sprite.PlayAnimation(5, 7, 1);
+    isMove = true;
   } else if (IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)) {
     sprite.PlayAnimation(5, 7, 2);
+    isMove = true;
   } else if (IsKeyDown(KEY_D) && IsKeyDown(KEY_S)) {
     sprite.PlayAnimation(5, 7, 3);
+    isMove = true;
   } else if (IsKeyDown(KEY_S) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) {
     sprite.PlayAnimation(5, 7, 4);
+    isMove = true;
   } else if (IsKeyDown(KEY_A) && IsKeyDown(KEY_S)) {
     sprite.PlayAnimation(5, 7, 5);
+    isMove = true;
   } else if (IsKeyDown(KEY_A) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)) {
     sprite.PlayAnimation(5, 7, 6);
+    isMove = true;
   } else if (IsKeyDown(KEY_A) && IsKeyDown(KEY_W)) {
     sprite.PlayAnimation(5, 7, 7);
+    isMove = true;
   } else {
     sprite.PlayAnimation(6, 6, 4);
+    isMove = false;
   }
 }
 
@@ -60,6 +70,7 @@ void Player::move() {
       pos.y += speed;
     }
   }
+  gameSound->PlayWalkSounds(gameSound->getStepSound(), isMove);
 }
 
 void Player::rifleUpdate() {
@@ -84,6 +95,7 @@ void Player::rifleUpdate() {
 
 void Player::shoot() {
   if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    gameSound->PlayerShotSounds(gameSound->getPlayerShotSounds(), true);
     float vx = (rifleStart.x - pos.x);
     float vy = (rifleStart.y - pos.y);
     bullets.push_back(
