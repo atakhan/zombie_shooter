@@ -64,7 +64,7 @@ void InputSystem(std::vector<Entity>& entities) {
         }
 
         // Обработка ввода с клавиатуры
-        if (vel) {
+        if (vel && power) {
             vel->speedX_ = 0; // Сбрасываем скорость по X
             vel->speedY_ = 0; // Сбрасываем скорость по Y
 
@@ -76,3 +76,78 @@ void InputSystem(std::vector<Entity>& entities) {
     }
 }
 
+void HealthUISystem(std::vector<Entity>& entities) {
+    for (auto& entity : entities) {
+        if (entity.id != 1) { // Предполагаем, что ID игрока равен 1
+            continue;
+        }
+        
+        Health* health = nullptr;
+        for (auto& comp : entity.components) {
+            if (dynamic_cast<Health*>(comp)) {
+                health = static_cast<Health*>(comp);
+                break;
+            }
+        }
+        if (health) {
+            std::string text = std::to_string(health->currentHealth_);
+            DrawText(text.c_str(), 10, 10, 32, DARKGREEN);
+        }
+    }
+}
+
+void AIMovementSystem(std::vector<Entity>& entities) {
+    static bool isSeedInitialized = false;
+    if (!isSeedInitialized) {
+        srand(static_cast<unsigned int>(time(nullptr)));
+        isSeedInitialized = true;
+    }
+
+    for (auto& entity : entities) {
+        if (entity.id == 1) { // Предполагаем, что ID игрока равен 1
+            continue;
+        }
+        
+        MovementAI* moveAi = nullptr;
+        Velocity* vel = nullptr;
+        Power* power = nullptr;
+
+        // Находим компонент Velocity и Power
+        for (auto& comp : entity.components) {
+            if (dynamic_cast<MovementAI*>(comp)) {
+                moveAi = static_cast<MovementAI*>(comp);
+            }
+            if (dynamic_cast<Velocity*>(comp)) {
+                vel = static_cast<Velocity*>(comp);
+            }
+            if (dynamic_cast<Power*>(comp)) {
+                power = static_cast<Power*>(comp);
+            }
+        }
+
+        if (moveAi && vel && power) {
+            vel->speedX_ = 0; // Сбрасываем скорость по X
+            vel->speedY_ = 0; // Сбрасываем скорость по Y
+
+            // Генерация случайного направления
+            moveAi->direction_ = (rand() % 4) + 1; // Значение от 1 до 4
+
+            switch (moveAi->direction_) {
+                case 1: // Движение вверх
+                    vel->speedY_ = -power->move_;
+                    break;
+                case 2: // Движение вниз
+                    vel->speedY_ = power->move_;
+                    break;
+                case 3: // Движение влево
+                    vel->speedX_ = -power->move_;
+                    break;
+                case 4: // Движение вправо
+                    vel->speedX_ = power->move_;
+                    break;
+            }
+
+            moveAi->isMovement_ = true;
+        }
+    }
+}

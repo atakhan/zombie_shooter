@@ -56,4 +56,10 @@ struct Enemy : public Component {
     Enemy(bool v) : isAggressive_(v) {};
 };
 
+struct MovementAI : public Component {
+    bool isMovement_;
+    int direction_;
+    MovementAI(bool isM, int d) : isMovement_(isM), direction_(d) {};
+};
+
 #endif // COMPONENTS_H
