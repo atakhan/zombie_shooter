@@ -20,6 +20,7 @@ void Game::CreatePlayer() {
     player.components.push_back(new Health{100, 100});
     // player.components.push_back(new Sprite{LoadTexture("player.png")});
     player.components.push_back(new Circle(400, 300, 10, raylib::Color(255U, 10U, 10U)));
+    player.components.push_back(new Power{5});
     entities.push_back(player);
 }
 
@@ -46,6 +47,7 @@ void Game::CreateLoot() {
 }
 
 void Game::Update() {
+    InputSystem(entities);
     MovementSystem(entities);
     CollisionSystem(entities);
     LootSystem(entities);

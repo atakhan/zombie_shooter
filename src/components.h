@@ -18,6 +18,11 @@ struct Velocity : public Component {
     Velocity(float sx, float sy) : speedX_(sx), speedY_(sy) {};
 };
 
+struct Power : public Component {
+    float move_;
+    Power(float m) : move_(m) {};
+};
+
 struct Health : public Component {
     int currentHealth_;
     int maxHealth_;
