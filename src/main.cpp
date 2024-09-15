@@ -2,11 +2,11 @@
 #include "game.h"
 
 int main() {
-    InitWindow(800, 600, "Top-Down RPG Demo");
-    SetTargetFPS(60);
 
     Game game;
     game.Init();
+    InitWindow(800, 600, "Top-Down RPG Demo");
+    SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
         game.Update();

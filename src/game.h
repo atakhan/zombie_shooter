@@ -15,8 +15,10 @@ public:
 private:
     std::vector<Entity> entities;
     void LoadResources();
+    void CreateEntity(int id, std::vector<Component*> components);
     void CreatePlayer();
     void CreateEnemies();
+    void CreateTerrain();
     void CreateLoot();
 };
 
