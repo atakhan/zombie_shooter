@@ -3,6 +3,7 @@
 #define ZOMBIE_H
 
 #include <iostream>
+#include <cstdlib>
 #include <cmath>
 #include <raylib-cpp.hpp>
 
@@ -16,26 +17,29 @@
 class Zombie : public Entity {
 public:
     Zombie(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY);
-    void Update() override;
     void Draw() override;
     void TakeDamage(float damage) override;
+    void Idle();
     void Move();
     void Attack();
     void Die();
     void SetGoal(float x, float y);
+    void FindGoal();
+    bool HasGoal();
+    bool GoalReached();
 
 private:
     enum State { IDLE, WALKING, RUNNING, ATTACKING };
-    State currentState;
+    State currentState_;
 
-    HealthComponent healthComponent;
-    PositionComponent positionComponent;
-    GoalComponent goalComponent;
-    AttackComponent attackComponent;
-    SpeedComponent speedComponent;
+    HealthComponent health_;
+    PositionComponent position_;
+    GoalComponent goal_;
+    AttackComponent attack_;
+    SpeedComponent speed_;
 
-    float hearingRadius;
-    float attackingRadius;
+    float hearingRadius_;
+    float attackingRadius_;
 
     void ChangeState(State newState);
     void MoveTo(float speedComponent);

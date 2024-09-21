@@ -3,26 +3,16 @@
 #include <iostream>
 
 Player::Player(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY)
-    : healthComponent(health)
-    , attackComponent(strength)
-    , speedComponent(agility)
+    : health(health)
+    , attack(strength)
+    , speed(agility)
     , hearingRadius(hearingRadius)
     , attackingRadius(attackingRadius)
     , currentState(IDLE)
-    , positionComponent(posX, posY) {}
-
-
-void Player::Update() {
-    std::cout << "Player Updating" << std::endl;
-}
+    , position(posX, posY) {}
 
 void Player::TakeDamage(float damage) {
-    healthComponent.TakeDamage(damage);
-}
-
-void Player::Move() {
-    // Логика движения игрока
-    std::cout << "Player Moving" << std::endl;
+    health.TakeDamage(damage);
 }
 
 void Player::Attack() {
@@ -31,5 +21,24 @@ void Player::Attack() {
 }
 
 void Player::Draw() {
-    DrawCircle(positionComponent.GetPositionX(), positionComponent.GetPositionY(), healthComponent.GetHealth(), GRAY);
+    DrawCircle(
+        position.GetPositionX(), 
+        position.GetPositionY(), 
+        health.GetHealth(), 
+        BLUE
+    );
+}
+
+float Player::GetPositionX() {
+    return position.GetPositionX();
+}
+float Player::GetPositionY() {
+    return position.GetPositionY();
+}
+
+void Player::SetPositionX(float x) {
+    position.SetPositionX(x);
+}
+void Player::SetPositionY(float y) {
+    position.SetPositionY(y);
 }

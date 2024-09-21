@@ -25,3 +25,11 @@ bool GoalComponent::Reached(float currentPosX, float currentPosY) {
     }
     return false;
 }
+
+bool GoalComponent::IsActive() {
+    return active;
+}
+
+void GoalComponent::SetActive(bool v) {
+    active = v;
+}

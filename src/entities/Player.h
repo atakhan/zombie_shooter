@@ -16,20 +16,22 @@
 class Player : public Entity {
 public:
     Player(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY);
-    void Update() override;
     void Draw() override;
     void TakeDamage(float damage) override;
-    void Move();
     void Attack();
+    float GetPositionX();
+    float GetPositionY();
+    void SetPositionX(float);
+    void SetPositionY(float);
 
 private:
     enum State { IDLE, WALKING, RUNNING, ATTACKING };
     State currentState;
 
-    HealthComponent healthComponent;
-    PositionComponent positionComponent;
-    AttackComponent attackComponent;
-    SpeedComponent speedComponent;
+    HealthComponent health;
+    PositionComponent position;
+    AttackComponent attack;
+    SpeedComponent speed;
 
     float hearingRadius;
     float attackingRadius;

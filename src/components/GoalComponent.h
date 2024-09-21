@@ -11,10 +11,13 @@ public:
     float GetPositionX();
     float GetPositionY();
     bool Reached(float x, float y);
+    bool IsActive();
+    void SetActive(bool);
 
 private:
     float posX;
     float posY;
+    bool active;
 };
 
 #endif // GOALCOMPONENT_H
