@@ -8,18 +8,17 @@
 
 class Scene {
 public:
-    virtual void Init();
-    virtual void Update();
-    virtual void Draw();
+    void Init();
+    void Update();
+    void Draw();
     
-    void AddSystem(System* system) {systems.push_back(system);}
+    void AddSystem(System* system);
     void RemoveSystem(System* system);
-    void UpdateSystems();
-    
-    void AddEntity(Entity* entity) {entities.push_back(entity);}
+
+    void AddEntity(Entity* entity);
     void RemoveEntity(Entity* entity);
-    void UpdateEntities(float playerX, float playerY);
-    
+
+    void UpdateSystems();
     void DrawEntities();
 protected:
     std::vector<System*> systems;

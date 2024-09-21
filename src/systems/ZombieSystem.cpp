@@ -7,8 +7,12 @@ void ZombieSystem::Init(std::vector<Entity*> *entities) {
 }
 
 void ZombieSystem::Update(std::vector<Entity*> *entities) {
-    std::cout << "Updating Zombie System" << std::endl;
-    // Логика появления и движения зомби
+    for (Entity* entity : *entities) {
+        Zombie* zombie = dynamic_cast<Zombie*>(entity);
+        if (zombie) {
+            zombie->Update();
+        }
+    }
 }
 
 void ZombieSystem::Draw(std::vector<Entity*> *entities) {

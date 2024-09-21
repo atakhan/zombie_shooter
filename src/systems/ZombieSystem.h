@@ -4,6 +4,7 @@
 
 #include "../core/System.h"
 #include "../core/Entity.h"
+#include "../entities/Zombie.h"
 
 class ZombieSystem : public System {
 public:
