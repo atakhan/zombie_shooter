@@ -27,7 +27,7 @@ public:
     void Attack();
     void Die();
     void SetGoal(float x, float y);
-    void FindGoal();
+    void FindRandomGoal();
     bool HasGoal();
     bool GoalReached();
     PositionComponent *FindEat(std::vector<Entity*> *entities);

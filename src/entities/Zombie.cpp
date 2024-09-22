@@ -28,7 +28,7 @@ bool Zombie::HasGoal() {
     return goal_.IsActive();
 }
 
-void Zombie::FindGoal() {
+void Zombie::FindRandomGoal() {
     int min = 0;
     int xmax = Config::WINDOW_WIDTH;
     int ymax = Config::WINDOW_HEIGHT;
@@ -38,7 +38,19 @@ void Zombie::FindGoal() {
     SetGoal(randX, randY);
 }
 
+// TODO
 PositionComponent *Zombie::FindEat(std::vector<Entity*> *entities) {
+    Player *player = nullptr;
+    for (const auto& entity : *entities) {
+        if (dynamic_cast<Player*>(entity)) {
+            player = static_cast<Player*>(entity);
+        }
+    }
+    if (player) {
+        float player_pos_x = player->GetPositionX();
+        float player_pos_y = player->GetPositionY();
+        player->GetSoundRadius();
+    }
     // return new PositionComponent(400.0f, 400.0f);
     return nullptr;
 }
