@@ -23,15 +23,18 @@ public:
     Zombie(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY);
     void Draw() override;
     void TakeDamage(float damage) override;
-    void Idle();
     void Move();
-    void Attack();
     void Die();
+    void IdleState();
+    void RunningState();
+    void WalkingState();
+    void AttackState();
+    void Attack();
     void SetGoal(float x, float y);
     void FindRandomGoal();
     bool HasGoal();
     bool GoalReached();
-    PositionComponent *FindEat(std::vector<Entity*> *entities);
+    PositionComponent *FindFood(std::vector<Entity*> *entities);
 
 private:
     enum State { IDLE, WALKING, RUNNING, ATTACKING };

@@ -10,10 +10,11 @@ void ZombieSystem::Update(std::vector<Entity*> *entities) {
     for (Entity* entity : *entities) {
         Zombie* zombie = dynamic_cast<Zombie*>(entity);
         if (zombie) {
-            PositionComponent* eat = nullptr; 
-            eat = zombie->FindEat(entities);  // TODO
-            if (eat) {
-                zombie->SetGoal(eat->GetPositionX(), eat->GetPositionY());
+            PositionComponent* food = nullptr; 
+            food = zombie->FindFood(entities);
+            if (food) {
+                zombie->SetGoal(food->GetPositionX(), food->GetPositionY());
+                zombie->AttackState();
                 zombie->Move();
             } else {
                 if (zombie->HasGoal() && zombie->GoalReached() == false) {
@@ -21,9 +22,10 @@ void ZombieSystem::Update(std::vector<Entity*> *entities) {
                 } else {
                     if (GetRandomHalfProbability(99)) {
                         zombie->FindRandomGoal();
+                        zombie->WalkingState();
                         zombie->Move();
                     } else {
-                        zombie->Idle();
+                        zombie->IdleState();
                     }
                 }
             }

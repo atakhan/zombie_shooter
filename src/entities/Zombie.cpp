@@ -38,7 +38,7 @@ void Zombie::FindRandomGoal() {
     SetGoal(randX, randY);
 }
 
-PositionComponent *Zombie::FindEat(std::vector<Entity*> *entities) {
+PositionComponent *Zombie::FindFood(std::vector<Entity*> *entities) {
     PositionComponent *result = nullptr;
     Player *player = nullptr;
     for (const auto& entity : *entities) {
@@ -63,16 +63,10 @@ PositionComponent *Zombie::FindEat(std::vector<Entity*> *entities) {
     return result;
 }
 
-void Zombie::Idle() {
-    ChangeState(IDLE);
-    goal_.SetActive(false);
-}
-
 void Zombie::Move() {
     if (goal_.Reached(position_.GetPositionX(), position_.GetPositionY())) {
-        Idle();
+        IdleState();
     } else {
-        ChangeState(WALKING);
         goal_.SetActive(true);
         float newPosX = 0.0f;
         float newPosY = 0.0f;
@@ -84,7 +78,7 @@ void Zombie::Move() {
                 MoveTo(speed_.GetSpeed() * 0.5f);
                 break;
             case RUNNING:
-                MoveTo(speed_.GetSpeed());
+                MoveTo(speed_.GetSpeed() * 1.5);
                 break;
             case ATTACKING:
                 Attack();
@@ -93,8 +87,25 @@ void Zombie::Move() {
     }
 }
 
+void Zombie::IdleState() {
+    ChangeState(IDLE);
+    goal_.SetActive(false);
+}
+
+void Zombie::AttackState() {
+    ChangeState(RUNNING);
+}
+
+void Zombie::RunningState() {
+    ChangeState(RUNNING);
+}
+
+void Zombie::WalkingState() {
+    ChangeState(WALKING);
+}
+
 void Zombie::Attack() {
-    std::cout << "Zombie attacks with strength: " << attack_.GetAttackStrength() << std::endl;
+    std::cout << "Zombie attacked." << std::endl;
 }
 
 void Zombie::Die() {
