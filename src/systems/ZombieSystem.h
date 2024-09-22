@@ -10,11 +10,11 @@
 #include "../entities/Player.h"
 
 class ZombieSystem : public System {
-public:
+  public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
 
-private:
+  private:
     bool GetRandomHalfProbability(int);
 };
 

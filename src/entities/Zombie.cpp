@@ -9,7 +9,8 @@ Zombie::Zombie(float health, float strength, float agility, float hearingRadius,
     , attackingRadius_(attackingRadius)
     , currentState_(IDLE)
     , goal_(posX, posY)
-    , position_(posX, posY) {}
+    , position_(posX, posY)
+    , sound_(100.0f, true) {}
 
 void Zombie::TakeDamage(float damage) {
     health_.TakeDamage(damage);
@@ -29,12 +30,17 @@ bool Zombie::HasGoal() {
 
 void Zombie::FindGoal() {
     int min = 0;
-    int xmax = 800;
-    int ymax = 600;
+    int xmax = Config::WINDOW_WIDTH;
+    int ymax = Config::WINDOW_HEIGHT;
     int randX = rand()%(xmax-min + 1) + min;
     int randY = rand()%(ymax-min + 1) + min;
 
     SetGoal(randX, randY);
+}
+
+PositionComponent *Zombie::FindEat(std::vector<Entity*> *entities) {
+    // return new PositionComponent(400.0f, 400.0f);
+    return nullptr;
 }
 
 void Zombie::Idle() {
