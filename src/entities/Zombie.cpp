@@ -38,8 +38,8 @@ void Zombie::FindRandomGoal() {
     SetGoal(randX, randY);
 }
 
-// TODO
 PositionComponent *Zombie::FindEat(std::vector<Entity*> *entities) {
+    PositionComponent *result = nullptr;
     Player *player = nullptr;
     for (const auto& entity : *entities) {
         if (dynamic_cast<Player*>(entity)) {
@@ -49,10 +49,18 @@ PositionComponent *Zombie::FindEat(std::vector<Entity*> *entities) {
     if (player) {
         float player_pos_x = player->GetPositionX();
         float player_pos_y = player->GetPositionY();
-        player->GetSoundRadius();
+        float pos_x_dif = player_pos_x - position_.GetPositionX();
+        float pos_y_dif = player_pos_y - position_.GetPositionY();
+        float radius_dif = player->GetSoundRadius() + health_.GetHealth();
+        // if collide
+        if (fabs(((pos_x_dif * pos_x_dif) + (pos_y_dif * pos_y_dif))) <= (radius_dif * radius_dif)) {
+            if (!result) {
+                result = new PositionComponent(player_pos_x, player_pos_y);
+            }
+        }
     }
-    // return new PositionComponent(400.0f, 400.0f);
-    return nullptr;
+
+    return result;
 }
 
 void Zombie::Idle() {

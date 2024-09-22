@@ -16,6 +16,7 @@
 #include "../components/SpeedComponent.h"
 #include "../components/GoalComponent.h"
 #include "../components/SoundComponent.h"
+#include "../entities/Player.h"
 
 class Zombie : public Entity {
 public:
