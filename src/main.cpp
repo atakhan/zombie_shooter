@@ -12,7 +12,8 @@ int main() {
     Game game;
     Scene scene = Scene();
 
-    Player player = Player(
+    // Entities
+    scene.AddEntity(new Player(
         Config::PLAYER_SPAWN_POSITION_X, 
         Config::PLAYER_SPAWN_POSITION_Y,
         Config::PLAYER_HEALTH, 
@@ -20,22 +21,24 @@ int main() {
         Config::PLAYER_AGILITY, 
         Config::PLAYER_HEARING_RADIUS, 
         Config::PLAYER_ATTACK_RADIUS
-    );
-    Zombie zombie1 = Zombie(
-        Config::ZOMBIE_SPAWN_POSITION_X, 
-        Config::ZOMBIE_SPAWN_POSITION_Y,
-        Config::ZOMBIE_HEALTH, 
-        Config::ZOMBIE_STRENGTH, 
-        Config::ZOMBIE_AGILITY, 
-        Config::ZOMBIE_HEARING_RADIUS, 
-        Config::ZOMBIE_ATTACK_RADIUS
-    );
+    ));
 
+    for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++)
+    {
+        scene.AddEntity(new Zombie(
+            Config::ZOMBIE_SPAWN_POSITION_X, 
+            Config::ZOMBIE_SPAWN_POSITION_Y,
+            Config::ZOMBIE_HEALTH, 
+            Config::ZOMBIE_STRENGTH, 
+            Config::ZOMBIE_AGILITY, 
+            Config::ZOMBIE_HEARING_RADIUS, 
+            Config::ZOMBIE_ATTACK_RADIUS
+        ));
+    }
+
+    // Systems
     ZombieSystem zombieSystem;
     PlayerSystem inputSystem;
-
-    scene.AddEntity(&player);
-    scene.AddEntity(&zombie1);
     scene.AddSystem(&inputSystem);
     scene.AddSystem(&zombieSystem);
 

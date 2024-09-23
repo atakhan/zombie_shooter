@@ -3,8 +3,9 @@
 
 // GAME CONFIGS
 const std::string Config::WINDOW_TITLE = "Zombie RPG";
-const int Config::WINDOW_WIDTH = 1600;
-const int Config::WINDOW_HEIGHT = 1200;
+const int Config::WINDOW_WIDTH = 610;
+const int Config::WINDOW_HEIGHT = 683;
+const size_t Config::ZOMBIES_COUNT = 10;
 
 // PLAYER CONFIGS
 const Color Config::PLAYER_COLOR = R0G0B3A7;
