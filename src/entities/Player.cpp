@@ -2,7 +2,7 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY, float soundR)
+Player::Player(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius)
     : health(health)
     , attack(strength)
     , speed(agility)
@@ -10,7 +10,7 @@ Player::Player(float health, float strength, float agility, float hearingRadius,
     , attackingRadius(attackingRadius)
     , currentState(IDLE)
     , position(posX, posY)
-    , sound(soundR, true)
+    , sound(Config::SOUND_MIN_RADIUS, Config::SOUND_MIN_RADIUS, Config::SOUND_MAX_RADIUS, true)
     {}
 
 void Player::TakeDamage(float damage) {
@@ -26,7 +26,7 @@ void Player::Draw() {
     DrawCircle(
         position.GetPositionX(), 
         position.GetPositionY(), 
-        sound.GetRadius(), 
+        sound.GetCurrentRadius(), 
         Config::SOUND_RADIUS_COLOR
     );
     DrawCircle(
@@ -52,5 +52,5 @@ void Player::SetPositionY(float y) {
 }
 
 float Player::GetSoundRadius() {
-    return sound.GetRadius();
+    return sound.GetCurrentRadius();
 }

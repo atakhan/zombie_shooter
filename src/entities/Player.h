@@ -17,7 +17,7 @@
 
 class Player : public Entity {
 public:
-    Player(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY, float soundR);
+    Player(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius);
     void Draw() override;
     void TakeDamage(float damage) override;
     void Attack();

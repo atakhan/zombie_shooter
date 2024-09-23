@@ -1,7 +1,7 @@
 // Zombie.cpp
 #include "Zombie.h"
 
-Zombie::Zombie(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY)
+Zombie::Zombie(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius)
     : health_(health)
     , attack_(strength)
     , speed_(agility)
@@ -10,7 +10,8 @@ Zombie::Zombie(float health, float strength, float agility, float hearingRadius,
     , currentState_(IDLE)
     , goal_(posX, posY)
     , position_(posX, posY)
-    , sound_(100.0f, true) {}
+    , sound_(Config::SOUND_MIN_RADIUS, Config::SOUND_MIN_RADIUS, Config::SOUND_MAX_RADIUS, true)
+    {}
 
 void Zombie::TakeDamage(float damage) {
     health_.TakeDamage(damage);
@@ -134,8 +135,8 @@ void Zombie::ChangeState(State newState) {
 }
 
 void Zombie::Draw() {
-    DrawCircle(position_.GetPositionX(), position_.GetPositionY(), health_.GetHealth(), GRAY);
-    DrawCircle(goal_.GetPositionX(), goal_.GetPositionY(), 3, raylib::Color(255U, 155U, 155U, 255U));
+    DrawCircle(position_.GetPositionX(), position_.GetPositionY(), health_.GetHealth(), Config::ZOMBIE_COLOR);
+    DrawCircle(goal_.GetPositionX(), goal_.GetPositionY(), 3, Config::GOAL_COLOR);
     DrawLine(position_.GetPositionX(), position_.GetPositionY(), goal_.GetPositionX(), goal_.GetPositionY(), RED);
 }
 

@@ -4,14 +4,20 @@
 
 class SoundComponent {
 public:
-    SoundComponent(float, bool);
+    SoundComponent(float currentR, float minR, float maxR, bool active);
     
-    void SetRadius(float x);
-    float GetRadius();
+    void SetCurrentRadius(float x);
+    void SetMinRadius(float x);
+    void SetMaxRadius(float x);
+    float GetCurrentRadius();
+    float GetMinRadius();
+    float GetMaxRadius();
     void SetActive(bool);
 
 private:
-    float radius;
+    float maxRadius;
+    float currentRadius;
+    float minRadius;
     float isActive;
 };
 

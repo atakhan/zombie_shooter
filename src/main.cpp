@@ -12,8 +12,24 @@ int main() {
     Game game;
     Scene scene = Scene();
 
-    Player player = Player(20.0f, 10.0f, 3.0f, 100.0f, 20.0f, 600.0f, 500.0f, 300.0f);
-    Zombie zombie1 = Zombie(10.0f, 25.0f, 1.0f, 100.0f, 20.0f, 122.0f, 66.0f);
+    Player player = Player(
+        Config::PLAYER_SPAWN_POSITION_X, 
+        Config::PLAYER_SPAWN_POSITION_Y,
+        Config::PLAYER_HEALTH, 
+        Config::PLAYER_STRENGTH, 
+        Config::PLAYER_AGILITY, 
+        Config::PLAYER_HEARING_RADIUS, 
+        Config::PLAYER_ATTACK_RADIUS
+    );
+    Zombie zombie1 = Zombie(
+        Config::ZOMBIE_SPAWN_POSITION_X, 
+        Config::ZOMBIE_SPAWN_POSITION_Y,
+        Config::ZOMBIE_HEALTH, 
+        Config::ZOMBIE_STRENGTH, 
+        Config::ZOMBIE_AGILITY, 
+        Config::ZOMBIE_HEARING_RADIUS, 
+        Config::ZOMBIE_ATTACK_RADIUS
+    );
 
     ZombieSystem zombieSystem;
     PlayerSystem inputSystem;

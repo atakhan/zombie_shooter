@@ -20,7 +20,7 @@
 
 class Zombie : public Entity {
 public:
-    Zombie(float health, float strength, float agility, float hearingRadius, float attackingRadius, float posX, float posY);
+    Zombie(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius);
     void Draw() override;
     void TakeDamage(float damage) override;
     void Move();
