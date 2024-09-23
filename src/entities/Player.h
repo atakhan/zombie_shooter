@@ -26,6 +26,10 @@ public:
     void SetPositionX(float);
     void SetPositionY(float);
     float GetSoundRadius();
+    void MoveRight();
+    void MoveLeft();
+    void MoveTop();
+    void MoveBottom();
 
 private:
     enum State { IDLE, WALKING, RUNNING, ATTACKING };

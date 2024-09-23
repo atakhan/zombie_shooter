@@ -54,3 +54,7 @@ void Player::SetPositionY(float y) {
 float Player::GetSoundRadius() {
     return sound.GetCurrentRadius();
 }
+
+void Player::Move() {
+    position.SetPosition(position.GetPositionX() + speed.GetSpeed(), position.GetPositionY() + speed.GetSpeed());
+}
