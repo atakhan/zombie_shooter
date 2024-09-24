@@ -24,37 +24,57 @@ void Player::Attack() {
 
 void Player::Draw() {
     DrawCircle(
-        position.GetPositionX(), 
-        position.GetPositionY(), 
+        position.GetX(), 
+        position.GetY(), 
         sound.GetCurrentRadius(), 
         Config::SOUND_RADIUS_COLOR
     );
     DrawCircle(
-        position.GetPositionX(), 
-        position.GetPositionY(), 
+        position.GetX(), 
+        position.GetY(), 
         health.GetHealth(), 
         Config::PLAYER_COLOR
     );
 }
 
 float Player::GetPositionX() {
-    return position.GetPositionX();
+    return position.GetX();
 }
 float Player::GetPositionY() {
-    return position.GetPositionY();
+    return position.GetY();
 }
 
 void Player::SetPositionX(float x) {
-    position.SetPositionX(x);
+    position.SetX(x);
 }
 void Player::SetPositionY(float y) {
-    position.SetPositionY(y);
+    position.SetY(y);
 }
 
 float Player::GetSoundRadius() {
     return sound.GetCurrentRadius();
 }
 
-void Player::Move() {
-    position.SetPosition(position.GetPositionX() + speed.GetSpeed(), position.GetPositionY() + speed.GetSpeed());
+void Player::MoveRight() {
+    position.SetX(
+        position.GetX() + speed.GetSpeed()
+    );
+}
+
+void Player::MoveLeft() {
+    position.SetX(
+        position.GetX() - speed.GetSpeed()
+    );
+}
+
+void Player::MoveTop() {
+    position.SetY(
+        position.GetY() - speed.GetSpeed()
+    );
+}
+
+void Player::MoveBottom() {
+    position.SetY(
+        position.GetY() + speed.GetSpeed()
+    );
 }

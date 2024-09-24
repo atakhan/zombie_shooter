@@ -13,7 +13,7 @@ void ZombieSystem::Update(std::vector<Entity*> *entities) {
             PositionComponent* food = nullptr; 
             food = zombie->FindFood(entities);
             if (food) {
-                zombie->SetGoal(food->GetPositionX(), food->GetPositionY());
+                zombie->SetGoal(food->GetX(), food->GetY());
                 zombie->AttackState();
                 zombie->Move();
             } else {

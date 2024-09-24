@@ -8,8 +8,8 @@ class GoalComponent {
 public:
     GoalComponent(float x, float y);
     void SetPosition(float x, float y);
-    float GetPositionX();
-    float GetPositionY();
+    float GetX();
+    float GetY();
     bool Reached(float x, float y);
     bool IsActive();
     void SetActive(bool);

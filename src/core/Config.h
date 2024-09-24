@@ -50,6 +50,8 @@ public:
     static const int WINDOW_WIDTH;
     static const int WINDOW_HEIGHT;
     static const size_t ZOMBIES_COUNT;
+    static const float WALK_COEF;
+    static const float RUN_COEF;
     
 // PLAYER CONFIGS
     static const Color PLAYER_COLOR;

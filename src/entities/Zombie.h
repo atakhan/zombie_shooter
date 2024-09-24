@@ -22,19 +22,31 @@ class Zombie : public Entity {
 public:
     Zombie(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius);
     void Draw() override;
+    
+    // Fighting
     void TakeDamage(float damage) override;
+    void Attack();
+    
+    // Moving
+    void Walk();
+    void Run();
     void Move();
-    void Die();
+    
+    // Goals
+    void SetGoal(float x, float y);
+    void FindRandomGoal();
+    bool HasGoal();
+    void MoveToGoal(float speedComponent);
+    bool GoalReached();
+    PositionComponent *FindFood(std::vector<Entity*> *entities);
+    
+    // States
     void IdleState();
     void RunningState();
     void WalkingState();
     void AttackState();
-    void Attack();
-    void SetGoal(float x, float y);
-    void FindRandomGoal();
-    bool HasGoal();
-    bool GoalReached();
-    PositionComponent *FindFood(std::vector<Entity*> *entities);
+    void Die();
+
 
 private:
     enum State { IDLE, WALKING, RUNNING, ATTACKING };
@@ -51,7 +63,6 @@ private:
     float attackingRadius_;
 
     void ChangeState(State newState);
-    void MoveTo(float speedComponent);
 };
 
 #endif // ZOMBIE_H

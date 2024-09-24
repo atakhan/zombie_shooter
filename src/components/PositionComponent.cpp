@@ -7,17 +7,17 @@ void PositionComponent::SetPosition(float x, float y) {
     posX = x;
     posY = y;
 }
-void PositionComponent::SetPositionX(float x) {
+void PositionComponent::SetX(float x) {
     posX = x;
 }
-void PositionComponent::SetPositionY(float y) {
+void PositionComponent::SetY(float y) {
     posY = y;
 }
 
-float PositionComponent::GetPositionX() {
+float PositionComponent::GetX() {
     return posX;
 }
 
-float PositionComponent::GetPositionY() {
+float PositionComponent::GetY() {
     return posY;
 }

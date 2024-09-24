@@ -22,7 +22,7 @@ void Zombie::SetGoal(float x, float y) {
 }
 
 bool Zombie::GoalReached() {
-    return goal_.Reached(position_.GetPositionX(), position_.GetPositionY());
+    return goal_.Reached(position_.GetX(), position_.GetY());
 }
 
 bool Zombie::HasGoal() {
@@ -50,8 +50,8 @@ PositionComponent *Zombie::FindFood(std::vector<Entity*> *entities) {
     if (player) {
         float player_pos_x = player->GetPositionX();
         float player_pos_y = player->GetPositionY();
-        float pos_x_dif = player_pos_x - position_.GetPositionX();
-        float pos_y_dif = player_pos_y - position_.GetPositionY();
+        float pos_x_dif = player_pos_x - position_.GetX();
+        float pos_y_dif = player_pos_y - position_.GetY();
         float radius_dif = player->GetSoundRadius() + health_.GetHealth();
         // if collide
         if (fabs(((pos_x_dif * pos_x_dif) + (pos_y_dif * pos_y_dif))) <= (radius_dif * radius_dif)) {
@@ -64,8 +64,16 @@ PositionComponent *Zombie::FindFood(std::vector<Entity*> *entities) {
     return result;
 }
 
+void Zombie::Walk() {
+    MoveToGoal(speed_.GetSpeed() * Config::WALK_COEF);
+}
+
+void Zombie::Run() {
+    MoveToGoal(speed_.GetSpeed() * Config::RUN_COEF);
+}
+
 void Zombie::Move() {
-    if (goal_.Reached(position_.GetPositionX(), position_.GetPositionY())) {
+    if (goal_.Reached(position_.GetX(), position_.GetY())) {
         IdleState();
     } else {
         goal_.SetActive(true);
@@ -76,10 +84,10 @@ void Zombie::Move() {
                 std::cout << "Zombie is idle." << std::endl;
                 break;
             case WALKING:
-                MoveTo(speed_.GetSpeed() * 0.5f);
+                MoveToGoal(speed_.GetSpeed() * 0.5f);
                 break;
             case RUNNING:
-                MoveTo(speed_.GetSpeed() * 1.5);
+                MoveToGoal(speed_.GetSpeed() * 1.5);
                 break;
             case ATTACKING:
                 Attack();
@@ -135,17 +143,17 @@ void Zombie::ChangeState(State newState) {
 }
 
 void Zombie::Draw() {
-    DrawCircle(position_.GetPositionX(), position_.GetPositionY(), health_.GetHealth(), Config::ZOMBIE_COLOR);
-    DrawCircle(goal_.GetPositionX(), goal_.GetPositionY(), 3, Config::GOAL_COLOR);
-    DrawLine(position_.GetPositionX(), position_.GetPositionY(), goal_.GetPositionX(), goal_.GetPositionY(), RED);
+    DrawCircle(position_.GetX(), position_.GetY(), health_.GetHealth(), Config::ZOMBIE_COLOR);
+    DrawCircle(goal_.GetX(), goal_.GetY(), 3, Config::GOAL_COLOR);
+    DrawLine(position_.GetX(), position_.GetY(), goal_.GetX(), goal_.GetY(), RED);
 }
 
-void Zombie::MoveTo(float speed) {
+void Zombie::MoveToGoal(float speed) {
     // Calculate the direction vector
-    float targetX = goal_.GetPositionX();
-    float targetY = goal_.GetPositionY();
-    float posX = position_.GetPositionX();
-    float posY = position_.GetPositionY();
+    float targetX = goal_.GetX();
+    float targetY = goal_.GetY();
+    float posX = position_.GetX();
+    float posY = position_.GetY();
     float deltaX = targetX - posX;
     float deltaY = targetY - posY;
     float distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);

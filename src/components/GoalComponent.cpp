@@ -8,11 +8,11 @@ void GoalComponent::SetPosition(float x, float y) {
     posY = y;
 }
 
-float GoalComponent::GetPositionX() {
+float GoalComponent::GetX() {
     return posX;
 }
 
-float GoalComponent::GetPositionY() {
+float GoalComponent::GetY() {
     return posY;
 }
 
