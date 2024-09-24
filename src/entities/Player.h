@@ -26,6 +26,7 @@ public:
     void SetPositionX(float);
     void SetPositionY(float);
     float GetSoundRadius();
+    void Idle();
     void MoveRight();
     void MoveLeft();
     void MoveTop();

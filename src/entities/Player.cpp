@@ -55,26 +55,34 @@ float Player::GetSoundRadius() {
     return sound.GetCurrentRadius();
 }
 
+void Player::Idle() {
+    sound.SetCurrentRadius(sound.GetMinRadius());
+}
+
 void Player::MoveRight() {
     position.SetX(
         position.GetX() + speed.GetSpeed()
     );
+    sound.SetCurrentRadius(sound.GetMaxRadius());
 }
 
 void Player::MoveLeft() {
     position.SetX(
         position.GetX() - speed.GetSpeed()
     );
+    sound.SetCurrentRadius(sound.GetMaxRadius());
 }
 
 void Player::MoveTop() {
     position.SetY(
         position.GetY() - speed.GetSpeed()
     );
+    sound.SetCurrentRadius(sound.GetMaxRadius());
 }
 
 void Player::MoveBottom() {
     position.SetY(
         position.GetY() + speed.GetSpeed()
     );
+    sound.SetCurrentRadius(sound.GetMaxRadius());
 }
