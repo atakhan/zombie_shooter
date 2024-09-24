@@ -1,7 +1,7 @@
 #include <raylib-cpp.hpp>
 
+#include "Config.h"
 #include "core/Game.h"
-#include "core/Config.h"
 #include "core/Scene.h"
 #include "entities/Player.h"
 #include "entities/Zombie.h"

@@ -8,7 +8,7 @@
 #include <cmath>
 #include <raylib-cpp.hpp>
 
-#include "../core/Config.h"
+#include "../Config.h"
 #include "../core/Entity.h"
 #include "../components/HealthComponent.h"
 #include "../components/PositionComponent.h"
