@@ -79,6 +79,7 @@ public:
     static const Color GOAL_COLOR;
     static const float SOUND_MIN_RADIUS;
     static const float SOUND_MAX_RADIUS;
+    static const float SOUND_RADIUS_STEP;
 
     // const Color 
 
