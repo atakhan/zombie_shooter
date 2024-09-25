@@ -18,6 +18,12 @@
 #define R4G0B0A7  CLITERAL(Color){ 128, 0, 0, 255 } 
 #define R5G0B0A7  CLITERAL(Color){ 160, 0, 0, 255 } 
 #define R6G0B0A7  CLITERAL(Color){ 192, 0, 0, 255 } 
+#define R7G0B0A1  CLITERAL(Color){ 255, 0, 0, 32 }
+#define R7G0B0A2  CLITERAL(Color){ 255, 0, 0, 64 }
+#define R7G0B0A3  CLITERAL(Color){ 255, 0, 0, 92 }
+#define R7G0B0A4  CLITERAL(Color){ 255, 0, 0, 128 }
+#define R7G0B0A5  CLITERAL(Color){ 255, 0, 0, 160 }
+#define R7G0B0A6  CLITERAL(Color){ 255, 0, 0, 192 }
 #define R7G0B0A7  CLITERAL(Color){ 255, 0, 0, 255 }
 
 
@@ -74,6 +80,7 @@ public:
     static const float ZOMBIE_SPAWN_POSITION_Y;
     
 // OTHERS
+    static const Color ATTACK_RADIUS_COLOR;
     static const Color SOUND_RADIUS_COLOR;
     static const Color PATH_COLOR;
     static const Color GOAL_COLOR;

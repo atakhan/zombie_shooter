@@ -25,6 +25,7 @@ public:
     float GetPositionY();
     void SetPositionX(float);
     void SetPositionY(float);
+    float GetRadius();
     float GetSoundRadius();
     void IncreaseSoundRadius();
     void DecreaseSoundRadius();
@@ -45,7 +46,6 @@ private:
     SoundComponent sound;
 
     float hearingRadius;
-    float attackingRadius;
 };
 
 #endif // PLAYER_H

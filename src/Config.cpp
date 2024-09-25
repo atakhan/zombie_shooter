@@ -20,7 +20,7 @@ const float Config::PLAYER_SPAWN_POSITION_Y = 673.0f;
 // ZOMBIE CONFIGS
 const Color Config::ZOMBIE_COLOR = R5G0B0A7;
 const float Config::ZOMBIE_HEALTH = 10.0f; // HP based on health
-const float Config::ZOMBIE_STRENGTH = 25.0f; //  Attack based on strength
+const float Config::ZOMBIE_STRENGTH = 0.5f; //  Attack based on strength
 const float Config::ZOMBIE_AGILITY = 0.5f;
 const float Config::WALK_COEF = 0.2;
 const float Config::RUN_COEF = 1;
@@ -30,6 +30,7 @@ const float Config::ZOMBIE_SPAWN_POSITION_X = 122.0f;
 const float Config::ZOMBIE_SPAWN_POSITION_Y = 66.0f;
 
 // OTHER CONFIGS
+const Color Config::ATTACK_RADIUS_COLOR = R7G0B0A2;
 const Color Config::SOUND_RADIUS_COLOR = R6G6B6A2;
 const Color Config::PATH_COLOR = R6G6B6A4;
 const Color Config::GOAL_COLOR = R3G0B0A4;

@@ -3,15 +3,26 @@
 
 Zombie::Zombie(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius)
     : health_(health)
-    , attack_(strength)
+    , attack_(strength, attackingRadius)
     , speed_(agility)
     , hearingRadius_(hearingRadius)
-    , attackingRadius_(attackingRadius)
     , currentState_(IDLE)
     , goal_(posX, posY)
     , position_(posX, posY)
     , sound_(Config::SOUND_MIN_RADIUS, Config::SOUND_MIN_RADIUS, Config::SOUND_MAX_RADIUS, true)
     {}
+
+
+void Zombie::Draw() {
+    // Draw Attack Radius
+    DrawCircle(position_.GetX(), position_.GetY(), attack_.GetRadius(), Config::ATTACK_RADIUS_COLOR);
+    // Draw body
+    DrawCircle(position_.GetX(), position_.GetY(), health_.GetHealth(), Config::ZOMBIE_COLOR);
+    // Draw goal
+    DrawCircle(goal_.GetX(), goal_.GetY(), 3, Config::GOAL_COLOR);
+    // Draw route
+    DrawLine(position_.GetX(), position_.GetY(), goal_.GetX(), goal_.GetY(), RED);
+}
 
 void Zombie::TakeDamage(float damage) {
     health_.TakeDamage(damage);
@@ -113,8 +124,22 @@ void Zombie::WalkingState() {
     ChangeState(WALKING);
 }
 
-void Zombie::Attack() {
-    std::cout << "Zombie attacked." << std::endl;
+float Zombie::Attack() {
+    return attack_.GetAttackStrength();
+}
+
+bool Zombie::CanAttack(Player *player) {
+    float player_pos_x = player->GetPositionX();
+    float player_pos_y = player->GetPositionY();
+    float pos_x_dif = player_pos_x - position_.GetX();
+    float pos_y_dif = player_pos_y - position_.GetY();
+    float radius_dif = player->GetRadius() + attack_.GetRadius();
+    // if collide
+    if (fabs(((pos_x_dif * pos_x_dif) + (pos_y_dif * pos_y_dif))) <= (radius_dif * radius_dif)) {
+        return true;
+    }
+    return false;
+
 }
 
 void Zombie::Die() {
@@ -140,12 +165,6 @@ void Zombie::ChangeState(State newState) {
                 break;
         }
     }
-}
-
-void Zombie::Draw() {
-    DrawCircle(position_.GetX(), position_.GetY(), health_.GetHealth(), Config::ZOMBIE_COLOR);
-    DrawCircle(goal_.GetX(), goal_.GetY(), 3, Config::GOAL_COLOR);
-    DrawLine(position_.GetX(), position_.GetY(), goal_.GetX(), goal_.GetY(), RED);
 }
 
 void Zombie::MoveToGoal(float speed) {

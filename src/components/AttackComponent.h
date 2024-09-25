@@ -4,11 +4,13 @@
 
 class AttackComponent {
 public:
-    AttackComponent(float attackStrength);
+    AttackComponent(float attackStrength, float radius);
     float GetAttackStrength() const;
+    float GetRadius() const;
 
 private:
-    float attackStrength;
+    float attackStrength_;
+    float radius_;
 };
 
 #endif // ATTACKCOMPONENT_H

@@ -25,9 +25,10 @@ public:
     
     // Fighting
     void TakeDamage(float damage) override;
-    void Attack();
+    float Attack();
+    bool CanAttack(Player *player);
     
-    // Moving
+    // Movings
     void Walk();
     void Run();
     void Move();
@@ -60,7 +61,6 @@ private:
     SoundComponent sound_;
 
     float hearingRadius_;
-    float attackingRadius_;
 
     void ChangeState(State newState);
 };

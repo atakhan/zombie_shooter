@@ -7,6 +7,12 @@ void ZombieSystem::Init(std::vector<Entity*> *entities) {
 }
 
 void ZombieSystem::Update(std::vector<Entity*> *entities) {
+    Player* player;
+    for (Entity* entity : *entities) {
+        if (dynamic_cast<Player*>(entity)) {
+            player = static_cast<Player*>(entity);
+        }
+    }
     for (Entity* entity : *entities) {
         Zombie* zombie = dynamic_cast<Zombie*>(entity);
         if (zombie) {
@@ -16,6 +22,10 @@ void ZombieSystem::Update(std::vector<Entity*> *entities) {
                 zombie->SetGoal(food->GetX(), food->GetY());
                 zombie->AttackState();
                 zombie->Move();
+                if (zombie->CanAttack(player)) {
+                    zombie->Attack();
+                    player->TakeDamage(zombie->Attack());
+                }
             } else {
                 if (zombie->HasGoal() && zombie->GoalReached() == false) {
                     zombie->Move();
