@@ -24,7 +24,7 @@ public:
     void Draw() override;
     
     // Fighting
-    void TakeDamage(float damage) override;
+    void TakeDamage(float damage);
     float Attack();
     bool CanAttack(Player *player);
     
