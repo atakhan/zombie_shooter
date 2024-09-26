@@ -39,8 +39,8 @@ int main() {
 
     // Systems
     ZombieSystem zombieSystem;
-    PlayerSystem inputSystem;
-    scene.AddSystem(&inputSystem);
+    PlayerSystem playerSystem;
+    scene.AddSystem(&playerSystem);
     scene.AddSystem(&zombieSystem);
 
     game.AddScene(&scene);
@@ -54,8 +54,14 @@ int main() {
 
     // Camera
     Camera2D camera = { 0 };
-    camera.target = (Vector2){ Config::PLAYER_SPAWN_POSITION_X + 20.0f, Config::PLAYER_SPAWN_POSITION_Y + 20.0f };
-    camera.offset = (Vector2){ Config::WINDOW_WIDTH/2.0f, Config::WINDOW_HEIGHT/2.0f };
+    camera.target = (Vector2){
+        Config::PLAYER_SPAWN_POSITION_X + 20.0f,
+        Config::PLAYER_SPAWN_POSITION_Y + 20.0f
+    };
+    camera.offset = (Vector2){
+        Config::WINDOW_WIDTH/2.0f,
+        Config::WINDOW_HEIGHT/2.0f
+    };
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
