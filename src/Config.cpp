@@ -2,7 +2,7 @@
 #include "Config.h"
 
 // GAME CONFIGS
-const std::string Config::WINDOW_TITLE = "Zombie RPG";
+const char * Config::WINDOW_TITLE = "Zombie RPG";
 const int Config::WINDOW_WIDTH = 610;
 const int Config::WINDOW_HEIGHT = 683;
 const size_t Config::ZOMBIES_COUNT = 100;

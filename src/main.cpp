@@ -5,15 +5,14 @@
 #include "core/Scene.h"
 #include "entities/Player.h"
 #include "entities/Zombie.h"
-#include "entities/CameraEntity.h"
 #include "systems/ZombieSystem.h"
 #include "systems/PlayerSystem.h"
-#include "systems/CameraSystem.h"
 
 int main() {
     Game game;
-    CameraEntity *camera;
+    Camera2D camera = { 0 };
     Scene scene = Scene();
+    scene.AddCamera(&camera);
 
     Player *player = new Player(
         Config::PLAYER_SPAWN_POSITION_X, 
@@ -24,9 +23,8 @@ int main() {
         Config::PLAYER_HEARING_RADIUS, 
         Config::PLAYER_ATTACK_RADIUS
     );
-
+    
     scene.AddEntity(player);
-    scene.AddEntity(camera);
     
     // Entities
 
@@ -45,10 +43,8 @@ int main() {
     // Systems
     ZombieSystem zombieSystem;
     PlayerSystem playerSystem;
-    CameraSystem cameraSystem;
     scene.AddSystem(&playerSystem);
     scene.AddSystem(&zombieSystem);
-    scene.AddSystem(&cameraSystem);
 
     game.AddScene(&scene);
     game.Init();
@@ -56,7 +52,7 @@ int main() {
     InitWindow(
         Config::WINDOW_WIDTH,
         Config::WINDOW_HEIGHT,
-        (Config::WINDOW_TITLE).c_str()
+        Config::WINDOW_TITLE
     );
 
     SetTargetFPS(60);
@@ -66,9 +62,7 @@ int main() {
 
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            BeginMode2D(camera->GetCamera());
-                game.Draw();
-            EndMode2D();
+            game.Draw();
         EndDrawing();
     }
 
