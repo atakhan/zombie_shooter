@@ -6,7 +6,6 @@ void CameraSystem::Init(std::vector<Entity*> *entities) {
     for (const auto& entity : *entities) {
         if (dynamic_cast<Player*>(entity)) player = static_cast<Player*>(entity);
     }
-
     if (player) {
         player->camera_.SetTarget((Vector2) {
             Config::PLAYER_SPAWN_POSITION_X + 20.0f,
@@ -26,7 +25,6 @@ void CameraSystem::Update(std::vector<Entity*> *entities) {
     for (const auto& entity : *entities) {
         if (dynamic_cast<Player*>(entity)) player = static_cast<Player*>(entity);
     }
-
     if (player) {
         player->camera_.SetTarget((Vector2){ 
             player->GetPositionX() + 20, 

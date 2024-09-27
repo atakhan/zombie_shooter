@@ -16,10 +16,22 @@
 #include "../components/SpeedComponent.h"
 #include "../components/GoalComponent.h"
 #include "../components/SoundComponent.h"
+#include "../components/CircleColliderComponent.h"
 #include "../entities/Player.h"
 
 class Zombie : public Entity {
 public:
+    enum State { IDLE, WALKING, RUNNING, ATTACKING };
+    State currentState_;
+    HealthComponent health_;
+    PositionComponent position_;
+    GoalComponent goal_;
+    AttackComponent attack_;
+    SpeedComponent speed_;
+    SoundComponent sound_;
+    CircleColliderComponent collider_;
+    float hearingRadius_;
+
     Zombie(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius);
     void Draw() override;
     
@@ -47,21 +59,6 @@ public:
     void WalkingState();
     void AttackState();
     void Die();
-
-
-private:
-    enum State { IDLE, WALKING, RUNNING, ATTACKING };
-    State currentState_;
-
-    HealthComponent health_;
-    PositionComponent position_;
-    GoalComponent goal_;
-    AttackComponent attack_;
-    SpeedComponent speed_;
-    SoundComponent sound_;
-
-    float hearingRadius_;
-
     void ChangeState(State newState);
 };
 

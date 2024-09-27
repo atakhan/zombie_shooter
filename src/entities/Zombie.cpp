@@ -10,6 +10,7 @@ Zombie::Zombie(float posX, float posY, float health, float strength, float agili
     , goal_(posX, posY)
     , position_(posX, posY)
     , sound_(Config::SOUND_MIN_RADIUS, Config::SOUND_MIN_RADIUS, Config::SOUND_MAX_RADIUS, true)
+    , collider_((Vector2){posX, posY}, health)
     {}
 
 
