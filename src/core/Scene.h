@@ -31,7 +31,6 @@ public:
     void DrawEntities();
 
 protected:
-    Camera2D *camera_;
     std::vector<System*> systems_;
     std::vector<Entity*> entities_;
 };

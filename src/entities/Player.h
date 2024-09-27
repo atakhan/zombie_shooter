@@ -14,9 +14,20 @@
 #include "../components/SpeedComponent.h"
 #include "../components/GoalComponent.h"
 #include "../components/SoundComponent.h"
+#include "../components/CameraComponent.h"
 
 class Player : public Entity {
-public:
+  public:
+    enum State { IDLE, WALKING, RUNNING, ATTACKING };
+    State currentState_;
+    HealthComponent health_;
+    PositionComponent position_;
+    AttackComponent attack_;
+    SpeedComponent speed_;
+    SoundComponent sound_;
+    CameraComponent camera_;
+    float hearingRadius_;
+    
     Player(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius);
     void Draw() override;
     void TakeDamage(float damage);
@@ -27,25 +38,14 @@ public:
     void SetPositionY(float);
     float GetRadius();
     float GetSoundRadius();
+    Camera2D GetCamera();
     void IncreaseSoundRadius();
     void DecreaseSoundRadius();
     void Idle();
     void MoveRight();
     void MoveLeft();
     void MoveTop();
-    void MoveBottom();
-
-private:
-    enum State { IDLE, WALKING, RUNNING, ATTACKING };
-    State currentState;
-
-    HealthComponent health;
-    PositionComponent position;
-    AttackComponent attack;
-    SpeedComponent speed;
-    SoundComponent sound;
-
-    float hearingRadius;
+    void MoveBottom();    
 };
 
 #endif // PLAYER_H

@@ -2,17 +2,18 @@
 #include <iostream>
 
 Player::Player(float posX, float posY, float health, float strength, float agility, float hearingRadius, float attackingRadius)
-    : health(health)
-    , attack(strength, attackingRadius)
-    , speed(agility)
-    , hearingRadius(hearingRadius)
-    , currentState(IDLE)
-    , position(posX, posY)
-    , sound(Config::SOUND_MIN_RADIUS, Config::SOUND_MIN_RADIUS, Config::SOUND_MAX_RADIUS, true)
+    : health_(health)
+    , attack_(strength, attackingRadius)
+    , speed_(agility)
+    , hearingRadius_(hearingRadius)
+    , currentState_(IDLE)
+    , position_(posX, posY)
+    , sound_(Config::SOUND_MIN_RADIUS, Config::SOUND_MIN_RADIUS, Config::SOUND_MAX_RADIUS, true)
+    , camera_()
     {}
 
 void Player::TakeDamage(float damage) {
-    health.TakeDamage(damage);
+    health_.TakeDamage(damage);
 }
 
 void Player::Attack() {
@@ -21,39 +22,43 @@ void Player::Attack() {
 
 void Player::Draw() {
     DrawCircle(
-        position.GetX(), 
-        position.GetY(), 
-        sound.GetCurrentRadius(), 
+        position_.GetX(), 
+        position_.GetY(), 
+        sound_.GetCurrentRadius(), 
         Config::SOUND_RADIUS_COLOR
     );
     DrawCircle(
-        position.GetX(), 
-        position.GetY(), 
-        health.GetHealth(), 
+        position_.GetX(), 
+        position_.GetY(), 
+        health_.GetHealth(), 
         Config::PLAYER_COLOR
     );
 }
 
 float Player::GetRadius() {
-    return health.GetHealth();
+    return health_.GetHealth();
 }
 
 float Player::GetPositionX() {
-    return position.GetX();
+    return position_.GetX();
 }
 float Player::GetPositionY() {
-    return position.GetY();
+    return position_.GetY();
 }
 
 void Player::SetPositionX(float x) {
-    position.SetX(x);
+    position_.SetX(x);
 }
 void Player::SetPositionY(float y) {
-    position.SetY(y);
+    position_.SetY(y);
 }
 
 float Player::GetSoundRadius() {
-    return sound.GetCurrentRadius();
+    return sound_.GetCurrentRadius();
+}
+
+Camera2D Player::GetCamera() {
+    return camera_.GetCamera();
 }
 
 void Player::Idle() {
@@ -61,42 +66,41 @@ void Player::Idle() {
 }
 
 void Player::MoveRight() {
-    position.SetX(
-        position.GetX() + speed.GetSpeed()
+    position_.SetX(
+        position_.GetX() + speed_.GetSpeed()
     );
     IncreaseSoundRadius();
 }
 
 void Player::MoveLeft() {
-    position.SetX(
-        position.GetX() - speed.GetSpeed()
+    position_.SetX(
+        position_.GetX() - speed_.GetSpeed()
     );
     IncreaseSoundRadius();
 }
 
 void Player::MoveTop() {
-    position.SetY(
-        position.GetY() - speed.GetSpeed()
+    position_.SetY(
+        position_.GetY() - speed_.GetSpeed()
     );
     IncreaseSoundRadius();
 }
 
 void Player::MoveBottom() {
-    position.SetY(
-        position.GetY() + speed.GetSpeed()
+    position_.SetY(
+        position_.GetY() + speed_.GetSpeed()
     );
     IncreaseSoundRadius();
 }
 
 void Player::IncreaseSoundRadius() {
-    if (sound.GetCurrentRadius() < sound.GetMaxRadius()) {
-        sound.SetCurrentRadius(sound.GetCurrentRadius() + Config::SOUND_RADIUS_STEP);
+    if (sound_.GetCurrentRadius() < sound_.GetMaxRadius()) {
+        sound_.SetCurrentRadius(sound_.GetCurrentRadius() + Config::SOUND_RADIUS_STEP);
     }
 }
 
 void Player::DecreaseSoundRadius() {
-    if (sound.GetCurrentRadius() > sound.GetMinRadius()) {
-        sound.SetCurrentRadius(sound.GetCurrentRadius() - Config::SOUND_RADIUS_STEP);
+    if (sound_.GetCurrentRadius() > sound_.GetMinRadius()) {
+        sound_.SetCurrentRadius(sound_.GetCurrentRadius() - Config::SOUND_RADIUS_STEP);
     }
 }
-

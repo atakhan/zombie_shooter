@@ -7,27 +7,25 @@
 #include "entities/Zombie.h"
 #include "systems/ZombieSystem.h"
 #include "systems/PlayerSystem.h"
+#include "systems/CameraSystem.h"
 
 int main() {
     Game game;
-    Camera2D camera = { 0 };
     Scene scene = Scene();
-    scene.AddCamera(&camera);
 
     Player *player = new Player(
-        Config::PLAYER_SPAWN_POSITION_X, 
+        Config::PLAYER_SPAWN_POSITION_X,
         Config::PLAYER_SPAWN_POSITION_Y,
-        Config::PLAYER_HEALTH, 
+        Config::PLAYER_HEALTH,
         Config::PLAYER_STRENGTH, 
         Config::PLAYER_AGILITY, 
         Config::PLAYER_HEARING_RADIUS, 
         Config::PLAYER_ATTACK_RADIUS
     );
-    
+
     scene.AddEntity(player);
     
     // Entities
-
     for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
         scene.AddEntity(new Zombie(
             Config::ZOMBIE_SPAWN_POSITION_X, 
@@ -43,8 +41,10 @@ int main() {
     // Systems
     ZombieSystem zombieSystem;
     PlayerSystem playerSystem;
+    CameraSystem cameraSystem;
     scene.AddSystem(&playerSystem);
     scene.AddSystem(&zombieSystem);
+    scene.AddSystem(&cameraSystem);
 
     game.AddScene(&scene);
     game.Init();
