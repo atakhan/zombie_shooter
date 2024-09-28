@@ -1,24 +1,18 @@
 // SoundComponent.h
-#ifndef SOUNDCOMPONENT_H
-#define SOUNDCOMPONENT_H
+#ifndef SOUND_COMPONENT_H
+#define SOUND_COMPONENT_H
 
-class SoundComponent {
-public:
-    SoundComponent(float currentR, float minR, float maxR, bool active);
-    
-    void SetCurrentRadius(float x);
-    void SetMinRadius(float x);
-    void SetMaxRadius(float x);
-    float GetCurrentRadius();
-    float GetMinRadius();
-    float GetMaxRadius();
-    void SetActive(bool);
-
-private:
+struct SoundComponent {
     float maxRadius;
     float currentRadius;
     float minRadius;
     float isActive;
+    
+    SoundComponent(float currentR, float minR, float maxR, bool active)
+        : maxRadius(currentR)
+        , currentRadius(minR)
+        , minRadius(maxR)
+        , isActive(active) {}
 };
 
-#endif // SOUNDCOMPONENT_H
+#endif // SOUND_COMPONENT_H

@@ -9,7 +9,6 @@
 #include "System.h"
 #include "../Config.h"
 #include "Entity.h"
-#include "../entities/Player.h"
 
 class Scene {
 public:

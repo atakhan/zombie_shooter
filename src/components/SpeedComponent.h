@@ -1,14 +1,10 @@
-// SpeedComponent.h
-#ifndef SPEEDCOMPONENT_H
-#define SPEEDCOMPONENT_H
+#ifndef SPEED_COMPONENT_H
+#define SPEED_COMPONENT_H
 
-class SpeedComponent {
-public:
-    SpeedComponent(float speed);
-    float GetSpeed() const;
+struct SpeedComponent {
+    float speed_;
 
-private:
-    float speed;
+    SpeedComponent(float speed) : speed_(speed) {}
 };
 
-#endif // SPEEDCOMPONENT_H
+#endif // SPEED_COMPONENT_H

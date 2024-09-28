@@ -1,15 +1,10 @@
-// HealthComponent.h
-#ifndef HEALTHCOMPONENT_H
-#define HEALTHCOMPONENT_H
+#ifndef HEALTH_COMPONENT_H
+#define HEALTH_COMPONENT_H
 
-class HealthComponent {
-public:
-    HealthComponent(float initialHealth);
-    void TakeDamage(float damage);
-    float GetHealth() const;
-
-private:
-    float health;
+struct HealthComponent {
+    float health_;
+    
+    HealthComponent(float initialHealth) : health_(initialHealth) {}
 };
 
-#endif // HEALTHCOMPONENT_H
+#endif // HEALTH_COMPONENT_H

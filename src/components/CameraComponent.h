@@ -1,24 +1,15 @@
 // AttackComponent.h
-#ifndef CAMERACOMPONENT_H
-#define CAMERACOMPONENT_H
+#ifndef CAMERA_COMPONENT_H
+#define CAMERA_COMPONENT_H
 
 #include <raylib-cpp.hpp>
 
-class CameraComponent {
-public:
-    CameraComponent();
-    Vector2 GetTarget() const;
-    Vector2 GetOffset() const;
-    float GetRotation() const;
-    float GetZoom() const;
-    void SetTarget(Vector2 target);
-    void SetOffset(Vector2 offset);
-    void SetRotation(float rotation);
-    void SetZoom(float zoom);
-    Camera2D GetCamera();
-
-private:
+struct CameraComponent {
     Camera2D camera_;
+
+    CameraComponent::CameraComponent() 
+        : camera_{0}
+    {}
 };
 
-#endif // CAMERACOMPONENT_H
+#endif // CAMERA_COMPONENT_H

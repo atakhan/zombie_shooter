@@ -3,14 +3,13 @@
 
 #include <raylib-cpp.hpp>
 
-class CircleColliderComponent {
-public:
-    float radius_;
-    Vector2 position_;
+struct CircleColliderComponent {
+    float radius;          // Radius of the circle
+    Vector2 position;      // Position of the circle collider relative to the entity
+    bool isTrigger;        // Whether the collider triggers events without causing physical collisions
 
-    CircleColliderComponent(Vector2 pos, float radius);
-    float GetAttackStrength() const;
-    float GetRadius() const;
+    CircleColliderComponent(float r, Vector2 pos, bool trigger = false)
+        : radius(r), position(pos), isTrigger(trigger) {}
 };
 
 #endif // CIRCLE_COLLIDER_COMPONENT_H

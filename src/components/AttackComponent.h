@@ -1,16 +1,13 @@
 // AttackComponent.h
-#ifndef ATTACKCOMPONENT_H
-#define ATTACKCOMPONENT_H
+#ifndef ATTACK_COMPONENT_H
+#define ATTACK_COMPONENT_H
 
-class AttackComponent {
-public:
-    AttackComponent(float attackStrength, float radius);
-    float GetAttackStrength() const;
-    float GetRadius() const;
-
-private:
+struct AttackComponent {
     float attackStrength_;
     float radius_;
+    AttackComponent(float attackStrength, float radius)
+        : attackStrength_(attackStrength)
+        , radius_(radius) {}
 };
 
-#endif // ATTACKCOMPONENT_H
+#endif // ATTACK_COMPONENT_H

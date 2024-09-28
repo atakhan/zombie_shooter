@@ -1,19 +1,14 @@
 // PositionComponent.h
-#ifndef POSITIONCOMPONENT_H
-#define POSITIONCOMPONENT_H
+#ifndef POSITION_COMPONENT_H
+#define POSITION_COMPONENT_H
 
-class PositionComponent {
-public:
-    PositionComponent(float x, float y);
-    void SetPosition(float x, float y);
-    void SetX(float x);
-    void SetY(float y);
-    float GetX();
-    float GetY();
+#include <raylib-cpp.hpp>
 
-private:
-    float posX;
-    float posY;
+struct PositionComponent {
+    Vector2 position_;
+
+    PositionComponent(float x, float y) : position_((Vector2){x, y}) {}
+    PositionComponent(Vector2 pos) : position_(pos) {}
 };
 
-#endif // POSITIONCOMPONENT_H
+#endif // POSITION_COMPONENT_H
