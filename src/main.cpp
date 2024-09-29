@@ -3,7 +3,14 @@
 #include "Config.h"
 #include "core/Game.h"
 #include "core/Scene.h"
+#include "components/AttackComponent.h"
+#include "components/CameraComponent.h"
+#include "components/CircleColliderComponent.h"
 #include "components/HealthComponent.h"
+#include "components/PositionComponent.h"
+#include "components/SoundComponent.h"
+#include "components/SpeedComponent.h"
+#include "components/TargetComponent.h"
 #include "systems/ZombieSystem.h"
 #include "systems/PlayerSystem.h"
 #include "systems/CameraSystem.h"
@@ -42,7 +49,7 @@ int main() {
             Config::SOUND_MAX_RADIUS,
             true
         )
-    )
+    );
 
     // Player *player = new Player(
     //     Config::PLAYER_SPAWN_POSITION_X,
@@ -57,24 +64,24 @@ int main() {
     scene.AddEntity(&player);
     
     // Entities
-    for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
-        scene.AddEntity(new Zombie(
-            Config::ZOMBIE_SPAWN_POSITION_X, 
-            Config::ZOMBIE_SPAWN_POSITION_Y,
-            Config::ZOMBIE_HEALTH, 
-            Config::ZOMBIE_STRENGTH, 
-            Config::ZOMBIE_AGILITY, 
-            Config::ZOMBIE_HEARING_RADIUS, 
-            Config::ZOMBIE_ATTACK_RADIUS
-        ));
-    }
+    // for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
+    //     scene.AddEntity(new Zombie(
+    //         Config::ZOMBIE_SPAWN_POSITION_X, 
+    //         Config::ZOMBIE_SPAWN_POSITION_Y,
+    //         Config::ZOMBIE_HEALTH, 
+    //         Config::ZOMBIE_STRENGTH, 
+    //         Config::ZOMBIE_AGILITY, 
+    //         Config::ZOMBIE_HEARING_RADIUS, 
+    //         Config::ZOMBIE_ATTACK_RADIUS
+    //     ));
+    // }
 
     // Systems
-    ZombieSystem zombieSystem;
-    PlayerSystem playerSystem;
+    // ZombieSystem zombieSystem;
+    // PlayerSystem playerSystem;
     CameraSystem cameraSystem;
-    scene.AddSystem(&playerSystem);
-    scene.AddSystem(&zombieSystem);
+    // scene.AddSystem(&playerSystem);
+    // scene.AddSystem(&zombieSystem);
     scene.AddSystem(&cameraSystem);
 
     game.AddScene(&scene);

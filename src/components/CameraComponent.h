@@ -7,9 +7,7 @@
 struct CameraComponent {
     Camera2D camera_;
 
-    CameraComponent::CameraComponent() 
-        : camera_{0}
-    {}
+    CameraComponent() : camera_() {}
 };
 
 #endif // CAMERA_COMPONENT_H
