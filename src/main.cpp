@@ -1,29 +1,96 @@
 #include <raylib-cpp.hpp>
 
-int main() {
-    
-    // Initialization
-    int screenWidth = 800;
-    int screenHeight = 450;
+#include "Config.h"
+#include "core/Bootstrap.h"
+#include "components/Bootstrap.h"
+#include "systems/Bootstrap.h"
 
-    raylib::Color textColor(LIGHTGRAY);
-    raylib::Window w(screenWidth, screenHeight, "Raylib C++ Starter Kit Example");
-    
+int main() {
+    Game game;
+    Scene scene = Scene();
+
+    // CREATE PLAYER
+    Entity player;
+    player.AddComponent<HealthComponent>(HealthComponent(
+        Config::PLAYER_HEALTH
+    ));
+    player.AddComponent<AttackComponent>(AttackComponent(
+        Config::PLAYER_STRENGTH, 
+        Config::PLAYER_ATTACK_RADIUS
+    ));
+    player.AddComponent<PositionComponent>(PositionComponent(
+        Config::PLAYER_SPAWN_POSITION_X, 
+        Config::PLAYER_SPAWN_POSITION_Y
+    ));
+    player.AddComponent<SpeedComponent>(SpeedComponent(
+        Config::PLAYER_AGILITY
+    ));
+    player.AddComponent<SoundComponent>(SoundComponent(
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MAX_RADIUS,
+        true
+    ));
+    player.AddComponent<PlayerComponent>(PlayerComponent());
+    player.AddComponent<CameraComponent>(CameraComponent());
+    scene.AddEntity(&player);
+
+    // CREATE ZOMBIES
+    Entity zombie;
+    zombie.AddComponent<PositionComponent>(PositionComponent(
+        Config::ZOMBIE_SPAWN_POSITION_X,
+        Config::ZOMBIE_SPAWN_POSITION_Y
+    ));
+    zombie.AddComponent<HealthComponent>(HealthComponent(
+        Config::ZOMBIE_HEALTH
+    ));
+    zombie.AddComponent<AttackComponent>(AttackComponent(
+        Config::ZOMBIE_STRENGTH, 
+        Config::ZOMBIE_ATTACK_RADIUS
+    ));
+    zombie.AddComponent<SpeedComponent>(SpeedComponent(
+        Config::ZOMBIE_AGILITY
+    ));
+    zombie.AddComponent<SoundComponent>(SoundComponent(
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MAX_RADIUS,
+        true
+    ));
+    zombie.AddComponent<ZombieComponent>(ZombieComponent());
+    scene.AddEntity(&zombie);
+    // for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
+    // }
+
+    // Systems
+    PlayerDrawSystem playerDrawSystem;
+    PlayerControlSystem playerControlSystem;
+    ZombieDrawSystem zombieDrawSystem;
+
+    scene.AddSystem(&playerDrawSystem);
+    scene.AddSystem(&playerControlSystem);
+    scene.AddSystem(&zombieDrawSystem);
+
+    game.AddScene(&scene);
+    game.Init();
+
+    InitWindow(
+        Config::WINDOW_WIDTH,
+        Config::WINDOW_HEIGHT,
+        Config::WINDOW_TITLE
+    );
+
     SetTargetFPS(60);
 
-    // Main game loop
-    while (!w.ShouldClose()) // Detect window close button or ESC key
-    {
-        // Update
+    while (!WindowShouldClose()) {
+        game.Update();
 
-        // TODO: Update your variables here
-
-        // Draw
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-        textColor.DrawText("Congrats! You created your first window!", 190, 200, 20);
+            ClearBackground(RAYWHITE);
+            game.Draw();
         EndDrawing();
     }
 
+    CloseWindow();
     return 0;
 }
