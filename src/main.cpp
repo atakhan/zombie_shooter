@@ -5,9 +5,9 @@
 #include "core/Scene.h"
 #include "components/Bootstrap.h"
 #include "systems/ZombieSystem.h"
-#include "systems/PlayerSystem.h"
 #include "systems/CameraSystem.h"
 #include "systems/PlayerDrawSystem.h"
+#include "systems/PlayerControlSystem.h"
 
 int main() {
     Game game;
@@ -67,13 +67,11 @@ int main() {
     // }
 
     // Systems
-    // ZombieSystem zombieSystem;
-    // CameraSystem cameraSystem;
     PlayerDrawSystem playerDrawSystem;
-    // scene.AddSystem(&playerSystem);
-    // scene.AddSystem(&zombieSystem);
-    // scene.AddSystem(&cameraSystem);
+    PlayerControlSystem playerControlSystem;
+
     scene.AddSystem(&playerDrawSystem);
+    scene.AddSystem(&playerControlSystem);
 
     game.AddScene(&scene);
     game.Init();
