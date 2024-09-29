@@ -41,6 +41,7 @@ void ZombieDrawSystem::Draw(std::vector<Entity*> *entities) {
                 Config::ZOMBIE_COLOR
             );
         }
+        
     }
 }
 
