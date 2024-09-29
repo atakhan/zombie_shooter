@@ -50,16 +50,9 @@ int main() {
             true
         )
     );
-
-    // Player *player = new Player(
-    //     Config::PLAYER_SPAWN_POSITION_X,
-    //     Config::PLAYER_SPAWN_POSITION_Y,
-    //     Config::PLAYER_HEALTH,
-    //     Config::PLAYER_STRENGTH, 
-    //     Config::PLAYER_AGILITY, 
-    //     Config::PLAYER_HEARING_RADIUS, 
-    //     Config::PLAYER_ATTACK_RADIUS
-    // );
+    player.AddComponent<CameraComponent>(
+        CameraComponent()
+    );
 
     scene.AddEntity(&player);
     
@@ -78,11 +71,12 @@ int main() {
 
     // Systems
     // ZombieSystem zombieSystem;
-    // PlayerSystem playerSystem;
     CameraSystem cameraSystem;
+    PlayerDrawSystem playerDrawSystem;
     // scene.AddSystem(&playerSystem);
     // scene.AddSystem(&zombieSystem);
     scene.AddSystem(&cameraSystem);
+    scene.AddSystem(&playerDrawSystem);
 
     game.AddScene(&scene);
     game.Init();
