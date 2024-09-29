@@ -36,7 +36,7 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
     if (player->HasComponent<SoundComponent>()) {
         sound = player->GetComponent<SoundComponent>();
     }
-    std::cerr << "PLAYER CONTROL SYSTEM!" << std::endl;
+
     if (IsKeyDown(KEY_RIGHT)) {
         if (IsKeyDown(KEY_LEFT)) {
             Idle(sound);

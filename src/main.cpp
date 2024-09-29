@@ -1,77 +1,75 @@
 #include <raylib-cpp.hpp>
 
 #include "Config.h"
-#include "core/Game.h"
-#include "core/Scene.h"
+#include "core/Bootstrap.h"
 #include "components/Bootstrap.h"
-#include "systems/ZombieSystem.h"
-#include "systems/CameraSystem.h"
-#include "systems/PlayerDrawSystem.h"
-#include "systems/PlayerControlSystem.h"
+#include "systems/Bootstrap.h"
 
 int main() {
     Game game;
     Scene scene = Scene();
 
+    // CREATE PLAYER
     Entity player;
-    player.AddComponent<HealthComponent>(
-        HealthComponent(
-            Config::PLAYER_HEALTH
-        )
-    );
-    player.AddComponent<AttackComponent>(
-        AttackComponent(
-            Config::PLAYER_STRENGTH, 
-            Config::PLAYER_ATTACK_RADIUS
-        )
-    );
-    player.AddComponent<PositionComponent>(
-        PositionComponent(
-            Config::PLAYER_SPAWN_POSITION_X, 
-            Config::PLAYER_SPAWN_POSITION_Y
-        )
-    );
-    player.AddComponent<SpeedComponent>(
-        SpeedComponent(
-            Config::PLAYER_AGILITY
-        )
-    );
-    player.AddComponent<SoundComponent>(
-        SoundComponent(
-            Config::SOUND_MIN_RADIUS, 
-            Config::SOUND_MIN_RADIUS, 
-            Config::SOUND_MAX_RADIUS,
-            true
-        )
-    );
-    player.AddComponent<PlayerComponent>(
-        PlayerComponent()
-    );
-    player.AddComponent<CameraComponent>(
-        CameraComponent()
-    );
-
+    player.AddComponent<HealthComponent>(HealthComponent(
+        Config::PLAYER_HEALTH
+    ));
+    player.AddComponent<AttackComponent>(AttackComponent(
+        Config::PLAYER_STRENGTH, 
+        Config::PLAYER_ATTACK_RADIUS
+    ));
+    player.AddComponent<PositionComponent>(PositionComponent(
+        Config::PLAYER_SPAWN_POSITION_X, 
+        Config::PLAYER_SPAWN_POSITION_Y
+    ));
+    player.AddComponent<SpeedComponent>(SpeedComponent(
+        Config::PLAYER_AGILITY
+    ));
+    player.AddComponent<SoundComponent>(SoundComponent(
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MAX_RADIUS,
+        true
+    ));
+    player.AddComponent<PlayerComponent>(PlayerComponent());
+    player.AddComponent<CameraComponent>(CameraComponent());
     scene.AddEntity(&player);
-    
-    // Entities
+
+    // CREATE ZOMBIES
+    Entity zombie;
+    zombie.AddComponent<PositionComponent>(PositionComponent(
+        Config::ZOMBIE_SPAWN_POSITION_X,
+        Config::ZOMBIE_SPAWN_POSITION_Y
+    ));
+    zombie.AddComponent<HealthComponent>(HealthComponent(
+        Config::ZOMBIE_HEALTH
+    ));
+    zombie.AddComponent<AttackComponent>(AttackComponent(
+        Config::ZOMBIE_STRENGTH, 
+        Config::ZOMBIE_ATTACK_RADIUS
+    ));
+    zombie.AddComponent<SpeedComponent>(SpeedComponent(
+        Config::ZOMBIE_AGILITY
+    ));
+    zombie.AddComponent<SoundComponent>(SoundComponent(
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MIN_RADIUS, 
+        Config::SOUND_MAX_RADIUS,
+        true
+    ));
+    zombie.AddComponent<ZombieComponent>(ZombieComponent());
+    scene.AddEntity(&zombie);
     // for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
-    //     scene.AddEntity(new Zombie(
-    //         Config::ZOMBIE_SPAWN_POSITION_X, 
-    //         Config::ZOMBIE_SPAWN_POSITION_Y,
-    //         Config::ZOMBIE_HEALTH, 
-    //         Config::ZOMBIE_STRENGTH, 
-    //         Config::ZOMBIE_AGILITY, 
-    //         Config::ZOMBIE_HEARING_RADIUS, 
-    //         Config::ZOMBIE_ATTACK_RADIUS
-    //     ));
     // }
 
     // Systems
     PlayerDrawSystem playerDrawSystem;
     PlayerControlSystem playerControlSystem;
+    ZombieDrawSystem zombieDrawSystem;
 
     scene.AddSystem(&playerDrawSystem);
     scene.AddSystem(&playerControlSystem);
+    scene.AddSystem(&zombieDrawSystem);
 
     game.AddScene(&scene);
     game.Init();
