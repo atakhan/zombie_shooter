@@ -1,15 +1,15 @@
-// InputSystem.h
-#ifndef PLAYERSYSTEM_H
-#define PLAYERSYSTEM_H
+// // InputSystem.h
+// #ifndef PLAYERSYSTEM_H
+// #define PLAYERSYSTEM_H
 
-#include "../core/System.h"
-#include "../core/Entity.h"
-#include "../entities/Player.h"
+// #include "../core/System.h"
+// #include "../core/Entity.h"
+// #include "../entities/Player.h"
 
-class PlayerSystem : public System {
-public:
-    void Init(std::vector<Entity*> *entities) override;
-    void Update(std::vector<Entity*> *entities) override;
-};
+// class PlayerSystem : public System {
+// public:
+//     void Init(std::vector<Entity*> *entities) override;
+//     void Update(std::vector<Entity*> *entities) override;
+// };
 
-#endif // PLAYERSYSTEM_H
+// #endif // PLAYERSYSTEM_H

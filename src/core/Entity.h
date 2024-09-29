@@ -8,6 +8,8 @@
 
 class Entity {
 public:
+    std::unordered_map<std::type_index, void*> components; // Stores components by type
+
     // Method to add a component to the entity
     template <typename T>
     void AddComponent(T component) {
@@ -20,7 +22,14 @@ public:
         return components.find(typeid(T)) != components.end();
     }
 
-private:
-    std::unordered_map<std::type_index, void*> components; // Stores components by type
+    template<typename T>
+    T* GetComponent() {
+        auto it = components.find(typeid(T));
+        if (it != components.end()) {
+            return static_cast<T*>(it->second);
+        }
+        return nullptr;
+    }
+
 };
 #endif // ENTITY_H

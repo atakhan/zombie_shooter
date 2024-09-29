@@ -25,6 +25,7 @@
 //     AttackComponent attack_;
 //     SpeedComponent speed_;
 //     SoundComponent sound_;
+//     ColliderComponent sound_;
 //     CameraComponent camera_;
 //     float hearingRadius_;
     

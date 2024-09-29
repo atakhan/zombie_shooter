@@ -3,17 +3,11 @@
 #include "Config.h"
 #include "core/Game.h"
 #include "core/Scene.h"
-#include "components/AttackComponent.h"
-#include "components/CameraComponent.h"
-#include "components/CircleColliderComponent.h"
-#include "components/HealthComponent.h"
-#include "components/PositionComponent.h"
-#include "components/SoundComponent.h"
-#include "components/SpeedComponent.h"
-#include "components/TargetComponent.h"
+#include "components/Bootstrap.h"
 #include "systems/ZombieSystem.h"
 #include "systems/PlayerSystem.h"
 #include "systems/CameraSystem.h"
+#include "systems/PlayerDrawSystem.h"
 
 int main() {
     Game game;
@@ -50,6 +44,9 @@ int main() {
             true
         )
     );
+    player.AddComponent<PlayerComponent>(
+        PlayerComponent()
+    );
     player.AddComponent<CameraComponent>(
         CameraComponent()
     );
@@ -71,11 +68,11 @@ int main() {
 
     // Systems
     // ZombieSystem zombieSystem;
-    CameraSystem cameraSystem;
+    // CameraSystem cameraSystem;
     PlayerDrawSystem playerDrawSystem;
     // scene.AddSystem(&playerSystem);
     // scene.AddSystem(&zombieSystem);
-    scene.AddSystem(&cameraSystem);
+    // scene.AddSystem(&cameraSystem);
     scene.AddSystem(&playerDrawSystem);
 
     game.AddScene(&scene);

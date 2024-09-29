@@ -10,19 +10,19 @@ void Scene::Update() {
     UpdateSystems();
 }
 void Scene::Draw() {
-    Player* player = nullptr;
-    for (const auto& entity : entities_) {
-        if (dynamic_cast<Player*>(entity)) player = static_cast<Player*>(entity);
-    }
-    
-    if (player) {
-        BeginMode2D(player->GetCamera());
-    }
-    
-    DrawEntities();
-    
-    if (player) {
-        EndMode2D();
+    // Player* player = nullptr;
+    // for (const auto& entity : entities_) {
+    //     if (dynamic_cast<Player*>(entity)) player = static_cast<Player*>(entity);
+    // }
+    // if (player) {
+    //     BeginMode2D(player->GetCamera());
+    // }
+    // DrawEntities();
+    // if (player) {
+    //     EndMode2D();
+    // }
+    for (auto& system : systems_) {
+        system->Draw(&entities_);
     }
 }
 
@@ -46,8 +46,8 @@ void Scene::RemoveEntity(Entity* entity) {
     entities_.erase(std::remove(entities_.begin(), entities_.end(), entity), entities_.end());
     delete entity; // Освобождаем память
 }
-void Scene::DrawEntities() {
-    for (auto& entity : entities_) {
-        entity->Draw();
-    }
-}
+// void Scene::DrawEntities() {
+//     for (auto& entity : entities_) {
+//         entity->Draw();
+//     }
+// }

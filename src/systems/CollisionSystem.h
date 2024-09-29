@@ -5,9 +5,7 @@
 
 #include "../core/System.h"
 #include "../core/Entity.h"
-#include "../entities/Player.h"
-#include "../entities/Zombie.h"
-#include "../Components/CircleColliderComponent.h"
+#include "../components/Bootstrap.h"
 
 class CollisionSystem : public System {
   public:
