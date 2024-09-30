@@ -66,10 +66,12 @@ int main() {
     PlayerDrawSystem playerDrawSystem;
     PlayerControlSystem playerControlSystem;
     ZombieDrawSystem zombieDrawSystem;
+    ZombieMoveSystem zombieMoveSystem;
 
     scene.AddSystem(&playerDrawSystem);
     scene.AddSystem(&playerControlSystem);
     scene.AddSystem(&zombieDrawSystem);
+    scene.AddSystem(&zombieMoveSystem);
 
     game.AddScene(&scene);
     game.Init();
