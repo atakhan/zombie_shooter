@@ -52,6 +52,10 @@ int main() {
         zombie->AddComponent<SpeedComponent>(SpeedComponent(
             Config::ZOMBIE_AGILITY
         ));
+        zombie->AddComponent<TargetComponent>(TargetComponent(
+            Config::ZOMBIE_SPAWN_POSITION_X + i,
+            Config::ZOMBIE_SPAWN_POSITION_Y + i
+        ));
         zombie->AddComponent<SoundComponent>(SoundComponent(
             Config::SOUND_MIN_RADIUS, 
             Config::SOUND_MIN_RADIUS, 

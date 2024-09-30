@@ -8,6 +8,7 @@ struct TargetComponent {
     bool active_;
 
     TargetComponent(float x, float y) : position_((Vector2){x, y}), active_(true) {}
+    TargetComponent(Vector2 pos) : position_(pos), active_(true) {}
 };
 // bool TargetComponent::Reached(float currentPosX, float currentPosY) {
 //     const float epsilon = 1.0f; // Define a small threshold for comparison
