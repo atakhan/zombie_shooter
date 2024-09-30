@@ -36,31 +36,31 @@ int main() {
     scene.AddEntity(&player);
 
     // CREATE ZOMBIES
-    Entity zombie;
-    zombie.AddComponent<PositionComponent>(PositionComponent(
-        Config::ZOMBIE_SPAWN_POSITION_X,
-        Config::ZOMBIE_SPAWN_POSITION_Y
-    ));
-    zombie.AddComponent<HealthComponent>(HealthComponent(
-        Config::ZOMBIE_HEALTH
-    ));
-    zombie.AddComponent<AttackComponent>(AttackComponent(
-        Config::ZOMBIE_STRENGTH, 
-        Config::ZOMBIE_ATTACK_RADIUS
-    ));
-    zombie.AddComponent<SpeedComponent>(SpeedComponent(
-        Config::ZOMBIE_AGILITY
-    ));
-    zombie.AddComponent<SoundComponent>(SoundComponent(
-        Config::SOUND_MIN_RADIUS, 
-        Config::SOUND_MIN_RADIUS, 
-        Config::SOUND_MAX_RADIUS,
-        true
-    ));
-    zombie.AddComponent<ZombieComponent>(ZombieComponent());
-    scene.AddEntity(&zombie);
-    // for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
-    // }
+    for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
+        Entity *zombie = new Entity();
+        zombie->AddComponent<PositionComponent>(PositionComponent(
+            Config::ZOMBIE_SPAWN_POSITION_X + i,
+            Config::ZOMBIE_SPAWN_POSITION_Y + i
+        ));
+        zombie->AddComponent<HealthComponent>(HealthComponent(
+            Config::ZOMBIE_HEALTH
+        ));
+        zombie->AddComponent<AttackComponent>(AttackComponent(
+            Config::ZOMBIE_STRENGTH, 
+            Config::ZOMBIE_ATTACK_RADIUS
+        ));
+        zombie->AddComponent<SpeedComponent>(SpeedComponent(
+            Config::ZOMBIE_AGILITY
+        ));
+        zombie->AddComponent<SoundComponent>(SoundComponent(
+            Config::SOUND_MIN_RADIUS, 
+            Config::SOUND_MIN_RADIUS, 
+            Config::SOUND_MAX_RADIUS,
+            true
+        ));
+        zombie->AddComponent<ZombieComponent>(ZombieComponent());
+        scene.AddEntity(zombie);
+    }
 
     // Systems
     PlayerDrawSystem playerDrawSystem;
