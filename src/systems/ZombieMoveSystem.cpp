@@ -20,6 +20,8 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
             continue;
         }
         if (entity->HasComponent<ZombieComponent>()) {
+            ZombieComponent* zombie_component = entity->GetComponent<ZombieComponent>();
+            
             PositionComponent* zombie_position = nullptr;
             HealthComponent* zombie_health = nullptr;
             SoundComponent* zombie_sound = nullptr;
@@ -39,9 +41,10 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
 
             if (zombie_position && zombie_health && zombie_sound) {
                 PositionComponent* food = nullptr; 
-                food = FindFood(player, entity);
+                food = FindFood(zombie_position, zombie_health, player);
                 if (food) {
                     target->position_ = food->position_;
+                    zombie_component->currentState = ZombieComponent::Status::RUN;
                 } else {
 
                 }
@@ -97,7 +100,7 @@ bool ZombieMoveSystem::GetRandomHalfProbability(int percent) {
     return tf;
 }
 
-PositionComponent *ZombieMoveSystem::FindFood(Entity *player, Entity *zombie) {
+PositionComponent *ZombieMoveSystem::FindFood(PositionComponent zombie_position, HealthComponent zombie_radius, Entity *player) {
     PositionComponent *result = nullptr;
 
     PositionComponent *player_position = nullptr;
