@@ -15,7 +15,10 @@ class ZombieMoveSystem : public System {
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
     bool GetRandomHalfProbability(int percent);
-    PositionComponent* FindFood(Entity *player, Entity *zombie);
+    
+    PositionComponent *FindFood(PositionComponent *zombie_position, PositionComponent *player_position, float zombie_radius, float player_sound_radius);
+    void MoveToTarget(PositionComponent *position, TargetComponent *target, float speed);
+    bool ZombieCanAttack(PositionComponent *playerPos, PositionComponent *zombiePos, float playerRadius, float attackRadius);
 };
 
 #endif // ZOMBIE_MOVE_SYSTEM_H

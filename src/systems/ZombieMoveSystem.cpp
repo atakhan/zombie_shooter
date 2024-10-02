@@ -14,37 +14,64 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
             break;
         }
     }
+    
+    PositionComponent* playerPosition = nullptr;
+    if (player->HasComponent<PositionComponent>()) {
+        playerPosition = player->GetComponent<PositionComponent>();
+    }
+    
+    SoundComponent* playerSound = nullptr;
+    if (player->HasComponent<SoundComponent>()) {
+        playerSound = player->GetComponent<SoundComponent>();
+    }
+    
+    HealthComponent* playerHealth = nullptr;
+    if (player->HasComponent<HealthComponent>()) {
+        playerHealth = player->GetComponent<HealthComponent>();
+    }
+
     for (auto& entity : *entities) {
         if (entity == nullptr) {
             std::cerr << "Entity pointer is null!" << std::endl;
             continue;
         }
         if (entity->HasComponent<ZombieComponent>()) {
-            ZombieComponent* zombie_component = entity->GetComponent<ZombieComponent>();
+            ZombieComponent* zombieComponent = entity->GetComponent<ZombieComponent>();
             
-            PositionComponent* zombie_position = nullptr;
-            HealthComponent* zombie_health = nullptr;
-            SoundComponent* zombie_sound = nullptr;
+            PositionComponent* zombiePosition = nullptr;
+            HealthComponent* zombieRadius = nullptr;
             TargetComponent* target = nullptr;
+            SpeedComponent* speed = nullptr;
+            AttackComponent* attack = nullptr;
+
             if (entity->HasComponent<PositionComponent>()) {
-                zombie_position = entity->GetComponent<PositionComponent>();
+                zombiePosition = entity->GetComponent<PositionComponent>();
             }
             if (entity->HasComponent<HealthComponent>()) {
-                zombie_health = entity->GetComponent<HealthComponent>();
-            }
-            if (entity->HasComponent<SoundComponent>()) {
-                zombie_sound = entity->GetComponent<SoundComponent>();
+                zombieRadius = entity->GetComponent<HealthComponent>();
             }
             if (entity->HasComponent<TargetComponent>()) {
                 target = entity->GetComponent<TargetComponent>();
             }
+            if (entity->HasComponent<SpeedComponent>()) {
+                speed = entity->GetComponent<SpeedComponent>();
+            }
+            if (entity->HasComponent<AttackComponent>()) {
+                attack = entity->GetComponent<AttackComponent>();
+            }
 
-            if (zombie_position && zombie_health && zombie_sound) {
+            if (zombiePosition && zombieRadius && target && playerPosition && playerSound) {
                 PositionComponent* food = nullptr; 
-                food = FindFood(zombie_position, zombie_health, player);
+                food = FindFood(zombiePosition, playerPosition, zombieRadius->health_, playerSound->currentRadius);
                 if (food) {
                     target->position_ = food->position_;
-                    zombie_component->currentState = ZombieComponent::Status::RUN;
+                    zombieComponent->currentState = ZombieComponent::Status::RUN;
+                    MoveToTarget(zombiePosition, target, speed->speed_ * Config::RUN_COEF);
+                    if (ZombieCanAttack(playerPosition, zombiePosition, playerHealth->health_, attack->radius_)) {
+                        if (playerHealth->health_ > 0) {
+                            playerHealth->health_ = playerHealth->health_ - attack->attackStrength_;
+                        }
+                    }
                 } else {
 
                 }
@@ -100,44 +127,69 @@ bool ZombieMoveSystem::GetRandomHalfProbability(int percent) {
     return tf;
 }
 
-PositionComponent *ZombieMoveSystem::FindFood(PositionComponent zombie_position, HealthComponent zombie_radius, Entity *player) {
+PositionComponent *ZombieMoveSystem::FindFood(
+        PositionComponent *zombiePosition,
+        PositionComponent *playerPosition, 
+        float zombieRadius, 
+        float playerSoundRadius
+) {
     PositionComponent *result = nullptr;
 
-    PositionComponent *player_position = nullptr;
-    HealthComponent *player_radius = nullptr;
-    if (player->HasComponent<PositionComponent>()) {
-        player_position = player->GetComponent<PositionComponent>();
-    }
-    if (player->HasComponent<HealthComponent>()) {
-        player_radius = player->GetComponent<HealthComponent>();
-    }
-    float player_pos_x = player_position->position_.x;
-    float player_pos_y = player_position->position_.y;
+    float playerPosX = playerPosition->position_.x;
+    float playerPosY = playerPosition->position_.y;
 
-    PositionComponent *zombie_position = nullptr;
-    HealthComponent *zombie_radius = nullptr;
-    if (zombie->HasComponent<PositionComponent>()) {
-        zombie_position = zombie->GetComponent<PositionComponent>();
-    }
-    if (zombie->HasComponent<HealthComponent>()) {
-        zombie_radius = zombie->GetComponent<HealthComponent>();
-    }
-    float zombie_pos_x = zombie_position->position_.x;
-    float zombie_pos_y = zombie_position->position_.y;
+    float zombiePosX = zombiePosition->position_.x;
+    float zombiePosY = zombiePosition->position_.y;
 
+    float posXDif = playerPosX - zombiePosX;
+    float posYDif = playerPosY - zombiePosY;
 
-
-    float pos_x_dif = player_pos_x - zombie_pos_x;
-    float pos_y_dif = player_pos_y - zombie_pos_y;
-
-    float radius_dif = player_radius->health_ + zombie_radius->health_;
-    // if collide
-    if (fabs(((pos_x_dif * pos_x_dif) + (pos_y_dif * pos_y_dif))) <= (radius_dif * radius_dif)) {
-        if (!result) {
-            result = new PositionComponent(player_pos_x, player_pos_y);
-        }
+    float radius_sum = playerSoundRadius + zombieRadius;
+    
+    // if zombie hears player, then return player pos
+    if (fabs(((posXDif * posXDif) + (posYDif * posYDif))) <= (radius_sum * radius_sum)) {
+        result = new PositionComponent(playerPosX, playerPosY);
     }
 
     return result;
 }
 
+void ZombieMoveSystem::MoveToTarget(PositionComponent *position, TargetComponent *target, float speed) {
+    float targetX = target->position_.x;
+    float targetY = target->position_.y;
+    float posX = position->position_.x;
+    float posY = position->position_.y;
+    float deltaX = targetX - posX;
+    float deltaY = targetY - posY;
+    float distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    if (distance > 0) {
+        float moveX = (deltaX / distance) * speed;
+        float moveY = (deltaY / distance) * speed;
+
+        posX += moveX;
+        posY += moveY;
+
+        position->position_.x = posX;
+        position->position_.y = posY;
+
+        if (std::abs(deltaX) < speed && std::abs(deltaY) < speed) {
+            posX = targetX;
+            posY = targetY;
+        }
+    }
+}
+
+bool ZombieMoveSystem::ZombieCanAttack(PositionComponent *playerPos, PositionComponent *zombiePos, float playerRadius, float attackRadius) {
+    float playerPosX = playerPos->position_.x;
+    float playerPosY = playerPos->position_.y;
+    float posXDif = playerPosX - zombiePos->position_.x;
+    float posYDif = playerPosY - zombiePos->position_.y;
+    float radiusDif = playerRadius + attackRadius;
+    // if collide
+    if (fabs(((posXDif * posXDif) + (posYDif * posYDif))) <= (radiusDif * radiusDif)) {
+        return true;
+    }
+    return false;
+
+}
