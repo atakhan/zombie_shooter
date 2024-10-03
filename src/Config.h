@@ -4,53 +4,24 @@
 
 #include <string>
 #include <raylib-cpp.hpp>
-
-#define R0G0B0A7  CLITERAL(Color){ 0, 0, 0, 255 } 
-#define R1G0B0A7  CLITERAL(Color){ 32, 0, 0, 255 } 
-#define R2G0B0A7  CLITERAL(Color){ 64, 0, 0, 255 } 
-#define R3G0B0A1  CLITERAL(Color){ 92, 0, 0, 32 } 
-#define R3G0B0A2  CLITERAL(Color){ 92, 0, 0, 64 } 
-#define R3G0B0A3  CLITERAL(Color){ 92, 0, 0, 92 } 
-#define R3G0B0A4  CLITERAL(Color){ 92, 0, 0, 128 } 
-#define R3G0B0A5  CLITERAL(Color){ 92, 0, 0, 160 } 
-#define R3G0B0A6  CLITERAL(Color){ 92, 0, 0, 192 } 
-#define R3G0B0A7  CLITERAL(Color){ 92, 0, 0, 255 } 
-#define R4G0B0A7  CLITERAL(Color){ 128, 0, 0, 255 } 
-#define R5G0B0A7  CLITERAL(Color){ 160, 0, 0, 255 } 
-#define R6G0B0A7  CLITERAL(Color){ 192, 0, 0, 255 } 
-#define R7G0B0A1  CLITERAL(Color){ 255, 0, 0, 32 }
-#define R7G0B0A2  CLITERAL(Color){ 255, 0, 0, 64 }
-#define R7G0B0A3  CLITERAL(Color){ 255, 0, 0, 92 }
-#define R7G0B0A4  CLITERAL(Color){ 255, 0, 0, 128 }
-#define R7G0B0A5  CLITERAL(Color){ 255, 0, 0, 160 }
-#define R7G0B0A6  CLITERAL(Color){ 255, 0, 0, 192 }
-#define R7G0B0A7  CLITERAL(Color){ 255, 0, 0, 255 }
-
-
-#define R0G0B0A7  CLITERAL(Color){ 0, 0, 0, 255 } 
-#define R0G0B1A7  CLITERAL(Color){ 0, 0, 32, 255 } 
-#define R0G0B2A7  CLITERAL(Color){ 0, 0, 64, 255 } 
-#define R0G0B3A1  CLITERAL(Color){ 0, 0, 92, 32 } 
-#define R0G0B3A2  CLITERAL(Color){ 0, 0, 92, 64 } 
-#define R0G0B3A3  CLITERAL(Color){ 0, 0, 92, 92 } 
-#define R0G0B3A4  CLITERAL(Color){ 0, 0, 92, 128 } 
-#define R0G0B3A5  CLITERAL(Color){ 0, 0, 92, 160 } 
-#define R0G0B3A6  CLITERAL(Color){ 0, 0, 92, 192 } 
-#define R0G0B3A7  CLITERAL(Color){ 0, 0, 92, 255 } 
-#define R0G0B4A7  CLITERAL(Color){ 0, 0, 128, 255 } 
-#define R0G0B5A7  CLITERAL(Color){ 0, 0, 160, 255 } 
-#define R0G0B6A7  CLITERAL(Color){ 0, 0, 192, 255 } 
-#define R0G0B7A7  CLITERAL(Color){ 0, 0, 255, 255 }
-
-#define R6G6B6A1  CLITERAL(Color){ 192, 192, 192, 32 } 
-#define R6G6B6A2  CLITERAL(Color){ 192, 192, 192, 64 } 
-#define R6G6B6A3  CLITERAL(Color){ 192, 192, 192, 92 } 
-#define R6G6B6A4  CLITERAL(Color){ 192, 192, 192, 128 } 
-#define R6G6B6A5  CLITERAL(Color){ 192, 192, 192, 160 } 
-#define R6G6B6A6  CLITERAL(Color){ 192, 192, 192, 192 } 
+#include "utils/Bootstrap.h"
 
 class Config {
 public:
+// STYLE CONFIGS
+    static const Color PLAYER_COLOR;
+    static const Color HUMAN_COLOR;
+    static const Color ZOMBIE_COLOR;
+    
+    static const Color SMELL_RADIUS_COLOR;
+    static const Color ATTACK_RADIUS_COLOR;
+    static const Color SOUND_RADIUS_COLOR;
+    
+    static const Color PATH_COLOR;
+    static const Color GOAL_COLOR;
+    
+    static const Color NEEDS_INFO_TEXT_COLOR;
+
 // GAME CONFIGS
     static const char * WINDOW_TITLE;
     static const int WINDOW_WIDTH;
@@ -58,9 +29,14 @@ public:
     static const size_t ZOMBIES_COUNT;
     static const float WALK_COEF;
     static const float RUN_COEF;
+    static const float DEFAULT_LOOT_AMOUNT;
+    static const float DEFAULT_LOOT_SPAWN_POSITION_X;
+    static const float DEFAULT_LOOT_SPAWN_POSITION_Y;
+    
+    static const float FOOD_DEFAULT_SIZE;
     
 // PLAYER CONFIGS
-    static const Color PLAYER_COLOR;
+    
     static const float PLAYER_HEALTH;
     static const float PLAYER_STRENGTH;
     static const float PLAYER_AGILITY;
@@ -69,8 +45,33 @@ public:
     static const float PLAYER_SPAWN_POSITION_X;
     static const float PLAYER_SPAWN_POSITION_Y;
 
-// PLAYER CONFIGS
-    static const Color ZOMBIE_COLOR;
+// HUMAN CONFIGS
+    static const float HUMAN_HEALTH;
+    static const float HUMAN_STRENGTH;
+    static const float HUMAN_AGILITY;
+    static const float HUMAN_WALK_SPEED;
+    static const float HUMAN_RUN_SPEED;
+    static const float HUMAN_HEARING_RADIUS;
+    static const float HUMAN_ATTACK_RADIUS;
+    static const float HUMAN_SPAWN_POSITION_X;
+    static const float HUMAN_SPAWN_POSITION_Y;
+    static const float HUMAN_DEFAULT_TARGET_X;
+    static const float HUMAN_DEFAULT_TARGET_Y;
+    static const float HUMAN_MOVE_TRESHOLD;
+    static const float HUMAN_AIR_DEFAULT_NEED_VALUE;
+    static const float HUMAN_WATER_DEFAULT_NEED_VALUE;
+    static const float HUMAN_FOOD_DEFAULT_NEED_VALUE;
+    static const float HUMAN_HEAT_DEFAULT_NEED_VALUE;
+    static const float HUMAN_CLOTHES_DEFAULT_NEED_VALUE;
+    static const float HUMAN_SLEEP_DEFAULT_NEED_VALUE;
+    static const float HUMAN_SHELTER_DEFAULT_NEED_VALUE;
+    static const float HUMAN_REPRODUCTION_DEFAULT_NEED_VALUE;
+    static const float NEEDS_INFO_TEXT_SIZE;
+    static const float NEEDS_INFO_TEXT_SPACING;
+    static const float HUMAN_PHYSIOLOGY_EPS;
+    static const float HUMAN_LUNGS_DEFAULT_CAPACITY ;
+
+// ZOMBI CONFIGS
     static const float ZOMBIE_HEALTH;
     static const float ZOMBIE_STRENGTH;
     static const float ZOMBIE_AGILITY;
@@ -78,12 +79,10 @@ public:
     static const float ZOMBIE_ATTACK_RADIUS;
     static const float ZOMBIE_SPAWN_POSITION_X;
     static const float ZOMBIE_SPAWN_POSITION_Y;
+    static const float ZOMBIE_DEFAULT_TARGET_POSITION_X;
+    static const float ZOMBIE_DEFAULT_TARGET_POSITION_Y;
     
 // OTHERS
-    static const Color ATTACK_RADIUS_COLOR;
-    static const Color SOUND_RADIUS_COLOR;
-    static const Color PATH_COLOR;
-    static const Color GOAL_COLOR;
     static const float SOUND_MIN_RADIUS;
     static const float SOUND_MAX_RADIUS;
     static const float SOUND_RADIUS_STEP;

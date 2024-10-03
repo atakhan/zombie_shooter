@@ -3,10 +3,7 @@
 
 #include <vector>
 
-#include "../core/System.h"
-#include "../core/Entity.h"
-#include "../Config.h"
-#include "../components/Bootstrap.h"
+#include "../../core/System.h"
 
 class PlayerControlSystem : public System {
   public:

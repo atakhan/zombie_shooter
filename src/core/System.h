@@ -3,6 +3,8 @@
 #define SYSTEM_H
 
 #include <vector>
+#include "../Config.h"
+#include "../components/Bootstrap.h"
 #include "Entity.h"
 
 class System {

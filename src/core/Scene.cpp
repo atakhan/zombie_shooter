@@ -6,25 +6,6 @@ void Scene::Init() {
         system->Init(&entities_);
     }
 }
-void Scene::Update() {
-    UpdateSystems();
-}
-void Scene::Draw() {
-    // Player* player = nullptr;
-    // for (const auto& entity : entities_) {
-    //     if (dynamic_cast<Player*>(entity)) player = static_cast<Player*>(entity);
-    // }
-    // if (player) {
-    //     BeginMode2D(player->GetCamera());
-    // }
-    // DrawEntities();
-    // if (player) {
-    //     EndMode2D();
-    // }
-    for (auto& system : systems_) {
-        system->Draw(&entities_);
-    }
-}
 
 void Scene::AddSystem(System* system) {
     systems_.push_back(system);
@@ -32,11 +13,6 @@ void Scene::AddSystem(System* system) {
 void Scene::RemoveSystem(System* system) {
     systems_.erase(std::remove(systems_.begin(), systems_.end(), system), systems_.end());
     delete system; // Освобождаем память
-}
-void Scene::UpdateSystems() {
-    for (auto& system : systems_) {
-        system->Update(&entities_);
-    }
 }
 
 void Scene::AddEntity(Entity* entity) {

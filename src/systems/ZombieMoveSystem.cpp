@@ -15,20 +15,9 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
         }
     }
     
-    PositionComponent* playerPosition = nullptr;
-    if (player->HasComponent<PositionComponent>()) {
-        playerPosition = player->GetComponent<PositionComponent>();
-    }
-    
-    SoundComponent* playerSound = nullptr;
-    if (player->HasComponent<SoundComponent>()) {
-        playerSound = player->GetComponent<SoundComponent>();
-    }
-    
-    HealthComponent* playerHealth = nullptr;
-    if (player->HasComponent<HealthComponent>()) {
-        playerHealth = player->GetComponent<HealthComponent>();
-    }
+    PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
+    SoundComponent* playerSound = playerSound = player->GetComponent<SoundComponent>();
+    HealthComponent* playerHealth = player->GetComponent<HealthComponent>();
 
     for (auto& entity : *entities) {
         if (entity == nullptr) {
@@ -37,31 +26,14 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
         }
         if (entity->HasComponent<ZombieComponent>()) {
             ZombieComponent* zombieComponent = entity->GetComponent<ZombieComponent>();
-            
-            PositionComponent* zombiePosition = nullptr;
-            HealthComponent* zombieRadius = nullptr;
-            TargetComponent* target = nullptr;
-            SpeedComponent* speed = nullptr;
-            AttackComponent* attack = nullptr;
-
-            if (entity->HasComponent<PositionComponent>()) {
-                zombiePosition = entity->GetComponent<PositionComponent>();
-            }
-            if (entity->HasComponent<HealthComponent>()) {
-                zombieRadius = entity->GetComponent<HealthComponent>();
-            }
-            if (entity->HasComponent<TargetComponent>()) {
-                target = entity->GetComponent<TargetComponent>();
-            }
-            if (entity->HasComponent<SpeedComponent>()) {
-                speed = entity->GetComponent<SpeedComponent>();
-            }
-            if (entity->HasComponent<AttackComponent>()) {
-                attack = entity->GetComponent<AttackComponent>();
-            }
+            PositionComponent* zombiePosition = entity->GetComponent<PositionComponent>();
+            HealthComponent* zombieRadius = entity->GetComponent<HealthComponent>();
+            TargetComponent* target = entity->GetComponent<TargetComponent>();
+            SpeedComponent* speed = entity->GetComponent<SpeedComponent>();
+            AttackComponent* attack = entity->GetComponent<AttackComponent>();
 
             if (zombiePosition && zombieRadius && target && playerPosition && playerSound) {
-                PositionComponent* food = nullptr; 
+                PositionComponent* food = nullptr;
                 food = FindFood(zombiePosition, playerPosition, zombieRadius->health_, playerSound->currentRadius);
                 if (food) {
                     target->position_ = food->position_;
@@ -73,7 +45,7 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
                         }
                     }
                 } else {
-
+                    
                 }
             }
         }

@@ -6,28 +6,21 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#include "System.h"
+
 #include "../Config.h"
+#include "System.h"
 #include "Entity.h"
 
 class Scene {
 public:
-    void Init();
-    void Update();
-    void Draw();
-    
-    void AddCamera(Camera2D* camera);
-    void InitCamera();
-    void UpdateCamera();
+    virtual void Init() = 0;
+    virtual void Update() = 0;
+    virtual void Draw() = 0;
 
     void AddSystem(System* system);
     void RemoveSystem(System* system);
-    void UpdateSystems();
-
     void AddEntity(Entity* entity);
     void RemoveEntity(Entity* entity);
-
-    void DrawEntities();
 
 protected:
     std::vector<System*> systems_;

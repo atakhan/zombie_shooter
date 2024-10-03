@@ -11,5 +11,10 @@
 #include "SoundComponent.h"
 #include "SpeedComponent.h"
 #include "TargetComponent.h"
+#include "HumanComponent.h"
+#include "LootComponent.h"
+#include "SmellComponent.h"
+#include "HumanPhysiologicalComponent.h"
+#include "HumanBreathComponent.h"
 
 #endif // COMPONENTS_BOOTSTRAP_H
