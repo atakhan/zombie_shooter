@@ -21,8 +21,10 @@ public:
     void RemoveSystem(System* system);
     void AddEntity(Entity* entity);
     void RemoveEntity(Entity* entity);
+    bool Continue() { return continue_;};
 
 protected:
+    bool continue_;
     std::vector<System*> systems_;
     std::vector<Entity*> entities_;
 };

@@ -1,22 +1,12 @@
 #include "ManageScenesScene.h"
 
 void ManageScenesScene::Init() {
+    Scene::continue_ = true;
     // Scene title
     Scene::AddEntity(SceneTools::InitGameComponent("Choose Scene"));
-    
-    // Entities
-    Scene::AddEntity(SceneTools::SpawnPlayer());
-    Scene::AddEntity(SceneTools::SpawnZombie());
+    Scene::AddSystem(new GameTitleSceneTitleDrawSystem);
 
-    // Systems
-    // Player systems
-    Scene::AddSystem(new PlayerDrawSystem);
-    Scene::AddSystem(new PlayerControlSystem);
     // Zombie systems
-    Scene::AddSystem(new ZombieDrawSystem);
-    Scene::AddSystem(new ZombieMoveSystem);
-    Scene::AddSystem(new ZombieTargetingSystem);
-
     for (auto& system : systems_) {
         if (system == nullptr) {
             std::cerr << "System pointer is null!" << std::endl;
@@ -27,6 +17,10 @@ void ManageScenesScene::Init() {
 }
 
 void ManageScenesScene::Update() {
+    // Exit scene
+    if (IsKeyDown(KEY_Q)) {
+        Scene::continue_ = false;
+    }
     for (auto& system : systems_) {
         if (system == nullptr) {
             std::cerr << "System pointer is null!" << std::endl;

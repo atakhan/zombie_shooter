@@ -17,5 +17,6 @@
 #include "./human/HumanStaminaSystem.h"
 
 #include "./loot/LootDrawSystem.h"
+#include "./ui/GameTitleSceneTitleDrawSystem.h"
 
 #endif // SYSTEMS_BOOTSTRAP_H

@@ -3,6 +3,7 @@
 void PlayerZombieScene::Init() {
     // Scene title
     Scene::AddEntity(SceneTools::InitGameComponent("Player Zombie Scene"));
+    Scene::AddSystem(new GameTitleSceneTitleDrawSystem);
 
     // Entities
     Scene::AddEntity(SceneTools::SpawnPlayer());

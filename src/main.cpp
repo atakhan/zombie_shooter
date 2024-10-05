@@ -7,9 +7,11 @@
 #include "scenes/Bootstrap.h"
 
 int main() {
-    Game game;
+    Game game(Game::Mode::CHOOSE_SCENE);
+    // SCENE MANAGER index 0
+    game.AddScene(new ManageScenesScene);
 
-    // game.AddScene(new ManageScenesScene);
+    // SCENES index++
     game.AddScene(new PlayerZombieScene());
     game.AddScene(new HumanTrainingScene());
     
