@@ -1,5 +1,5 @@
-#ifndef HUMAN_MOVE_SYSTEM_H
-#define HUMAN_MOVE_SYSTEM_H
+#ifndef HUMAN_TARGETING_SYSTEM_H
+#define HUMAN_TARGETING_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -9,14 +9,15 @@
 #include "../../core/Bootstrap.h"
 #include "../../components/Bootstrap.h"
 
-class HumanMoveSystem : public System {
+class HumanTargetingSystem : public System {
   public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void MoveTo(TargetComponent *targetPos, PositionComponent *curPos, float speed);
-    
+    bool TargetReached(Vector2 targetPos, Vector2 curPos);
+    Vector2 FindTarget(HumanComponent *human, std::vector<Entity*> *entities);
+    Vector2 RandomTarget();
 };
 
-#endif // HUMAN_MOVE_SYSTEM_H
+#endif // HUMAN_TARGETING_SYSTEM_H

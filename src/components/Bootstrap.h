@@ -14,7 +14,6 @@
 #include "HumanComponent.h"
 #include "LootComponent.h"
 #include "SmellComponent.h"
-#include "HumanPhysiologicalComponent.h"
-#include "HumanBreathComponent.h"
+#include "StaminaComponent.h"
 
 #endif // COMPONENTS_BOOTSTRAP_H

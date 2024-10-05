@@ -29,7 +29,7 @@ void LootDrawSystem::Draw(std::vector<Entity*> *entities) {
                 DrawCircle(
                     position->position_.x,
                     position->position_.y,
-                    loot->amount * GetLootSize(loot->current),
+                    loot->amount * GetLootSizeByType(loot->lootType),
                     Config::ZOMBIE_COLOR
                 );
             }
@@ -38,7 +38,7 @@ void LootDrawSystem::Draw(std::vector<Entity*> *entities) {
     }
 }
 
-float LootDrawSystem::GetLootSize(LootComponent::Type type) {
+float LootDrawSystem::GetLootSizeByType(LootComponent::Type type) {
     if (type == LootComponent::Type::FOOD) {
         return Config::FOOD_DEFAULT_SIZE;
     }

@@ -7,10 +7,14 @@
 #include "./player/PlayerDrawSystem.h"
 #include "./player/PlayerControlSystem.h"
 
+#include "./zombie/ZombieDrawSystem.h"
+#include "./zombie/ZombieMoveSystem.h"
+#include "./zombie/ZombieTargetingSystem.h"
+
 #include "./human/HumanDrawSystem.h"
 #include "./human/HumanMoveSystem.h"
-#include "./human/HumanPhysiologicalSystem.h"
-#include "./human/HumanBreathSystem.h"
+#include "./human/HumanTargetingSystem.h"
+#include "./human/HumanStaminaSystem.h"
 
 #include "./loot/LootDrawSystem.h"
 

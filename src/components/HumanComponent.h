@@ -17,6 +17,9 @@ struct HumanComponent {
         : currentStatus(Status::WALK)
         , isAlive(true) 
     {}
+    HumanComponent(Status status) 
+        : currentStatus(status)
+    {}
 };
 
 #endif // HUMAN_COMPONENT_H

@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "../../core/System.h"
+#include "../../utils/Bootstrap.h"
 
 class HumanDrawSystem : public System {
   public:
@@ -13,8 +14,7 @@ class HumanDrawSystem : public System {
 
     void DrawBody(PositionComponent *pos, HealthComponent *health, bool isAlive);
     void DrawMessArea(PositionComponent* position, SoundComponent* sound);
-    void DrawHumanInfo(HumanComponent *human, PositionComponent* position, HealthComponent* health, HumanPhysiologicalComponent* physiology, HumanBreathComponent *breath);
-    void DrawTitleValueText(PositionComponent* position, std::string title, std::string value);
+    void DrawHumanInfo(Entity *entity);
 };
 
 #endif // HUMAN_DRAW_SYSTEM_H

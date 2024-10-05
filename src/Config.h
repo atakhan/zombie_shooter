@@ -8,6 +8,11 @@
 
 class Config {
 public:
+// UI CONFIGS
+    static const float TITLE_VALUE_LIST_TEXT_SIZE;
+    static const float TITLE_VALUE_LIST_TEXT_SPACING;
+    static const Color DEFAULT_UI_TEXT_COLOR;
+
 // STYLE CONFIGS
     static const Color PLAYER_COLOR;
     static const Color HUMAN_COLOR;
@@ -18,9 +23,7 @@ public:
     static const Color SOUND_RADIUS_COLOR;
     
     static const Color PATH_COLOR;
-    static const Color GOAL_COLOR;
-    
-    static const Color NEEDS_INFO_TEXT_COLOR;
+    static const Color TARGET_COLOR;
 
 // GAME CONFIGS
     static const char * WINDOW_TITLE;
@@ -46,9 +49,10 @@ public:
     static const float PLAYER_SPAWN_POSITION_Y;
 
 // HUMAN CONFIGS
-    static const float HUMAN_HEALTH;
-    static const float HUMAN_STRENGTH;
-    static const float HUMAN_AGILITY;
+    static const float HUMAN_DEFAULT_HEALTH;
+    static const float HUMAN_DEFAULT_STRENGTH;
+    static const float HUMAN_DEFAULT_AGILITY;
+    static const float HUMAN_DEFAULT_STAMINA;
     static const float HUMAN_WALK_SPEED;
     static const float HUMAN_RUN_SPEED;
     static const float HUMAN_HEARING_RADIUS;
@@ -58,18 +62,6 @@ public:
     static const float HUMAN_DEFAULT_TARGET_X;
     static const float HUMAN_DEFAULT_TARGET_Y;
     static const float HUMAN_MOVE_TRESHOLD;
-    static const float HUMAN_AIR_DEFAULT_NEED_VALUE;
-    static const float HUMAN_WATER_DEFAULT_NEED_VALUE;
-    static const float HUMAN_FOOD_DEFAULT_NEED_VALUE;
-    static const float HUMAN_HEAT_DEFAULT_NEED_VALUE;
-    static const float HUMAN_CLOTHES_DEFAULT_NEED_VALUE;
-    static const float HUMAN_SLEEP_DEFAULT_NEED_VALUE;
-    static const float HUMAN_SHELTER_DEFAULT_NEED_VALUE;
-    static const float HUMAN_REPRODUCTION_DEFAULT_NEED_VALUE;
-    static const float NEEDS_INFO_TEXT_SIZE;
-    static const float NEEDS_INFO_TEXT_SPACING;
-    static const float HUMAN_PHYSIOLOGY_EPS;
-    static const float HUMAN_LUNGS_DEFAULT_CAPACITY ;
 
 // ZOMBI CONFIGS
     static const float ZOMBIE_HEALTH;
@@ -86,8 +78,6 @@ public:
     static const float SOUND_MIN_RADIUS;
     static const float SOUND_MAX_RADIUS;
     static const float SOUND_RADIUS_STEP;
-
-    // const Color 
 
 };
 

@@ -6,10 +6,10 @@ struct LootComponent {
         FOOD = 1,
     };
     float amount;
-    Type current;
+    Type lootType;
 
-    LootComponent(float amount_ = 1.0f) 
-        : current(Type::FOOD)
+    LootComponent(float amount_ = 10.0f) 
+        : lootType(Type::FOOD)
         , amount(amount_) 
     {}
 

@@ -11,7 +11,7 @@ class LootDrawSystem : public System {
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    float GetLootSize(LootComponent::Type type);
+    float GetLootSizeByType(LootComponent::Type type);
 };
 
 #endif // LOOT_DRAW_SYSTEM_H

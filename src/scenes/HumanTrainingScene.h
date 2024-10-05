@@ -11,7 +11,11 @@ class HumanTrainingScene : public Scene {
     void Draw() override;
 
     void SpawnPlayer();
+    void CreateHumanWithDefaultComponents(Entity *human);
     void SpawnHuman();
+    void SpawnHumanInPos(float posX, float posY);
+    void SpawnHumanInPosWithStatus(float posX, float posY, HumanComponent::Status status);
+    void SpawnHumanInPosWithStatusAndTarget(float posX, float posY, HumanComponent::Status status, float tarX, float tarY);
     void SpawnLoot();
     void SpawnZombie();
 };

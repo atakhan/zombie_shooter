@@ -31,5 +31,16 @@ public:
         return nullptr;
     }
 
+    template <typename T>
+    void ReplaceComponent(T component) {
+        auto it = components.find(typeid(T));
+        if (it != components.end()) {
+            delete static_cast<T*>(it->second); // Удаляем старый компонент
+            it->second = new T(component); // Добавляем новый компонент
+        } else {
+            // Если компонента нет, добавляем его
+            AddComponent(component);
+        }
+    }
 };
 #endif // ENTITY_H
