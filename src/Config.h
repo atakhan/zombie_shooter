@@ -8,6 +8,9 @@
 
 class Config {
 public:
+// GENERAL CONFIGS
+    static const std::string GAME_TITLE;
+
 // UI CONFIGS
     static const float TITLE_VALUE_LIST_TEXT_SIZE;
     static const float TITLE_VALUE_LIST_TEXT_SPACING;

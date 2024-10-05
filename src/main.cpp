@@ -8,9 +8,11 @@
 
 int main() {
     Game game;
-    HumanTrainingScene humanTrainingScene = HumanTrainingScene();
 
-    game.AddScene(&humanTrainingScene);
+    // game.AddScene(new ManageScenesScene);
+    game.AddScene(new PlayerZombieScene());
+    game.AddScene(new HumanTrainingScene());
+    
     game.Init();
 
     InitWindow(

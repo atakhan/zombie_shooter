@@ -15,5 +15,6 @@
 #include "LootComponent.h"
 #include "SmellComponent.h"
 #include "StaminaComponent.h"
+#include "GameComponent.h"
 
 #endif // COMPONENTS_BOOTSTRAP_H

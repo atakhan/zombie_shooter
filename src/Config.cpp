@@ -1,6 +1,9 @@
 // Config.cpp
 #include "Config.h"
 
+// GAME CONFIGS
+const std::string Config::GAME_TITLE = "Zombie Shooter";
+
 // UI CONFIGS
 const float Config::TITLE_VALUE_LIST_TEXT_SIZE = 16.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SPACING = 1.0f;
