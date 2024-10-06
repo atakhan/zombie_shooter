@@ -1,6 +1,9 @@
 #ifndef PLAYER_ZOMBIE_SCENE
 #define PLAYER_ZOMBIE_SCENE
 
+#include <string>
+#include <iostream>
+
 #include "../core/Bootstrap.h"
 #include "../components/Bootstrap.h"
 #include "../systems/Bootstrap.h"

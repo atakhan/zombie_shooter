@@ -27,13 +27,23 @@ void HumanTrainingScene::Init() {
 
     // Scene::AddSystem(new LootDrawSystem());
 
-
+    // Init Systems
     for (auto& system : systems_) {
         if (system == nullptr) {
-            std::cerr << "System pointer is null!" << std::endl;
             continue;
         }
         system->Init(&entities_);
+    }
+
+    // Init scenes
+    for (auto& scene : *scenes_) {
+        if (scene == nullptr) {
+            continue;
+        }
+        // // init all scenes except current
+        // if (scene->index_ != index_) {
+        //     scene->Init();
+        // }
     }
 }
 

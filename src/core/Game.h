@@ -12,10 +12,10 @@ public:
         PLAY_SCENE,
         EXIT_GAME,
     };
-    Mode currentMode;
-    int currentSceneIndex;
+    Mode currentMode_;
+    int currentSceneIndex_;
     
-    Game(Mode mode) : currentMode(mode), currentSceneIndex(0) {}
+    Game(Mode mode) : currentMode_(mode), currentSceneIndex_(0) {}
 
     void Init();
     void Update();

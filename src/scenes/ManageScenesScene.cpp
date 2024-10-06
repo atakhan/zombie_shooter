@@ -35,19 +35,6 @@ void ManageScenesScene::Init() {
         }
     }
     
-    
-    Scene::AddEntity(UiTools::CreateUIEntity(
-        (Vector2){10.0f, 10.0f},
-        Config::GAME_TITLE,
-        16.0f, 1, 1, 3.0f, RED
-    ));
-    Scene::AddEntity(UiTools::CreateUIEntity(
-        (Vector2){10.0f, 10.0f},
-        Scene::title_,
-        16.0f, 1, 2, 3.0f, RED
-    ));
-    
-    
     Scene::AddSystem(new MenuControlSystem());
     Scene::AddSystem(new MenuDrawSystem());
 
@@ -66,14 +53,15 @@ void ManageScenesScene::Init() {
         if (scene == nullptr) {
             continue;
         }
-        if (scene->GetTitle() != "choose a scene") {
-            scene->Init();
-        }
+        // // init all scenes except current
+        // if (scene->index_ != index_) {
+        //     scene->Init();
+        // }
     }
 }
 
 void ManageScenesScene::Update(int *currentSceneIndex) {
-    if (continue_) {
+    if (*currentSceneIndex == index_) {
         MenuComponent *menu = nullptr;
         for (auto& entity : entities_) {
             if (entity->HasComponent<MenuComponent>()) {
@@ -82,11 +70,17 @@ void ManageScenesScene::Update(int *currentSceneIndex) {
         }
         if (menu) {
             if (menu->chooseEvent_) {
-                if (menu->currentItemIndex_ != *currentSceneIndex && menu->currentItemIndex_ != 0) {
+                std::cout << "CHOOSE EVENT!!!!" << std::endl;
+                std::cout << "menu item index: " << std::to_string(menu->currentItemIndex_) << std::endl;
+                std::cout << "current scene index: " << std::to_string(*currentSceneIndex) << std::endl;
+                if (menu->currentItemIndex_ != *currentSceneIndex) {
+                    menu->chooseEvent_ = false;
                     *currentSceneIndex = menu->currentItemIndex_;
+                    scenes_->at(*currentSceneIndex)->continue_ = true;
+                } else {
+                    menu->chooseEvent_ = false;
+                    continue_ = true;
                 }
-                menu->chooseEvent_ = false;
-                scenes_->at(*currentSceneIndex)->continue_ = true;
             } else {
                 for (auto& system : systems_) {
                     if (system == nullptr) {
@@ -95,8 +89,16 @@ void ManageScenesScene::Update(int *currentSceneIndex) {
                     system->Update(&entities_);
                 }
             }
+        } else {
+            std::cout << "ManageScenesScene::Update MenuComponent NOT FOUND in scene: " << std::to_string(*currentSceneIndex) << std::endl;
         }
         HandleExit(currentSceneIndex);
+    } else {
+        std::cout 
+            << "ManageScenesScene::Update CONTINUE STOPED: *currentSceneIndex != index_  -  " 
+            << std::to_string(*currentSceneIndex) 
+            << std::to_string(index_) 
+            << std::endl;
     }
 }
 

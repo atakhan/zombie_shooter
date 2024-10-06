@@ -1,12 +1,6 @@
 // Scene.cpp
 #include "Scene.h"
 
-void Scene::Init() {
-    for (auto& system : systems_) {
-        system->Init(&entities_);
-    }
-}
-
 void Scene::AddSystem(System* system) {
     systems_.push_back(system);
 }
@@ -26,10 +20,11 @@ void Scene::RemoveEntity(Entity* entity) {
 void Scene::HandleExit(int *currentSceneIndex) {
     if (IsKeyDown(KEY_Q)) {
         if (*currentSceneIndex == 0) {
-            Scene::continue_ = false;
+            continue_ = false;
         } else {
+            continue_ = false;
             *currentSceneIndex = 0;
-            scenes_->at(*currentSceneIndex)->continue_ = true;
+            scenes_->at(0)->continue_ = true;
         }
     }
 }

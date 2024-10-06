@@ -30,7 +30,7 @@ int main() {
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
-        if ((int)game->currentMode == 2) {
+        if ((int)game->currentMode_ == 2) {
             break;
         }
 

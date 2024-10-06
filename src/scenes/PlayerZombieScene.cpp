@@ -28,9 +28,9 @@ void PlayerZombieScene::Init() {
     // Scene::AddSystem(new ZombieMoveSystem);
     // Scene::AddSystem(new ZombieTargetingSystem);
 
+    // Init Systems
     for (auto& system : systems_) {
         if (system == nullptr) {
-            std::cerr << "System pointer is null!" << std::endl;
             continue;
         }
         system->Init(&entities_);
