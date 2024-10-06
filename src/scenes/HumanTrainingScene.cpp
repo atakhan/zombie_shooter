@@ -38,12 +38,14 @@ void HumanTrainingScene::Init() {
 }
 
 void HumanTrainingScene::Update(int *currentSceneIndex) {
-    for (auto& system : systems_) {
-        if (system == nullptr) {
-            std::cerr << "System pointer is null!" << std::endl;
-            continue;
+    if (continue_) {
+        for (auto& system : systems_) {
+            if (system == nullptr) {
+                continue;
+            }
+            system->Update(&entities_);
         }
-        system->Update(&entities_);
+        HandleExit(currentSceneIndex);
     }
 }
 

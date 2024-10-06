@@ -20,9 +20,10 @@ public:
     std::vector<System*> systems_;
     std::vector<Entity*> entities_;
     
-    Scene(int index, std::string title = "no title") 
+    Scene(int index, bool isContinue, std::string title = "no title") 
         : title_(title)
         , index_(index)
+        , continue_(isContinue)
     {}
 
     virtual void Init() = 0;
@@ -36,7 +37,7 @@ public:
     void AddEntity(Entity* entity);
     void RemoveEntity(Entity* entity);
     bool Continue() { return continue_;};
-    void IsExit();
+    void HandleExit(int *currentSceneIndex);
     std::string GetTitle();
 };
 

@@ -23,10 +23,14 @@ void Scene::RemoveEntity(Entity* entity) {
     delete entity; // Освобождаем память
 }
 
-void Scene::IsExit() {
+void Scene::HandleExit(int *currentSceneIndex) {
     if (IsKeyDown(KEY_Q)) {
-        std::cout << "KEY Q PRESSED. try to exit by changing continue to false" << std::endl;
-        Scene::continue_ = false;
+        if (*currentSceneIndex == 0) {
+            Scene::continue_ = false;
+        } else {
+            *currentSceneIndex = 0;
+            scenes_->at(*currentSceneIndex)->continue_ = true;
+        }
     }
 }
 

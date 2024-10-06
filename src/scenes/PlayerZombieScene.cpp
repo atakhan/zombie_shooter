@@ -22,7 +22,7 @@ void PlayerZombieScene::Init() {
     // Player systems
     Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
-    Scene::AddSystem(new SceneControlSystem);
+    // Scene::AddSystem(new SceneControlSystem);
     // Zombie systems
     // Scene::AddSystem(new ZombieDrawSystem);
     // Scene::AddSystem(new ZombieMoveSystem);
@@ -45,16 +45,17 @@ void PlayerZombieScene::Update(int *currentSceneIndex) {
             }
             system->Update(&entities_);
         }
-        IsExit();
+        HandleExit(currentSceneIndex);
     }
 }
 
 void PlayerZombieScene::Draw() {
-    for (auto& system : systems_) {
-        if (system == nullptr) {
-            std::cerr << "System pointer is null!" << std::endl;
-            continue;
+    if (continue_) {
+        for (auto& system : systems_) {
+            if (system == nullptr) {
+                continue;
+            }
+            system->Draw(&entities_);
         }
-        system->Draw(&entities_);
     }
 }

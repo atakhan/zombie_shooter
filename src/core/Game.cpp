@@ -3,20 +3,40 @@
 
 void Game::Init() {
     if(!scenes.empty()) {
-        scenes[currentSceneIndex]->Init();
+        for (auto &scene : scenes) {
+            if (scenes.at(scene->index_)->Continue() == true) {
+                scenes[scene->index_]->Init();
+            }
+        }
     }
 }
 
 void Game::Update() {
     int newSceneIndex = currentSceneIndex;
-    if (scenes[currentSceneIndex]->Continue()) {
-        scenes[currentSceneIndex]->Update(&newSceneIndex);
+
+    // Count active scenes
+    Scene *scene = nullptr;
+    int activeScenesNumber = scenes.size();
+    for (auto &scene : scenes) {
+        if (scenes.at(scene->index_)->Continue() == false) {
+            activeScenesNumber--;
+        }
+    }
+    // if no active scenes then exit game
+    if (activeScenesNumber == 0) {
+        std::cout << "No active scenes. go exit!" << std::endl;
+        currentMode = Game::Mode::EXIT_GAME;
     } else {
-        newSceneIndex = 0;
+        if (scenes.at(currentSceneIndex)->Continue()) {
+            scenes.at(currentSceneIndex)->Update(&newSceneIndex);
+            if (newSceneIndex != currentSceneIndex) {
+                currentSceneIndex = newSceneIndex;
+            }
+        } else {
+            newSceneIndex = 0;
+        }
     }
-    if (newSceneIndex != currentSceneIndex) {
-        currentSceneIndex = newSceneIndex;
-    }
+    
 }
 
 void Game::Draw() {

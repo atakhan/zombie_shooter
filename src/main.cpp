@@ -1,4 +1,6 @@
 #include <raylib-cpp.hpp>
+#include <iostream>
+#include <string>
 
 #include "Config.h"
 #include "core/Bootstrap.h"
@@ -8,13 +10,14 @@
 #include "utils/Bootstrap.h"
 
 int main() {
-    Game *game = new Game(Game::Mode::CHOOSE_SCENE);
+    Game *game = new Game(
+        Game::Mode::CHOOSE_SCENE
+    );
+    
     // // SCENE MANAGER index 0
-    game->AddScene(new ManageScenesScene(0, "choose a scene"));
-
-    // // SCENES index++
-    game->AddScene(new PlayerZombieScene(1, "player vs zombie scene"));
-    game->AddScene(new HumanTrainingScene(2, "try to create a human entity scene"));
+    game->AddScene(new ManageScenesScene(0, true, "choose a scene"));
+    game->AddScene(new PlayerZombieScene(1, false, "player vs zombie scene"));
+    game->AddScene(new HumanTrainingScene(2, false, "try to create a human entity scene"));
     
     game->Init();
 
@@ -27,6 +30,10 @@ int main() {
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
+        if ((int)game->currentMode == 2) {
+            break;
+        }
+
         game->Update();
 
         BeginDrawing();

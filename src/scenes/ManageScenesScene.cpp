@@ -73,27 +73,30 @@ void ManageScenesScene::Init() {
 }
 
 void ManageScenesScene::Update(int *currentSceneIndex) {
-    MenuComponent *menu = nullptr;
-    for (auto& entity : entities_) {
-        if (entity->HasComponent<MenuComponent>()) {
-            menu = entity->GetComponent<MenuComponent>();
-        }
-    }
-    if (menu) {
-        if (menu->chooseEvent_) {
-            if (menu->currentItemIndex_ != *currentSceneIndex && menu->currentItemIndex_ != 0) {
-                *currentSceneIndex = menu->currentItemIndex_;
+    if (continue_) {
+        MenuComponent *menu = nullptr;
+        for (auto& entity : entities_) {
+            if (entity->HasComponent<MenuComponent>()) {
+                menu = entity->GetComponent<MenuComponent>();
             }
-            menu->chooseEvent_ = false;
-            scenes_->at(*currentSceneIndex)->continue_ = true;
-        } else {
-            for (auto& system : systems_) {
-                if (system == nullptr) {
-                    continue;
+        }
+        if (menu) {
+            if (menu->chooseEvent_) {
+                if (menu->currentItemIndex_ != *currentSceneIndex && menu->currentItemIndex_ != 0) {
+                    *currentSceneIndex = menu->currentItemIndex_;
                 }
-                system->Update(&entities_);
+                menu->chooseEvent_ = false;
+                scenes_->at(*currentSceneIndex)->continue_ = true;
+            } else {
+                for (auto& system : systems_) {
+                    if (system == nullptr) {
+                        continue;
+                    }
+                    system->Update(&entities_);
+                }
             }
         }
+        HandleExit(currentSceneIndex);
     }
 }
 
