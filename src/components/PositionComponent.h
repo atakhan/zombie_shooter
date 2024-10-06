@@ -1,6 +1,6 @@
 // PositionComponent.h
-#ifndef POSITION_COMPONENT_H
-#define POSITION_COMPONENT_H
+#ifndef SRC_COMPONENTS_POSITION_COMPONENT_H
+#define SRC_COMPONENTS_POSITION_COMPONENT_H
 
 #include <raylib-cpp.hpp>
 
@@ -11,4 +11,4 @@ struct PositionComponent {
     PositionComponent(Vector2 pos) : position_(pos) {}
 };
 
-#endif // POSITION_COMPONENT_H
+#endif // SRC_COMPONENTS_POSITION_COMPONENT_H

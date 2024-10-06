@@ -1,6 +1,6 @@
 // SoundComponent.h
-#ifndef SOUND_COMPONENT_H
-#define SOUND_COMPONENT_H
+#ifndef SRC_COMPONENTS_SOUND_COMPONENT_H
+#define SRC_COMPONENTS_SOUND_COMPONENT_H
 
 struct SoundComponent {
     float maxRadius;
@@ -8,11 +8,11 @@ struct SoundComponent {
     float minRadius;
     float isActive;
     
-    SoundComponent(float currentR, float minR, float maxR, bool active)
-        : maxRadius(currentR)
-        , currentRadius(minR)
-        , minRadius(maxR)
-        , isActive(active) {}
+    SoundComponent(float radius)
+        : minRadius(0.0f)
+        , maxRadius(radius)
+        , currentRadius(radius)
+        , isActive(true) {}
 };
 
-#endif // SOUND_COMPONENT_H
+#endif // SRC_COMPONENTS_SOUND_COMPONENT_H

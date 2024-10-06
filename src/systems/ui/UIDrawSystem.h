@@ -1,19 +1,18 @@
-#ifndef PLAYER_DRAW_SYSTEM_H
-#define PLAYER_DRAW_SYSTEM_H
+#ifndef UI_DRAW_SYSTEM_H
+#define UI_DRAW_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
-#include <iostream>
 
 #include "../../Config.h"
 #include "../../core/Bootstrap.h"
 #include "../../components/Bootstrap.h"
 
-class PlayerDrawSystem : public System {
+class UIDrawSystem : public System {
   public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 };
 
-#endif // PLAYER_DRAW_SYSTEM_H
+#endif // UI_DRAW_SYSTEM_H

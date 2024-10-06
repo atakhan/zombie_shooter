@@ -1,5 +1,5 @@
-#ifndef LOOT_COMPONENT_H
-#define LOOT_COMPONENT_H
+#ifndef SRC_COMPONENTS_LOOT_COMPONENT_H
+#define SRC_COMPONENTS_LOOT_COMPONENT_H
 
 struct LootComponent {
     enum class Type {
@@ -15,4 +15,4 @@ struct LootComponent {
 
 };
 
-#endif // LOOT_COMPONENT_H
+#endif // SRC_COMPONENTS_LOOT_COMPONENT_H

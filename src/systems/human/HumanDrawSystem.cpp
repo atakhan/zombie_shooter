@@ -58,7 +58,7 @@ void HumanDrawSystem::DrawHumanInfo(Entity *entity) {
     TargetComponent* target = entity->GetComponent<TargetComponent>();
     StaminaComponent* stamina = entity->GetComponent<StaminaComponent>();
     
-    Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_,
+    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_,
         1, "alive: ", (human->isAlive) ? "YES" : "NO"
     );
     
@@ -69,23 +69,23 @@ void HumanDrawSystem::DrawHumanInfo(Entity *entity) {
     if (human->currentStatus == HumanComponent::Status::WALK) statusText = "WALK";
     if (human->currentStatus == HumanComponent::Status::RUN) statusText = "RUN";
     if (human->currentStatus == HumanComponent::Status::ATTACK) statusText = "ATTACK";
-    Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_,
+    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_,
         2, "status: ", statusText
     );
     
-    Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_,
+    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_,
         3, "stamina: ", std::to_string(stamina->currentValue_)
     );
     
-    Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
         4, "current pos: ", std::to_string(position->position_.x) + ", " + std::to_string(position->position_.y)
     );
     
-    Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
         5, "target: ", std::to_string(target->position_.x) + ", " + std::to_string(target->position_.y)
     );
     
-    Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
         6, "target status: ", std::to_string(target->active_)
     );
 }

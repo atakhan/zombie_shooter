@@ -48,15 +48,15 @@ void ZombieDrawSystem::Draw(std::vector<Entity*> *entities) {
                     Config::PATH_COLOR
                 );
 
-                Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+                UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
                     1, "current pos: ", std::to_string(position->position_.x) + ", " + std::to_string(position->position_.y)
                 );
                 
-                Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+                UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
                     2, "target: ", std::to_string(target->position_.x) + ", " + std::to_string(target->position_.y)
                 );
                 
-                Ui::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+                UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
                     3, "target status: ", std::to_string(target->active_)
                 );
             }

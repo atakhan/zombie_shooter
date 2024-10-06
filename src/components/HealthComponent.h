@@ -1,5 +1,5 @@
-#ifndef HEALTH_COMPONENT_H
-#define HEALTH_COMPONENT_H
+#ifndef SRC_COMPONENTS_HEALTH_COMPONENT_H
+#define SRC_COMPONENTS_HEALTH_COMPONENT_H
 
 struct HealthComponent {
     float health_;
@@ -7,4 +7,4 @@ struct HealthComponent {
     HealthComponent(float initialHealth) : health_(initialHealth) {}
 };
 
-#endif // HEALTH_COMPONENT_H
+#endif // SRC_COMPONENTS_HEALTH_COMPONENT_H

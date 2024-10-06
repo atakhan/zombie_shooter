@@ -12,9 +12,14 @@ public:
     static const std::string GAME_TITLE;
 
 // UI CONFIGS
+    static const float DEFAULT_FONT_SIZE;
+    static const float DEFAULT_PADDING;
+    static const float DEFAULT_LINE_SPACING;
+    static const float DEFAULT_TEXT_SPACING;
     static const float TITLE_VALUE_LIST_TEXT_SIZE;
     static const float TITLE_VALUE_LIST_TEXT_SPACING;
     static const Color DEFAULT_UI_TEXT_COLOR;
+    static const Color DEFAULT_FONT_COLOR;
 
 // STYLE CONFIGS
     static const Color PLAYER_COLOR;

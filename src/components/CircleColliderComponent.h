@@ -1,5 +1,5 @@
-#ifndef CIRCLE_COLLIDER_COMPONENT_H
-#define CIRCLE_COLLIDER_COMPONENT_H
+#ifndef SRC_COMPONENTS_CIRCLE_COLLIDER_COMPONENT_H
+#define SRC_COMPONENTS_CIRCLE_COLLIDER_COMPONENT_H
 
 #include <raylib-cpp.hpp>
 
@@ -12,4 +12,4 @@ struct CircleColliderComponent {
         : radius(r), position(pos), isTrigger(trigger) {}
 };
 
-#endif // CIRCLE_COLLIDER_COMPONENT_H
+#endif // SRC_COMPONENTS_CIRCLE_COLLIDER_COMPONENT_H

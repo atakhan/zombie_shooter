@@ -22,8 +22,18 @@ void Scene::RemoveEntity(Entity* entity) {
     entities_.erase(std::remove(entities_.begin(), entities_.end(), entity), entities_.end());
     delete entity; // Освобождаем память
 }
-// void Scene::DrawEntities() {
-//     for (auto& entity : entities_) {
-//         entity->Draw();
-//     }
-// }
+
+void Scene::Exit() {
+    if (IsKeyDown(KEY_Q)) {
+        std::cout << "KEY Q PRESSED. try to exit by changing continue to false" << std::endl;
+        Scene::continue_ = false;
+    }
+}
+
+void Scene::SetSceneList(std::vector<Scene*> *scenes) {
+    scenes_ = scenes;
+}
+
+std::string Scene::GetTitle() {
+    return title_;
+}

@@ -1,5 +1,5 @@
-#ifndef HUMAN_COMPONENT_H
-#define HUMAN_COMPONENT_H
+#ifndef SRC_COMPONENTS_HUMAN_COMPONENT_H
+#define SRC_COMPONENTS_HUMAN_COMPONENT_H
 
 struct HumanComponent {
     enum class Status {
@@ -22,4 +22,4 @@ struct HumanComponent {
     {}
 };
 
-#endif // HUMAN_COMPONENT_H
+#endif // SRC_COMPONENTS_HUMAN_COMPONENT_H

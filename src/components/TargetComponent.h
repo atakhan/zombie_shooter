@@ -1,5 +1,5 @@
-#ifndef TARGET_COMPONENT_H
-#define TARGET_COMPONENT_H
+#ifndef SRC_COMPONENTS_TARGET_COMPONENT_H
+#define SRC_COMPONENTS_TARGET_COMPONENT_H
 
 #include <raylib-cpp.hpp>
 
@@ -19,4 +19,4 @@ struct TargetComponent {
 //     }
 //     return false;
 // }
-#endif // TARGET_COMPONENT_H
+#endif // SRC_COMPONENTS_TARGET_COMPONENT_H

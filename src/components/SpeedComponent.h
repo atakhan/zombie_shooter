@@ -1,5 +1,5 @@
-#ifndef SPEED_COMPONENT_H
-#define SPEED_COMPONENT_H
+#ifndef SRC_COMPONENTS_SPEED_COMPONENT_H
+#define SRC_COMPONENTS_SPEED_COMPONENT_H
 
 struct SpeedComponent {
     float speed_;
@@ -7,4 +7,4 @@ struct SpeedComponent {
     SpeedComponent(float speed) : speed_(speed) {}
 };
 
-#endif // SPEED_COMPONENT_H
+#endif // SRC_COMPONENTS_SPEED_COMPONENT_H

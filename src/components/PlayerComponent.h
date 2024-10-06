@@ -1,8 +1,8 @@
-#ifndef PLAYER_COMPONENT_H
-#define PLAYER_COMPONENT_H
+#ifndef SRC_COMPONENTS_PLAYER_COMPONENT_H
+#define SRC_COMPONENTS_PLAYER_COMPONENT_H
 
 struct PlayerComponent {
     bool isAlive;
 };
 
-#endif // PLAYER_COMPONENT_H
+#endif // SRC_COMPONENTS_PLAYER_COMPONENT_H

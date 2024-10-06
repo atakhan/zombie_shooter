@@ -1,5 +1,5 @@
-#ifndef STAMINA_COMPONENT_H
-#define STAMINA_COMPONENT_H
+#ifndef SRC_COMPONENTS_STAMINA_COMPONENT_H
+#define SRC_COMPONENTS_STAMINA_COMPONENT_H
 
 struct StaminaComponent {
     float currentValue_;
@@ -8,4 +8,4 @@ struct StaminaComponent {
     StaminaComponent(float initial) : maxValue_(initial), currentValue_(initial) {}
 };
 
-#endif // STAMINA_COMPONENT_H
+#endif // SRC_COMPONENTS_STAMINA_COMPONENT_H

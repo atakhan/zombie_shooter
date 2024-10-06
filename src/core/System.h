@@ -1,10 +1,8 @@
 // System.h
-#ifndef SYSTEM_H
-#define SYSTEM_H
+#ifndef SRC_CORE_SYSTEM_H
+#define SRC_CORE_SYSTEM_H
 
 #include <vector>
-#include "../Config.h"
-#include "../components/Bootstrap.h"
 #include "Entity.h"
 
 class System {
@@ -16,4 +14,4 @@ public:
     virtual ~System() {}
 };
 
-#endif // SYSTEM_H
+#endif // SRC_CORE_SYSTEM_H

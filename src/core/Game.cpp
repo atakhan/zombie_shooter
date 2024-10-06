@@ -2,28 +2,30 @@
 #include "Game.h"
 
 void Game::Init() {
-    currentSceneIndex = 0;
-    for (auto& scene : scenes) {
-        if (scene == nullptr) {
-            std::cerr << "scene pointer is null!" << std::endl;
-            continue;
-        }
-        scene->Init();
+    if(!scenes.empty()) {
+        scenes[currentSceneIndex]->Init();
     }
 }
 
 void Game::Update() {
     if (currentMode == Mode::CHOOSE_SCENE) {
-        std::cout << "Choose Scene mode" << std::endl;
-        scenes[0]->Update();
+        if (scenes[0]->Continue()) {
+            scenes[0]->Update();
+        } else {
+            // Exit game
+            currentSceneIndex = 0;
+            currentMode = Mode::EXIT_GAME;
+        }
     } else 
     if (currentMode == Mode::PLAY_SCENE) {
-        std::cout << "Play Scene mode" << std::endl;
         if (!scenes.empty()) {
             if (scenes[currentSceneIndex]->Continue()) {
                 scenes[currentSceneIndex]->Update();
             } else {
-                ExitScene();
+                // Exit scene
+                scenes[currentSceneIndex]->Exit();
+                currentSceneIndex = 0;
+                currentMode = Mode::CHOOSE_SCENE;
             }
         }
     }
@@ -41,10 +43,11 @@ void Game::Draw() {
 }
 
 void Game::AddScene(Scene* scene) {
+    scene->SetSceneList(&scenes);
     scenes.push_back(scene);
 }
 
-void Game::ExitScene() {
-    currentSceneIndex = 0;
-    currentMode = Mode::CHOOSE_SCENE;
+bool Game::ShouldExit() {
+    return currentMode == Game::Mode::EXIT_GAME;
 }
+

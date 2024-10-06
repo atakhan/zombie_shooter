@@ -5,9 +5,14 @@
 const std::string Config::GAME_TITLE = "Zombie Shooter";
 
 // UI CONFIGS
+const float Config::DEFAULT_FONT_SIZE = 16.0f;
+const float Config::DEFAULT_PADDING = 0.0f;
+const float Config::DEFAULT_LINE_SPACING = 22.0f;
+const float Config::DEFAULT_TEXT_SPACING = 1.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SIZE = 16.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SPACING = 1.0f;
 const Color Config::DEFAULT_UI_TEXT_COLOR = GREY_1_8;
+const Color Config::DEFAULT_FONT_COLOR = GREY_1_8;
 
 // STYLE CONFIGS
 const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
@@ -67,6 +72,5 @@ const float Config::ZOMBIE_DEFAULT_TARGET_POSITION_X = 300.0f;
 const float Config::ZOMBIE_DEFAULT_TARGET_POSITION_Y = 303.0f;
 
 // OTHER CONFIGS
-const float Config::SOUND_MIN_RADIUS = 64.0f;
 const float Config::SOUND_MAX_RADIUS = 256.0f;
 const float Config::SOUND_RADIUS_STEP = 4.0f;

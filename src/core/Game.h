@@ -10,21 +10,22 @@ public:
     enum class Mode {
         PLAY_SCENE,
         CHOOSE_SCENE,
+        EXIT_GAME,
     };
+    Mode currentMode;
     
-    Game(Mode mode) : currentMode(mode) {}
+    Game(Mode mode) : currentMode(mode), currentSceneIndex(0) {}
 
     void Init();
     void Update();
-    void Draw();
+    void Draw();    
+    
     void AddScene(Scene* scene);
-    void ExitScene();
-    void ChangeMode(Mode mode);
+    bool ShouldExit();
     
 private:
     std::vector<Scene*> scenes;
     int currentSceneIndex;
-    Mode currentMode;
 };
 
 #endif // GAME_H

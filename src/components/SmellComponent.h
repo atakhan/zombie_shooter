@@ -1,6 +1,6 @@
 // SoundComponent.h
-#ifndef SMELL_COMPONENT_H
-#define SMELL_COMPONENT_H
+#ifndef SRC_COMPONENTS_SMELL_COMPONENT_H
+#define SRC_COMPONENTS_SMELL_COMPONENT_H
 
 struct SmellComponent {
     float maxRadius;
@@ -13,4 +13,4 @@ struct SmellComponent {
         , minRadius(maxR) {}
 };
 
-#endif // SMELL_COMPONENT_H
+#endif // SRC_COMPONENTS_SMELL_COMPONENT_H

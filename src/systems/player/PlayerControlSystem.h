@@ -2,8 +2,13 @@
 #define PLAYER_CONTROL_SYSTEM_H
 
 #include <vector>
+#include <raylib-cpp.hpp>
+#include <iostream>
 
-#include "../../core/System.h"
+#include "../../Config.h"
+#include "../../core/Bootstrap.h"
+#include "../../components/Bootstrap.h"
+
 
 class PlayerControlSystem : public System {
   public:

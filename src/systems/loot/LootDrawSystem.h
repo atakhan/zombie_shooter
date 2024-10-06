@@ -3,7 +3,9 @@
 
 #include <vector>
 
-#include "../../core/System.h"
+#include "../../core/Bootstrap.h"
+#include "../../components/Bootstrap.h"
+#include "../../Config.h"
 
 class LootDrawSystem : public System {
   public:

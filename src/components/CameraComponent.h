@@ -1,6 +1,5 @@
-// AttackComponent.h
-#ifndef CAMERA_COMPONENT_H
-#define CAMERA_COMPONENT_H
+#ifndef SRC_COMPONENTS_CAMERA_COMPONENT_H
+#define SRC_COMPONENTS_CAMERA_COMPONENT_H
 
 #include <raylib-cpp.hpp>
 
@@ -10,4 +9,4 @@ struct CameraComponent {
     CameraComponent() : camera_() {}
 };
 
-#endif // CAMERA_COMPONENT_H
+#endif // SRC_COMPONENTS_CAMERA_COMPONENT_H

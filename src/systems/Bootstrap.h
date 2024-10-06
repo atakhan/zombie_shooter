@@ -1,22 +1,29 @@
 #ifndef SYSTEMS_BOOTSTRAP_H
 #define SYSTEMS_BOOTSTRAP_H
 
-// #include "ZombieDrawSystem.h"
-// #include "ZombieMoveSystem.h"
-
+// Player systems
 #include "./player/PlayerDrawSystem.h"
 #include "./player/PlayerControlSystem.h"
 
+// Zombie systems
 #include "./zombie/ZombieDrawSystem.h"
 #include "./zombie/ZombieMoveSystem.h"
 #include "./zombie/ZombieTargetingSystem.h"
 
+// Human systems
 #include "./human/HumanDrawSystem.h"
 #include "./human/HumanMoveSystem.h"
 #include "./human/HumanTargetingSystem.h"
 #include "./human/HumanStaminaSystem.h"
 
+// Loot systems
 #include "./loot/LootDrawSystem.h"
-#include "./ui/GameTitleSceneTitleDrawSystem.h"
+
+// Menu systems
+#include "./menu/MenuControlSystem.h"
+#include "./menu/MenuDrawSystem.h"
+
+// UI draw systems
+#include "./ui/UIDrawSystem.h"
 
 #endif // SYSTEMS_BOOTSTRAP_H
