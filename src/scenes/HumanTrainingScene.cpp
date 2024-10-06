@@ -34,17 +34,6 @@ void HumanTrainingScene::Init() {
         }
         system->Init(&entities_);
     }
-
-    // Init scenes
-    for (auto& scene : *scenes_) {
-        if (scene == nullptr) {
-            continue;
-        }
-        // // init all scenes except current
-        // if (scene->index_ != index_) {
-        //     scene->Init();
-        // }
-    }
 }
 
 void HumanTrainingScene::Update(int *currentSceneIndex) {
