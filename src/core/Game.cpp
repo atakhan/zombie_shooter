@@ -11,17 +11,11 @@ void Game::Update() {
     int newSceneIndex = currentSceneIndex;
     if (scenes[currentSceneIndex]->Continue()) {
         scenes[currentSceneIndex]->Update(&newSceneIndex);
-        if (newSceneIndex != currentSceneIndex) {
-            currentSceneIndex = newSceneIndex;
-            currentMode = Mode::PLAY_SCENE;
-        }
     } else {
-        if (currentSceneIndex == 0) {
-            currentMode = Mode::EXIT_GAME;
-        } else 
-        if (currentSceneIndex > 0) {
-            currentMode = Mode::CHOOSE_SCENE;
-        }
+        newSceneIndex = 0;
+    }
+    if (newSceneIndex != currentSceneIndex) {
+        currentSceneIndex = newSceneIndex;
     }
 }
 

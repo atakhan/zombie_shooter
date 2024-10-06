@@ -10,7 +10,7 @@
 #include "LootComponent.h"
 #include "PlayerComponent.h"
 #include "PositionComponent.h"
-#include "SceneTitleComponent.h"
+#include "SceneComponent.h"
 #include "SmellComponent.h"
 #include "SoundComponent.h"
 #include "SpeedComponent.h"

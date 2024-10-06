@@ -23,7 +23,7 @@ void Scene::RemoveEntity(Entity* entity) {
     delete entity; // Освобождаем память
 }
 
-void Scene::Exit() {
+void Scene::IsExit() {
     if (IsKeyDown(KEY_Q)) {
         std::cout << "KEY Q PRESSED. try to exit by changing continue to false" << std::endl;
         Scene::continue_ = false;

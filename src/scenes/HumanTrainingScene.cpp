@@ -1,17 +1,7 @@
 #include "HumanTrainingScene.h"
 
 void HumanTrainingScene::Init() {
-    Scene::AddEntity(SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_));
-    Scene::AddEntity(UiTools::CreateUIEntity(
-        (Vector2){10.0f, 10.0f},
-        Config::GAME_TITLE,
-        16.0f, 1, 1, 3.0f, RED
-    ));
-    Scene::AddEntity(UiTools::CreateUIEntity(
-        (Vector2){10.0f, 10.0f},
-        Scene::title_,
-        16.0f, 1, 2, 3.0f, RED
-    ));
+    SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
     Scene::AddSystem(new UIDrawSystem());
 
     // Entities

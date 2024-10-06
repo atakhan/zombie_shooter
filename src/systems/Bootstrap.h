@@ -19,6 +19,9 @@
 // Loot systems
 #include "./loot/LootDrawSystem.h"
 
+// Scene systems
+#include "./scene/SceneControlSystem.h"
+
 // Menu systems
 #include "./menu/MenuControlSystem.h"
 #include "./menu/MenuDrawSystem.h"

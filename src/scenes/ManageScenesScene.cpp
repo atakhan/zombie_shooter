@@ -3,7 +3,7 @@
 void ManageScenesScene::Init() {
     Scene::continue_ = true;
     // Scene title
-    Scene::AddEntity(SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_));
+    SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
     
     Entity *menu = MenuTools::CreateMenu(
         Vector2{30.0f, 100.0f}, 
@@ -85,6 +85,7 @@ void ManageScenesScene::Update(int *currentSceneIndex) {
                 *currentSceneIndex = menu->currentItemIndex_;
             }
             menu->chooseEvent_ = false;
+            scenes_->at(*currentSceneIndex)->continue_ = true;
         } else {
             for (auto& system : systems_) {
                 if (system == nullptr) {
@@ -93,7 +94,6 @@ void ManageScenesScene::Update(int *currentSceneIndex) {
                 system->Update(&entities_);
             }
         }
-        
     }
 }
 

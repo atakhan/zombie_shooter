@@ -12,6 +12,7 @@
 
 class Scene {
 public:
+    int index_;
     std::string title_;
     bool continue_;
     std::vector<Scene*> *scenes_;
@@ -19,7 +20,10 @@ public:
     std::vector<System*> systems_;
     std::vector<Entity*> entities_;
     
-    Scene(std::string title = "no title") : title_(title) {}
+    Scene(int index, std::string title = "no title") 
+        : title_(title)
+        , index_(index)
+    {}
 
     virtual void Init() = 0;
     virtual void Update(int *currentSceneIndex) = 0;
@@ -32,7 +36,7 @@ public:
     void AddEntity(Entity* entity);
     void RemoveEntity(Entity* entity);
     bool Continue() { return continue_;};
-    void Exit();
+    void IsExit();
     std::string GetTitle();
 };
 

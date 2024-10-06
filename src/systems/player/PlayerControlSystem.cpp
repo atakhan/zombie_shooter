@@ -2,7 +2,7 @@
 #include <iostream>
 
 void PlayerControlSystem::Init(std::vector<Entity*> *entities) {
-    std::cout << "Player Draw System Initialized" << std::endl;
+    std::cout << "Player Control System Initialized" << std::endl;
 }
 
 void PlayerControlSystem::Draw(std::vector<Entity*> *entities) {}

@@ -3,17 +3,7 @@
 void PlayerZombieScene::Init() {
     
     // Scene title
-    Scene::AddEntity(SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_));
-    Scene::AddEntity(UiTools::CreateUIEntity(
-        (Vector2){10.0f, 10.0f},
-        Config::GAME_TITLE,
-        16.0f, 1, 1, 3.0f, RED
-    ));
-    Scene::AddEntity(UiTools::CreateUIEntity(
-        (Vector2){10.0f, 10.0f},
-        Scene::title_,
-        16.0f, 1, 2, 3.0f, RED
-    ));
+    SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
 
     // Entities
     Scene::AddEntity(SceneTools::CreatePlayer(
@@ -28,14 +18,15 @@ void PlayerZombieScene::Init() {
 
     // Systems
     // UI Draw systems
-    Scene::AddSystem(new UIDrawSystem());
+    // Scene::AddSystem(new UIDrawSystem());
     // Player systems
     Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
+    Scene::AddSystem(new SceneControlSystem);
     // Zombie systems
-    Scene::AddSystem(new ZombieDrawSystem);
-    Scene::AddSystem(new ZombieMoveSystem);
-    Scene::AddSystem(new ZombieTargetingSystem);
+    // Scene::AddSystem(new ZombieDrawSystem);
+    // Scene::AddSystem(new ZombieMoveSystem);
+    // Scene::AddSystem(new ZombieTargetingSystem);
 
     for (auto& system : systems_) {
         if (system == nullptr) {
@@ -47,13 +38,14 @@ void PlayerZombieScene::Init() {
 }
 
 void PlayerZombieScene::Update(int *currentSceneIndex) {
-    std::cout << "PlayerZombieScene UPDATE!" << std::endl;
-    for (auto& system : systems_) {
-        if (system == nullptr) {
-            std::cerr << "System pointer is null!" << std::endl;
-            continue;
+    if (continue_) {
+        for (auto& system : systems_) {
+            if (system == nullptr) {
+                continue;
+            }
+            system->Update(&entities_);
         }
-        system->Update(&entities_);
+        IsExit();
     }
 }
 

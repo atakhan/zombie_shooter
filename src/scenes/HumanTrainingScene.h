@@ -8,7 +8,7 @@
 
 class HumanTrainingScene : public Scene {
   public:
-    HumanTrainingScene(std::string title) : Scene(title) {};
+    HumanTrainingScene(int index, std::string title) : Scene(index, title) {};
     
     void Init() override;
     void Update(int *currentSceneIndex) override;

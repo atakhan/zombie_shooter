@@ -8,7 +8,7 @@
 
 class PlayerZombieScene : public Scene {
   public:
-    PlayerZombieScene(std::string title) : Scene(title) {};
+    PlayerZombieScene(int index, std::string title) : Scene(index, title) {};
 
     void Init() override;
     void Update(int *currentSceneIndex) override;

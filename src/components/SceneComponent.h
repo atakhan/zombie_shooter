@@ -3,11 +3,13 @@
 
 #include <raylib-cpp.hpp>
 
-struct SceneTitleComponent {
+struct SceneComponent {
     std::string title;
+    int index_;
 
-    SceneTitleComponent(std::string sceneTitle)
+    SceneComponent(std::string sceneTitle)
         : title(sceneTitle)
+        , index_()
     {}
 };
 
