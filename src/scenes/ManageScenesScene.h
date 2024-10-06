@@ -9,11 +9,10 @@
 
 class ManageScenesScene : public Scene {
   public:
-  
     ManageScenesScene(std::string title) : Scene(title) {};
   
     void Init() override;
-    void Update() override;
+    void Update(int *currentSceneIndex) override;
     void Draw() override;
 };
 

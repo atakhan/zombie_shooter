@@ -8,11 +8,12 @@
 class Game {
 public:
     enum class Mode {
+        CHOOSE_SCENE = 0,
         PLAY_SCENE,
-        CHOOSE_SCENE,
         EXIT_GAME,
     };
     Mode currentMode;
+    int currentSceneIndex;
     
     Game(Mode mode) : currentMode(mode), currentSceneIndex(0) {}
 
@@ -25,7 +26,6 @@ public:
     
 private:
     std::vector<Scene*> scenes;
-    int currentSceneIndex;
 };
 
 #endif // GAME_H

@@ -10,11 +10,11 @@
 int main() {
     Game *game = new Game(Game::Mode::CHOOSE_SCENE);
     // // SCENE MANAGER index 0
-    game->AddScene(new ManageScenesScene("Choose a Scene"));
+    game->AddScene(new ManageScenesScene("choose a scene"));
 
     // // SCENES index++
-    game->AddScene(new PlayerZombieScene("Player vs zombie scene"));
-    game->AddScene(new HumanTrainingScene("Try to create a Human entity scene"));
+    game->AddScene(new PlayerZombieScene("player vs zombie scene"));
+    game->AddScene(new HumanTrainingScene("try to create a human entity scene"));
     
     game->Init();
 

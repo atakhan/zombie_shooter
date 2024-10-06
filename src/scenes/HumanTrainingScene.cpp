@@ -47,7 +47,7 @@ void HumanTrainingScene::Init() {
     }
 }
 
-void HumanTrainingScene::Update() {
+void HumanTrainingScene::Update(int *currentSceneIndex) {
     for (auto& system : systems_) {
         if (system == nullptr) {
             std::cerr << "System pointer is null!" << std::endl;

@@ -60,14 +60,40 @@ void ManageScenesScene::Init() {
         }
         system->Init(&entities_);
     }
-}
 
-void ManageScenesScene::Update() {
-    for (auto& system : systems_) {
-        if (system == nullptr) {
+    // Init scenes
+    for (auto& scene : *scenes_) {
+        if (scene == nullptr) {
             continue;
         }
-        system->Update(&entities_);
+        if (scene->GetTitle() != "choose a scene") {
+            scene->Init();
+        }
+    }
+}
+
+void ManageScenesScene::Update(int *currentSceneIndex) {
+    MenuComponent *menu = nullptr;
+    for (auto& entity : entities_) {
+        if (entity->HasComponent<MenuComponent>()) {
+            menu = entity->GetComponent<MenuComponent>();
+        }
+    }
+    if (menu) {
+        if (menu->chooseEvent_) {
+            if (menu->currentItemIndex_ != *currentSceneIndex && menu->currentItemIndex_ != 0) {
+                *currentSceneIndex = menu->currentItemIndex_;
+            }
+            menu->chooseEvent_ = false;
+        } else {
+            for (auto& system : systems_) {
+                if (system == nullptr) {
+                    continue;
+                }
+                system->Update(&entities_);
+            }
+        }
+        
     }
 }
 

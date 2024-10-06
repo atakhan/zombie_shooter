@@ -29,11 +29,11 @@ class MenuTools {
         ColPositionComponent *colNum = uiElement->GetComponent<ColPositionComponent>();
         RowPositionComponent *rowNum = uiElement->GetComponent<RowPositionComponent>();
         
-        if (menuItem->menuItemIndex_ == menu->currentItemIndex) {
+        if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
             DrawRectangle(
                 position->position_.x * colNum->value_,
                 position->position_.y + menu->textSize_ * rowNum->value_,
-                text->text_.size() * 10.0f,
+                text->text_.length() * 10.0f,
                 menu->textSize_,
                 GREEN
             );

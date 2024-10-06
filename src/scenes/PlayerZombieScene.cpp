@@ -46,7 +46,7 @@ void PlayerZombieScene::Init() {
     }
 }
 
-void PlayerZombieScene::Update() {
+void PlayerZombieScene::Update(int *currentSceneIndex) {
     std::cout << "PlayerZombieScene UPDATE!" << std::endl;
     for (auto& system : systems_) {
         if (system == nullptr) {

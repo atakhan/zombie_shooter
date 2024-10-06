@@ -8,37 +8,26 @@ void Game::Init() {
 }
 
 void Game::Update() {
-    if (currentMode == Mode::CHOOSE_SCENE) {
-        if (scenes[0]->Continue()) {
-            scenes[0]->Update();
-        } else {
-            // Exit game
-            currentSceneIndex = 0;
-            currentMode = Mode::EXIT_GAME;
+    int newSceneIndex = currentSceneIndex;
+    if (scenes[currentSceneIndex]->Continue()) {
+        scenes[currentSceneIndex]->Update(&newSceneIndex);
+        if (newSceneIndex != currentSceneIndex) {
+            currentSceneIndex = newSceneIndex;
+            currentMode = Mode::PLAY_SCENE;
         }
-    } else 
-    if (currentMode == Mode::PLAY_SCENE) {
-        if (!scenes.empty()) {
-            if (scenes[currentSceneIndex]->Continue()) {
-                scenes[currentSceneIndex]->Update();
-            } else {
-                // Exit scene
-                scenes[currentSceneIndex]->Exit();
-                currentSceneIndex = 0;
-                currentMode = Mode::CHOOSE_SCENE;
-            }
+    } else {
+        if (currentSceneIndex == 0) {
+            currentMode = Mode::EXIT_GAME;
+        } else 
+        if (currentSceneIndex > 0) {
+            currentMode = Mode::CHOOSE_SCENE;
         }
     }
 }
 
 void Game::Draw() {
-    if (currentMode == Mode::CHOOSE_SCENE) {
-        scenes[0]->Draw();
-    } else 
-    if (currentMode == Mode::PLAY_SCENE) {
-        if (!scenes.empty()) {
-            scenes[currentSceneIndex]->Draw();
-        }
+    if (!scenes.empty()) {
+        scenes[currentSceneIndex]->Draw();
     }
 }
 
