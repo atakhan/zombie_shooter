@@ -38,8 +38,8 @@ public:
     static const int WINDOW_WIDTH;
     static const int WINDOW_HEIGHT;
     static const size_t ZOMBIES_COUNT;
-    static const float WALK_COEF;
-    static const float RUN_COEF;
+    static const float ZOMBIE_WALK_COEF;
+    static const float ZOMBIE_RUN_COEF;
     static const float DEFAULT_LOOT_AMOUNT;
     static const float DEFAULT_LOOT_SPAWN_POSITION_X;
     static const float DEFAULT_LOOT_SPAWN_POSITION_Y;
@@ -55,14 +55,16 @@ public:
     static const float PLAYER_ATTACK_RADIUS;
     static const float PLAYER_SPAWN_POSITION_X;
     static const float PLAYER_SPAWN_POSITION_Y;
+    static const float PLAYER_WALK_COEF;
+    static const float PLAYER_RUN_COEF;
 
 // HUMAN CONFIGS
     static const float HUMAN_DEFAULT_HEALTH;
     static const float HUMAN_DEFAULT_STRENGTH;
     static const float HUMAN_DEFAULT_AGILITY;
     static const float HUMAN_DEFAULT_STAMINA;
-    static const float HUMAN_WALK_SPEED;
-    static const float HUMAN_RUN_SPEED;
+    static const float HUMAN_WALK_COEF;
+    static const float HUMAN_RUN_COEF;
     static const float HUMAN_HEARING_RADIUS;
     static const float HUMAN_ATTACK_RADIUS;
     static const float HUMAN_SPAWN_POSITION_X;

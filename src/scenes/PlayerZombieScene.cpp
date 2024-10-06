@@ -14,7 +14,15 @@ void PlayerZombieScene::Init() {
         Config::PLAYER_ATTACK_RADIUS,
         Config::SOUND_MAX_RADIUS
     ));
-    // Scene::AddEntity(SceneTools::SpawnZombie());
+    Scene::AddEntity(SceneTools::CreateZombie(
+        (Vector2){Config::ZOMBIE_SPAWN_POSITION_X,Config::ZOMBIE_SPAWN_POSITION_Y},
+        (Vector2){Config::ZOMBIE_DEFAULT_TARGET_POSITION_X, Config::ZOMBIE_DEFAULT_TARGET_POSITION_X},
+        Config::ZOMBIE_HEALTH,
+        Config::ZOMBIE_STRENGTH,
+        Config::ZOMBIE_AGILITY,
+        Config::ZOMBIE_ATTACK_RADIUS,
+        Config::SOUND_MAX_RADIUS
+    ));
 
     // Systems
     // UI Draw systems
@@ -23,10 +31,11 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
     // Scene::AddSystem(new SceneControlSystem);
+    
     // Zombie systems
-    // Scene::AddSystem(new ZombieDrawSystem);
-    // Scene::AddSystem(new ZombieMoveSystem);
-    // Scene::AddSystem(new ZombieTargetingSystem);
+    Scene::AddSystem(new ZombieDrawSystem);
+    Scene::AddSystem(new ZombieMoveSystem);
+    Scene::AddSystem(new ZombieTargetingSystem);
 
     // Init Systems
     for (auto& system : systems_) {

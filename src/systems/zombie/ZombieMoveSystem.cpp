@@ -34,7 +34,12 @@ void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
 
             if (zombiePosition && zombieRadius && target && playerPosition && playerSound) {
                 if (target->active_) {
-                    MoveTo(target, zombiePosition, speed->speed_ * Config::WALK_COEF);   
+                    if (zombieComponent->currentState == ZombieComponent::Status::WALK) {
+                        MoveTo(target, zombiePosition, speed->speed_ * Config::ZOMBIE_WALK_COEF);
+                    } else
+                    if (zombieComponent->currentState == ZombieComponent::Status::RUN) {
+                        MoveTo(target, zombiePosition, speed->speed_ * Config::ZOMBIE_RUN_COEF);
+                    }
                 }
             }
         }

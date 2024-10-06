@@ -22,10 +22,10 @@ void HumanMoveSystem::Update(std::vector<Entity*> *entities) {
             }
 
             if (human->currentStatus == HumanComponent::Status::WALK) {
-                MoveTo(target, humanPos, Config::HUMAN_WALK_SPEED);
+                MoveTo(target, humanPos, Config::HUMAN_WALK_COEF);
             } else
             if (human->currentStatus == HumanComponent::Status::RUN) {
-                MoveTo(target, humanPos, Config::HUMAN_RUN_SPEED);
+                MoveTo(target, humanPos, Config::HUMAN_RUN_COEF);
             } else {
                 MoveTo(target, humanPos, 0.0f);
             }
@@ -33,15 +33,15 @@ void HumanMoveSystem::Update(std::vector<Entity*> *entities) {
     }
 }
 
-void HumanMoveSystem::MoveTo(TargetComponent *targetPos, PositionComponent *curPos, float speed) {
+void HumanMoveSystem::MoveTo(TargetComponent *targetPos, PositionComponent *curPos, float speedCoef) {
     float distanceX = targetPos->position_.x - curPos->position_.x;
     float distanceY = targetPos->position_.y - curPos->position_.y;
     float distance = std::sqrt(std::pow(distanceX, 2) + std::pow(distanceY, 2));
 
     if (Config::HUMAN_MOVE_TRESHOLD < distance) {
         Vector2 direction = { distanceX / distance, distanceY / distance };
-        curPos->position_.x += direction.x * speed;
-        curPos->position_.y += direction.y * speed;
+        curPos->position_.x += direction.x * speedCoef;
+        curPos->position_.y += direction.y * speedCoef;
         // std::cout << "Moving towards target: (" << curPos->position_.x << ", " << curPos->position_.y << ")" << std::endl;
     }
 }

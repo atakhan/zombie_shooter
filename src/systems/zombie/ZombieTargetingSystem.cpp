@@ -42,8 +42,10 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         );
 
         if (foodNear) {
+            zombie->currentState = ZombieComponent::Status::RUN;
             target->position_ = playerPosition->position_;
         } else {
+            zombie->currentState = ZombieComponent::Status::WALK;
             if (TargetReached(target->position_, zombiePos->position_)) {
                 target->position_ = RandomTarget();
             }
