@@ -13,7 +13,12 @@ class MapTools {
     static Entity* CreateTerrain(Scene *scene) {
         // logic entities
         Entity *terrain = new Entity();
-        terrain->AddComponent<TerrainComponent>(TerrainComponent(scene->width_, scene->height_));
+        terrain->AddComponent<TerrainComponent>(TerrainComponent(
+            scene->width_, 
+            scene->height_,
+            20.0f,
+            20.0f
+        ));
         scene->AddEntity(terrain);
         
         // // ui entities
@@ -31,14 +36,12 @@ class MapTools {
         return terrain;
     }
 
-    
-
     // CREATE PLAYER
     static Entity* CreatePlayer(
         Vector2 pos, 
         float health, 
         float strength, 
-        float agility, 
+        float agility,
         float attackRadius, 
         float soundRadius
     ) {

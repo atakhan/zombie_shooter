@@ -7,6 +7,7 @@ void PlayerZombieScene::Init() {
 
     // Entities
     Scene::AddEntity(MapTools::CreateTerrain(this));
+
     Scene::AddEntity(SceneTools::CreatePlayer(
         (Vector2){Config::PLAYER_SPAWN_POSITION_X, Config::PLAYER_SPAWN_POSITION_Y},
         Config::PLAYER_HEALTH,

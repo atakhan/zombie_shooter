@@ -6,8 +6,15 @@
 struct TerrainComponent {
     float width_;
     float height_;
+    float cellHeight_;
+    float cellWidth_;
 
-    TerrainComponent(float w, float h) : width_(w), height_(h) {}
+    TerrainComponent(float w, float h, float cw, float ch) 
+        : width_(w)
+        , height_(h) 
+        , cellWidth_(cw) 
+        , cellHeight_(ch) 
+        {}
 };
 
 #endif // SRC_COMPONENTS_TERRAIN_COMPONENT_H
