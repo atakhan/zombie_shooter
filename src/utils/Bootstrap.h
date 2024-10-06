@@ -5,5 +5,6 @@
 #include "UiTools.h"
 #include "SceneTools.h"
 #include "MenuTools.h"
+#include "MapTools.h"
 
 #endif // UTILS_BOOTSTRAP_H

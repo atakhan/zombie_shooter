@@ -2,7 +2,14 @@
 #include "Config.h"
 
 // GAME CONFIGS
-const std::string Config::GAME_TITLE = "Zombie Shooter";
+const char* Config::GAME_TITLE = "Zombie RPG";
+const int Config::WINDOW_WIDTH = 610;
+const int Config::WINDOW_HEIGHT = 683;
+const size_t Config::ZOMBIES_COUNT = 100;
+const float Config::DEFAULT_LOOT_AMOUNT = 10.0f;
+const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;
+const float Config::DEFAULT_LOOT_SPAWN_POSITION_Y = 425.0f;
+const float Config::FOOD_DEFAULT_SIZE = 425.0f;
 
 // UI CONFIGS
 const float Config::DEFAULT_FONT_SIZE = 16.0f;
@@ -15,24 +22,15 @@ const Color Config::DEFAULT_UI_TEXT_COLOR = GREY_1_8;
 const Color Config::DEFAULT_FONT_COLOR = GREY_1_8;
 
 // STYLE CONFIGS
-const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
+const Color Config::TERRAIN_DEFAULT_COLOR   = GREEN_3_4;
 const Color Config::PLAYER_COLOR            = BLUE_3_8;
 const Color Config::HUMAN_COLOR             = BLUE_3_8;
 const Color Config::ZOMBIE_COLOR            = RED_3_8;
 const Color Config::ATTACK_RADIUS_COLOR     = RED_7_2;
 const Color Config::SOUND_RADIUS_COLOR      = GREY_6_2;
+const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
 const Color Config::PATH_COLOR              = GREY_6_4;
 const Color Config::TARGET_COLOR            = RED_3_4;
-
-// GAME CONFIGS
-const char * Config::WINDOW_TITLE = "Zombie RPG";
-const int Config::WINDOW_WIDTH = 610;
-const int Config::WINDOW_HEIGHT = 683;
-const size_t Config::ZOMBIES_COUNT = 100;
-const float Config::DEFAULT_LOOT_AMOUNT = 10.0f;
-const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;
-const float Config::DEFAULT_LOOT_SPAWN_POSITION_Y = 425.0f;
-const float Config::FOOD_DEFAULT_SIZE = 425.0f;
 
 // PLAYER CONFIGS
 const float Config::PLAYER_HEALTH = 20.0f;

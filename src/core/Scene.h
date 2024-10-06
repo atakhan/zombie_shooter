@@ -13,17 +13,21 @@
 class Scene {
 public:
     int index_;
-    std::string title_;
     bool continue_;
+    std::string title_;
     std::vector<Scene*> *scenes_;
+    float width_;
+    float height_;
 
     std::vector<System*> systems_;
     std::vector<Entity*> entities_;
     
-    Scene(int index, bool isContinue, std::string title = "no title") 
+    Scene(int index, bool isContinue, float width, float height, std::string title = "no title") 
         : title_(title)
         , index_(index)
         , continue_(isContinue)
+        , width_(width)
+        , height_(height)
     {}
 
     virtual void Init() = 0;

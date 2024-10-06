@@ -9,7 +9,10 @@
 class Config {
 public:
 // GENERAL CONFIGS
-    static const std::string GAME_TITLE;
+    static const char* GAME_TITLE;
+    static const char * WINDOW_TITLE;
+    static const int WINDOW_WIDTH;
+    static const int WINDOW_HEIGHT;
 
 // UI CONFIGS
     static const float DEFAULT_FONT_SIZE;
@@ -22,32 +25,23 @@ public:
     static const Color DEFAULT_FONT_COLOR;
 
 // STYLE CONFIGS
+    static const Color TERRAIN_DEFAULT_COLOR;
     static const Color PLAYER_COLOR;
     static const Color HUMAN_COLOR;
     static const Color ZOMBIE_COLOR;
-    
     static const Color SMELL_RADIUS_COLOR;
     static const Color ATTACK_RADIUS_COLOR;
     static const Color SOUND_RADIUS_COLOR;
-    
     static const Color PATH_COLOR;
     static const Color TARGET_COLOR;
 
-// GAME CONFIGS
-    static const char * WINDOW_TITLE;
-    static const int WINDOW_WIDTH;
-    static const int WINDOW_HEIGHT;
-    static const size_t ZOMBIES_COUNT;
-    static const float ZOMBIE_WALK_COEF;
-    static const float ZOMBIE_RUN_COEF;
+// LOOT CONFIGS
     static const float DEFAULT_LOOT_AMOUNT;
     static const float DEFAULT_LOOT_SPAWN_POSITION_X;
     static const float DEFAULT_LOOT_SPAWN_POSITION_Y;
-    
     static const float FOOD_DEFAULT_SIZE;
     
 // PLAYER CONFIGS
-    
     static const float PLAYER_HEALTH;
     static const float PLAYER_STRENGTH;
     static const float PLAYER_AGILITY;
@@ -74,6 +68,9 @@ public:
     static const float HUMAN_MOVE_TRESHOLD;
 
 // ZOMBI CONFIGS
+    static const size_t ZOMBIES_COUNT;
+    static const float ZOMBIE_WALK_COEF;
+    static const float ZOMBIE_RUN_COEF;
     static const float ZOMBIE_HEALTH;
     static const float ZOMBIE_STRENGTH;
     static const float ZOMBIE_AGILITY;
@@ -84,7 +81,7 @@ public:
     static const float ZOMBIE_DEFAULT_TARGET_POSITION_X;
     static const float ZOMBIE_DEFAULT_TARGET_POSITION_Y;
     
-// OTHERS
+// SOUND CONFIGS
     static const float SOUND_MIN_RADIUS;
     static const float SOUND_MAX_RADIUS;
     static const float SOUND_RADIUS_STEP;

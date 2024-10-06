@@ -26,6 +26,9 @@
 #define R7G0B0A6  CLITERAL(Color){ 255, 0, 0, 192 }
 #define R7G0B0A7  CLITERAL(Color){ 255, 0, 0, 255 }
 
+// GREEN PATTERN
+#define R0G3B0A4  CLITERAL(Color){ 0, 92, 0, 128 }
+
 // YELLOW PATTERN
 #define R1G1B0A8  CLITERAL(Color){ 32, 32, 0, 255 }
 #define R2G2B0A8  CLITERAL(Color){ 64, 64, 0, 255 }
@@ -74,6 +77,7 @@
 #define GREY_8_8    R8G8B8A8
 #define GREY_1_8    R1G1B1A8
 #define RED_3_4     R3G0B0A4
+#define GREEN_3_4   R0G3B0A4
 
 
 #endif // UTILS_COLORS_H

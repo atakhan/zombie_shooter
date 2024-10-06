@@ -15,16 +15,16 @@ int main() {
     );
     
     // // SCENE MANAGER index 0
-    game->AddScene(new ManageScenesScene(0, true, "choose a scene"));
-    game->AddScene(new PlayerZombieScene(1, false, "player vs zombie scene"));
-    game->AddScene(new HumanTrainingScene(2, false, "try to create a human entity scene"));
+    game->AddScene(new ManageScenesScene(0, true, 1000, 1000, "choose a scene"));
+    game->AddScene(new PlayerZombieScene(1, false, 1000, 1000, "player vs zombie scene"));
+    game->AddScene(new HumanTrainingScene(2, false, 1000, 1000, "try to create a human entity scene"));
     
     game->Init();
 
     InitWindow(
         Config::WINDOW_WIDTH,
         Config::WINDOW_HEIGHT,
-        Config::WINDOW_TITLE
+        Config::GAME_TITLE
     );
 
     SetTargetFPS(60);

@@ -18,6 +18,16 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
     if (player == nullptr) {
         return;
     }
+
+    for (auto& entity : *entities) {
+        SceneComponent *scene = nullptr;
+        if (entity->HasComponent<SceneComponent>()) {
+            SceneComponent *scene = entity->GetComponent<SceneComponent>();
+            break;
+        }
+    }
+
+    
     
     PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
     SoundComponent* playerSound = playerSound = player->GetComponent<SoundComponent>();

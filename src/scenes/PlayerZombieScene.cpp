@@ -6,6 +6,7 @@ void PlayerZombieScene::Init() {
     SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
 
     // Entities
+    Scene::AddEntity(MapTools::CreateTerrain(this));
     Scene::AddEntity(SceneTools::CreatePlayer(
         (Vector2){Config::PLAYER_SPAWN_POSITION_X, Config::PLAYER_SPAWN_POSITION_Y},
         Config::PLAYER_HEALTH,
@@ -27,6 +28,8 @@ void PlayerZombieScene::Init() {
     // Systems
     // UI Draw systems
     // Scene::AddSystem(new UIDrawSystem());
+    // Map systems
+    Scene::AddSystem(new TerrainDrawSystem);
     // Player systems
     Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
@@ -36,6 +39,7 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new ZombieDrawSystem);
     Scene::AddSystem(new ZombieMoveSystem);
     Scene::AddSystem(new ZombieTargetingSystem);
+    
 
     // Init Systems
     for (auto& system : systems_) {

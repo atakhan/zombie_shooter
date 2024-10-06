@@ -16,6 +16,7 @@
 #include "SpeedComponent.h"
 #include "StaminaComponent.h"
 #include "TargetComponent.h"
+#include "TerrainComponent.h"
 #include "ZombieComponent.h"
 
 

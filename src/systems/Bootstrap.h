@@ -29,4 +29,7 @@
 // UI draw systems
 #include "./ui/UIDrawSystem.h"
 
+// Terrain systems
+#include "./terrain/TerrainDrawSystem.h"
+
 #endif // SYSTEMS_BOOTSTRAP_H

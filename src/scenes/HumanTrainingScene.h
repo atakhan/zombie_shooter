@@ -8,7 +8,8 @@
 
 class HumanTrainingScene : public Scene {
   public:
-    HumanTrainingScene(int index, bool isContinue, std::string title) : Scene(index, isContinue, title) {};
+    HumanTrainingScene(int index, bool isContinue, float width, float height, std::string title) 
+      : Scene(index, isContinue, width, height, title) {};
     
     void Init() override;
     void Update(int *currentSceneIndex) override;

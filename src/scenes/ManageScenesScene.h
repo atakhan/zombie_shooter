@@ -9,7 +9,8 @@
 
 class ManageScenesScene : public Scene {
   public:
-    ManageScenesScene(int index, bool isContinue, std::string title) : Scene(index, isContinue, title) {};
+    ManageScenesScene(int index, bool isContinue, float width, float height, std::string title) 
+      : Scene(index, isContinue, width, height, title) {};
   
     void Init() override;
     void Update(int *currentSceneIndex) override;
