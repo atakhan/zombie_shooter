@@ -25,17 +25,9 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
     SpeedComponent* speed = nullptr;
     SoundComponent* sound = nullptr;
 
-    if (player->HasComponent<PositionComponent>()) {
-        position = player->GetComponent<PositionComponent>();
-    }
-
-    if (player->HasComponent<SpeedComponent>()) {
-        speed = player->GetComponent<SpeedComponent>();
-    }
-
-    if (player->HasComponent<SoundComponent>()) {
-        sound = player->GetComponent<SoundComponent>();
-    }
+    position = player->GetComponent<PositionComponent>();
+    speed = player->GetComponent<SpeedComponent>();
+    sound = player->GetComponent<SoundComponent>();
 
     if (IsKeyDown(KEY_RIGHT)) {
         if (IsKeyDown(KEY_LEFT)) {

@@ -72,10 +72,11 @@
 #define BLUE_3_8    R0G0B3A8
 #define RED_3_8     R3G0B0A8
 #define RED_7_2     R7G0B0A2
-#define GREY_6_2    R6G6B6A2
-#define GREY_6_4    R6G6B6A4
-#define GREY_8_8    R8G8B8A8
-#define GREY_1_8    R1G1B1A8
+#define GRAY_6_2    R6G6B6A2
+#define GRAY_6_4    R6G6B6A4
+#define GRAY_6_8    R6G6B6A8
+#define GRAY_8_8    R8G8B8A8
+#define GRAY_1_8    R1G1B1A8
 #define RED_3_4     R3G0B0A4
 #define GREEN_3_4   R0G3B0A4
 

@@ -5,11 +5,10 @@
 
 struct CircleColliderComponent {
     float radius;          // Radius of the circle
-    Vector2 position;      // Position of the circle collider relative to the entity
     bool isTrigger;        // Whether the collider triggers events without causing physical collisions
 
-    CircleColliderComponent(float r, Vector2 pos, bool trigger = false)
-        : radius(r), position(pos), isTrigger(trigger) {}
+    CircleColliderComponent(float r, bool trigger = false)
+        : radius(r), isTrigger(trigger) {}
 };
 
 #endif // SRC_COMPONENTS_CIRCLE_COLLIDER_COMPONENT_H

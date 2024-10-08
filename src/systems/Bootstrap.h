@@ -31,6 +31,6 @@
 #include "./ui/UIDrawSystem.h"
 
 // Terrain systems
-#include "./terrain/TerrainDrawSystem.h"
+#include "./map/TerrainDrawSystem.h"
 
 #endif // SYSTEMS_BOOTSTRAP_H

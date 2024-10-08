@@ -18,8 +18,8 @@ const float Config::DEFAULT_LINE_SPACING = 22.0f;
 const float Config::DEFAULT_TEXT_SPACING = 1.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SIZE = 16.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SPACING = 1.0f;
-const Color Config::DEFAULT_UI_TEXT_COLOR = GREY_1_8;
-const Color Config::DEFAULT_FONT_COLOR = GREY_1_8;
+const Color Config::DEFAULT_UI_TEXT_COLOR = GRAY_1_8;
+const Color Config::DEFAULT_FONT_COLOR = GRAY_6_8;
 
 // STYLE CONFIGS
 const Color Config::TERRAIN_DEFAULT_COLOR   = GREEN_3_4;
@@ -27,9 +27,9 @@ const Color Config::PLAYER_COLOR            = BLUE_3_8;
 const Color Config::HUMAN_COLOR             = BLUE_3_8;
 const Color Config::ZOMBIE_COLOR            = RED_3_8;
 const Color Config::ATTACK_RADIUS_COLOR     = RED_7_2;
-const Color Config::SOUND_RADIUS_COLOR      = GREY_6_2;
+const Color Config::SOUND_RADIUS_COLOR      = GRAY_6_2;
 const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
-const Color Config::PATH_COLOR              = GREY_6_4;
+const Color Config::PATH_COLOR              = GRAY_6_4;
 const Color Config::TARGET_COLOR            = RED_3_4;
 
 // PLAYER CONFIGS
