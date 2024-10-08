@@ -7,6 +7,7 @@
 
 class Game {
 public:
+    std::vector<Scene*> scenes;
     enum class Mode {
         CHOOSE_SCENE = 0,
         PLAY_SCENE,
@@ -23,9 +24,6 @@ public:
     
     void AddScene(Scene* scene);
     bool ShouldExit();
-    
-private:
-    std::vector<Scene*> scenes;
 };
 
 #endif // GAME_H

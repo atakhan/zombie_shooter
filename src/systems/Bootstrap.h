@@ -4,6 +4,7 @@
 // Player systems
 #include "./player/PlayerDrawSystem.h"
 #include "./player/PlayerControlSystem.h"
+#include "./player/PlayerCameraSystem.h"
 
 // Zombie systems
 #include "./zombie/ZombieDrawSystem.h"

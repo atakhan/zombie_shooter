@@ -30,8 +30,6 @@ class SceneTools {
         ));
     }
 
-    
-
     // CREATE PLAYER
     static Entity* CreatePlayer(
         Vector2 pos, 

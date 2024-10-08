@@ -27,19 +27,16 @@ void PlayerZombieScene::Init() {
     ));
 
     // Systems
-    // UI Draw systems
-    // Scene::AddSystem(new UIDrawSystem());
     // Map systems
     Scene::AddSystem(new TerrainDrawSystem);
-    // Player systems
-    Scene::AddSystem(new PlayerDrawSystem);
-    Scene::AddSystem(new PlayerControlSystem);
-    // Scene::AddSystem(new SceneControlSystem);
-    
     // Zombie systems
     Scene::AddSystem(new ZombieDrawSystem);
     Scene::AddSystem(new ZombieMoveSystem);
     Scene::AddSystem(new ZombieTargetingSystem);
+    // Player systems
+    Scene::AddSystem(new PlayerDrawSystem);
+    Scene::AddSystem(new PlayerControlSystem);
+    Scene::AddSystem(new PlayerCameraSystem);
     
 
     // Init Systems
@@ -64,12 +61,34 @@ void PlayerZombieScene::Update(int *currentSceneIndex) {
 }
 
 void PlayerZombieScene::Draw() {
-    if (continue_) {
-        for (auto& system : systems_) {
-            if (system == nullptr) {
-                continue;
+    if (!continue_) {
+        return;
+    }
+    CameraComponent *camera = nullptr;
+    PlayerComponent *player = nullptr;
+    for (auto& entity : entities_) {
+        if (entity->HasComponent<PlayerComponent>()) {
+            player = entity->GetComponent<PlayerComponent>();
+            if (entity->HasComponent<CameraComponent>()) {
+                camera = entity->GetComponent<CameraComponent>();
+                break;
             }
-            system->Draw(&entities_);
         }
     }
+
+    if (player && camera) {
+        BeginMode2D(camera->camera_);
+    }
+
+    for (auto& system : systems_) {
+        if (system == nullptr) {
+            continue;
+        }
+        system->Draw(&entities_);
+    }
+    
+    if (player && camera) {
+        EndMode2D();
+    }
+
 }

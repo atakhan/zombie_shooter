@@ -6,7 +6,7 @@
 struct CameraComponent {
     Camera2D camera_;
 
-    CameraComponent() : camera_() {}
+    CameraComponent() : camera_({0}) {}
 };
 
 #endif // SRC_COMPONENTS_CAMERA_COMPONENT_H

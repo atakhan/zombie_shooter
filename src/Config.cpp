@@ -3,8 +3,8 @@
 
 // GAME CONFIGS
 const char* Config::GAME_TITLE = "Zombie RPG";
-const int Config::WINDOW_WIDTH = 610;
-const int Config::WINDOW_HEIGHT = 683;
+const int Config::WINDOW_WIDTH = 1200;
+const int Config::WINDOW_HEIGHT = 883;
 const size_t Config::ZOMBIES_COUNT = 100;
 const float Config::DEFAULT_LOOT_AMOUNT = 10.0f;
 const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;

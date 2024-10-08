@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <raylib-cpp.hpp>
 
 #include "../core/Bootstrap.h"
 #include "../components/Bootstrap.h"
