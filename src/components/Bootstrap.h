@@ -31,4 +31,7 @@
 #include "./ui/TextHighlightComponent.h"
 #include "./ui/TextSpacingComponent.h"
 
+#include "./colliders/CircleColliderComponent.h"
+#include "./colliders/RectangleColliderComponent.h"
+
 #endif // SRC_COMPONENTS_BOOTSTRAP_H
