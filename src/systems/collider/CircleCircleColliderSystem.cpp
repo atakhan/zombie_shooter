@@ -7,25 +7,15 @@ void CircleCircleColliderSystem::Init(std::vector<Entity*> *entities) {
 void CircleCircleColliderSystem::Draw(std::vector<Entity*> *entities) {}
 
 void CircleCircleColliderSystem::Update(std::vector<Entity*> *entities) {
+    std::vector<CircleColliderComponent> *circles = nullptr;
     for (auto& entity : *entities) {
         CircleColliderComponent *circleColliderComponent = nullptr;
         if (entity->HasComponent<CircleColliderComponent>()) {
-            circleColliderComponent = entity->GetComponent<CircleColliderComponent>();
-            break;
+            circles->push_back(*entity->GetComponent<CircleColliderComponent>());
         }
     }
 
-    if (player == nullptr) {
-        return;
-    }
-
-    for (auto& entity : *entities) {
-        SceneComponent *scene = nullptr;
-        if (entity->HasComponent<SceneComponent>()) {
-            SceneComponent *scene = entity->GetComponent<SceneComponent>();
-            break;
-        }
-    }
+    
 }
 
 void CircleCircleColliderSystem::CheckCollisions(const std::vector<CircleColliderComponent>& circles) {
