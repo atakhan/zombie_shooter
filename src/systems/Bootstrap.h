@@ -33,4 +33,8 @@
 // Terrain systems
 #include "./map/TerrainDrawSystem.h"
 
+// Collider systems
+#include "./collider/CircleCircleColliderSystem.h"
+#include "./collider/ColliderSolve.h"
+
 #endif // SYSTEMS_BOOTSTRAP_H

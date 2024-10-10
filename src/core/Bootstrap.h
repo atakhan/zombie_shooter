@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "Entity.h"
+#include "EventManager.h"
 #include "Game.h"
 #include "Scene.h"
 #include "System.h"

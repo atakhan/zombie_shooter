@@ -4,7 +4,11 @@ void PlayerZombieScene::Init() {
     
     // Scene title
     SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
-
+    
+    EventManager eventManager;
+    CircleCircleColliderSystem colliderSystem(eventManager);
+    eventManager.Subscribe(OnCollision);
+    
     // Entities
     Scene::AddEntity(MapTools::CreateTerrain(this));
 
@@ -37,6 +41,8 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
+    // Collider systems
+    Scene::AddSystem(&colliderSystem);
     
 
     // Init Systems

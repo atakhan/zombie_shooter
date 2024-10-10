@@ -3,7 +3,6 @@
 
 #include "AttackComponent.h"
 #include "CameraComponent.h"
-#include "CircleColliderComponent.h"
 #include "GameTitleComponent.h"
 #include "HealthComponent.h"
 #include "HumanComponent.h"
