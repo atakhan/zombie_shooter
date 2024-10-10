@@ -35,6 +35,6 @@
 
 // Collider systems
 #include "./collider/CircleCircleColliderSystem.h"
-#include "./collider/ColliderSolve.h"
+#include "./collider/ColliderResolverSystem.h"
 
 #endif // SYSTEMS_BOOTSTRAP_H

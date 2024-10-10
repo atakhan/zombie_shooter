@@ -10,8 +10,8 @@ void CircleCircleColliderSystem::Update(std::vector<Entity*> *entities) {
     for (size_t i = 0; i < entities->size(); ++i) {
         for (size_t j = i + 1; j < entities->size(); ++j) {
             if (CollisionDetected(entities->at(i), entities->at(j))) {
-                CollisionEvent event{entities->at(i), entities->at(j)};
-                eventManager_.Dispatch(event);
+                entities->at(i)->GetComponent<CircleColliderComponent>()->isCollide_ = true;
+                entities->at(j)->GetComponent<CircleColliderComponent>()->isCollide_ = true;
             }
         }
     }

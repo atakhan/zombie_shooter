@@ -1,5 +1,5 @@
-#ifndef CIRCLE_CIRCLE_COLLIDER_SYSTEM_H
-#define CIRCLE_CIRCLE_COLLIDER_SYSTEM_H
+#ifndef SRC_SYSTEMS_COLLIDER_CIRCLE_CIRCLE_COLLIDER_SYSTEM_H
+#define SRC_SYSTEMS_COLLIDER_CIRCLE_CIRCLE_COLLIDER_SYSTEM_H
 
 #include <vector>
 #include <unordered_set>
@@ -12,10 +12,6 @@
 
 class CircleCircleColliderSystem : public System {
   public:
-    EventManager& eventManager_;
-
-    CircleCircleColliderSystem(EventManager& eventManager) : eventManager_(eventManager) {}
-    
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
@@ -23,5 +19,5 @@ class CircleCircleColliderSystem : public System {
     bool CollisionDetected(Entity* a, Entity* b);
 };
 
-#endif // CIRCLE_CIRCLE_COLLIDER_SYSTEM_H
+#endif // SRC_SYSTEMS_COLLIDER_CIRCLE_CIRCLE_COLLIDER_SYSTEM_H
 

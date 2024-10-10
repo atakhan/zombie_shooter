@@ -1,13 +1,8 @@
 #include "PlayerZombieScene.h"
 
 void PlayerZombieScene::Init() {
-    
     // Scene title
     SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
-    
-    EventManager eventManager;
-    CircleCircleColliderSystem colliderSystem(eventManager);
-    eventManager.Subscribe(OnCollision);
     
     // Entities
     Scene::AddEntity(MapTools::CreateTerrain(this));
@@ -21,7 +16,7 @@ void PlayerZombieScene::Init() {
         Config::SOUND_MAX_RADIUS
     ));
     Scene::AddEntity(SceneTools::CreateZombie(
-        (Vector2){Config::ZOMBIE_SPAWN_POSITION_X,Config::ZOMBIE_SPAWN_POSITION_Y},
+        (Vector2){Config::ZOMBIE_SPAWN_POSITION_X, Config::ZOMBIE_SPAWN_POSITION_Y},
         (Vector2){Config::ZOMBIE_DEFAULT_TARGET_POSITION_X, Config::ZOMBIE_DEFAULT_TARGET_POSITION_X},
         Config::ZOMBIE_HEALTH,
         Config::ZOMBIE_STRENGTH,
@@ -42,8 +37,8 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
     // Collider systems
-    Scene::AddSystem(&colliderSystem);
-    
+    Scene::AddSystem(new CircleCircleColliderSystem);
+    Scene::AddSystem(new ColliderResolverSystem);
 
     // Init Systems
     for (auto& system : systems_) {

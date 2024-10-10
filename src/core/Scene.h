@@ -15,6 +15,7 @@ public:
     int index_;
     bool continue_;
     std::string title_;
+    
     std::vector<Scene*> *scenes_;
     float width_;
     float height_;
@@ -22,7 +23,7 @@ public:
     std::vector<System*> systems_;
     std::vector<Entity*> entities_;
     
-    Scene(int index, bool isContinue, float width, float height, std::string title = "no title") 
+    Scene(int index, bool isContinue, float width, float height, std::string title) 
         : title_(title)
         , index_(index)
         , continue_(isContinue)
