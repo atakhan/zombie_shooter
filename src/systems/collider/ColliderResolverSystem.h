@@ -13,7 +13,7 @@ class ColliderResolverSystem : public System {
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void handleCollision(Entity *A, Entity *B);
+    void HandleCollision(Entity *A, Entity *B);
 };
 
 #endif // SRC_SYSTEMS_COLLIDER_COLLIDER_RESOLVER_SYSTEM_H

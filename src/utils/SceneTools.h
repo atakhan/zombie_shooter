@@ -47,6 +47,7 @@ class SceneTools {
         player->AddComponent<SpeedComponent>(SpeedComponent(agility));
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
         player->AddComponent<CameraComponent>(CameraComponent());
+        player->AddComponent<CircleColliderComponent>(CircleColliderComponent());
         
         return player;
     }
@@ -70,6 +71,7 @@ class SceneTools {
         zombie->AddComponent<SpeedComponent>(SpeedComponent(agility));
         zombie->AddComponent<TargetComponent>(TargetComponent(targetPos));
         zombie->AddComponent<SoundComponent>(SoundComponent(soundRadius));
+        zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent());
 
         return zombie;
     }

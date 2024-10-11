@@ -10,18 +10,31 @@ void CircleCircleColliderSystem::Update(std::vector<Entity*> *entities) {
     for (size_t i = 0; i < entities->size(); ++i) {
         for (size_t j = i + 1; j < entities->size(); ++j) {
             if (CollisionDetected(entities->at(i), entities->at(j))) {
-                entities->at(i)->GetComponent<CircleColliderComponent>()->isCollide_ = true;
-                entities->at(j)->GetComponent<CircleColliderComponent>()->isCollide_ = true;
+                entities->at(i)->GetComponent<CircleColliderComponent>()->collisions_.push(j);
+                entities->at(j)->GetComponent<CircleColliderComponent>()->collisions_.push(i);
             }
         }
     }
 }
 
 bool CircleCircleColliderSystem::CollisionDetected(Entity *entityA, Entity* entityB) {
-    float dx = entityA->GetComponent<CircleColliderComponent>()->center_.x - entityB->GetComponent<CircleColliderComponent>()->center_.x;
-    float dy = entityA->GetComponent<CircleColliderComponent>()->center_.y - entityB->GetComponent<CircleColliderComponent>()->center_.y;
-    float distanceSquared = dx * dx + dy * dy;
-    float radiusSum = entityA->GetComponent<CircleColliderComponent>()->radius_ + entityB->GetComponent<CircleColliderComponent>()->radius_;
+    CircleColliderComponent *aCollider = entityA->GetComponent<CircleColliderComponent>();
+    PositionComponent *aPosition = entityA->GetComponent<PositionComponent>();
+    HealthComponent *aRadius = entityA->GetComponent<HealthComponent>();
 
-    return distanceSquared <= (radiusSum * radiusSum);
+    CircleColliderComponent *bCollider = entityB->GetComponent<CircleColliderComponent>();
+    PositionComponent *bPosition = entityB->GetComponent<PositionComponent>();
+    HealthComponent *bRadius = entityB->GetComponent<HealthComponent>();
+
+    if (aCollider && aPosition && aRadius && bCollider && bPosition && bRadius) {
+        float dx = aPosition->position_.x - bPosition->position_.x;
+        float dy = aPosition->position_.y - bPosition->position_.y;
+        float distanceSquared = dx * dx + dy * dy;
+        float radiusSum = aRadius->health_ + bRadius->health_;
+
+        return distanceSquared <= (radiusSum * radiusSum);
+    } else {
+        return false;
+    }
+
 }
