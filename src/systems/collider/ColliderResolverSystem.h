@@ -3,6 +3,7 @@
 
 #include <raylib-cpp.hpp>
 #include <iostream>
+#include <cmath>
 
 #include "../../Config.h"
 #include "../../core/Entity.h"
@@ -14,6 +15,8 @@ class ColliderResolverSystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
 
     void HandleCollision(Entity *A, Entity *B);
+    void PlayerToZombie(Entity *a, Entity *b);
+    void ZombieToZombie(Entity *a, Entity *b);
 };
 
 #endif // SRC_SYSTEMS_COLLIDER_COLLIDER_RESOLVER_SYSTEM_H

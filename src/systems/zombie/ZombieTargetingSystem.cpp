@@ -43,6 +43,7 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         HealthComponent* zombieRadius = entity->GetComponent<HealthComponent>();
         SpeedComponent* speed = entity->GetComponent<SpeedComponent>();
         AttackComponent* attack = entity->GetComponent<AttackComponent>();
+        CircleColliderComponent* collider = entity->GetComponent<CircleColliderComponent>();
         
         bool foodNear = IsFoodNear(
             zombiePos->position_, 
@@ -57,6 +58,9 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         } else {
             zombie->currentState = ZombieComponent::Status::WALK;
             if (TargetReached(target->position_, zombiePos->position_)) {
+                target->position_ = RandomTarget();
+            }
+            if (collider->isCollide_) {
                 target->position_ = RandomTarget();
             }
         }

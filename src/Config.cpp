@@ -2,24 +2,24 @@
 #include "Config.h"
 
 // GAME CONFIGS
-const char* Config::GAME_TITLE = "Zombie RPG";
-const int Config::WINDOW_WIDTH = 1200;
-const int Config::WINDOW_HEIGHT = 883;
-const size_t Config::ZOMBIES_COUNT = 100;
-const float Config::DEFAULT_LOOT_AMOUNT = 10.0f;
+const char* Config::GAME_TITLE              = "Zombie RPG";
+const int Config::WINDOW_WIDTH              = 1200;
+const int Config::WINDOW_HEIGHT             = 883;
+const size_t Config::ZOMBIES_COUNT          = 10;
+const float Config::DEFAULT_LOOT_AMOUNT     = 10.0f;
 const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;
 const float Config::DEFAULT_LOOT_SPAWN_POSITION_Y = 425.0f;
-const float Config::FOOD_DEFAULT_SIZE = 425.0f;
+const float Config::FOOD_DEFAULT_SIZE       = 425.0f;
 
 // UI CONFIGS
-const float Config::DEFAULT_FONT_SIZE = 16.0f;
-const float Config::DEFAULT_PADDING = 0.0f;
-const float Config::DEFAULT_LINE_SPACING = 22.0f;
-const float Config::DEFAULT_TEXT_SPACING = 1.0f;
+const float Config::DEFAULT_FONT_SIZE       = 16.0f;
+const float Config::DEFAULT_PADDING         = 0.0f;
+const float Config::DEFAULT_LINE_SPACING    = 22.0f;
+const float Config::DEFAULT_TEXT_SPACING    = 1.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SIZE = 16.0f;
 const float Config::TITLE_VALUE_LIST_TEXT_SPACING = 1.0f;
-const Color Config::DEFAULT_UI_TEXT_COLOR = GRAY_1_8;
-const Color Config::DEFAULT_FONT_COLOR = GRAY_6_8;
+const Color Config::DEFAULT_UI_TEXT_COLOR   = GRAY_1_8;
+const Color Config::DEFAULT_FONT_COLOR      = GRAY_6_8;
 
 // STYLE CONFIGS
 const Color Config::TERRAIN_DEFAULT_COLOR   = GREEN_3_4;
@@ -62,14 +62,14 @@ const float Config::HUMAN_MOVE_TRESHOLD = 1.0f;
 const float Config::ZOMBIE_HEALTH = 10.0f; // HP based on health
 const float Config::ZOMBIE_STRENGTH = 0.5f; //  Attack based on strength
 const float Config::ZOMBIE_AGILITY = 1.0f; //  Speed based on agility
-const float Config::ZOMBIE_WALK_COEF = 0.2;
+const float Config::ZOMBIE_WALK_COEF = 0.4;
 const float Config::ZOMBIE_RUN_COEF = 1;
 const float Config::ZOMBIE_HEARING_RADIUS = 100.0f;
 const float Config::ZOMBIE_ATTACK_RADIUS = 20.0f;
-const float Config::ZOMBIE_SPAWN_POSITION_X = 122.0f;
-const float Config::ZOMBIE_SPAWN_POSITION_Y = 66.0f;
-const float Config::ZOMBIE_DEFAULT_TARGET_POSITION_X = 300.0f;
-const float Config::ZOMBIE_DEFAULT_TARGET_POSITION_Y = 303.0f;
+const float Config::ZOMBIE_SPAWN_POSITION_X = 422.0f;
+const float Config::ZOMBIE_SPAWN_POSITION_Y = 376.0f;
+const float Config::ZOMBIE_DEFAULT_TARGET_POSITION_X = 500.0f;
+const float Config::ZOMBIE_DEFAULT_TARGET_POSITION_Y = 503.0f;
 
 // OTHER CONFIGS
 const float Config::SOUND_MAX_RADIUS = 256.0f;

@@ -15,15 +15,19 @@ void PlayerZombieScene::Init() {
         Config::PLAYER_ATTACK_RADIUS,
         Config::SOUND_MAX_RADIUS
     ));
-    Scene::AddEntity(SceneTools::CreateZombie(
-        (Vector2){Config::ZOMBIE_SPAWN_POSITION_X, Config::ZOMBIE_SPAWN_POSITION_Y},
-        (Vector2){Config::ZOMBIE_DEFAULT_TARGET_POSITION_X, Config::ZOMBIE_DEFAULT_TARGET_POSITION_X},
-        Config::ZOMBIE_HEALTH,
-        Config::ZOMBIE_STRENGTH,
-        Config::ZOMBIE_AGILITY,
-        Config::ZOMBIE_ATTACK_RADIUS,
-        Config::SOUND_MAX_RADIUS
-    ));
+
+    for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
+        Scene::AddEntity(SceneTools::CreateZombie(
+            (Vector2){Config::ZOMBIE_SPAWN_POSITION_X, Config::ZOMBIE_SPAWN_POSITION_Y},
+            (Vector2){Config::ZOMBIE_DEFAULT_TARGET_POSITION_X, Config::ZOMBIE_DEFAULT_TARGET_POSITION_X},
+            Config::ZOMBIE_HEALTH,
+            Config::ZOMBIE_STRENGTH,
+            Config::ZOMBIE_AGILITY,
+            Config::ZOMBIE_ATTACK_RADIUS,
+            Config::SOUND_MAX_RADIUS
+        ));
+    }
+    
 
     // Systems
     // Map systems
