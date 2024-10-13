@@ -33,7 +33,6 @@ class UiTools {
         // PaddingComponent *padding = uiElement->GetComponent<PaddingComponent>();
 
         if (position && text && textSize && colNum && rowNum && textSpacing && color) {
-            std::cout << "Needed UI entity components isset" << std::endl;
             DrawTextEx(
                 GetFontDefault(),
                 text->text_.c_str(),

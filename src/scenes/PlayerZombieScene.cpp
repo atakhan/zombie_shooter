@@ -1,7 +1,8 @@
 #include "PlayerZombieScene.h"
 
 void PlayerZombieScene::Init() {
-    // Scene title
+    
+    // Scene entity
     Scene::AddEntity(SceneTools::CreateScene(
         Config::GAME_TITLE,
         Scene::title_
@@ -15,18 +16,19 @@ void PlayerZombieScene::Init() {
     ));
     Scene::AddEntity(UiTools::CreateUIEntity(
         (Vector2){10.0f, 10.0f},
-        this->title_,
+        Scene::title_,
         16.0f, 1, 2, 3.0f, RED
     ));
 
-    // Entities
-    Scene::AddEntity(MapTools::CreateTerrain(
+    // Map entity
+    Scene::AddEntity(MapTools::CreateMap(
         this->width_,
         this->height_,
         Config::MAP_CELL_WIDTH,
         Config::MAP_CELL_HEIGHT
     ));
 
+    // Player entity
     Scene::AddEntity(SceneTools::CreatePlayer(
         (Vector2){Config::PLAYER_SPAWN_POSITION_X, Config::PLAYER_SPAWN_POSITION_Y},
         Config::PLAYER_HEALTH,
@@ -36,10 +38,17 @@ void PlayerZombieScene::Init() {
         Config::SOUND_MAX_RADIUS
     ));
 
+    // Zombie entities
     for (size_t i = 0; i < Config::ZOMBIES_COUNT; i++) {
         Scene::AddEntity(SceneTools::CreateZombie(
-            (Vector2){Config::ZOMBIE_SPAWN_POSITION_X, Config::ZOMBIE_SPAWN_POSITION_Y},
-            (Vector2){Config::ZOMBIE_DEFAULT_TARGET_POSITION_X, Config::ZOMBIE_DEFAULT_TARGET_POSITION_X},
+            (Vector2){
+                Config::ZOMBIE_SPAWN_POSITION_X, 
+                Config::ZOMBIE_SPAWN_POSITION_Y
+            },
+            (Vector2){
+                Config::ZOMBIE_DEFAULT_TARGET_POSITION_X, 
+                Config::ZOMBIE_DEFAULT_TARGET_POSITION_X
+            },
             Config::ZOMBIE_HEALTH,
             Config::ZOMBIE_STRENGTH,
             Config::ZOMBIE_AGILITY,

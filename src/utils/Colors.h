@@ -72,6 +72,7 @@
 #define BLUE_3_8    R0G0B3A8
 #define RED_3_8     R3G0B0A8
 #define RED_7_2     R7G0B0A2
+#define GRAY_6_1    R6G6B6A1
 #define GRAY_6_2    R6G6B6A2
 #define GRAY_6_4    R6G6B6A4
 #define GRAY_6_8    R6G6B6A8
