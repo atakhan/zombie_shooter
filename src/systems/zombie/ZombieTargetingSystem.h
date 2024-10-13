@@ -17,7 +17,7 @@ class ZombieTargetingSystem : public System {
   
     bool IsFoodNear(Vector2 zombiePosition, Vector2 playerPosition, float zombieRadius, float playerSoundRadius);
     bool TargetReached(Vector2 targetPos, Vector2 curPos);
-    Vector2 RandomTarget();
+    Vector2 RandomTarget(float xMax, float yMax);
 };
 
 #endif // ZOMBIE_TARGETING_SYSTEM_H

@@ -16,7 +16,7 @@ int main() {
     
     // // SCENE MANAGER index 0
     game->AddScene(new ManageScenesScene(0, true, 10, 10, "choose a scene"));
-    game->AddScene(new PlayerZombieScene(1, false, 100, 100, "player vs zombie scene"));
+    game->AddScene(new PlayerZombieScene(1, false, 20, 20, "player vs zombie scene"));
     game->AddScene(new HumanTrainingScene(2, false, 10, 10, "try to create a human entity scene"));
     
     game->Init();

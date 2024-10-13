@@ -21,6 +21,7 @@ public:
     float height_;
 
     std::vector<System*> systems_;
+    std::vector<System*> UISystems_;
     std::vector<Entity*> entities_;
     
     Scene(int index, bool isContinue, float width, float height, std::string title) 
@@ -38,7 +39,9 @@ public:
     void SetSceneList(std::vector<Scene*> *scenes);
 
     void AddSystem(System* system);
+    void AddUISystem(System* system);
     void RemoveSystem(System* system);
+    void RemoveUISystem(System* system);
     void AddEntity(Entity* entity);
     void RemoveEntity(Entity* entity);
     bool Continue() { return continue_;};

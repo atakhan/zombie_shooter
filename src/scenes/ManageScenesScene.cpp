@@ -3,7 +3,10 @@
 void ManageScenesScene::Init() {
     Scene::continue_ = true;
     // Scene title
-    SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
+    Scene::AddEntity(SceneTools::CreateScene(
+        Config::GAME_TITLE,
+        Scene::title_
+    ));
     
     Entity *menu = MenuTools::CreateMenu(
         Vector2{30.0f, 100.0f}, 

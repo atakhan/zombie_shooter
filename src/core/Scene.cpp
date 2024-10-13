@@ -4,9 +4,16 @@
 void Scene::AddSystem(System* system) {
     systems_.push_back(system);
 }
+void Scene::AddUISystem(System* system) {
+    UISystems_.push_back(system);
+}
 void Scene::RemoveSystem(System* system) {
     systems_.erase(std::remove(systems_.begin(), systems_.end(), system), systems_.end());
-    delete system; // Освобождаем память
+    delete system;
+}
+void Scene::RemoveUISystem(System* system) {
+    UISystems_.erase(std::remove(UISystems_.begin(), UISystems_.end(), system), UISystems_.end());
+    delete system;
 }
 
 void Scene::AddEntity(Entity* entity) {
@@ -14,7 +21,7 @@ void Scene::AddEntity(Entity* entity) {
 }
 void Scene::RemoveEntity(Entity* entity) {
     entities_.erase(std::remove(entities_.begin(), entities_.end(), entity), entities_.end());
-    delete entity; // Освобождаем память
+    delete entity;
 }
 
 void Scene::HandleExit(int *currentSceneIndex) {

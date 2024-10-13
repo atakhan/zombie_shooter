@@ -25,24 +25,27 @@ class UiTools {
     static void DrawUIEntity(Entity *uiElement) {
         PositionComponent *position = uiElement->GetComponent<PositionComponent>();
         TextComponent *text = uiElement->GetComponent<TextComponent>();
-        PaddingComponent *padding = uiElement->GetComponent<PaddingComponent>();
         TextSizeComponent *textSize = uiElement->GetComponent<TextSizeComponent>();
         ColPositionComponent *colNum = uiElement->GetComponent<ColPositionComponent>();
         RowPositionComponent *rowNum = uiElement->GetComponent<RowPositionComponent>();
         TextSpacingComponent *textSpacing = uiElement->GetComponent<TextSpacingComponent>();
         ColorComponent *color = uiElement->GetComponent<ColorComponent>();
+        // PaddingComponent *padding = uiElement->GetComponent<PaddingComponent>();
 
-        DrawTextEx(
-            GetFontDefault(),
-            text->text_.c_str(),
-            (Vector2){
-                position->position_.x + padding->value_ * colNum->value_,
-                position->position_.y + padding->value_ + textSize->value_ * rowNum->value_
-            },
-            textSize->value_,
-            textSpacing->value_,
-            color->value_
-        );
+        if (position && text && textSize && colNum && rowNum && textSpacing && color) {
+            std::cout << "Needed UI entity components isset" << std::endl;
+            DrawTextEx(
+                GetFontDefault(),
+                text->text_.c_str(),
+                (Vector2){
+                    position->position_.x * colNum->value_,
+                    position->position_.y + textSize->value_ * rowNum->value_
+                },
+                textSize->value_,
+                textSpacing->value_,
+                color->value_
+            );
+        }
     }
 
     static Entity* CreateUIEntity(

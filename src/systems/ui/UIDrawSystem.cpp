@@ -13,13 +13,11 @@ void UIDrawSystem::Draw(std::vector<Entity*> *entities) {
             std::cout << "Entity pointer is null!" << std::endl;
             continue; // Skip this iteration
         }
-        if (entity->HasComponent<BaseUIComponent>()) {
-            BaseUIComponent *baseUi = entity->GetComponent<BaseUIComponent>();
-            if (baseUi) {
-                UiTools::DrawUIEntity(entity);
-            }
-        }
         
+        BaseUIComponent *baseUi = entity->GetComponent<BaseUIComponent>();
+        if (baseUi) {
+            UiTools::DrawUIEntity(entity);
+        }
     }
 }
 

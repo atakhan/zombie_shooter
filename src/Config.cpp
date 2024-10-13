@@ -3,13 +3,11 @@
 
 // GAME CONFIGS
 const char* Config::GAME_TITLE              = "Zombie RPG";
+const char* Config::WINDOW_TITLE            = "Zombie RPG";
 const int Config::WINDOW_WIDTH              = 1200;
 const int Config::WINDOW_HEIGHT             = 883;
-const size_t Config::ZOMBIES_COUNT          = 10;
-const float Config::DEFAULT_LOOT_AMOUNT     = 10.0f;
-const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;
-const float Config::DEFAULT_LOOT_SPAWN_POSITION_Y = 425.0f;
-const float Config::FOOD_DEFAULT_SIZE       = 425.0f;
+const float Config::MAP_CELL_WIDTH          = 32.0f;
+const float Config::MAP_CELL_HEIGHT         = 32.0f;
 
 // UI CONFIGS
 const float Config::DEFAULT_FONT_SIZE       = 16.0f;
@@ -31,6 +29,12 @@ const Color Config::SOUND_RADIUS_COLOR      = GRAY_6_2;
 const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
 const Color Config::PATH_COLOR              = GRAY_6_4;
 const Color Config::TARGET_COLOR            = RED_3_4;
+
+// LOOT CONFIGS
+const float Config::DEFAULT_LOOT_AMOUNT     = 10.0f;
+const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;
+const float Config::DEFAULT_LOOT_SPAWN_POSITION_Y = 425.0f;
+const float Config::FOOD_DEFAULT_SIZE       = 425.0f;
 
 // PLAYER CONFIGS
 const float Config::PLAYER_HEALTH = 20.0f;
@@ -59,6 +63,7 @@ const float Config::HUMAN_DEFAULT_TARGET_Y = 425.0f;
 const float Config::HUMAN_MOVE_TRESHOLD = 1.0f;
 
 // ZOMBIE CONFIGS
+const size_t Config::ZOMBIES_COUNT = 10;
 const float Config::ZOMBIE_HEALTH = 10.0f; // HP based on health
 const float Config::ZOMBIE_STRENGTH = 0.5f; //  Attack based on strength
 const float Config::ZOMBIE_AGILITY = 1.0f; //  Speed based on agility

@@ -14,24 +14,26 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
             break;
         }
     }
-
     if (player == nullptr) {
         return;
     }
 
+    Entity *terrain = nullptr;
     for (auto& entity : *entities) {
-        SceneComponent *scene = nullptr;
-        if (entity->HasComponent<SceneComponent>()) {
-            SceneComponent *scene = entity->GetComponent<SceneComponent>();
+        if (entity->HasComponent<TerrainComponent>()) {
+            terrain = entity;
             break;
         }
     }
-
-    
+    if (terrain == nullptr) {
+        return;
+    }
     
     PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
-    SoundComponent* playerSound = playerSound = player->GetComponent<SoundComponent>();
+    SoundComponent* playerSound = player->GetComponent<SoundComponent>();
     HealthComponent* playerHealth = player->GetComponent<HealthComponent>();
+
+    TerrainComponent* terrainComponent = terrain->GetComponent<TerrainComponent>();
 
     for (auto& entity : *entities) {
         if (!entity->HasComponent<ZombieComponent>()) {
@@ -45,26 +47,33 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         AttackComponent* attack = entity->GetComponent<AttackComponent>();
         CircleColliderComponent* collider = entity->GetComponent<CircleColliderComponent>();
         
-        bool foodNear = IsFoodNear(
-            zombiePos->position_, 
-            playerPosition->position_, 
-            zombieRadius->health_, 
-            playerSound->currentRadius
-        );
+        if (target && zombiePos && zombieRadius && speed && attack && collider) {
+            bool foodNear = IsFoodNear(
+                zombiePos->position_, 
+                playerPosition->position_, 
+                zombieRadius->health_, 
+                playerSound->currentRadius
+            );
 
-        if (foodNear) {
-            zombie->currentState = ZombieComponent::Status::RUN;
-            target->position_ = playerPosition->position_;
-        } else {
-            zombie->currentState = ZombieComponent::Status::WALK;
-            if (TargetReached(target->position_, zombiePos->position_)) {
-                target->position_ = RandomTarget();
-            }
-            if (collider->isCollide_) {
-                target->position_ = RandomTarget();
+            if (foodNear) {
+                zombie->currentState = ZombieComponent::Status::RUN;
+                target->position_ = playerPosition->position_;
+            } else {
+                zombie->currentState = ZombieComponent::Status::WALK;
+                if (TargetReached(target->position_, zombiePos->position_)) {
+                    target->position_ = RandomTarget(
+                        terrainComponent->width_ * terrainComponent->cellWidth_, 
+                        terrainComponent->height_ * terrainComponent->cellHeight_
+                    );
+                }
+                if (collider->isCollide_) {
+                    target->position_ = RandomTarget(
+                        terrainComponent->width_ * terrainComponent->cellWidth_, 
+                        terrainComponent->height_ * terrainComponent->cellHeight_
+                    );
+                }
             }
         }
-
     }
 }
 
@@ -82,12 +91,10 @@ bool ZombieTargetingSystem::IsFoodNear(Vector2 zombiePos,Vector2 playerPos, floa
     return false;
 }
 
-Vector2 ZombieTargetingSystem::RandomTarget() {
+Vector2 ZombieTargetingSystem::RandomTarget(float xMax, float yMax) {
     int min = 10;
-    int xmax = Config::WINDOW_WIDTH;
-    int ymax = Config::WINDOW_HEIGHT;
-    int randX = rand()%(xmax-min + 1) + min;
-    int randY = rand()%(ymax-min + 1) + min;
+    int randX = rand() % ((int)xMax - min + 1) + min;
+    int randY = rand() % ((int)yMax - min + 1) + min;
 
     return (Vector2){static_cast<float>(randX), static_cast<float>(randY)};
 }

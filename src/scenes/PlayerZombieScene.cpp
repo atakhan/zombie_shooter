@@ -2,10 +2,30 @@
 
 void PlayerZombieScene::Init() {
     // Scene title
-    SceneTools::CreateScene(Config::GAME_TITLE, Scene::title_, this);
-    
+    Scene::AddEntity(SceneTools::CreateScene(
+        Config::GAME_TITLE,
+        Scene::title_
+    ));
+
+    // ui entities
+    Scene::AddEntity(UiTools::CreateUIEntity(
+        (Vector2){10.0f, 10.0f},
+        Config::GAME_TITLE,
+        16.0f, 1, 1, 3.0f, RED
+    ));
+    Scene::AddEntity(UiTools::CreateUIEntity(
+        (Vector2){10.0f, 10.0f},
+        this->title_,
+        16.0f, 1, 2, 3.0f, RED
+    ));
+
     // Entities
-    Scene::AddEntity(MapTools::CreateTerrain(this));
+    Scene::AddEntity(MapTools::CreateTerrain(
+        this->width_,
+        this->height_,
+        Config::MAP_CELL_WIDTH,
+        Config::MAP_CELL_HEIGHT
+    ));
 
     Scene::AddEntity(SceneTools::CreatePlayer(
         (Vector2){Config::PLAYER_SPAWN_POSITION_X, Config::PLAYER_SPAWN_POSITION_Y},
@@ -27,7 +47,6 @@ void PlayerZombieScene::Init() {
             Config::SOUND_MAX_RADIUS
         ));
     }
-    
 
     // Systems
     // Map systems
@@ -43,6 +62,9 @@ void PlayerZombieScene::Init() {
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);
     Scene::AddSystem(new ColliderResolverSystem);
+    
+    // UI draw systems
+    Scene::AddUISystem(new UIDrawSystem);
 
     // Init Systems
     for (auto& system : systems_) {
@@ -83,17 +105,19 @@ void PlayerZombieScene::Draw() {
 
     if (player && camera) {
         BeginMode2D(camera->camera_);
-    }
-
-    for (auto& system : systems_) {
-        if (system == nullptr) {
-            continue;
+        for (auto& system : systems_) {
+            if (system == nullptr) {
+                continue;
+            }
+            system->Draw(&entities_);
         }
-        system->Draw(&entities_);
-    }
-    
-    if (player && camera) {
         EndMode2D();
-    }
 
+        for (auto& system : UISystems_) {
+            if (system == nullptr) {
+                continue;
+            }
+            system->Draw(&entities_);
+        }
+    }
 }

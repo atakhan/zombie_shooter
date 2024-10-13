@@ -13,6 +13,8 @@ public:
     static const char * WINDOW_TITLE;
     static const int WINDOW_WIDTH;
     static const int WINDOW_HEIGHT;
+    static const float MAP_CELL_WIDTH;
+    static const float MAP_CELL_HEIGHT;
 
 // UI CONFIGS
     static const float DEFAULT_FONT_SIZE;
