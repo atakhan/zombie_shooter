@@ -14,11 +14,16 @@ void PlayerZombieScene::Init() {
         Config::GAME_TITLE,
         16.0f, 1, 1, 3.0f, RED
     ));
-    Scene::AddEntity(UiTools::CreateUIEntity(
+    Scene::AddEntity(UiTools::CreateUITextEntity(
         (Vector2){10.0f, 10.0f},
         Scene::title_,
         16.0f, 1, 2, 3.0f, RED
     ));
+    // Scene::AddEntity(UiTools::CreateUICheckBoxEntity(
+    //     (Vector2){10.0f, 10.0f},
+    //     Scene::title_,
+    //     16.0f, 1, 2, 3.0f, RED
+    // ));
 
     // Map entity
     Scene::AddEntity(MapTools::CreateMap(

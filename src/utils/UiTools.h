@@ -22,32 +22,7 @@ class UiTools {
         );
     }
 
-    static void DrawUIEntity(Entity *uiElement) {
-        PositionComponent *position = uiElement->GetComponent<PositionComponent>();
-        TextComponent *text = uiElement->GetComponent<TextComponent>();
-        TextSizeComponent *textSize = uiElement->GetComponent<TextSizeComponent>();
-        ColPositionComponent *colNum = uiElement->GetComponent<ColPositionComponent>();
-        RowPositionComponent *rowNum = uiElement->GetComponent<RowPositionComponent>();
-        TextSpacingComponent *textSpacing = uiElement->GetComponent<TextSpacingComponent>();
-        ColorComponent *color = uiElement->GetComponent<ColorComponent>();
-        // PaddingComponent *padding = uiElement->GetComponent<PaddingComponent>();
-
-        if (position && text && textSize && colNum && rowNum && textSpacing && color) {
-            DrawTextEx(
-                GetFontDefault(),
-                text->text_.c_str(),
-                (Vector2){
-                    position->position_.x * colNum->value_,
-                    position->position_.y + textSize->value_ * rowNum->value_
-                },
-                textSize->value_,
-                textSpacing->value_,
-                color->value_
-            );
-        }
-    }
-
-    static Entity* CreateUIEntity(
+    static Entity* CreateUITextEntity(
             Vector2 pos, 
             std::string text,
             float textSize, 
@@ -84,6 +59,31 @@ class UiTools {
         );
 
         return element;
+    }
+
+    static void DrawUITextEntity(Entity *uiElement) {
+        PositionComponent *position = uiElement->GetComponent<PositionComponent>();
+        TextComponent *text = uiElement->GetComponent<TextComponent>();
+        TextSizeComponent *textSize = uiElement->GetComponent<TextSizeComponent>();
+        ColPositionComponent *colNum = uiElement->GetComponent<ColPositionComponent>();
+        RowPositionComponent *rowNum = uiElement->GetComponent<RowPositionComponent>();
+        TextSpacingComponent *textSpacing = uiElement->GetComponent<TextSpacingComponent>();
+        ColorComponent *color = uiElement->GetComponent<ColorComponent>();
+        // PaddingComponent *padding = uiElement->GetComponent<PaddingComponent>();
+
+        if (position && text && textSize && colNum && rowNum && textSpacing && color) {
+            DrawTextEx(
+                GetFontDefault(),
+                text->text_.c_str(),
+                (Vector2){
+                    position->position_.x * colNum->value_,
+                    position->position_.y + textSize->value_ * rowNum->value_
+                },
+                textSize->value_,
+                textSpacing->value_,
+                color->value_
+            );
+        }
     }
 
     static void DrawTitleValueText(Color color, Vector2 position, float padding, float rowNum, std::string title, std::string value) {
