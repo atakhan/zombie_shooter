@@ -39,6 +39,9 @@ void ColliderResolverSystem::HandleCollision(Entity *a, Entity *b) {
     } else 
     if (a->HasComponent<ZombieComponent>() && b->HasComponent<ZombieComponent>()) {
         ZombieToZombie(a, b);
+    } else 
+    if (a->HasComponent<PlayerComponent>() && b->HasComponent<WallComponent>()) {
+        PlayerToWall(a, b);
     }
 }
 
@@ -64,6 +67,31 @@ void ColliderResolverSystem::ZombieToZombie(Entity *z1, Entity *z2) {
 
         z1Pos->position_.x = z1Pos->position_.x + (overlapValue/2);
         z2Pos->position_.x = z2Pos->position_.x + ((overlapValue/2) * (-1));
+    }
+}
+
+void ColliderResolverSystem::PlayerToWall(Entity *player, Entity *wall) {
+    CircleColliderComponent *playerCollider = player->GetComponent<CircleColliderComponent>();
+    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
+    HealthComponent *playerRadius = player->GetComponent<HealthComponent>();
+
+    RectangleColliderComponent *rectangleCollider = wall->GetComponent<RectangleColliderComponent>();
+    PositionComponent *rectanglePosition = wall->GetComponent<PositionComponent>();
+
+    if (playerCollider && playerPosition && playerRadius && rectangleCollider && rectanglePosition) {
+        // Calculate the closest point on the rectangle to the circle
+        float closestX = std::max(rectanglePosition->position_.x, std::min(playerPosition->position_.x, rectanglePosition->position_.x + rectangleCollider->width_));
+        float closestY = std::max(rectanglePosition->position_.y, std::min(playerPosition->position_.y, rectanglePosition->position_.y + rectangleCollider->height_));
+
+        // Calculate the distance from the circle's center to this closest point
+        float dx = playerPosition->position_.x - closestX;
+        float dy = playerPosition->position_.y - closestY;
+        
+        // Check if the distance is less than or equal to the circle's radius
+        if ((dx * dx + dy * dy) <= (playerRadius->health_ * playerRadius->health_)) {
+            playerPosition->position_.x += 0.01f;
+            playerPosition->position_.y += 0.01f;
+        }
     }
 }
 

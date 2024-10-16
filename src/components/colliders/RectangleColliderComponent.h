@@ -4,11 +4,17 @@
 #include <raylib-cpp.hpp>
 
 struct RectangleColliderComponent {
-    Vector2 center_;
-    float radius_;
+    bool isCollide_;
+    float width_;
+    float height_;
+    std::queue<unsigned> collisions_;
 
-    RectangleColliderComponent(Vector2 pos, float r)
-        : radius_(r), center_(pos) {}
+    RectangleColliderComponent(float w, float h)
+        : width_(w)
+        , height_(h)
+        , isCollide_(false)
+        , collisions_()
+        {}
 };
 
 #endif // SRC_COMPONENTS_RECTANGLE_COLLIDER_COMPONENT_H

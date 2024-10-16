@@ -31,6 +31,9 @@ void PlayerDrawSystem::Draw(std::vector<Entity*> *entities) {
                         health->health_,
                         Config::PLAYER_COLOR
                     );
+                    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
+                        1, "current pos: ", std::to_string(position->position_.x) + ", " + std::to_string(position->position_.y)
+                    );
                 }
             }
         }

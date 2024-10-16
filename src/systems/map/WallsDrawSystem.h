@@ -1,5 +1,5 @@
-#ifndef TERRAIN_DRAW_SYSTEM_H
-#define TERRAIN_DRAW_SYSTEM_H
+#ifndef WALLS_DRAW_SYSTEM_H
+#define WALLS_DRAW_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -10,14 +10,13 @@
 #include "../../core/Bootstrap.h"
 #include "../../components/Bootstrap.h"
 
-class TerrainDrawSystem : public System {
+class WallsDrawSystem : public System {
   public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void DrawSpawnMapColors(TerrainComponent* terrain, SpawnMapComponent *spawnMap, int x, int y);
-    void DrawWallsColors(TerrainComponent* terrain, WallsMapComponent *wallsMap, int x, int y);
+    void DrawWallsMapCell(float posx, float posy, int w, int h);
 };
 
-#endif // TERRAIN_DRAW_SYSTEM_H
+#endif // WALLS_DRAW_SYSTEM_H

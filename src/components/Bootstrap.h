@@ -11,6 +11,10 @@
 #include "SpeedComponent.h"
 #include "StaminaComponent.h"
 #include "TargetComponent.h"
+#include "SpawnMapComponent.h"
+#include "WallsMapComponent.h"
+#include "WallComponent.h"
+#include "SoundReflectComponent.h"
 
 #include "./entities/SceneComponent.h"
 #include "./entities/TerrainComponent.h"

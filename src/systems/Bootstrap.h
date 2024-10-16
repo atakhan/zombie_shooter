@@ -30,11 +30,13 @@
 // UI draw systems
 #include "./ui/UIDrawSystem.h"
 
-// Terrain systems
+// Map systems
 #include "./map/TerrainDrawSystem.h"
+#include "./map/WallsDrawSystem.h"
 
 // Collider systems
 #include "./collider/CircleCircleColliderSystem.h"
+#include "./collider/CircleRectangleColliderSystem.h"
 #include "./collider/ColliderResolverSystem.h"
 
 #endif // SYSTEMS_BOOTSTRAP_H

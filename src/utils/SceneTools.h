@@ -35,7 +35,7 @@ class SceneTools {
         player->AddComponent<SpeedComponent>(SpeedComponent(agility));
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
         player->AddComponent<CameraComponent>(CameraComponent());
-        player->AddComponent<CircleColliderComponent>(CircleColliderComponent());
+        player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
         
         return player;
     }
@@ -43,27 +43,26 @@ class SceneTools {
 
     // CREATE ZOMBIES
     static Entity* CreateZombie(
-        Vector2 pos,
-        Vector2 targetPos,
-        float health, 
-        float strength, 
-        float agility,
-        float attackRadius, 
-        float soundRadius
+        PositionComponent pos,
+        TargetComponent targetPos,
+        HealthComponent health, 
+        AttackComponent attack,
+        SpeedComponent speed,
+        SoundComponent sound
     ) {
         Entity *zombie = new Entity();
         zombie->AddComponent<ZombieComponent>(ZombieComponent());
-        zombie->AddComponent<PositionComponent>(PositionComponent(pos));
-        zombie->AddComponent<HealthComponent>(HealthComponent(health));
-        zombie->AddComponent<AttackComponent>(AttackComponent(strength, attackRadius));
-        zombie->AddComponent<SpeedComponent>(SpeedComponent(agility));
-        zombie->AddComponent<TargetComponent>(TargetComponent(targetPos));
-        zombie->AddComponent<SoundComponent>(SoundComponent(soundRadius));
-        zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent());
+        zombie->AddComponent<PositionComponent>(pos);
+        zombie->AddComponent<TargetComponent>(targetPos);
+        zombie->AddComponent<HealthComponent>(health);
+        zombie->AddComponent<AttackComponent>(attack);
+        zombie->AddComponent<SpeedComponent>(speed);
+        zombie->AddComponent<SoundComponent>(sound);
+        zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent(health.health_));
 
         return zombie;
-    }
-    
+    }    
+  
     
     // static void CreateHumanWithDefaultComponents(Entity *human) {
     //     human->AddComponent<HumanComponent>(HumanComponent());

@@ -60,7 +60,7 @@ class MenuTools {
         PositionComponent *menuPos = menuEntity->GetComponent<PositionComponent>();
 
         if (menu && menuPos) {
-            element = UiTools::CreateUIEntity(
+            element = UiTools::CreateUITextEntity(
                 (Vector2){
                     menuPos->position_.x * colPos, 
                     menuPos->position_.y + (menu->lineSpacing_ * rowPos)

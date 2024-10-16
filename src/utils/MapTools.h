@@ -14,51 +14,61 @@
 class MapTools {  
   public:
     // CREATE GAME
-    static Entity* CreateMap(float width, float height, float cellWidth, float cellHeight) {
-        Entity *map = new Entity();
-        map->AddComponent<TerrainComponent>(TerrainComponent(
-            width, 
-            height,
+    static Entity* CreateMap(
+        std::vector<std::vector<int>> spawnMap,
+        std::vector<std::vector<int>> wallsMap,
+        float cellWidth, 
+        float cellHeight
+    ) {
+        Entity *mapEntity = new Entity();
+        mapEntity->AddComponent<TerrainComponent>(TerrainComponent(
+            spawnMap.size(), // width
+            spawnMap.at(0).size(), // height
             cellWidth,
             cellHeight
         ));
 
-        std::vector<std::vector<int>> binaryArray = ParseMap("../src/maps/test.txt");
+        mapEntity->AddComponent<SpawnMapComponent>(SpawnMapComponent(spawnMap));
+        mapEntity->AddComponent<WallsMapComponent>(WallsMapComponent(wallsMap));
 
-        // Вывод результата для проверки
-        for (const auto& row : binaryArray) {
-            for (int value : row) {
-                std::cout << value << " ";
-            }
-            std::cout << std::endl;
-        }
-
-        return map;
+        return mapEntity;
     }
 
-    static std::vector<std::vector<int>> ParseMap(std::string filepath) {
-        std::ifstream file(filepath);
-        std::vector<std::vector<int>> array;
-        std::string line;
-
-        if (!file.is_open()) {
-            std::cerr << "Не удалось открыть файл: " << filepath << std::endl;
-            return array; // Вернуть пустой массив в случае ошибки
-        }
-
-        while (std::getline(file, line)) {
-            std::vector<int> row;
-            for (char ch : line) {
-                if (ch == '0' || ch == '1') {
-                    row.push_back(ch - '0'); // Преобразуем символ в целое число
+    static Vector2 GetPlayerSpawnPositionFromMap(Entity *entity) {
+        SpawnMapComponent *spawnMap = entity->GetComponent<SpawnMapComponent>();
+        TerrainComponent *terrain = entity->GetComponent<TerrainComponent>();
+        if (spawnMap && terrain) {
+            for (size_t i = 0; i < terrain->height_; i++) {
+                for (size_t j = 0; j < terrain->width_; j++) {
+                    // PLAYER SPAWN POINT
+                    if (spawnMap->map_[i][j] == 1) {  
+                        return (Vector2) {
+                            (i * terrain->cellHeight_) + (terrain->cellHeight_ / 2),
+                            (j * terrain->cellWidth_) + (terrain->cellWidth_ / 2)
+                        };
+                    }
                 }
             }
-            array.push_back(row);
         }
-
-        file.close();
-        return array;
+        std::cout << "spawn point not found. set custom pos 0,0" << std::endl;
+        return (Vector2){0.0f,0.0f};
     }
+
+    static Entity* CreateWall(
+        PositionComponent position,
+        HealthComponent health,
+        SoundReflectComponent soundReflect,
+        RectangleColliderComponent rectCollider
+    ) {
+        Entity *wall = new Entity();
+        wall->AddComponent<WallComponent>(WallComponent());
+        wall->AddComponent<PositionComponent>(position);
+        wall->AddComponent<HealthComponent>(health);
+        wall->AddComponent<SoundReflectComponent>(soundReflect);
+        wall->AddComponent<RectangleColliderComponent>(rectCollider);
+
+        return wall;
+    }  
 };
 
 #endif // SRC_UTILS_MAP_TOOLS_H

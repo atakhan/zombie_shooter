@@ -57,6 +57,7 @@
 #define R0G0B7A8  CLITERAL(Color){ 0, 0, 255, 255 }
 
 // GRAY PATTERN
+#define R3G3B3A1  CLITERAL(Color){ 92, 92, 92, 32 } 
 #define R6G6B6A1  CLITERAL(Color){ 192, 192, 192, 32 } 
 #define R6G6B6A2  CLITERAL(Color){ 192, 192, 192, 64 } 
 #define R6G6B6A3  CLITERAL(Color){ 192, 192, 192, 92 } 
@@ -69,6 +70,7 @@
 #define R1G1B1A8  CLITERAL(Color){ 32, 32, 32, 255 } 
 
 #define YELLOW_3_8  R3G3B0A8
+#define BLUE_3_3    R0G0B3A3
 #define BLUE_3_8    R0G0B3A8
 #define RED_3_8     R3G0B0A8
 #define RED_7_2     R7G0B0A2

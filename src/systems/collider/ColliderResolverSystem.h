@@ -16,6 +16,7 @@ class ColliderResolverSystem : public System {
 
     void HandleCollision(Entity *A, Entity *B);
     void PlayerToZombie(Entity *a, Entity *b);
+    void PlayerToWall(Entity *a, Entity *b);
     void ZombieToZombie(Entity *a, Entity *b);
 };
 

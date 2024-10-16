@@ -18,6 +18,7 @@ const Color Config::DEFAULT_UI_TEXT_COLOR   = GRAY_1_8;
 const Color Config::DEFAULT_FONT_COLOR      = GRAY_6_8;
 
 // STYLE CONFIGS
+const Color Config::PLAYER_SPAWN_CELL_COLOR = BLUE_3_3;
 const Color Config::TERRAIN_DEFAULT_COLOR   = GREEN_3_4;
 const Color Config::PLAYER_COLOR            = BLUE_3_8;
 const Color Config::HUMAN_COLOR             = BLUE_3_8;
@@ -28,6 +29,9 @@ const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
 const Color Config::PATH_COLOR              = GRAY_6_4;
 const Color Config::TARGET_COLOR            = RED_3_4;
 
+// WALL CONFIGS
+const float Config::DEFAULT_WALL_HEALTH     = 100.0f;
+
 // LOOT CONFIGS
 const float Config::DEFAULT_LOOT_AMOUNT     = 10.0f;
 const float Config::DEFAULT_LOOT_SPAWN_POSITION_X = 300.0f;
@@ -35,10 +39,10 @@ const float Config::DEFAULT_LOOT_SPAWN_POSITION_Y = 425.0f;
 const float Config::FOOD_DEFAULT_SIZE       = 425.0f;
 
 // PLAYER CONFIGS
-const float Config::PLAYER_HEALTH = 20.0f;
-const float Config::PLAYER_STRENGTH = 10.0f;
-const float Config::PLAYER_AGILITY = 2.0f;
-const float Config::PLAYER_WALK_COEF= 1.0f;
+const float Config::PLAYER_HEALTH = 8.0f;
+const float Config::PLAYER_STRENGTH = 5.0f;
+const float Config::PLAYER_AGILITY = 1.0f;
+const float Config::PLAYER_WALK_COEF= 0.5f;
 const float Config::PLAYER_RUN_COEF= 3.0f;
 const float Config::PLAYER_HEARING_RADIUS = 100.0f;
 const float Config::PLAYER_ATTACK_RADIUS = 20.0f;
@@ -61,11 +65,11 @@ const float Config::HUMAN_DEFAULT_TARGET_Y = 425.0f;
 const float Config::HUMAN_MOVE_TRESHOLD = 1.0f;
 
 // ZOMBIE CONFIGS
-const size_t Config::ZOMBIES_COUNT = 10;
+const size_t Config::ZOMBIES_COUNT = 3;
 const float Config::ZOMBIE_HEALTH = 10.0f; // HP based on health
 const float Config::ZOMBIE_STRENGTH = 0.5f; //  Attack based on strength
-const float Config::ZOMBIE_AGILITY = 1.0f; //  Speed based on agility
-const float Config::ZOMBIE_WALK_COEF = 0.4;
+const float Config::ZOMBIE_AGILITY = 0.5f; //  Speed based on agility
+const float Config::ZOMBIE_WALK_COEF = 0.5;
 const float Config::ZOMBIE_RUN_COEF = 1;
 const float Config::ZOMBIE_HEARING_RADIUS = 100.0f;
 const float Config::ZOMBIE_ATTACK_RADIUS = 20.0f;

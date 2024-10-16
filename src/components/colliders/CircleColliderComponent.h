@@ -6,10 +6,12 @@
 
 struct CircleColliderComponent {
     bool isCollide_;
+    float radius_;
     std::queue<unsigned> collisions_;
 
-    CircleColliderComponent()
+    CircleColliderComponent(float radius)
         : isCollide_(false)
+        , radius_(radius)
         , collisions_() 
     {}
 };

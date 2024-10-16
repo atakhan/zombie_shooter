@@ -25,6 +25,7 @@ public:
     static const Color DEFAULT_FONT_COLOR;
 
 // STYLE CONFIGS
+    static const Color PLAYER_SPAWN_CELL_COLOR;
     static const Color TERRAIN_DEFAULT_COLOR;
     static const Color PLAYER_COLOR;
     static const Color HUMAN_COLOR;
@@ -34,6 +35,9 @@ public:
     static const Color SOUND_RADIUS_COLOR;
     static const Color PATH_COLOR;
     static const Color TARGET_COLOR;
+
+// WALL CONFIGS
+    static const float DEFAULT_WALL_HEALTH;
 
 // LOOT CONFIGS
     static const float DEFAULT_LOOT_AMOUNT;
