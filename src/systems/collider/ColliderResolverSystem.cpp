@@ -27,13 +27,11 @@ void ColliderResolverSystem::HandleCollision(Entity *a, Entity *b) {
     if (!a->HasComponent<CircleColliderComponent>() || !b->HasComponent<CircleColliderComponent>()) {
         return;
     }
-
     // if (a->GetComponent<CircleColliderComponent>()->isCollide_ == false || b->GetComponent<CircleColliderComponent>()->isCollide_ == false) {
     //     a->GetComponent<CircleColliderComponent>()->isCollide_ = false;
     //     b->GetComponent<CircleColliderComponent>()->isCollide_ = false;
     //     return;
     // }
-
     if (a->HasComponent<PlayerComponent>() && b->HasComponent<ZombieComponent>()) {
         PlayerToZombie(a, b);
     } else 
@@ -71,6 +69,7 @@ void ColliderResolverSystem::ZombieToZombie(Entity *z1, Entity *z2) {
 }
 
 void ColliderResolverSystem::PlayerToWall(Entity *player, Entity *wall) {
+    std::cout << "collision detected between player and wall" << std::endl;
     CircleColliderComponent *playerCollider = player->GetComponent<CircleColliderComponent>();
     PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
     HealthComponent *playerRadius = player->GetComponent<HealthComponent>();
