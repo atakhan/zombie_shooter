@@ -33,30 +33,14 @@ class UiTools {
     ) {
         Entity *element = new Entity();
         element->AddComponent<BaseUIComponent>(BaseUIComponent());
-        element->AddComponent<PositionComponent>(
-            PositionComponent(pos)
-        );
-        element->AddComponent<TextComponent>(
-            TextComponent(text)
-        );
-        element->AddComponent<TextSizeComponent>(
-            TextSizeComponent(textSize)
-        );
-        element->AddComponent<ColPositionComponent>(
-            ColPositionComponent(colPos)
-        );
-        element->AddComponent<RowPositionComponent>(
-            RowPositionComponent(rowPos)
-        );
-        element->AddComponent<TextSpacingComponent>(
-            TextSpacingComponent(textSpacing)
-        );
-        element->AddComponent<ColorComponent>(
-            ColorComponent(color)
-        );
-        element->AddComponent<TextHighlightComponent>(
-            TextHighlightComponent(false)
-        );
+        element->AddComponent<PositionComponent>(PositionComponent(pos));
+        element->AddComponent<TextComponent>(TextComponent(text));
+        element->AddComponent<TextSizeComponent>(TextSizeComponent(textSize));
+        element->AddComponent<ColPositionComponent>(ColPositionComponent(colPos));
+        element->AddComponent<RowPositionComponent>(RowPositionComponent(rowPos));
+        element->AddComponent<TextSpacingComponent>(TextSpacingComponent(textSpacing));
+        element->AddComponent<ColorComponent>(ColorComponent(color));
+        element->AddComponent<TextHighlightComponent>(TextHighlightComponent(false));
 
         return element;
     }

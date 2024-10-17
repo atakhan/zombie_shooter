@@ -1,5 +1,35 @@
 #include "PlayerZombieScene.h"
 
+std::vector<std::vector<int>> PlayerZombieScene::GetSpawnMap() {
+    return {
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,1,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0},
+        {0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0},
+        {0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+    };
+}
+
+std::vector<std::vector<int>> PlayerZombieScene::GetWallsMap() {
+    return {
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1}
+    };
+}
+
 void PlayerZombieScene::Init() {
     // Scene entity
     Scene::AddEntity(SceneTools::CreateScene(
@@ -12,30 +42,8 @@ void PlayerZombieScene::Init() {
     // 2 - spawn zombie
     // 3 - spawn obstacle
     // 4 - spawn loot
-    std::vector<std::vector<int>> spawnMap = {
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,1,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0},
-        {0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0},
-        {0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-    };
-    std::vector<std::vector<int>> wallsMap = {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1}
-    };
+    std::vector<std::vector<int>> spawnMap = GetSpawnMap();
+    std::vector<std::vector<int>> wallsMap = GetWallsMap();
 
     // Map entity
     Entity *mapEntity = MapTools::CreateMap(
@@ -46,60 +54,17 @@ void PlayerZombieScene::Init() {
     );
     Scene::AddEntity(mapEntity);
 
-    TerrainComponent *terrain = mapEntity->GetComponent<TerrainComponent>();
-    if (terrain) {
-        // Player entity
-        Scene::AddEntity(SceneTools::CreatePlayer(
-            MapTools::GetPlayerSpawnPositionFromMap(mapEntity),
-            Config::PLAYER_HEALTH,
-            Config::PLAYER_STRENGTH,
-            Config::PLAYER_AGILITY,
-            Config::PLAYER_ATTACK_RADIUS,
-            Config::SOUND_MAX_RADIUS
-        ));
-
-        // Zombie and Walls entities
-        for (size_t y = 0; y < terrain->height_; y++) {
-            for (size_t x = 0; x < terrain->width_; x++) {
-                // Zombie spawn point
-                if (spawnMap[y][x] == 2) {
-                    Vector2 pos = (Vector2) {
-                        (x * Config::MAP_CELL_WIDTH) + (Config::MAP_CELL_WIDTH / 2),
-                        (y * Config::MAP_CELL_HEIGHT) + (Config::MAP_CELL_HEIGHT / 2)
-                    };
-                    
-                    Scene::AddEntity(SceneTools::CreateZombie(
-                        PositionComponent(pos),
-                        TargetComponent(pos),
-                        HealthComponent(Config::ZOMBIE_HEALTH),
-                        AttackComponent(Config::ZOMBIE_STRENGTH, Config::ZOMBIE_ATTACK_RADIUS),
-                        SpeedComponent(Config::ZOMBIE_AGILITY),
-                        SoundComponent(Config::SOUND_MAX_RADIUS)
-                    ));
-                }
-                if (wallsMap[y][x] == 1) {
-                    Vector2 pos = (Vector2) {
-                        (x * Config::MAP_CELL_WIDTH),
-                        (y * Config::MAP_CELL_HEIGHT)
-                    };
-                    
-                    Scene::AddEntity(MapTools::CreateWall(
-                        PositionComponent(pos), 
-                        HealthComponent(Config::DEFAULT_WALL_HEALTH),
-                        SoundReflectComponent({
-                            {10, 100},
-                            {20, 50},
-                            {30, 10},
-                        }),
-                        RectangleColliderComponent(
-                            Config::MAP_CELL_WIDTH,
-                            Config::MAP_CELL_HEIGHT
-                        )
-                    ));
-                }
-            }
-        }
-    }
+    // Player entity
+    Scene::AddEntity(SceneTools::CreatePlayer(
+        MapTools::GetPlayerSpawnPositionFromMap(mapEntity),
+        Config::PLAYER_HEALTH,
+        Config::PLAYER_STRENGTH,
+        Config::PLAYER_AGILITY,
+        Config::PLAYER_ATTACK_RADIUS,
+        Config::SOUND_MAX_RADIUS
+    ));
+    
+    GenerateMapEntities(mapEntity, spawnMap, wallsMap);
 
     // ui entities
     Scene::AddEntity(UiTools::CreateUITextEntity(
@@ -132,8 +97,8 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new ColliderResolverSystem);
     
     // Debug systems
-    Scene::AddSystem(new SoundDrawSystem);
-    Scene::AddSystem(new ZombieStatsDrawSystem);
+    // Scene::AddSystem(new SoundDrawSystem);
+    // Scene::AddSystem(new ZombieStatsDrawSystem);
     
     // UI draw systems
     // Scene::AddUISystem(new DebugUIDrawSystem);
@@ -191,6 +156,56 @@ void PlayerZombieScene::Draw() {
                 continue;
             }
             system->Draw(&entities_);
+        }
+    }
+}
+
+
+void PlayerZombieScene::GenerateMapEntities(Entity *mapEntity, std::vector<std::vector<int>> spawnMap, std::vector<std::vector<int>> wallsMap) {
+    TerrainComponent *terrain = mapEntity->GetComponent<TerrainComponent>();
+    if (!terrain) {
+        return;
+    }
+    // Zombie and Walls entities
+    for (size_t y = 0; y < terrain->height_; y++) {
+        for (size_t x = 0; x < terrain->width_; x++) {
+            // Zombie spawn point
+            if (spawnMap[y][x] == 2) {
+                Vector2 pos = (Vector2) {
+                    (x * Config::MAP_CELL_WIDTH) + (Config::MAP_CELL_WIDTH / 2),
+                    (y * Config::MAP_CELL_HEIGHT) + (Config::MAP_CELL_HEIGHT / 2)
+                };
+                
+                Scene::AddEntity(SceneTools::CreateZombie(
+                    PositionComponent(pos),
+                    TargetComponent(pos),
+                    HealthComponent(Config::ZOMBIE_HEALTH),
+                    AttackComponent(Config::ZOMBIE_STRENGTH, Config::ZOMBIE_ATTACK_RADIUS),
+                    SpeedComponent(Config::ZOMBIE_AGILITY),
+                    SoundComponent(Config::SOUND_MAX_RADIUS)
+                ));
+            }
+            // Walls spawn point
+            if (wallsMap[y][x] == 1) {
+                Vector2 pos = (Vector2) {
+                    (x * Config::MAP_CELL_WIDTH),
+                    (y * Config::MAP_CELL_HEIGHT)
+                };
+                
+                Scene::AddEntity(MapTools::CreateWall(
+                    PositionComponent(pos), 
+                    HealthComponent(Config::DEFAULT_WALL_HEALTH),
+                    SoundReflectComponent({
+                        {10, 100},
+                        {20, 50},
+                        {30, 10},
+                    }),
+                    RectangleColliderComponent(
+                        Config::MAP_CELL_WIDTH,
+                        Config::MAP_CELL_HEIGHT
+                    )
+                ));
+            }
         }
     }
 }

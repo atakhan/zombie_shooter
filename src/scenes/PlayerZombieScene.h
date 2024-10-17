@@ -18,6 +18,10 @@ class PlayerZombieScene : public Scene {
     void Init() override;
     void Update(int *currentSceneIndex) override;
     void Draw() override;
+
+    void GenerateMapEntities(Entity *mapEntity, std::vector<std::vector<int>> spawnMap, std::vector<std::vector<int>> wallsMap);
+    std::vector<std::vector<int>> GetSpawnMap();
+    std::vector<std::vector<int>> GetWallsMap();
 };
 
 #endif // PLAYER_ZOMBIE_SCENE
