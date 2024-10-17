@@ -16,23 +16,13 @@ void PlayerDrawSystem::Draw(std::vector<Entity*> *entities) {
                 
                 PositionComponent *position = entity->GetComponent<PositionComponent>();
                 HealthComponent *health = entity->GetComponent<HealthComponent>();
-                SoundComponent *sound = entity->GetComponent<SoundComponent>();           
                 
-                if (position && health && sound) {
-                    DrawCircle(
-                        position->position_.x,
-                        position->position_.y,
-                        sound->currentRadius,
-                        Config::SOUND_RADIUS_COLOR
-                    );
+                if (position && health) {
                     DrawCircle(
                         position->position_.x,
                         position->position_.y,
                         health->health_,
                         Config::PLAYER_COLOR
-                    );
-                    UiTools::DrawTitleValueText(Config::DEFAULT_UI_TEXT_COLOR, position->position_, health->health_, 
-                        1, "current pos: ", std::to_string(position->position_.x) + ", " + std::to_string(position->position_.y)
                     );
                 }
             }

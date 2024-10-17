@@ -27,8 +27,6 @@
 #include "./menu/MenuControlSystem.h"
 #include "./menu/MenuDrawSystem.h"
 
-// UI draw systems
-#include "./ui/UIDrawSystem.h"
 
 // Map systems
 #include "./map/TerrainDrawSystem.h"
@@ -37,5 +35,15 @@
 #include "./collider/CircleCircleColliderSystem.h"
 #include "./collider/CircleRectangleColliderSystem.h"
 #include "./collider/ColliderResolverSystem.h"
+
+// Debug systems
+#include "./debug/DebugUIDrawSystem.h"
+#include "./debug/PlayerStatsDrawSystem.h"
+#include "./debug/SoundDrawSystem.h"
+#include "./debug/TargetDrawSystem.h"
+#include "./debug/ZombieStatsDrawSystem.h"
+
+// UI draw systems
+#include "./ui/UIDrawSystem.h"
 
 #endif // SYSTEMS_BOOTSTRAP_H

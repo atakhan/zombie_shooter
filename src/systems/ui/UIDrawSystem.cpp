@@ -16,7 +16,10 @@ void UIDrawSystem::Draw(std::vector<Entity*> *entities) {
         
         BaseUIComponent *baseUi = entity->GetComponent<BaseUIComponent>();
         if (baseUi) {
-            UiTools::DrawUITextEntity(entity);
+            TextComponent *text = entity->GetComponent<TextComponent>();
+            if (text) {
+                UiTools::DrawUITextEntity(entity);
+            }
         }
     }
 }

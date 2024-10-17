@@ -131,7 +131,12 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new CircleRectangleColliderSystem);
     Scene::AddSystem(new ColliderResolverSystem);
     
+    // Debug systems
+    Scene::AddSystem(new SoundDrawSystem);
+    Scene::AddSystem(new ZombieStatsDrawSystem);
+    
     // UI draw systems
+    // Scene::AddUISystem(new DebugUIDrawSystem);
     Scene::AddUISystem(new UIDrawSystem);
 
     // Init Systems
