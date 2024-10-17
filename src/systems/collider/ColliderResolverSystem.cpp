@@ -6,7 +6,7 @@ void ColliderResolverSystem::Update(std::vector<Entity*> *entities) {
     for (size_t i = 0; i < entities->size(); ++i) {
         Entity *entityA = entities->at(i);
         CircleColliderComponent *collider = entityA->GetComponent<CircleColliderComponent>();
-        if (collider) {
+        if (collider && collider->isCollide_ == true) {
             if (collider->collisions_.size() > 0) {
                 while (!collider->collisions_.empty()) {
                     unsigned collidedEntityIndex = collider->collisions_.front();
@@ -24,22 +24,16 @@ void ColliderResolverSystem::Update(std::vector<Entity*> *entities) {
 void ColliderResolverSystem::Draw(std::vector<Entity*> *entities) {}
 
 void ColliderResolverSystem::HandleCollision(Entity *a, Entity *b) {
-    if (!a->HasComponent<CircleColliderComponent>() || !b->HasComponent<CircleColliderComponent>()) {
-        return;
-    }
-    // if (a->GetComponent<CircleColliderComponent>()->isCollide_ == false || b->GetComponent<CircleColliderComponent>()->isCollide_ == false) {
-    //     a->GetComponent<CircleColliderComponent>()->isCollide_ = false;
-    //     b->GetComponent<CircleColliderComponent>()->isCollide_ = false;
-    //     return;
-    // }
-    if (a->HasComponent<PlayerComponent>() && b->HasComponent<ZombieComponent>()) {
-        PlayerToZombie(a, b);
-    } else 
-    if (a->HasComponent<ZombieComponent>() && b->HasComponent<ZombieComponent>()) {
-        ZombieToZombie(a, b);
-    } else 
-    if (a->HasComponent<PlayerComponent>() && b->HasComponent<WallComponent>()) {
-        PlayerToWall(a, b);
+    if (a->HasComponent<CircleColliderComponent>() && b->HasComponent<CircleColliderComponent>()) {
+        if (a->HasComponent<PlayerComponent>() && b->HasComponent<ZombieComponent>()) {
+            PlayerToZombie(a, b);
+        } else
+        if (a->HasComponent<ZombieComponent>() && b->HasComponent<ZombieComponent>()) {
+            ZombieToZombie(a, b);
+        }
+    } else
+    if (a->HasComponent<CircleColliderComponent>() && b->HasComponent<RectangleColliderComponent>()) {
+        CircleToRectangle(a, b);
     }
 }
 
@@ -68,28 +62,23 @@ void ColliderResolverSystem::ZombieToZombie(Entity *z1, Entity *z2) {
     }
 }
 
-void ColliderResolverSystem::PlayerToWall(Entity *player, Entity *wall) {
-    std::cout << "collision detected between player and wall" << std::endl;
-    CircleColliderComponent *playerCollider = player->GetComponent<CircleColliderComponent>();
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
-    HealthComponent *playerRadius = player->GetComponent<HealthComponent>();
+void ColliderResolverSystem::CircleToRectangle(Entity *circleEntity, Entity *rectEntity) {
+    SpeedComponent *speed = circleEntity->GetComponent<SpeedComponent>();
+    PositionComponent *playerPosition = circleEntity->GetComponent<PositionComponent>();
+    PositionComponent *wallPosition = rectEntity->GetComponent<PositionComponent>();
+    if (speed) {
+        float xDiff = playerPosition->position_.x - wallPosition->position_.x;
+        if (xDiff < 0) {
+            playerPosition->position_.x = playerPosition->position_.x - (speed->speed_ + speed->speed_);
+        } else {
+            playerPosition->position_.x = playerPosition->position_.x + (speed->speed_ + speed->speed_);
+        }
 
-    RectangleColliderComponent *rectangleCollider = wall->GetComponent<RectangleColliderComponent>();
-    PositionComponent *rectanglePosition = wall->GetComponent<PositionComponent>();
-
-    if (playerCollider && playerPosition && playerRadius && rectangleCollider && rectanglePosition) {
-        // Calculate the closest point on the rectangle to the circle
-        float closestX = std::max(rectanglePosition->position_.x, std::min(playerPosition->position_.x, rectanglePosition->position_.x + rectangleCollider->width_));
-        float closestY = std::max(rectanglePosition->position_.y, std::min(playerPosition->position_.y, rectanglePosition->position_.y + rectangleCollider->height_));
-
-        // Calculate the distance from the circle's center to this closest point
-        float dx = playerPosition->position_.x - closestX;
-        float dy = playerPosition->position_.y - closestY;
-        
-        // Check if the distance is less than or equal to the circle's radius
-        if ((dx * dx + dy * dy) <= (playerRadius->health_ * playerRadius->health_)) {
-            playerPosition->position_.x += 0.01f;
-            playerPosition->position_.y += 0.01f;
+        float yDiff = playerPosition->position_.y - wallPosition->position_.y;
+        if (yDiff < 0) {
+            playerPosition->position_.y = playerPosition->position_.y - (speed->speed_ + speed->speed_);
+        } else {
+            playerPosition->position_.y = playerPosition->position_.y + (speed->speed_ + speed->speed_);
         }
     }
 }

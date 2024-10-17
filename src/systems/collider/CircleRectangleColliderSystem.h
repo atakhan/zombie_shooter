@@ -17,6 +17,7 @@ class CircleRectangleColliderSystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
     
     bool CollisionDetected(Entity* circleEntity, Entity* rectangleEntity);
+    bool Intersects(float cx, float cy, float cr, float rx, float ry, float rw, float rh);
 };
 
 #endif // SRC_SYSTEMS_COLLIDER_CIRCLE_RECTANGLE_COLLIDER_SYSTEM_H

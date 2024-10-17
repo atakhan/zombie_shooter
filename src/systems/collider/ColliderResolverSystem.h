@@ -14,10 +14,11 @@ class ColliderResolverSystem : public System {
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void HandleCollision(Entity *A, Entity *B);
+    void HandleCollision(Entity *a, Entity *b);
     void PlayerToZombie(Entity *a, Entity *b);
     void PlayerToWall(Entity *a, Entity *b);
     void ZombieToZombie(Entity *a, Entity *b);
+    void CircleToRectangle(Entity *a, Entity *b);
 };
 
 #endif // SRC_SYSTEMS_COLLIDER_COLLIDER_RESOLVER_SYSTEM_H

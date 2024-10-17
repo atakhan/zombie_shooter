@@ -46,19 +46,19 @@ void PlayerZombieScene::Init() {
     );
     Scene::AddEntity(mapEntity);
 
-    // Player entity
-    Scene::AddEntity(SceneTools::CreatePlayer(
-        MapTools::GetPlayerSpawnPositionFromMap(mapEntity),
-        Config::PLAYER_HEALTH,
-        Config::PLAYER_STRENGTH,
-        Config::PLAYER_AGILITY,
-        Config::PLAYER_ATTACK_RADIUS,
-        Config::SOUND_MAX_RADIUS
-    ));
-
-    // Zombie entities
     TerrainComponent *terrain = mapEntity->GetComponent<TerrainComponent>();
     if (terrain) {
+        // Player entity
+        Scene::AddEntity(SceneTools::CreatePlayer(
+            MapTools::GetPlayerSpawnPositionFromMap(mapEntity),
+            Config::PLAYER_HEALTH,
+            Config::PLAYER_STRENGTH,
+            Config::PLAYER_AGILITY,
+            Config::PLAYER_ATTACK_RADIUS,
+            Config::SOUND_MAX_RADIUS
+        ));
+
+        // Zombie and Walls entities
         for (size_t i = 0; i < terrain->height_; i++) {
             for (size_t j = 0; j < terrain->width_; j++) {
                 // Zombie spawn point
