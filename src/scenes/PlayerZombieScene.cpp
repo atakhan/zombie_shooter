@@ -13,28 +13,28 @@ void PlayerZombieScene::Init() {
     // 3 - spawn obstacle
     // 4 - spawn loot
     std::vector<std::vector<int>> spawnMap = {
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,1,0,0,0,0,2,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,2,0,0},
-        {0,0,0,0,2,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,2,0,0},
-        {0,0,0,2,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0}
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,1,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0},
+        {0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0},
+        {0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
     };
     std::vector<std::vector<int>> wallsMap = {
-        {1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1}
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1}
     };
 
     // Map entity
@@ -59,13 +59,13 @@ void PlayerZombieScene::Init() {
         ));
 
         // Zombie and Walls entities
-        for (size_t i = 0; i < terrain->height_; i++) {
-            for (size_t j = 0; j < terrain->width_; j++) {
+        for (size_t y = 0; y < terrain->height_; y++) {
+            for (size_t x = 0; x < terrain->width_; x++) {
                 // Zombie spawn point
-                if (spawnMap[i][j] == 2) {
+                if (spawnMap[y][x] == 2) {
                     Vector2 pos = (Vector2) {
-                        (i * Config::MAP_CELL_HEIGHT) + (Config::MAP_CELL_HEIGHT / 2),
-                        (j * Config::MAP_CELL_WIDTH) + (Config::MAP_CELL_WIDTH / 2)
+                        (x * Config::MAP_CELL_WIDTH) + (Config::MAP_CELL_WIDTH / 2),
+                        (y * Config::MAP_CELL_HEIGHT) + (Config::MAP_CELL_HEIGHT / 2)
                     };
                     
                     Scene::AddEntity(SceneTools::CreateZombie(
@@ -77,10 +77,10 @@ void PlayerZombieScene::Init() {
                         SoundComponent(Config::SOUND_MAX_RADIUS)
                     ));
                 }
-                if (wallsMap[i][j] == 1) {
+                if (wallsMap[y][x] == 1) {
                     Vector2 pos = (Vector2) {
-                        (i * Config::MAP_CELL_HEIGHT),
-                        (j * Config::MAP_CELL_WIDTH)
+                        (x * Config::MAP_CELL_WIDTH),
+                        (y * Config::MAP_CELL_HEIGHT)
                     };
                     
                     Scene::AddEntity(MapTools::CreateWall(
@@ -116,15 +116,16 @@ void PlayerZombieScene::Init() {
     // Systems
     // Map systems
     Scene::AddSystem(new TerrainDrawSystem);
-    Scene::AddSystem(new WallsDrawSystem);
     // Zombie systems
     Scene::AddSystem(new ZombieDrawSystem);
     Scene::AddSystem(new ZombieMoveSystem);
     Scene::AddSystem(new ZombieTargetingSystem);
+    
     // Player systems
     Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
+    
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);
     Scene::AddSystem(new CircleRectangleColliderSystem);

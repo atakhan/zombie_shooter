@@ -22,8 +22,8 @@ class MapTools {
     ) {
         Entity *mapEntity = new Entity();
         mapEntity->AddComponent<TerrainComponent>(TerrainComponent(
-            spawnMap.size(), // width
-            spawnMap.at(0).size(), // height
+            spawnMap.at(0).size(), // width
+            spawnMap.size(), // height
             cellWidth,
             cellHeight
         ));
@@ -38,13 +38,13 @@ class MapTools {
         SpawnMapComponent *spawnMap = entity->GetComponent<SpawnMapComponent>();
         TerrainComponent *terrain = entity->GetComponent<TerrainComponent>();
         if (spawnMap && terrain) {
-            for (size_t i = 0; i < terrain->height_; i++) {
-                for (size_t j = 0; j < terrain->width_; j++) {
+            for (size_t y = 0; y < terrain->height_; y++) {
+                for (size_t x = 0; x < terrain->width_; x++) {
                     // PLAYER SPAWN POINT
-                    if (spawnMap->map_[i][j] == 1) {  
+                    if (spawnMap->map_[y][x] == 1) {  
                         return (Vector2) {
-                            (i * terrain->cellHeight_) + (terrain->cellHeight_ / 2),
-                            (j * terrain->cellWidth_) + (terrain->cellWidth_ / 2)
+                            (y * terrain->cellHeight_) + (terrain->cellHeight_ / 2),
+                            (x * terrain->cellWidth_) + (terrain->cellWidth_ / 2)
                         };
                     }
                 }

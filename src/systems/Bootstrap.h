@@ -32,7 +32,6 @@
 
 // Map systems
 #include "./map/TerrainDrawSystem.h"
-#include "./map/WallsDrawSystem.h"
 
 // Collider systems
 #include "./collider/CircleCircleColliderSystem.h"
