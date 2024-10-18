@@ -12,15 +12,13 @@ void CircleRectangleColliderSystem::Update(std::vector<Entity*> *entities) {
             if (i == j) {
                 continue;
             }
-            if (entities->at(i)->HasComponent<CircleColliderComponent>()) {
-                if (entities->at(j)->HasComponent<RectangleColliderComponent>()) {
-                    if (CollisionDetected(entities->at(i), entities->at(j))) {
-                        entities->at(i)->GetComponent<CircleColliderComponent>()->isCollide_ = true;
-                        entities->at(i)->GetComponent<CircleColliderComponent>()->collisions_.push(j);
-                        
-                        entities->at(j)->GetComponent<RectangleColliderComponent>()->isCollide_ = true;
-                        entities->at(j)->GetComponent<RectangleColliderComponent>()->collisions_.push(i);
-                    }
+            if (entities->at(i)->HasComponent<CircleColliderComponent>() && entities->at(j)->HasComponent<RectangleColliderComponent>()) {
+                if (CollisionDetected(entities->at(i), entities->at(j))) {
+                    entities->at(i)->GetComponent<CircleColliderComponent>()->isCollide_ = true;
+                    entities->at(i)->GetComponent<CircleColliderComponent>()->collisions_.push(j);
+                    
+                    entities->at(j)->GetComponent<RectangleColliderComponent>()->isCollide_ = true;
+                    entities->at(j)->GetComponent<RectangleColliderComponent>()->collisions_.push(i);
                 }
             }
         }
@@ -52,8 +50,7 @@ bool CircleRectangleColliderSystem::CollisionDetected(Entity *circleEntity, Enti
     return false;
 }
 
-bool CircleRectangleColliderSystem::Intersects(float cx, float cy, float cr, float rx, float ry, float rw, float rh)
-{
+bool CircleRectangleColliderSystem::Intersects(float cx, float cy, float cr, float rx, float ry, float rw, float rh) {
     return CheckCollisionCircleRec((Vector2){cx, cy}, cr, (Rectangle){
         rx, ry, rw, rh
     });

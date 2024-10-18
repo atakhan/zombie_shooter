@@ -8,6 +8,11 @@ void MenuControlSystem::Init(std::vector<Entity*> *entities) {
 void MenuControlSystem::Draw(std::vector<Entity*> *entities) {}
 
 void MenuControlSystem::Update(std::vector<Entity*> *entities) {
+    // // Example of using GetEntityByComponent() method
+    // Entity *terrain = GetEntityByComponent<TerrainComponent>(entities);
+    // if (terrain == nullptr) { return; }
+    
+    // TODO? menu should be an entity
     MenuComponent *menu = nullptr;
     int currentItemIndex = 0;
     for (auto& entity : *entities) {

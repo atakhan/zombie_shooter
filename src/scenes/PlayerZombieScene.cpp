@@ -1,34 +1,5 @@
 #include "PlayerZombieScene.h"
-
-std::vector<std::vector<int>> PlayerZombieScene::GetSpawnMap() {
-    return {
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,1,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0},
-        {0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0},
-        {0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-    };
-}
-
-std::vector<std::vector<int>> PlayerZombieScene::GetWallsMap() {
-    return {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1}
-    };
-}
+#include "PlayerZombieSceneMaps.h"
 
 void PlayerZombieScene::Init() {
     // Scene entity
@@ -37,13 +8,9 @@ void PlayerZombieScene::Init() {
         Scene::title_
     ));
 
-    // 0 - no spawns
-    // 1 - spawn player
-    // 2 - spawn zombie
-    // 3 - spawn obstacle
-    // 4 - spawn loot
-    std::vector<std::vector<int>> spawnMap = GetSpawnMap();
-    std::vector<std::vector<int>> wallsMap = GetWallsMap();
+    int mapIndex = 2;
+    std::vector<std::vector<int>> spawnMap = PlayerZombieSceneMaps::GetSpawnMap(mapIndex);
+    std::vector<std::vector<int>> wallsMap = PlayerZombieSceneMaps::GetWallsMap(mapIndex);
 
     // Map entity
     Entity *mapEntity = MapTools::CreateMap(
@@ -80,14 +47,11 @@ void PlayerZombieScene::Init() {
 
     // Systems
     // Map systems
-    Scene::AddSystem(new TerrainDrawSystem);
     // Zombie systems
-    Scene::AddSystem(new ZombieDrawSystem);
     Scene::AddSystem(new ZombieMoveSystem);
     Scene::AddSystem(new ZombieTargetingSystem);
     
     // Player systems
-    Scene::AddSystem(new PlayerDrawSystem);
     Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
     
@@ -96,9 +60,15 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new CircleRectangleColliderSystem);
     Scene::AddSystem(new ColliderResolverSystem);
     
+    // Draw systems
+    Scene::AddSystem(new TerrainDrawSystem);
+    Scene::AddSystem(new ZombieDrawSystem);
+    Scene::AddSystem(new PlayerDrawSystem);
+
     // Debug systems
     // Scene::AddSystem(new SoundDrawSystem);
-    // Scene::AddSystem(new ZombieStatsDrawSystem);
+    Scene::AddSystem(new ZombieStatsDrawSystem);
+    Scene::AddSystem(new TargetDrawSystem);
     
     // UI draw systems
     // Scene::AddUISystem(new DebugUIDrawSystem);

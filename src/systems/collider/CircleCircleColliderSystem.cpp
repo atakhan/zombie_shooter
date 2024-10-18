@@ -37,9 +37,8 @@ bool CircleCircleColliderSystem::CollisionDetected(Entity *entityA, Entity* enti
         return distanceSquared <= (radiusSum * radiusSum);
     
     } else {
-    
+
         return false;
-    
     }
 
 }

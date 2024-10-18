@@ -7,13 +7,7 @@ void ZombieMoveSystem::Init(std::vector<Entity*> *entities) {
 void ZombieMoveSystem::Draw(std::vector<Entity*> *entities) {}
 
 void ZombieMoveSystem::Update(std::vector<Entity*> *entities) {
-    Entity *player;
-    for (auto& entity : *entities) {
-        if (entity->HasComponent<PlayerComponent>()) {
-            player = entity;
-            break;
-        }
-    }
+    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     
     PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
     SoundComponent* playerSound = playerSound = player->GetComponent<SoundComponent>();

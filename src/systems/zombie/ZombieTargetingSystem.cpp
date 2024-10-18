@@ -7,33 +7,17 @@ void ZombieTargetingSystem::Init(std::vector<Entity*> *entities) {
 void ZombieTargetingSystem::Draw(std::vector<Entity*> *entities) {}
 
 void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
-    Entity *player = nullptr;
-    for (auto& entity : *entities) {
-        if (entity->HasComponent<PlayerComponent>()) {
-            player = entity;
-            break;
-        }
-    }
-    if (player == nullptr) {
-        return;
-    }
-
-    Entity *terrain = nullptr;
-    for (auto& entity : *entities) {
-        if (entity->HasComponent<TerrainComponent>()) {
-            terrain = entity;
-            break;
-        }
-    }
-    if (terrain == nullptr) {
-        return;
-    }
+    Entity *terrain = GetEntityByComponent<TerrainComponent>(entities);
+    if (terrain == nullptr) { return; }
+    
+    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
+    if (player == nullptr) { return; }
+    
+    TerrainComponent* terrainComponent = terrain->GetComponent<TerrainComponent>();
     
     PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
     SoundComponent* playerSound = player->GetComponent<SoundComponent>();
     HealthComponent* playerHealth = player->GetComponent<HealthComponent>();
-
-    TerrainComponent* terrainComponent = terrain->GetComponent<TerrainComponent>();
 
     for (auto& entity : *entities) {
         if (!entity->HasComponent<ZombieComponent>()) {

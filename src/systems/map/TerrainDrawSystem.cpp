@@ -7,6 +7,29 @@ void TerrainDrawSystem::Init(std::vector<Entity*> *entities) {
 
 void TerrainDrawSystem::Update(std::vector<Entity*> *entities) {}
 
+void TerrainDrawSystem::Draw(std::vector<Entity*> *entities) {
+    
+    for (auto& entity : *entities) {
+        if (entity != nullptr) {
+            if (entity->HasComponent<TerrainComponent>()) {
+                TerrainComponent* terrain = entity->GetComponent<TerrainComponent>();
+                SpawnMapComponent *spawnMap = entity->GetComponent<SpawnMapComponent>();
+                WallsMapComponent *wallsMap = entity->GetComponent<WallsMapComponent>();
+                
+                for (size_t y = 0; y < terrain->height_; y++) {
+                    for (size_t x = 0; x < terrain->width_; x++) {
+                        DrawSpawnMapColors(terrain, spawnMap, x, y);
+                        DrawWallsColors(terrain, wallsMap, x, y);
+                    }
+                }
+                break;
+            }
+        }
+
+    }
+    
+}
+
 void TerrainDrawSystem::DrawSpawnMapColors(TerrainComponent* terrain, SpawnMapComponent *spawnMap, int x, int y) {
     if (spawnMap->map_[y][x] == 1) {  // PLAYER SPAWN POINT
         DrawRectangle(
@@ -38,27 +61,3 @@ void TerrainDrawSystem::DrawWallsColors(TerrainComponent* terrain, WallsMapCompo
         );
     }
 }
-
-void TerrainDrawSystem::Draw(std::vector<Entity*> *entities) {
-    
-    for (auto& entity : *entities) {
-        if (entity != nullptr) {
-            if (entity->HasComponent<TerrainComponent>()) {
-                TerrainComponent* terrain = entity->GetComponent<TerrainComponent>();
-                SpawnMapComponent *spawnMap = entity->GetComponent<SpawnMapComponent>();
-                WallsMapComponent *wallsMap = entity->GetComponent<WallsMapComponent>();
-                
-                for (size_t y = 0; y < terrain->height_; y++) {
-                    for (size_t x = 0; x < terrain->width_; x++) {
-                        DrawSpawnMapColors(terrain, spawnMap, x, y);
-                        DrawWallsColors(terrain, wallsMap, x, y);
-                    }
-                }
-                break;
-            }
-        }
-
-    }
-    
-}
-

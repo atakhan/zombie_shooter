@@ -8,26 +8,14 @@ void PlayerControlSystem::Init(std::vector<Entity*> *entities) {
 void PlayerControlSystem::Draw(std::vector<Entity*> *entities) {}
 
 void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
-    Entity* player = nullptr;
-    for (auto& entity : *entities) {
-        if (entity->HasComponent<PlayerComponent>()) {
-            player = entity;
-            break;
-        }
-    }
+    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
+    if (player == nullptr) { return; }
 
-    if (!player) {
-        std::cerr << "No player entity found!" << std::endl;
-        return; // Exit if no player entity is found
-    }
+    PositionComponent *position = player->GetComponent<PositionComponent>();
+    SpeedComponent *speed = player->GetComponent<SpeedComponent>();
+    SoundComponent *sound = player->GetComponent<SoundComponent>();
 
-    PositionComponent* position = nullptr;
-    SpeedComponent* speed = nullptr;
-    SoundComponent* sound = nullptr;
-
-    position = player->GetComponent<PositionComponent>();
-    speed = player->GetComponent<SpeedComponent>();
-    sound = player->GetComponent<SoundComponent>();
+    if (!position || !speed || !sound) { return; }
 
     if (IsKeyDown(KEY_RIGHT)) {
         if (IsKeyDown(KEY_LEFT)) {

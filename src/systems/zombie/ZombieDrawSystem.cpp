@@ -9,10 +9,7 @@ void ZombieDrawSystem::Update(std::vector<Entity*> *entities) {}
 
 void ZombieDrawSystem::Draw(std::vector<Entity*> *entities) {
     for (auto& entity : *entities) {
-        if (entity == nullptr) {
-            std::cerr << "Entity pointer is null!" << std::endl;
-            continue; // Skip this iteration
-        }
+        if (entity == nullptr) { continue; }
         if (entity->HasComponent<ZombieComponent>()) {
             ZombieComponent *zombie = entity->GetComponent<ZombieComponent>();
             PositionComponent *position = entity->GetComponent<PositionComponent>();
