@@ -14,6 +14,7 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
     if (player == nullptr) { return; }
     
     TerrainComponent* terrainComponent = terrain->GetComponent<TerrainComponent>();
+    WallsMapComponent* wallsMap = terrain->GetComponent<WallsMapComponent>();
     
     PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
     SoundComponent* playerSound = player->GetComponent<SoundComponent>();
@@ -44,17 +45,15 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
                 target->position_ = playerPosition->position_;
             } else {
                 zombie->currentState = ZombieComponent::Status::WALK;
-                if (TargetReached(target->position_, zombiePos->position_)) {
-                    target->position_ = RandomTarget(
+                if (collider->isCollide_ || TargetReached(target->position_, zombiePos->position_)) {
+                    Vector2 newTarget = RandomTarget(
                         terrainComponent->width_ * terrainComponent->cellWidth_, 
                         terrainComponent->height_ * terrainComponent->cellHeight_
                     );
-                }
-                if (collider->isCollide_) {
-                    target->position_ = RandomTarget(
-                        terrainComponent->width_ * terrainComponent->cellWidth_, 
-                        terrainComponent->height_ * terrainComponent->cellHeight_
-                    );
+
+                    if (TargetReachable(newTarget, zombiePos->position_, terrainComponent, wallsMap)) {
+                        target->position_ = newTarget;
+                    }
                 }
             }
         }
@@ -84,6 +83,38 @@ Vector2 ZombieTargetingSystem::RandomTarget(float xMax, float yMax) {
 }
 
 bool ZombieTargetingSystem::TargetReached(Vector2 targetPos, Vector2 curPos) {
+    float distanceX = targetPos.x - curPos.x;
+    float distanceY = targetPos.y - curPos.y;
+    float distance = std::sqrt(std::pow(distanceX, 2) + std::pow(distanceY, 2));
+    
+    if (Config::HUMAN_MOVE_TRESHOLD >= distance) {
+        return true;
+    }
+    return false;
+}
+
+bool ZombieTargetingSystem::TargetReachable(Vector2 targetPos, Vector2 curPos, TerrainComponent *terrain, WallsMapComponent *wallsMap) {
+    float some = targetPos.x / terrain->cellWidth_;
+    if (some < 1.0f) {
+
+    }
+    
+    std::vector<Vector2> emptyCells;
+    for (size_t y = 0; y < wallsMap->map_.size(); y++) {
+        for (size_t x = 0; x < wallsMap->map_.size(); x++) {
+            if (wallsMap->map_[y][x] == 1) {
+                if (targetPos.y < (y * terrain->cellHeight_))
+                x * terrain->cellWidth_;
+                wallsMap->map_[y][x];
+            }
+        }
+    }
+    
+    for (size_t i = 0; i < emptyCells.size(); i++) {
+        
+    }
+    
+    
     float distanceX = targetPos.x - curPos.x;
     float distanceY = targetPos.y - curPos.y;
     float distance = std::sqrt(std::pow(distanceX, 2) + std::pow(distanceY, 2));
