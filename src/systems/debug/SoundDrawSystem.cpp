@@ -9,10 +9,7 @@ void SoundDrawSystem::Update(std::vector<Entity*> *entities) {}
 
 void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
     for (auto& entity : *entities) {
-        if (entity == nullptr) {
-            std::cerr << "Entity pointer is null!" << std::endl;
-            continue; // Skip this iteration
-        }
+        if (entity == nullptr) { continue; }
         if (entity->HasComponent<SoundComponent>()) {
             if (entity->HasComponent<PlayerComponent>()) {
                 PositionComponent *position = entity->GetComponent<PositionComponent>();
@@ -30,7 +27,7 @@ void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
                     DrawCircle(
                         position->position_.x,
                         position->position_.y,
-                        breathSound->currentValue / 4.0f,
+                        breathSound->currentValue,
                         R6G6B6A1
                     );
                 }

@@ -16,15 +16,17 @@ void PlayerBreathSystem::Update(std::vector<Entity*> *entities) {
 
     if (!position || !breathSound) { return; }
 
+    breathSound->maxValue = 
+
     if (breathSound->inhale == true) {
-        float newValue = breathSound->currentValue + 1.0f;
+        float newValue = breathSound->currentValue + 0.2f;
         if (newValue < breathSound->maxValue) {
             breathSound->currentValue = newValue;
         } else {
             breathSound->inhale = false;
         }
     } else {
-        float newValue = breathSound->currentValue - 1.0f;
+        float newValue = breathSound->currentValue - 0.2f;
         if (newValue > breathSound->minValue) {
             breathSound->currentValue = newValue;
         } else {
