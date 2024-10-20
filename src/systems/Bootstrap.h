@@ -2,9 +2,10 @@
 #define SYSTEMS_BOOTSTRAP_H
 
 // Player systems
-#include "./player/PlayerDrawSystem.h"
-#include "./player/PlayerControlSystem.h"
+#include "./player/PlayerBreathSystem.h"
 #include "./player/PlayerCameraSystem.h"
+#include "./player/PlayerControlSystem.h"
+#include "./player/PlayerDrawSystem.h"
 
 // Zombie systems
 #include "./zombie/ZombieDrawSystem.h"
