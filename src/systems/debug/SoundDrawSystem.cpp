@@ -17,12 +17,21 @@ void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
             if (entity->HasComponent<PlayerComponent>()) {
                 PositionComponent *position = entity->GetComponent<PositionComponent>();
                 SoundComponent *sound = entity->GetComponent<SoundComponent>();
-                if (sound) {
+                if (position && sound) {
                     DrawCircle(
                         position->position_.x,
                         position->position_.y,
                         sound->currentRadius,
                         Config::SOUND_RADIUS_COLOR
+                    );
+                }
+                BreathSoundComponent *breathSound = entity->GetComponent<BreathSoundComponent>();
+                if (position && sound) {
+                    DrawCircle(
+                        position->position_.x,
+                        position->position_.y,
+                        breathSound->currentValue / 4.0f,
+                        R6G6B6A1
                     );
                 }
             }

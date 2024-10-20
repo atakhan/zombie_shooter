@@ -12,11 +12,24 @@ void PlayerBreathSystem::Update(std::vector<Entity*> *entities) {
     if (player == nullptr) { return; }
 
     PositionComponent *position = player->GetComponent<PositionComponent>();
-    BreathComponent *breath = player->GetComponent<BreathComponent>();
-    SoundComponent *sound = player->GetComponent<SoundComponent>();
+    BreathSoundComponent *breathSound = player->GetComponent<BreathSoundComponent>();
 
-    if (!position || !sound || !breath) { return; }
+    if (!position || !breathSound) { return; }
 
-
+    if (breathSound->inhale == true) {
+        float newValue = breathSound->currentValue + 1.0f;
+        if (newValue < breathSound->maxValue) {
+            breathSound->currentValue = newValue;
+        } else {
+            breathSound->inhale = false;
+        }
+    } else {
+        float newValue = breathSound->currentValue - 1.0f;
+        if (newValue > breathSound->minValue) {
+            breathSound->currentValue = newValue;
+        } else {
+            breathSound->inhale = true;
+        }
+    }
 
 }

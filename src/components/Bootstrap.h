@@ -2,7 +2,7 @@
 #define SRC_COMPONENTS_BOOTSTRAP_H
 
 #include "AttackComponent.h"
-#include "BreathComponent.h"
+#include "BreathSoundComponent.h"
 #include "CameraComponent.h"
 #include "GameTitleComponent.h"
 #include "HealthComponent.h"
