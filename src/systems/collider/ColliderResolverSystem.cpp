@@ -38,7 +38,7 @@ void ColliderResolverSystem::HandleCollision(Entity *a, Entity *b) {
 }
 
 void ColliderResolverSystem::PlayerToZombie(Entity *a, Entity *b) {
-    std::cout << "collision detected between player and zombie" << std::endl;
+    // std::cout << "collision detected between player and zombie" << std::endl;
 }
 
 void ColliderResolverSystem::ZombieToZombie(Entity *z1, Entity *z2) {
