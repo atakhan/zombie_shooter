@@ -19,6 +19,7 @@ class ColliderResolverSystem : public System {
     void PlayerToWall(Entity *a, Entity *b);
     void ZombieToZombie(Entity *a, Entity *b);
     void CircleToRectangle(Entity *a, Entity *b);
+    void CircleToCircle(Entity *a, Entity *b);
 };
 
 #endif // SRC_SYSTEMS_COLLIDER_COLLIDER_RESOLVER_SYSTEM_H

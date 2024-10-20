@@ -67,6 +67,13 @@
 #define R6G6B6A7  CLITERAL(Color){ 192, 192, 192, 224 } 
 #define R6G6B6A8  CLITERAL(Color){ 192, 192, 192, 255 } 
 #define R8G8B8A8  CLITERAL(Color){ 255, 255, 255, 255 } 
+#define R1G1B1A1  CLITERAL(Color){ 32, 32, 32, 32 } 
+#define R1G1B1A2  CLITERAL(Color){ 32, 32, 32, 64 } 
+#define R1G1B1A3  CLITERAL(Color){ 32, 32, 32, 92 } 
+#define R1G1B1A4  CLITERAL(Color){ 32, 32, 32, 128 } 
+#define R1G1B1A5  CLITERAL(Color){ 32, 32, 32, 160 } 
+#define R1G1B1A6  CLITERAL(Color){ 32, 32, 32, 192 } 
+#define R1G1B1A7  CLITERAL(Color){ 32, 32, 32, 224 } 
 #define R1G1B1A8  CLITERAL(Color){ 32, 32, 32, 255 } 
 
 #define YELLOW_3_8  R3G3B0A8

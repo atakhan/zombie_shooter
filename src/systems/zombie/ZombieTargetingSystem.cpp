@@ -45,7 +45,6 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
                 target->position_ = playerPosition->position_;
             } else {
                 zombie->currentState = ZombieComponent::Status::WALK;
-                
                 // is current target reachable?
                 if (TargetReachable(
                     target->position_, 

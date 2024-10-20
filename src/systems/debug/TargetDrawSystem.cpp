@@ -28,7 +28,7 @@ void TargetDrawSystem::Draw(std::vector<Entity*> *entities) {
                     position->position_.y,
                     target->position_.x,
                     target->position_.y,
-                    Config::PATH_COLOR
+                    R6G6B6A1
                 );
             }
         }

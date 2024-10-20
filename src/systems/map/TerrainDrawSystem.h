@@ -18,6 +18,7 @@ class TerrainDrawSystem : public System {
 
     void DrawSpawnMapColors(TerrainComponent* terrain, SpawnMapComponent *spawnMap, int x, int y);
     void DrawWallsColors(TerrainComponent* terrain, WallsMapComponent *wallsMap, int x, int y);
+    void DrawFloorColors(TerrainComponent* terrain, WallsMapComponent *wallsMap, int x, int y);
 };
 
 #endif // TERRAIN_DRAW_SYSTEM_H

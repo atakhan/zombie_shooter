@@ -29,7 +29,8 @@ void ColliderResolverSystem::HandleCollision(Entity *a, Entity *b) {
             PlayerToZombie(a, b);
         } else
         if (a->HasComponent<ZombieComponent>() && b->HasComponent<ZombieComponent>()) {
-            ZombieToZombie(a, b);
+            // ZombieToZombie(a, b);
+            CircleToCircle(a, b);
         }
     } else
     if (a->HasComponent<CircleColliderComponent>() && b->HasComponent<RectangleColliderComponent>()) {
@@ -41,24 +42,62 @@ void ColliderResolverSystem::PlayerToZombie(Entity *a, Entity *b) {
     // std::cout << "collision detected between player and zombie" << std::endl;
 }
 
-void ColliderResolverSystem::ZombieToZombie(Entity *z1, Entity *z2) {
-    CircleColliderComponent *z1Collider = z1->GetComponent<CircleColliderComponent>();
-    CircleColliderComponent *z2Collider = z2->GetComponent<CircleColliderComponent>();
+// void ColliderResolverSystem::ZombieToZombie(Entity *z1, Entity *z2) {
+//     CircleColliderComponent *z1Collider = z1->GetComponent<CircleColliderComponent>();
+//     CircleColliderComponent *z2Collider = z2->GetComponent<CircleColliderComponent>();
 
-    if (z1Collider->isCollide_ && z1Collider->isCollide_) {
-        PositionComponent *z1Pos = z1->GetComponent<PositionComponent>();
-        HealthComponent *z1Radius = z1->GetComponent<HealthComponent>();
-        PositionComponent *z2Pos = z2->GetComponent<PositionComponent>();
-        HealthComponent *z2Radius = z2->GetComponent<HealthComponent>();
+//     if (z1Collider->isCollide_ && z1Collider->isCollide_) {
+//         PositionComponent *z1Pos = z1->GetComponent<PositionComponent>();
+//         HealthComponent *z1Radius = z1->GetComponent<HealthComponent>();
+//         PositionComponent *z2Pos = z2->GetComponent<PositionComponent>();
+//         HealthComponent *z2Radius = z2->GetComponent<HealthComponent>();
 
-        float dx = z1Pos->position_.x - z2Pos->position_.x;
-        float dy = z1Pos->position_.y - z2Pos->position_.y;
-        float distanceSquared = (dx * dx) + (dy * dy);
+//         float dx = z1Pos->position_.x - z2Pos->position_.x;
+//         float dy = z1Pos->position_.y - z2Pos->position_.y;
+//         float distanceSquared = (dx * dx) + (dy * dy);
 
-        float overlapValue = (z1Radius->health_ + z2Radius->health_) - sqrtf(distanceSquared);
+//         float overlapValue = (z1Radius->health_ + z2Radius->health_) - sqrtf(distanceSquared);
 
-        z1Pos->position_.x = z1Pos->position_.x + (overlapValue/2);
-        z2Pos->position_.x = z2Pos->position_.x + ((overlapValue/2) * (-1));
+//         z1Pos->position_.x = z1Pos->position_.x + (overlapValue/2);
+//         z2Pos->position_.x = z2Pos->position_.x + ((overlapValue/2) * (-1));
+//     }
+// }
+
+void ColliderResolverSystem::CircleToCircle(Entity *circleA, Entity *circleB) {
+    CircleColliderComponent *circleACollider = circleA->GetComponent<CircleColliderComponent>();
+    CircleColliderComponent *circleBCollider = circleB->GetComponent<CircleColliderComponent>();
+
+    if (circleACollider->isCollide_ && circleBCollider->isCollide_) {
+        PositionComponent *circleAPos = circleA->GetComponent<PositionComponent>();
+        HealthComponent *circleARadius = circleA->GetComponent<HealthComponent>();
+        PositionComponent *circleBPos = circleB->GetComponent<PositionComponent>();
+        HealthComponent *circleBRadius = circleB->GetComponent<HealthComponent>();
+        
+        // Calculate the distance vector between the two circles
+        Vector2 distance;
+        distance.x = circleBPos->position_.x - circleAPos->position_.x;
+        distance.y = circleBPos->position_.y - circleAPos->position_.y;
+        // Calculate the distance squared between the centers of the circles
+        float distanceSquared = distance.x * distance.x + distance.y * distance.y;
+        float radiusSum = circleARadius->health_ + circleBRadius->health_;
+        // Check for collision
+        if (distanceSquared < radiusSum * radiusSum) {
+            // Calculate the distance to push the circles apart
+            float distanceBetween = std::sqrt(distanceSquared);
+            float overlap = radiusSum - distanceBetween;
+
+            // Normalize the distance vector
+            if (distanceBetween != 0) {
+                distance.x /= distanceBetween;
+                distance.y /= distanceBetween;
+            }
+
+            // Move circles apart based on their overlap
+            circleAPos->position_.x -= distance.x * (overlap / 2);
+            circleAPos->position_.y -= distance.y * (overlap / 2);
+            circleBPos->position_.x += distance.x * (overlap / 2);
+            circleBPos->position_.y += distance.y * (overlap / 2);
+        }
     }
 }
 

@@ -14,15 +14,17 @@ void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
             continue; // Skip this iteration
         }
         if (entity->HasComponent<SoundComponent>()) {
-            PositionComponent *position = entity->GetComponent<PositionComponent>();
-            SoundComponent *sound = entity->GetComponent<SoundComponent>();
-            if (sound) {
-                DrawCircle(
-                    position->position_.x,
-                    position->position_.y,
-                    sound->currentRadius,
-                    Config::SOUND_RADIUS_COLOR
-                );
+            if (entity->HasComponent<PlayerComponent>()) {
+                PositionComponent *position = entity->GetComponent<PositionComponent>();
+                SoundComponent *sound = entity->GetComponent<SoundComponent>();
+                if (sound) {
+                    DrawCircle(
+                        position->position_.x,
+                        position->position_.y,
+                        sound->currentRadius,
+                        Config::SOUND_RADIUS_COLOR
+                    );
+                }
             }
         }
     }

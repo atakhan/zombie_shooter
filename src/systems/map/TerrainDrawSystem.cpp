@@ -20,6 +20,7 @@ void TerrainDrawSystem::Draw(std::vector<Entity*> *entities) {
                     for (size_t x = 0; x < terrain->width_; x++) {
                         DrawSpawnMapColors(terrain, spawnMap, x, y);
                         DrawWallsColors(terrain, wallsMap, x, y);
+                        DrawFloorColors(terrain, wallsMap, x, y);
                     }
                 }
                 break;
@@ -57,7 +58,18 @@ void TerrainDrawSystem::DrawWallsColors(TerrainComponent* terrain, WallsMapCompo
             y * terrain->cellHeight_, 
             terrain->cellWidth_, 
             terrain->cellHeight_,
-            R1G1B1A8
+            R1G1B1A2
+        );
+    }
+}
+void TerrainDrawSystem::DrawFloorColors(TerrainComponent* terrain, WallsMapComponent *wallsMap, int x, int y) {
+    if (wallsMap->map_[y][x] == 0) {  // WALL NOT ISSET
+        DrawRectangle(
+            x * terrain->cellWidth_, 
+            y * terrain->cellHeight_, 
+            terrain->cellWidth_, 
+            terrain->cellHeight_,
+            R1G1B1A4
         );
     }
 }

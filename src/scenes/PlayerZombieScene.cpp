@@ -66,8 +66,8 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerDrawSystem);
 
     // Debug systems
-    // Scene::AddSystem(new SoundDrawSystem);
-    Scene::AddSystem(new ZombieStatsDrawSystem);
+    Scene::AddSystem(new SoundDrawSystem);
+    // Scene::AddSystem(new ZombieStatsDrawSystem);
     Scene::AddSystem(new TargetDrawSystem);
     
     // UI draw systems
