@@ -51,7 +51,7 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
                         terrainComponent->height_ * terrainComponent->cellHeight_
                     );
 
-                    if (TargetReachable(newTarget, zombiePos->position_, terrainComponent, wallsMap)) {
+                    if (TargetReachable(newTarget, zombiePos->position_, zombieRadius->health_, terrainComponent, wallsMap)) {
                         target->position_ = newTarget;
                     }
                 }
@@ -93,35 +93,27 @@ bool ZombieTargetingSystem::TargetReached(Vector2 targetPos, Vector2 curPos) {
     return false;
 }
 
-bool ZombieTargetingSystem::TargetReachable(Vector2 targetPos, Vector2 curPos, TerrainComponent *terrain, WallsMapComponent *wallsMap) {
-    float some = targetPos.x / terrain->cellWidth_;
-    if (some < 1.0f) {
-
-    }
-    
-    std::vector<Vector2> emptyCells;
+bool ZombieTargetingSystem::TargetReachable(Vector2 targetPos, Vector2 curPos, float zombieRadius, TerrainComponent *terrain, WallsMapComponent *wallsMap) {
     for (size_t y = 0; y < wallsMap->map_.size(); y++) {
         for (size_t x = 0; x < wallsMap->map_.size(); x++) {
             if (wallsMap->map_[y][x] == 1) {
-                if (targetPos.y < (y * terrain->cellHeight_))
-                x * terrain->cellWidth_;
-                wallsMap->map_[y][x];
+                float wall_x_begin = ((float)x * terrain->cellWidth_) - (zombieRadius/2);
+                float wall_x_end = wall_x_begin + terrain->cellWidth_ + (zombieRadius/2);
+                
+                float wall_y_begin = ((float)y * terrain->cellHeight_) - (zombieRadius/2);
+                float wall_y_end = wall_y_begin + terrain->cellHeight_ + (zombieRadius/2);
+                
+                // Check if target in a wall
+                if (wall_x_begin < targetPos.x && targetPos.x < wall_x_end) {
+                    if (wall_y_begin < targetPos.y && targetPos.y < wall_y_end) {
+                        return false;
+                    }
+                }
+
             }
         }
     }
-    
-    for (size_t i = 0; i < emptyCells.size(); i++) {
-        
-    }
-    
-    
-    float distanceX = targetPos.x - curPos.x;
-    float distanceY = targetPos.y - curPos.y;
-    float distance = std::sqrt(std::pow(distanceX, 2) + std::pow(distanceY, 2));
-    
-    if (Config::HUMAN_MOVE_TRESHOLD >= distance) {
-        return true;
-    }
-    return false;
+
+    return true;
 }
 
