@@ -45,15 +45,31 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
                 target->position_ = playerPosition->position_;
             } else {
                 zombie->currentState = ZombieComponent::Status::WALK;
-                if (collider->isCollide_ || TargetReached(target->position_, zombiePos->position_)) {
+                
+                // is current target reachable?
+                if (TargetReachable(
+                    target->position_, 
+                    zombiePos->position_, 
+                    zombieRadius->health_, 
+                    terrainComponent, 
+                    wallsMap)
+                ) {
+                    // is current target reached?
+                    if (TargetReached(target->position_, zombiePos->position_)) {
+                        Vector2 newTarget = RandomTarget(
+                            terrainComponent->width_ * terrainComponent->cellWidth_, 
+                            terrainComponent->height_ * terrainComponent->cellHeight_
+                        );
+                        target->position_ = newTarget;
+                    }
+                // current target not reachable
+                } else {
+                    // create a new target
                     Vector2 newTarget = RandomTarget(
                         terrainComponent->width_ * terrainComponent->cellWidth_, 
                         terrainComponent->height_ * terrainComponent->cellHeight_
                     );
-
-                    if (TargetReachable(newTarget, zombiePos->position_, zombieRadius->health_, terrainComponent, wallsMap)) {
-                        target->position_ = newTarget;
-                    }
+                    target->position_ = newTarget;
                 }
             }
         }
@@ -87,7 +103,7 @@ bool ZombieTargetingSystem::TargetReached(Vector2 targetPos, Vector2 curPos) {
     float distanceY = targetPos.y - curPos.y;
     float distance = std::sqrt(std::pow(distanceX, 2) + std::pow(distanceY, 2));
     
-    if (Config::HUMAN_MOVE_TRESHOLD >= distance) {
+    if (10.0f >= distance) {
         return true;
     }
     return false;
@@ -95,21 +111,54 @@ bool ZombieTargetingSystem::TargetReached(Vector2 targetPos, Vector2 curPos) {
 
 bool ZombieTargetingSystem::TargetReachable(Vector2 targetPos, Vector2 curPos, float zombieRadius, TerrainComponent *terrain, WallsMapComponent *wallsMap) {
     for (size_t y = 0; y < wallsMap->map_.size(); y++) {
-        for (size_t x = 0; x < wallsMap->map_.size(); x++) {
+        for (size_t x = 0; x < wallsMap->map_[y].size(); x++) {
             if (wallsMap->map_[y][x] == 1) {
-                float wall_x_begin = ((float)x * terrain->cellWidth_) - (zombieRadius/2);
-                float wall_x_end = wall_x_begin + terrain->cellWidth_ + (zombieRadius/2);
-                
-                float wall_y_begin = ((float)y * terrain->cellHeight_) - (zombieRadius/2);
-                float wall_y_end = wall_y_begin + terrain->cellHeight_ + (zombieRadius/2);
-                
+                // Check if path from curPos to Target Pos
+                // collide with one of ABCD lines
+                // 
+                //          A------B
+                //          |      |
+                //          |      |
+                //          |      |
+                //          C------D
+                // 
+                //
+                Vector2 cornerA = {
+                    (float)x * terrain->cellWidth_, 
+                    (float)y * terrain->cellHeight_
+                };
+                Vector2 cornerB = {
+                    ((float)x * terrain->cellWidth_) + terrain->cellWidth_, 
+                    (float)y * terrain->cellHeight_
+                };
+                Vector2 cornerC = {
+                    (float)x * terrain->cellWidth_, 
+                    ((float)y * terrain->cellHeight_) + terrain->cellHeight_
+                };
+                Vector2 cornerD = {
+                    (float)x * terrain->cellWidth_ + terrain->cellWidth_, 
+                    (float)y * terrain->cellHeight_ + terrain->cellHeight_
+                };
+
                 // Check if target in a wall
-                if (wall_x_begin < targetPos.x && targetPos.x < wall_x_end) {
-                    if (wall_y_begin < targetPos.y && targetPos.y < wall_y_end) {
-                        return false;
-                    }
+                if (CheckCollisionCircleRec(
+                    targetPos, 
+                    zombieRadius, 
+                    (Rectangle){
+                        cornerA.x,
+                        cornerA.y, 
+                        terrain->cellWidth_,
+                        terrain->cellHeight_
+                    })
+                ) {
+                    return false;
                 }
 
+                Vector2 *collisionPoint = nullptr;
+                if (CheckCollisionLines(cornerA, cornerB, curPos, targetPos, collisionPoint)) { return false; }  // Check if path collide with walls AB
+                if (CheckCollisionLines(cornerB, cornerD, curPos, targetPos, collisionPoint)) { return false; }  // Check if path collide with walls BD
+                if (CheckCollisionLines(cornerC, cornerD, curPos, targetPos, collisionPoint)) { return false; }  // Check if path collide with walls CD
+                if (CheckCollisionLines(cornerA, cornerC, curPos, targetPos, collisionPoint)) { return false; }  // Check if path collide with walls AC
             }
         }
     }
