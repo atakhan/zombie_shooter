@@ -17,7 +17,8 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
     WallsMapComponent* wallsMap = terrain->GetComponent<WallsMapComponent>();
     
     PositionComponent* playerPosition = player->GetComponent<PositionComponent>();
-    BreathSoundComponent* playerSound = player->GetComponent<BreathSoundComponent>();
+    BreathSoundComponent* playerBreathSound = player->GetComponent<BreathSoundComponent>();
+    SoundComponent* playerSound = player->GetComponent<SoundComponent>();
     HealthComponent* playerHealth = player->GetComponent<HealthComponent>();
 
     for (auto& entity : *entities) {
@@ -33,14 +34,20 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         CircleColliderComponent* collider = entity->GetComponent<CircleColliderComponent>();
         
         if (target && zombiePos && zombieRadius && speed && attack && collider) {
-            bool foodNear = IsFoodNear(
+            bool hearBreath = IsFoodNear(
                 zombiePos->position_,
                 playerPosition->position_,
                 zombieRadius->health_,
-                playerSound->currentValue
+                playerBreathSound->currentValue
+            );
+            bool hearSteps = IsFoodNear(
+                zombiePos->position_,
+                playerPosition->position_,
+                zombieRadius->health_,
+                playerSound->currentRadius
             );
 
-            if (foodNear) {
+            if (hearBreath || hearSteps) {
                 zombie->currentState = ZombieComponent::Status::RUN;
                 target->position_ = playerPosition->position_;
             } else {

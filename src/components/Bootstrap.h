@@ -1,6 +1,7 @@
 #ifndef SRC_COMPONENTS_BOOTSTRAP_H
 #define SRC_COMPONENTS_BOOTSTRAP_H
 
+#include "AdrenalinComponent.h"
 #include "AttackComponent.h"
 #include "BreathSoundComponent.h"
 #include "CameraComponent.h"

@@ -13,10 +13,11 @@ void PlayerBreathSystem::Update(std::vector<Entity*> *entities) {
 
     PositionComponent *position = player->GetComponent<PositionComponent>();
     BreathSoundComponent *breathSound = player->GetComponent<BreathSoundComponent>();
+    AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
 
     if (!position || !breathSound) { return; }
 
-    breathSound->maxValue = 
+    breathSound->maxValue = breathSound->maxValue * adrenalin->currentValue;
 
     if (breathSound->inhale == true) {
         float newValue = breathSound->currentValue + 0.2f;
