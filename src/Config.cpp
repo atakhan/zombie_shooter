@@ -20,7 +20,7 @@ const Color Config::DEFAULT_FONT_COLOR      = GRAY_6_8;
 // STYLE CONFIGS
 const Color Config::PLAYER_SPAWN_CELL_COLOR = BLUE_3_3;
 const Color Config::TERRAIN_DEFAULT_COLOR   = GREEN_3_4;
-const Color Config::PLAYER_COLOR            = BLUE_3_8;
+const Color Config::PLAYER_COLOR            = RAYWHITE;
 const Color Config::HUMAN_COLOR             = BLUE_3_8;
 const Color Config::ZOMBIE_COLOR            = RED_3_8;
 const Color Config::ATTACK_RADIUS_COLOR     = RED_7_2;

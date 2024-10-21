@@ -21,7 +21,7 @@ void PlayerDrawSystem::Draw(std::vector<Entity*> *entities) {
                     position->position_.x,
                     position->position_.y,
                     health->health_,
-                    Config::PLAYER_COLOR
+                    R7G7B0A3
                 );
             }
 

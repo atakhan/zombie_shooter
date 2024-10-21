@@ -34,16 +34,16 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         CircleColliderComponent* collider = entity->GetComponent<CircleColliderComponent>();
         
         if (target && zombiePos && zombieRadius && speed && attack && collider) {
-            bool hearBreath = IsFoodNear(
+            bool hearBreath = CheckCollisionCircles(
                 zombiePos->position_,
-                playerPosition->position_,
                 zombieRadius->health_,
-                playerBreathSound->currentValue
+                playerPosition->position_,
+                playerBreathSound->current_
             );
-            bool hearSteps = IsFoodNear(
+            bool hearSteps = CheckCollisionCircles(
                 zombiePos->position_,
-                playerPosition->position_,
                 zombieRadius->health_,
+                playerPosition->position_,
                 playerSound->currentRadius
             );
 
@@ -80,20 +80,6 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
             }
         }
     }
-}
-
-bool ZombieTargetingSystem::IsFoodNear(Vector2 zombiePos,Vector2 playerPos, float zombieRadius, float playerSoundRadius) {
-    Vector2 result;
-
-    float posXDif = playerPos.x - zombiePos.x;
-    float posYDif = playerPos.y - zombiePos.y;
-    float radiusSum = playerSoundRadius + zombieRadius;
-    
-    if (fabs(((posXDif * posXDif) + (posYDif * posYDif))) <= (radiusSum * radiusSum)) {
-        return true;
-    }
-
-    return false;
 }
 
 Vector2 ZombieTargetingSystem::RandomTarget(float xMax, float yMax) {

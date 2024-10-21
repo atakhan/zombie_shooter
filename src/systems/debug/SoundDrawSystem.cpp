@@ -23,12 +23,12 @@ void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
                     );
                 }
                 BreathSoundComponent *breathSound = entity->GetComponent<BreathSoundComponent>();
-                if (position && sound) {
+                if (position && breathSound) {
                     DrawCircle(
                         position->position_.x,
                         position->position_.y,
-                        breathSound->currentValue,
-                        R6G6B6A1
+                        breathSound->current_,
+                        RED
                     );
                 }
             }

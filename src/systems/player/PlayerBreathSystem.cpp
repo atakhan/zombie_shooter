@@ -2,10 +2,26 @@
 #include <iostream>
 
 void PlayerBreathSystem::Init(std::vector<Entity*> *entities) {
-    std::cout << "Player Control System Initialized" << std::endl;
+    std::cout << "Player Breath System Initialized" << std::endl;
 }
 
-void PlayerBreathSystem::Draw(std::vector<Entity*> *entities) {}
+void PlayerBreathSystem::Draw(std::vector<Entity*> *entities) {
+    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
+    if (player == nullptr) { return; }
+    BreathSoundComponent *breathSound = player->GetComponent<BreathSoundComponent>();
+    PositionComponent *position = player->GetComponent<PositionComponent>();
+    if (breathSound && position) {
+        std::cout << "breathSound->current_: " << breathSound->current_ << std::endl;
+        DrawCircle(
+            position->position_.x,
+            position->position_.y,
+            breathSound->current_,
+            RAYWHITE
+        );
+    } else {
+        std::cout << "breath sound draw components not found" << std::endl;
+    }
+}
 
 void PlayerBreathSystem::Update(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
@@ -15,24 +31,18 @@ void PlayerBreathSystem::Update(std::vector<Entity*> *entities) {
     BreathSoundComponent *breathSound = player->GetComponent<BreathSoundComponent>();
     AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
 
-    if (!position || !breathSound) { return; }
+    if (!position || !breathSound || !adrenalin) { return; }
+    if (breathSound->current_ < breathSound->min_) {
+        breathSound->inhale_ = true;
+    }
+    if (breathSound->max_ < breathSound->current_) {
+        breathSound->inhale_ = false;
+    }
 
-    breathSound->maxValue = breathSound->maxValue * adrenalin->currentValue;
-
-    if (breathSound->inhale == true) {
-        float newValue = breathSound->currentValue + 0.2f;
-        if (newValue < breathSound->maxValue) {
-            breathSound->currentValue = newValue;
-        } else {
-            breathSound->inhale = false;
-        }
+    if (breathSound->inhale_ == true) {
+        breathSound->current_ = breathSound->current_ + (breathSound->step_ * adrenalin->current_);
     } else {
-        float newValue = breathSound->currentValue - 0.2f;
-        if (newValue > breathSound->minValue) {
-            breathSound->currentValue = newValue;
-        } else {
-            breathSound->inhale = true;
-        }
+        breathSound->current_ = breathSound->current_ - (breathSound->step_ * adrenalin->current_);
     }
 
 }

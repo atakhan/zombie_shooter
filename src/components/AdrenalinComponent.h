@@ -3,14 +3,16 @@
 #define ADRENALIN_COMPONENT_H
 
 struct AdrenalinComponent {
-    float currentValue;
-    float minValue;
-    float maxValue;
+    float current_;
+    float step_;
+    float min_;
+    float max_;
 
     AdrenalinComponent(float min, float max)
-        : currentValue(min)
-        , minValue(min)
-        , maxValue(max)
+        : current_(min)
+        , step_(min)
+        , min_(min)
+        , max_(max)
         {}
 };
 

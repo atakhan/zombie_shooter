@@ -3,15 +3,18 @@
 #define BREATH_SOUND_COMPONENT_H
 
 struct BreathSoundComponent {
-    bool inhale;
-    float currentValue;
-    float minValue;
-    float maxValue;
+    bool inhale_;
+    float current_;
+    float step_;
+    float min_;
+    float max_;
 
     BreathSoundComponent(float min, float max)
-        : currentValue(min)
-        , minValue(min)
-        , maxValue(max)
+        : inhale_(true)
+        , current_(min)
+        , step_(min)
+        , min_(min)
+        , max_(max)
         {}
 };
 

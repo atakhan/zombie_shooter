@@ -36,6 +36,7 @@
 #define R4G4B0A8  CLITERAL(Color){ 128, 128, 0, 255 }
 #define R5G5B0A8  CLITERAL(Color){ 160, 160, 0, 255 }
 #define R6G6B0A8  CLITERAL(Color){ 192, 192, 0, 255 }
+#define R7G7B0A3  CLITERAL(Color){ 224, 224, 0, 92 }
 #define R7G7B0A8  CLITERAL(Color){ 224, 224, 0, 255 }
 #define R8G8B0A8  CLITERAL(Color){ 255, 255, 0, 255 }
 

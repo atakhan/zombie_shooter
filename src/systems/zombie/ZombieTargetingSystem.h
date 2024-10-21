@@ -14,8 +14,7 @@ class ZombieTargetingSystem : public System {
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
-  
-    bool IsFoodNear(Vector2 zombiePosition, Vector2 playerPosition, float zombieRadius, float playerSoundRadius);
+
     Vector2 RandomTarget(float xMax, float yMax);
     bool TargetReached(Vector2 targetPos, Vector2 curPos);
     bool TargetReachable(Vector2 targetPos, Vector2 curPos, float zombieRadius, TerrainComponent *terrain, WallsMapComponent *wallsMap);

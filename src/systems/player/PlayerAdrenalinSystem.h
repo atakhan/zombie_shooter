@@ -15,6 +15,9 @@ class PlayerAdrenalinSystem : public System {
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
+
+    void DecreaseAdrenaline(AdrenalinComponent *playerAdrenalin);
+    void IncreaseAdrenaline(AdrenalinComponent *playerAdrenalin);
 };
 
 #endif // ADRENALIN_SYSTEM_H

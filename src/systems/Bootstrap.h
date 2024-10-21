@@ -2,6 +2,7 @@
 #define SYSTEMS_BOOTSTRAP_H
 
 // Player systems
+#include "./player/PlayerAdrenalinSystem.h"
 #include "./player/PlayerBreathSystem.h"
 #include "./player/PlayerCameraSystem.h"
 #include "./player/PlayerControlSystem.h"
