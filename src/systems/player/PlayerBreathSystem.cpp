@@ -11,15 +11,12 @@ void PlayerBreathSystem::Draw(std::vector<Entity*> *entities) {
     BreathSoundComponent *breathSound = player->GetComponent<BreathSoundComponent>();
     PositionComponent *position = player->GetComponent<PositionComponent>();
     if (breathSound && position) {
-        std::cout << "breathSound->current_: " << breathSound->current_ << std::endl;
         DrawCircle(
             position->position_.x,
             position->position_.y,
             breathSound->current_,
             RAYWHITE
         );
-    } else {
-        std::cout << "breath sound draw components not found" << std::endl;
     }
 }
 
@@ -32,13 +29,13 @@ void PlayerBreathSystem::Update(std::vector<Entity*> *entities) {
     AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
 
     if (!position || !breathSound || !adrenalin) { return; }
+    
     if (breathSound->current_ < breathSound->min_) {
         breathSound->inhale_ = true;
     }
     if (breathSound->max_ < breathSound->current_) {
         breathSound->inhale_ = false;
     }
-
     if (breathSound->inhale_ == true) {
         breathSound->current_ = breathSound->current_ + (breathSound->step_ * adrenalin->current_);
     } else {

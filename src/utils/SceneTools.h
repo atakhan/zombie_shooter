@@ -35,8 +35,8 @@ class SceneTools {
         player->AddComponent<SpeedComponent>(SpeedComponent(agility));
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
         player->AddComponent<CameraComponent>(CameraComponent());
-        player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.1f, 100.0f));
-        player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 2.0f));
+        player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.2f, 20.0f));
+        player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 3.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
         
         return player;

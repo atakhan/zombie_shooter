@@ -8,9 +8,9 @@ struct AdrenalinComponent {
     float min_;
     float max_;
 
-    AdrenalinComponent(float min, float max)
+    AdrenalinComponent(float min, float max, float step)
         : current_(min)
-        , step_(min)
+        , step_(step)
         , min_(min)
         , max_(max)
         {}

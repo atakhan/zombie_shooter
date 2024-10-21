@@ -11,6 +11,18 @@ void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
     for (auto& entity : *entities) {
         if (entity == nullptr) { continue; }
         if (entity->HasComponent<SoundComponent>()) {
+            if (entity->HasComponent<ZombieComponent>()) {
+                PositionComponent *position = entity->GetComponent<PositionComponent>();
+                SoundComponent *sound = entity->GetComponent<SoundComponent>();
+                if (position && sound) {
+                    DrawCircle(
+                        position->position_.x,
+                        position->position_.y,
+                        sound->currentRadius,
+                        GRAY_5_05
+                    );
+                }
+            } else
             if (entity->HasComponent<PlayerComponent>()) {
                 PositionComponent *position = entity->GetComponent<PositionComponent>();
                 SoundComponent *sound = entity->GetComponent<SoundComponent>();
@@ -20,15 +32,6 @@ void SoundDrawSystem::Draw(std::vector<Entity*> *entities) {
                         position->position_.y,
                         sound->currentRadius,
                         Config::SOUND_RADIUS_COLOR
-                    );
-                }
-                BreathSoundComponent *breathSound = entity->GetComponent<BreathSoundComponent>();
-                if (position && breathSound) {
-                    DrawCircle(
-                        position->position_.x,
-                        position->position_.y,
-                        breathSound->current_,
-                        RED
                     );
                 }
             }
