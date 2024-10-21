@@ -42,7 +42,7 @@ void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
                 playerPosition->position_, 
                 playerHealth->health_, 
                 zombiePosition->position_, 
-                zombieSound->currentRadius
+                zombieSound->currentRadius / 2
             )) {
                 // SET increased value of adrenaline 
                 IncreaseAdrenaline(adrenalin);
