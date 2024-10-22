@@ -6,12 +6,12 @@ void PlayerAdrenalinSystem::Init(std::vector<Entity*> *entities) {
 }
 
 void PlayerAdrenalinSystem::Draw(std::vector<Entity*> *entities) {
-    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
-    if (player == nullptr) { return; }
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
-    AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
-    DrawRectangle(playerPosition->position_.x, playerPosition->position_.y, adrenalin->max_, adrenalin->min_, RED_3_4);
-    DrawRectangle(playerPosition->position_.x, playerPosition->position_.y, adrenalin->current_, adrenalin->min_, RED_3_8);
+    // Entity *player = GetEntityByComponent<PlayerComponent>(entities);
+    // if (player == nullptr) { return; }
+    // PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
+    // AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
+    // DrawRectangle(playerPosition->position_.x, playerPosition->position_.y, adrenalin->max_, adrenalin->min_, RED_3_4);
+    // DrawRectangle(playerPosition->position_.x, playerPosition->position_.y, adrenalin->current_, adrenalin->min_, RED_3_8);
 }
 
 void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
@@ -44,7 +44,7 @@ void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
                 zombiePosition->position_, 
                 zombieSound->currentRadius / 2
             )) {
-                // SET increased value of adrenaline 
+                // SET increased value of adrenaline
                 IncreaseAdrenaline(adrenalin);
             }
         }

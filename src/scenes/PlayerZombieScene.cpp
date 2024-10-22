@@ -56,6 +56,7 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerCameraSystem);
     Scene::AddSystem(new PlayerBreathSystem);
     Scene::AddSystem(new PlayerAdrenalinSystem);
+    Scene::AddSystem(new PlayerFeetMoveSystem);
     
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);
