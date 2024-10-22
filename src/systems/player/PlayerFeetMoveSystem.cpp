@@ -8,23 +8,32 @@ void PlayerFeetMoveSystem::Init(std::vector<Entity*> *entities) {
 void PlayerFeetMoveSystem::Draw(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     if (player == nullptr) { return; }
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
-    DrawRectangle(playerPosition->position_.x, playerPosition->position_.y - 10.0f, 15.0f, 15.0f, VIOLET);
-    DrawRectangle(playerPosition->position_.x, playerPosition->position_.y + 10.0f, 15.0f, 15.0f, VIOLET);
-    // DrawRectangle(playerPosition->position_.x, playerPosition->position_.y, adrenalin->max_, adrenalin->min_, RED_3_4);
-    // DrawRectangle(playerPosition->position_.x, playerPosition->position_.y, adrenalin->current_, adrenalin->min_, RED_3_8);
+    FeetComponent *feet = player->GetComponent<FeetComponent>();
+
+    DrawCircleV(feet->leftPosition_, feet->leftRadius_, RAYWHITE);
+    DrawCircleV(feet->rightPosition_, feet->rightRadius_, RAYWHITE);
 }
 
 void PlayerFeetMoveSystem::Update(std::vector<Entity*> *entities) {
-    // Entity *player = GetEntityByComponent<PlayerComponent>(entities);
-    // if (player == nullptr) { return; }
+    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
+    if (player == nullptr) { return; }
+    
+    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
+    HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
+    FeetComponent *feet = player->GetComponent<FeetComponent>();
 
-    // PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
-    // HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
-    // AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
+    if (!playerPosition || !playerHealth || !feet) { return; }
 
-    // if (!playerPosition || !playerHealth || !adrenalin) { return; }
-
+    feet->leftPosition_ = (Vector2) {
+        playerPosition->position_.x + (playerHealth->health_ / 4),
+        playerPosition->position_.y + (playerHealth->health_ / 4)
+    };
+    feet->rightPosition_ = (Vector2) {
+        playerPosition->position_.x - (playerHealth->health_ / 4),
+        playerPosition->position_.y - (playerHealth->health_ / 4)
+    };
+    feet->leftRadius_ = playerHealth->health_ / 3;
+    feet->rightRadius_ = playerHealth->health_ / 3;
     
     // // If adrenalin is changable
     // std::cout << "PlayerFeetMoveSystem : update : " << std::endl;
