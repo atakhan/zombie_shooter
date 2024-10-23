@@ -36,7 +36,7 @@ class SceneTools {
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
         CameraComponent camera = CameraComponent();
         player->AddComponent<CameraComponent>(camera);
-        player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.2f, 25.0f));
+        player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
         player->AddComponent<FeetComponent>(FeetComponent(pos, pos, (health/3), (health/3)));

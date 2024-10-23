@@ -61,6 +61,8 @@ endif
 # Default target, compiles, executes and cleans
 all: $(target) execute clean
 
+rebuild: $(target) execute
+
 # Sets up the project for compiling, generates includes and libs
 setup: include lib
 
@@ -85,13 +87,18 @@ lib: submodules
 $(target): $(objects)
 	$(CXX) $(objects) -o $(target) $(linkFlags)
 
+# Compile objects to the build directory
+$(buildDir)/%.o: src/%.cpp
+	$(MKDIR) $(call platformpth, $(@D))
+	$(CXX) $(compileFlags) -o $@ -c $<
+
+# origin
+#	$(CXX) -MMD -MP -c $(compileFlags) $< -o $@ $(CXXFLAGS)  
+# template from 3dviewer
+#	$(CC) $(CCFLAGS) -o $@ -c $< $(LDFLAGS)
+
 # Add all rules from dependency files
 -include $(depends)
-
-# Compile objects to the build directory
-$(buildDir)/%.o: src/%.cpp Makefile
-	$(MKDIR) $(call platformpth, $(@D))
-	$(CXX) -MMD -MP -c $(compileFlags) $< -o $@ $(CXXFLAGS)
 
 # Run the executable
 execute:
