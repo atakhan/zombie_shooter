@@ -34,11 +34,14 @@ class SceneTools {
         player->AddComponent<AttackComponent>(AttackComponent(strength, attackRadius));
         player->AddComponent<SpeedComponent>(SpeedComponent(agility));
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
-        player->AddComponent<CameraComponent>(CameraComponent());
+        CameraComponent camera = CameraComponent();
+        player->AddComponent<CameraComponent>(camera);
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.2f, 25.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
         player->AddComponent<FeetComponent>(FeetComponent(pos, pos, (health/3), (health/3)));
+        Vector2 worldPos = GetScreenToWorld2D(GetMousePosition(), camera.camera_);
+        player->AddComponent<DirectionComponent>(DirectionComponent(0.0f, worldPos)); // degrees
         
         return player;
     }

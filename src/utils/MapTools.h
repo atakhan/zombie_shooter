@@ -68,7 +68,52 @@ class MapTools {
         wall->AddComponent<RectangleColliderComponent>(rectCollider);
 
         return wall;
-    }  
+    }
+    
+    static float AngleBetweenVectors(const Vector2& a, const Vector2& b) {        
+        // Calculate the dot product
+        float dotProduct = a.x * b.x + a.y * b.y;
+
+        // Calculate the magnitudes
+        float magnitudeA = std::sqrt(a.x * a.x + a.y * a.y);
+        float magnitudeB = std::sqrt(b.x * b.x + b.y * b.y);
+
+        // Avoid division by zero
+        if (magnitudeA == 0 || magnitudeB == 0) {
+            return 0; // or handle as needed
+        }
+
+        // Calculate the cosine of the angle
+        float cosTheta = dotProduct / (magnitudeA * magnitudeB);
+
+        // Clamp the value to the range [-1, 1] to avoid NaN from acos
+        cosTheta = std::fmax(-1.0f, std::fmin(1.0f, cosTheta));
+
+        // Calculate the angle in radians
+        float angleRadians = std::acos(cosTheta);
+
+        // Convert to degrees
+        float angleDegrees = angleRadians * (180.0f / M_PI);
+
+        return angleDegrees;
+    }
+    
+    static float NormalizeToRange(float value, float minValue, float maxValue) {
+        // Ensure the minValue is less than maxValue
+        if (minValue >= maxValue) {
+            throw std::invalid_argument("minValue must be less than maxValue");
+        }
+
+        // Normalize the value to the range [0, 1]
+        float normalizedValue = (value - minValue) / (maxValue - minValue);
+        
+        // Clamp the normalized value to the range [0, 1]
+        normalizedValue = std::max(0.0f, std::min(1.0f, normalizedValue));
+
+        // Return as a Vector2, using normalizedValue for both x and y for simplicity
+        return normalizedValue;
+    }
 };
+
 
 #endif // SRC_UTILS_MAP_TOOLS_H

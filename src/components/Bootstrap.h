@@ -5,6 +5,7 @@
 #include "AttackComponent.h"
 #include "BreathSoundComponent.h"
 #include "CameraComponent.h"
+#include "DirectionComponent.h"
 #include "FeetComponent.h"
 #include "GameTitleComponent.h"
 #include "HealthComponent.h"

@@ -17,15 +17,15 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
 
     if (!position || !speed || !sound) { return; }
 
-    if (IsKeyDown(KEY_RIGHT)) {
-        if (IsKeyDown(KEY_LEFT)) {
+    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
             Idle(sound);
         } else {
-            if (IsKeyDown(KEY_UP)) {
+            if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
                 MoveRight(sound, position, speed);
                 MoveTop(sound, position, speed);
             } else
-            if (IsKeyDown(KEY_DOWN)) {
+            if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
                 MoveRight(sound, position, speed);
                 MoveBottom(sound, position, speed);
             } else {
@@ -33,15 +33,15 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
             }
         }
     } else
-    if (IsKeyDown(KEY_LEFT)) {
-        if (IsKeyDown(KEY_RIGHT)) {
+    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
             Idle(sound);
         } else {
-            if (IsKeyDown(KEY_UP)) {
+            if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) ) {
                 MoveLeft(sound, position, speed);
                 MoveTop(sound, position, speed);
             } else
-            if (IsKeyDown(KEY_DOWN)) {
+            if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
                 MoveLeft(sound, position, speed);
                 MoveBottom(sound, position, speed);
             } else {
@@ -49,15 +49,15 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
             }
         }
     } else
-    if (IsKeyDown(KEY_UP)) {
-        if (IsKeyDown(KEY_DOWN)) {
+    if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
             Idle(sound);
         } else {
-            if (IsKeyDown(KEY_RIGHT)) {
+            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
                 MoveTop(sound, position, speed);
                 MoveRight(sound, position, speed);
             } else
-            if (IsKeyDown(KEY_LEFT)) {
+            if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
                 MoveTop(sound, position, speed);
                 MoveLeft(sound, position, speed);
             } else {
@@ -65,15 +65,15 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
             }
         }
     } else
-    if (IsKeyDown(KEY_DOWN)) {
-        if (IsKeyDown(KEY_UP)) {
+    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
             Idle(sound);
         } else {
-            if (IsKeyDown(KEY_RIGHT)) {
+            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
                 MoveBottom(sound, position, speed);
                 MoveRight(sound, position, speed);
             } else
-            if (IsKeyDown(KEY_LEFT)) {
+            if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
                 MoveBottom(sound, position, speed);
                 MoveLeft(sound, position, speed);
             } else {

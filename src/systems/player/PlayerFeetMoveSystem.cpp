@@ -34,39 +34,5 @@ void PlayerFeetMoveSystem::Update(std::vector<Entity*> *entities) {
     };
     feet->leftRadius_ = playerHealth->health_ / 3;
     feet->rightRadius_ = playerHealth->health_ / 3;
-    
-    // // If adrenalin is changable
-    // std::cout << "PlayerFeetMoveSystem : update : " << std::endl;
-    // std::cout << "min: " << adrenalin->min_ << std::endl;
-    // std::cout << "max: " << adrenalin->max_ << std::endl;
-    // std::cout << "current: " << adrenalin->current_ << std::endl;
-
-    // //   - hearing a zombi
-    // for (auto& entity : *entities) {
-    //     if (entity == nullptr) { continue; }
-    //     if (entity->HasComponent<ZombieComponent>()) {
-    //         PositionComponent *zombiePosition = entity->GetComponent<PositionComponent>();
-    //         SoundComponent *zombieSound = entity->GetComponent<SoundComponent>();
-    //         if (CheckCollisionCircles(
-    //             playerPosition->position_, 
-    //             playerHealth->health_, 
-    //             zombiePosition->position_, 
-    //             zombieSound->currentRadius / 2
-    //         )) {
-    //             // SET increased value of adrenaline
-    //             IncreaseAdrenaline(adrenalin);
-    //         }
-    //     }
-    // }
-    // // TODO: When adrenalin should be increased?
-    // //   - seeing a zombi
-    // //   - low hp more adrenalin
-    
-    // if (adrenalin->current_ < adrenalin->min_) {
-    //     IncreaseAdrenaline(adrenalin);
-    // } else {
-    //     DecreaseAdrenaline(adrenalin);
-    // }
-
 }
 

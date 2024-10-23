@@ -8,6 +8,7 @@
 #include "./player/PlayerControlSystem.h"
 #include "./player/PlayerDrawSystem.h"
 #include "./player/PlayerFeetMoveSystem.h"
+#include "./player/PlayerDirectionSystem.h"
 
 // Zombie systems
 #include "./zombie/ZombieDrawSystem.h"
