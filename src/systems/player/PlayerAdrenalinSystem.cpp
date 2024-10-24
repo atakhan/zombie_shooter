@@ -3,6 +3,7 @@
 
 void PlayerAdrenalinSystem::Init(std::vector<Entity*> *entities) {
     std::cout << "Player Adrenalin System Initialized" << std::endl;
+    debug_ = false;
 }
 
 void PlayerAdrenalinSystem::Draw(std::vector<Entity*> *entities) {
@@ -26,12 +27,14 @@ void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
     if (!playerPosition || !playerHealth || !adrenalin) { return; }
 
     
-    // If adrenalin is changable
-    std::cout << "PlayerAdrenalinSystem : update : " << std::endl;
-    std::cout << "min: " << adrenalin->min_ << std::endl;
-    std::cout << "max: " << adrenalin->max_ << std::endl;
-    std::cout << "current: " << adrenalin->current_ << std::endl;
+    if (debug_) {
+        std::cout << "PlayerAdrenalinSystem : update : " << std::endl;
+        std::cout << "min: " << adrenalin->min_ << std::endl;
+        std::cout << "max: " << adrenalin->max_ << std::endl;
+        std::cout << "current: " << adrenalin->current_ << std::endl;
+    }
 
+    // If adrenalin is changable
     //   - hearing a zombi
     for (auto& entity : *entities) {
         if (entity == nullptr) { continue; }
@@ -63,16 +66,24 @@ void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
 
 void PlayerAdrenalinSystem::DecreaseAdrenaline(AdrenalinComponent *adrenalin) {
     if (adrenalin->min_ < adrenalin->current_) {
-        std::cout << "ADRENALIN DECREASED for : " << adrenalin->step_ << std::endl;
-        std::cout << "adrenalin->current_ : " << adrenalin->current_ << std::endl;
+        
+        if (debug_) {
+            std::cout << "ADRENALIN DECREASED for : " << adrenalin->step_ << std::endl;
+            std::cout << "adrenalin->current_ : " << adrenalin->current_ << std::endl;
+        }
+
         adrenalin->current_ = adrenalin->current_ - adrenalin->step_;
     }
 }
 void PlayerAdrenalinSystem::IncreaseAdrenaline(AdrenalinComponent *adrenalin) {
 
     if (adrenalin->current_ < adrenalin->max_) {
-        std::cout << "ADRENALIN INCREASED for : " << adrenalin->step_ << std::endl;
-        std::cout << "adrenalin->current_ : " << adrenalin->current_ << std::endl;
+        
+        if (debug_) {
+            std::cout << "ADRENALIN INCREASED for : " << adrenalin->step_ << std::endl;
+            std::cout << "adrenalin->current_ : " << adrenalin->current_ << std::endl;
+        }
+
         adrenalin->current_ = adrenalin->current_ + adrenalin->step_;
     }
 }

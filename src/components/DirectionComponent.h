@@ -7,10 +7,12 @@
 struct DirectionComponent {
     float rotation_;
     Vector2 mousePos_;
+    bool isMove_;
 
     DirectionComponent(float rotationDegrees, Vector2 mousePos)
         : rotation_(rotationDegrees)
         , mousePos_(mousePos)
+        , isMove_(false)
         {};
 };
 

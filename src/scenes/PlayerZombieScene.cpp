@@ -8,7 +8,7 @@ void PlayerZombieScene::Init() {
         Scene::title_
     ));
 
-    int mapIndex = 1;
+    int mapIndex = 3;
     std::vector<std::vector<int>> spawnMap = PlayerZombieSceneMaps::GetSpawnMap(mapIndex);
     std::vector<std::vector<int>> wallsMap = PlayerZombieSceneMaps::GetWallsMap(mapIndex);
 

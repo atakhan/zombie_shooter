@@ -18,7 +18,7 @@ void PlayerCameraSystem::Init(std::vector<Entity*> *entities) {
         Config::WINDOW_HEIGHT / 2.0f
     };
     camera->camera_.rotation = 0.0f;
-    camera->camera_.zoom = 1.0f;
+    camera->camera_.zoom = 2.0f;
 }
 
 void PlayerCameraSystem::Update(std::vector<Entity*> *entities) {

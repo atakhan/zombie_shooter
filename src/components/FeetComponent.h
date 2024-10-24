@@ -5,16 +5,16 @@
 #include <raylib.hpp>
 
 struct FeetComponent {
-    Vector2 leftPosition_;
-    Vector2 rightPosition_;
-    float leftRadius_;
-    float rightRadius_;
-
-    FeetComponent(Vector2 leftPosition, Vector2 rightPosition, float leftRadius, float rightRadius)
-        : leftPosition_(leftPosition)
-        , rightPosition_(rightPosition)
-        , leftRadius_(leftRadius)
-        , rightRadius_(rightRadius)
+    Rectangle left_;
+    Rectangle right_;
+    Vector2 leftOrigin_;
+    Vector2 rightOrigin_;
+    
+    FeetComponent(Rectangle left, Rectangle right, Vector2 leftOrigin, Vector2 rightOrigin)
+        : left_(left)
+        , right_(right)
+        , leftOrigin_(leftOrigin)
+        , rightOrigin_(rightOrigin)
         {};
 };
 

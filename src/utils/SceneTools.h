@@ -39,7 +39,13 @@ class SceneTools {
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
-        player->AddComponent<FeetComponent>(FeetComponent(pos, pos, (health/3), (health/3)));
+
+        Rectangle leftFoot = {0.0f, 0.0f, 0.0f, 0.0f};
+        Rectangle rightFoot = {0.0f, 0.0f, 0.0f, 0.0f};
+        Vector2 leftOrigin = { 0.0f, 0.0f };
+        Vector2 rightOrigin = { 0.0f, 0.0f };
+        player->AddComponent<FeetComponent>(FeetComponent(leftFoot, rightFoot, leftOrigin, rightOrigin));
+        
         Vector2 worldPos = GetScreenToWorld2D(GetMousePosition(), camera.camera_);
         player->AddComponent<DirectionComponent>(DirectionComponent(0.0f, worldPos)); // degrees
         
@@ -67,85 +73,7 @@ class SceneTools {
         zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent(health.health_));
 
         return zombie;
-    }    
-  
-    
-    // static void CreateHumanWithDefaultComponents(Entity *human) {
-    //     human->AddComponent<HumanComponent>(HumanComponent());
-    //     human->AddComponent<StaminaComponent>(StaminaComponent(
-    //         Config::HUMAN_DEFAULT_STAMINA
-    //     ));
-    //     human->AddComponent<HealthComponent>(HealthComponent(
-    //         Config::HUMAN_DEFAULT_HEALTH
-    //     ));
-    //     human->AddComponent<PositionComponent>(PositionComponent(
-    //         Config::HUMAN_SPAWN_POSITION_X, 
-    //         Config::HUMAN_SPAWN_POSITION_Y
-    //     ));
-    //     human->AddComponent<AttackComponent>(AttackComponent(
-    //         Config::HUMAN_DEFAULT_STRENGTH, 
-    //         Config::HUMAN_ATTACK_RADIUS
-    //     ));
-    //     human->AddComponent<SpeedComponent>(SpeedComponent(
-    //         Config::HUMAN_DEFAULT_AGILITY
-    //     ));
-    //     human->AddComponent<SoundComponent>(SoundComponent(
-    //         Config::SOUND_MIN_RADIUS, 
-    //         Config::SOUND_MIN_RADIUS, 
-    //         Config::SOUND_MAX_RADIUS,
-    //         true
-    //     ));
-    //     human->AddComponent<CameraComponent>(CameraComponent());
-    //     human->AddComponent<TargetComponent>(TargetComponent(
-    //         Config::HUMAN_DEFAULT_TARGET_X, 
-    //         Config::HUMAN_DEFAULT_TARGET_Y
-    //     ));
-    // }
-
-    // static Entity* SpawnHumanInPosWithStatusAndTarget(float posX, float posY, HumanComponent::Status status, float tarX, float tarY) {
-    //     Entity *human = new Entity();
-    //     CreateHumanWithDefaultComponents(human);
-    //     human->ReplaceComponent<HumanComponent>(HumanComponent(status));
-    //     human->ReplaceComponent<PositionComponent>(PositionComponent(posX, posY));
-    //     human->ReplaceComponent<TargetComponent>(TargetComponent(tarX, tarY));
-    //     return human;
-    // }
-    // static Entity* SpawnHumanInPosWithStatus(float posX, float posY, HumanComponent::Status status) {
-    //     Entity *human = new Entity();
-    //     CreateHumanWithDefaultComponents(human);
-    //     human->ReplaceComponent<HumanComponent>(HumanComponent(status));
-    //     human->ReplaceComponent<PositionComponent>(PositionComponent(posX, posY));
-    //     return human;
-        
-    // }
-    // static Entity* SpawnHumanInPos(float posX, float posY) {
-    //     Entity *human = new Entity();
-    //     CreateHumanWithDefaultComponents(human);
-    //     human->ReplaceComponent<PositionComponent>(PositionComponent(posX, posY));
-    //     return human;
-
-    // }
-
-    // static Entity* SpawnHuman() {
-    //     // CREATE HUMAN
-    //     Entity *human = new Entity();
-    //     CreateHumanWithDefaultComponents(human);
-    //     return human;
-    // }
-
-    // static Entity* SpawnLoot() {
-    //     // CREATE LOOT
-    //     Entity *loot = new Entity();
-    //     loot->AddComponent<LootComponent>(LootComponent(
-    //         Config::DEFAULT_LOOT_AMOUNT
-    //     ));
-    //     loot->AddComponent<PositionComponent>(PositionComponent(
-    //         Config::DEFAULT_LOOT_SPAWN_POSITION_X, 
-    //         Config::DEFAULT_LOOT_SPAWN_POSITION_Y
-    //     ));
-    //     return loot;
-    // }
-
+    }
 };
 
 #endif // SRC_UTILS_SCENE_TOOLS_H
