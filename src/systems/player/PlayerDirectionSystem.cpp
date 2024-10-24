@@ -6,6 +6,12 @@ void PlayerDirectionSystem::Init(std::vector<Entity*> *entities) {
     debug_ = false;
 }
 
+float NormalizeAngle(float angle) {
+    while (angle > 180.0f) angle -= 360.0f;
+    while (angle < -180.0f) angle += 360.0f;
+    return angle;
+}
+
 void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     if (player == nullptr) { return; }
@@ -46,18 +52,20 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
 
     // Вычисляем целевой угол
     float targetRotation = MapTools::AngleBetweenVectors({mousePosX, mousePosY}, playerPosition->position_);
+    targetRotation = NormalizeAngle(targetRotation); // Нормализуем целевой угол
 
-    // Плавное вращение
-    float rotationSpeed = 100.0f; // Скорость вращения
-    if (playerDirection->rotation_ < targetRotation) {
-        playerDirection->rotation_ += rotationSpeed * GetFrameTime();
-        if (playerDirection->rotation_ > targetRotation) {
-            playerDirection->rotation_ = targetRotation; // Остановка на целевом угле
-        }
+    // Плавное вращение с интерполяцией
+    float rotationSpeed = 300.0f; // Скорость вращения
+    float angleDifference = NormalizeAngle(targetRotation - playerDirection->rotation_);
+
+    // Используем интерполяцию для плавного вращения
+    if (fabs(angleDifference) < rotationSpeed * GetFrameTime()) {
+        playerDirection->rotation_ = targetRotation; // Остановка на целевом угле
     } else {
-        playerDirection->rotation_ -= rotationSpeed * GetFrameTime();
-        if (playerDirection->rotation_ < targetRotation) {
-            playerDirection->rotation_ = targetRotation; // Остановка на целевом угле
+        if (angleDifference > 0) {
+            playerDirection->rotation_ += rotationSpeed * GetFrameTime();
+        } else {
+            playerDirection->rotation_ -= rotationSpeed * GetFrameTime();
         }
     }
 
