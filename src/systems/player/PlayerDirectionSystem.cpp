@@ -40,11 +40,10 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
     
     PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
     HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
-    FeetComponent *feet = player->GetComponent<FeetComponent>();
     CameraComponent *camera = player->GetComponent<CameraComponent>();
     DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
 
-    if (!playerPosition || !playerHealth || !feet) { return; }
+    if (!playerPosition || !playerHealth) { return; }
 
     Vector2 mousePos = GetScreenToWorld2D(GetMousePosition(), camera->camera_);
     float mousePosX = mousePos.x;
