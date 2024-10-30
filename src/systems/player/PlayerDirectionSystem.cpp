@@ -55,7 +55,7 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
     targetRotation = NormalizeAngle(targetRotation); // Нормализуем целевой угол
 
     // Плавное вращение с интерполяцией
-    float rotationSpeed = 300.0f; // Скорость вращения
+    float rotationSpeed = 260.0f; // Скорость вращения
     float angleDifference = NormalizeAngle(targetRotation - playerDirection->rotation_);
 
     // Используем интерполяцию для плавного вращения

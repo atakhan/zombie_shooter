@@ -29,8 +29,6 @@
 
 // Menu systems
 #include "./menu/MenuControlSystem.h"
-#include "./menu/MenuDrawSystem.h"
-
 
 // Map systems
 #include "./map/TerrainDrawSystem.h"

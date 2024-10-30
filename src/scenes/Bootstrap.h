@@ -4,5 +4,6 @@
 #include "HumanTrainingScene.h"
 #include "PlayerZombieScene.h"
 #include "ManageScenesScene.h"
+#include "MovementTestingScene.h"
 
 #endif // SCENES_BOOTSTRAP_H

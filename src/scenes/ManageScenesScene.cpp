@@ -39,7 +39,6 @@ void ManageScenesScene::Init() {
     }
     
     Scene::AddSystem(new MenuControlSystem());
-    Scene::AddSystem(new MenuDrawSystem());
 
     // Init systems
     for (auto& system : systems_) {
