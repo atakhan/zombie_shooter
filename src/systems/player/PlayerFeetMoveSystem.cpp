@@ -12,36 +12,10 @@ void PlayerFeetMoveSystem::Draw(std::vector<Entity*> *entities) {
     DirectionComponent *direction = player->GetComponent<DirectionComponent>();
     HealthComponent *health = player->GetComponent<HealthComponent>();
 
-    // Определяем координаты углов
-    Vector2 corners[4];
-    corners[0] = { 0.0f, 0.0f }; // Верхний левый угол
-    corners[1] = { 0.0f + feet->left_.width, 0.0f }; // Верхний правый угол
-    corners[2] = { 0.0f + feet->left_.width, 0.0f + feet->left_.height }; // Нижний правый угол
-    corners[3] = { 0.0f, 0.0f + feet->left_.height }; // Нижний левый угол
-
-    // Вычисляем новый центр вращения (например, центр прямоугольника)
-    Vector2 rotationOrigin_center = { (corners[0].x + corners[2].x) / 2, (corners[0].y + corners[2].y) / 2 };
-    Vector2 rotationOrigin_topLeft = corners[0];
-    Vector2 rotationOrigin_topRight = corners[1];
-    Vector2 rotationOrigin_bottomRight = corners[2];
-    Vector2 rotationOrigin_bottomLeft = corners[3];
-
-    float padding = 10.0f;
-    Vector2 rotationOrigin_bottomCenter = { 
-        (corners[0].x + corners[2].x) / 2, 
-        corners[0].y + padding
-    };
-    Vector2 rotationOrigin_topCenter = { 
-        (corners[0].x + corners[2].x) / 2,
-        (corners[0].y + corners[2].y) - padding
-    };
-
-    // Рисуем левую ногу с новым центром вращения
-    DrawRectanglePro(feet->left_, rotationOrigin_bottomCenter, direction->rotation_, BLUE);
-    DrawRectanglePro(feet->right_, rotationOrigin_topCenter, direction->rotation_, ORANGE);
-    // DrawRectanglePro(feet->left_, rotationOrigin_topRight, direction->rotation_, YELLOW);
-    // DrawRectanglePro(feet->left_, rotationOrigin_bottomRight, direction->rotation_, GREEN);
-    // DrawRectanglePro(feet->left_, rotationOrigin_center, direction->rotation_, RED);
+    if (feet && direction && health) {
+        DrawRectanglePro(feet->left_, feet->leftOrigin_, direction->rotation_, BLUE);
+        DrawRectanglePro(feet->right_, feet->rightOrigin_, direction->rotation_, ORANGE);
+    }
 }
 
 bool PlayerFeetMoveSystem::NeedRotate(FeetComponent *feet, DirectionComponent *direction) {
@@ -75,6 +49,29 @@ void PlayerFeetMoveSystem::Update(std::vector<Entity*> *entities) {
 
     if (!playerPosition || !playerHealth || !feet || !direction || !speed || !sound) { return; }
 
+    // Определяем координаты углов
+    Vector2 corners[4];
+    corners[0] = { 0.0f, 0.0f }; // Верхний левый угол
+    corners[1] = { 0.0f + feet->left_.width, 0.0f }; // Верхний правый угол
+    corners[2] = { 0.0f + feet->left_.width, 0.0f + feet->left_.height }; // Нижний правый угол
+    corners[3] = { 0.0f, 0.0f + feet->left_.height }; // Нижний левый угол
+
+    // Вычисляем новый центр вращения (например, центр прямоугольника)
+    Vector2 rotationOrigin_center = { (corners[0].x + corners[2].x) / 2, (corners[0].y + corners[2].y) / 2 };
+    Vector2 rotationOrigin_topLeft = corners[0];
+    Vector2 rotationOrigin_topRight = corners[1];
+    Vector2 rotationOrigin_bottomRight = corners[2];
+    Vector2 rotationOrigin_bottomLeft = corners[3];
+
+    Vector2 rotationOrigin_bottomCenter = { 
+        (corners[0].x + corners[2].x) / 2, 
+        corners[0].y
+    };
+    Vector2 rotationOrigin_topCenter = { 
+        (corners[0].x + corners[2].x) / 2,
+        (corners[0].y + corners[2].y)
+    };
+
     float coef = 2.0f;
     feet->left_.width = playerHealth->health_ * coef;
     feet->left_.height = (playerHealth->health_ / 2.0f) * coef;
@@ -85,6 +82,9 @@ void PlayerFeetMoveSystem::Update(std::vector<Entity*> *entities) {
     feet->right_.height = (playerHealth->health_ / 2.0f) * coef; 
     feet->right_.x = playerPosition->position_.x;
     feet->right_.y = playerPosition->position_.y;
+
+    feet->leftOrigin_ = rotationOrigin_bottomCenter;
+    feet->rightOrigin_ = rotationOrigin_topCenter;
 
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
         MoveRight(feet, playerPosition, direction);
