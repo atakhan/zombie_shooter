@@ -1,5 +1,4 @@
 #include "MovementTestingScene.h"
-#include "MovementTestingSceneMaps.h"
 
 void MovementTestingScene::Init() {
     // Scene entity
@@ -48,34 +47,20 @@ void MovementTestingScene::Init() {
     // Map systems
     Scene::AddSystem(new TerrainDrawSystem);
 
-    // Zombie systems
-    // Scene::AddSystem(new ZombieMoveSystem);
-    // Scene::AddSystem(new ZombieTargetingSystem);
-    // Scene::AddSystem(new ZombieDrawSystem);
-    
     // Player systems
     Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
     Scene::AddSystem(new PlayerFeetMoveSystem);
-    Scene::AddSystem(new PlayerDirectionSystem);
-    Scene::AddSystem(new PlayerDrawSystem);
+    // Scene::AddSystem(new PlayerDirectionSystem);
     // Scene::AddSystem(new PlayerBreathSystem);
     // Scene::AddSystem(new PlayerAdrenalinSystem);
-    
+
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);
     Scene::AddSystem(new CircleRectangleColliderSystem);
     Scene::AddSystem(new ColliderResolverSystem);
-    
-    // Draw systems
 
-    // Debug systems
-    // Scene::AddSystem(new SoundDrawSystem);
-    // Scene::AddSystem(new TargetDrawSystem);
-    // Scene::AddSystem(new ZombieStatsDrawSystem);
-    
     // UI draw systems
-    // Scene::AddUISystem(new DebugUIDrawSystem);
     Scene::AddUISystem(new UIDrawSystem);
 
     // Init Systems

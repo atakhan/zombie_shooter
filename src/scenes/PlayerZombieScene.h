@@ -10,6 +10,8 @@
 #include "../systems/Bootstrap.h"
 #include "../utils/Bootstrap.h"
 
+#include "PlayerZombieSceneMaps.h"
+
 class PlayerZombieScene : public Scene {
   public:
     PlayerZombieScene(int index, bool isContinue, float width, float height, std::string title) 

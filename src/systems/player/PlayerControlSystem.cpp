@@ -5,7 +5,27 @@ void PlayerControlSystem::Init(std::vector<Entity*> *entities) {
     std::cout << "Player Control System Initialized" << std::endl;
 }
 
-void PlayerControlSystem::Draw(std::vector<Entity*> *entities) {}
+void PlayerControlSystem::Draw(std::vector<Entity*> *entities) {
+    for (auto& entity : *entities) {
+        if (entity == nullptr) { continue; }
+        
+        if (entity->HasComponent<PlayerComponent>()) {                
+            PositionComponent *position = entity->GetComponent<PositionComponent>();
+            HealthComponent *health = entity->GetComponent<HealthComponent>();
+            
+            if (position && health) {
+                DrawCircle(
+                    position->position_.x,
+                    position->position_.y,
+                    health->health_,
+                    R7G7B0A3
+                );
+            }
+
+            break;
+        }
+    }
+}
 
 void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);

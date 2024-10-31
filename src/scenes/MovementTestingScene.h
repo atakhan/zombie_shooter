@@ -10,6 +10,8 @@
 #include "../systems/Bootstrap.h"
 #include "../utils/Bootstrap.h"
 
+#include "MovementTestingSceneMaps.h"
+
 class MovementTestingScene : public Scene {
   public:
     MovementTestingScene(int index, bool isContinue, float width, float height, std::string title) 

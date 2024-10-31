@@ -1,5 +1,4 @@
 #include "PlayerZombieScene.h"
-#include "PlayerZombieSceneMaps.h"
 
 void PlayerZombieScene::Init() {
     // Scene entity
@@ -58,7 +57,6 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerAdrenalinSystem);
     Scene::AddSystem(new PlayerFeetMoveSystem);
     Scene::AddSystem(new PlayerDirectionSystem);
-    Scene::AddSystem(new PlayerDrawSystem);
     
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);

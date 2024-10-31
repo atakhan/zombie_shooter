@@ -12,16 +12,15 @@ class SceneTools {
     // CREATE GAME
     static Entity* CreateScene(const std::string& gameTitle, const std::string& sceneTitle) {
         Entity *sceneEntity = new Entity();
-        sceneEntity->AddComponent<GameTitleComponent>(GameTitleComponent(gameTitle));
         sceneEntity->AddComponent<SceneComponent>(SceneComponent(sceneTitle));
-        
+        sceneEntity->AddComponent<GameTitleComponent>(GameTitleComponent(gameTitle));
         return sceneEntity;
     }
 
     // CREATE PLAYER
     static Entity* CreatePlayer(
-        Vector2 pos, 
-        float health, 
+        Vector2 pos,
+        float health,
         float strength, 
         float agility, 
         float attackRadius, 
@@ -34,21 +33,19 @@ class SceneTools {
         player->AddComponent<AttackComponent>(AttackComponent(strength, attackRadius));
         player->AddComponent<SpeedComponent>(SpeedComponent(agility));
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
-        
-        CameraComponent camera = CameraComponent();
-        player->AddComponent<CameraComponent>(camera);
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
         player->AddComponent<FeetComponent>(FeetComponent());
-        player->AddComponent<BonesComponent>(BonesComponent());
-        
+
+        CameraComponent camera = CameraComponent();
+        player->AddComponent<CameraComponent>(camera);
+
         Vector2 worldPos = GetScreenToWorld2D(GetMousePosition(), camera.camera_);
         player->AddComponent<DirectionComponent>(DirectionComponent(0.0f, worldPos)); // degrees
         
         return player;
     }
-
 
     // CREATE ZOMBIES
     static Entity* CreateZombie(

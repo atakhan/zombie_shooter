@@ -1,5 +1,5 @@
-#ifndef PLAYER_ZOMBIE_SCENE_MAPS_H
-#define PLAYER_ZOMBIE_SCENE_MAPS_H
+#ifndef MOVEMENT_TESTING_SCENE_MAPS_H
+#define MOVEMENT_TESTING_SCENE_MAPS_H
 
 #include <string>
 #include <vector>
@@ -156,4 +156,4 @@ class MovementTestingSceneMaps {
 
 };
 
-#endif // PLAYER_ZOMBIE_SCENE_MAPS_H
+#endif // MOVEMENT_TESTING_SCENE_MAPS_H

@@ -6,7 +6,6 @@
 #include "./player/PlayerBreathSystem.h"
 #include "./player/PlayerCameraSystem.h"
 #include "./player/PlayerControlSystem.h"
-#include "./player/PlayerDrawSystem.h"
 #include "./player/PlayerFeetMoveSystem.h"
 #include "./player/PlayerDirectionSystem.h"
 
