@@ -34,17 +34,14 @@ class SceneTools {
         player->AddComponent<AttackComponent>(AttackComponent(strength, attackRadius));
         player->AddComponent<SpeedComponent>(SpeedComponent(agility));
         player->AddComponent<SoundComponent>(SoundComponent(soundRadius));
+        
         CameraComponent camera = CameraComponent();
         player->AddComponent<CameraComponent>(camera);
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
-
-        Rectangle leftFoot = {0.0f, 0.0f, 0.0f, 0.0f};
-        Rectangle rightFoot = {0.0f, 0.0f, 0.0f, 0.0f};
-        Vector2 leftOrigin = { 0.0f, 0.0f };
-        Vector2 rightOrigin = { 0.0f, 0.0f };
-        player->AddComponent<FeetComponent>(FeetComponent(leftFoot, rightFoot, leftOrigin, rightOrigin));
+        player->AddComponent<FeetComponent>(FeetComponent());
+        player->AddComponent<BonesComponent>(BonesComponent());
         
         Vector2 worldPos = GetScreenToWorld2D(GetMousePosition(), camera.camera_);
         player->AddComponent<DirectionComponent>(DirectionComponent(0.0f, worldPos)); // degrees

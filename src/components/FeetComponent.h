@@ -10,11 +10,11 @@ struct FeetComponent {
     Vector2 leftOrigin_;
     Vector2 rightOrigin_;
     
-    FeetComponent(Rectangle left, Rectangle right, Vector2 leftOrigin, Vector2 rightOrigin)
-        : left_(left)
-        , right_(right)
-        , leftOrigin_(leftOrigin)
-        , rightOrigin_(rightOrigin)
+    FeetComponent()
+        : left_({0.0f, 0.0f, 0.0f, 0.0f})
+        , right_({0.0f, 0.0f, 0.0f, 0.0f})
+        , leftOrigin_({ 0.0f, 0.0f })
+        , rightOrigin_({ 0.0f, 0.0f })
         {};
 };
 

@@ -8,11 +8,10 @@ void MovementTestingScene::Init() {
         Scene::title_
     ));
 
+    // Create Map
     int mapIndex = 1;
     std::vector<std::vector<int>> spawnMap = MovementTestingSceneMaps::GetSpawnMap(mapIndex);
     std::vector<std::vector<int>> wallsMap = MovementTestingSceneMaps::GetWallsMap(mapIndex);
-
-    // Map entity
     Entity *mapEntity = MapTools::CreateMap(
         spawnMap,
         wallsMap,
@@ -21,7 +20,7 @@ void MovementTestingScene::Init() {
     );
     Scene::AddEntity(mapEntity);
 
-    // Player entity
+    // Create Player
     Scene::AddEntity(SceneTools::CreatePlayer(
         MapTools::GetPlayerSpawnPositionFromMap(mapEntity),
         Config::PLAYER_HEALTH,
@@ -47,18 +46,21 @@ void MovementTestingScene::Init() {
 
     // Systems
     // Map systems
+    Scene::AddSystem(new TerrainDrawSystem);
+
     // Zombie systems
     // Scene::AddSystem(new ZombieMoveSystem);
     // Scene::AddSystem(new ZombieTargetingSystem);
+    // Scene::AddSystem(new ZombieDrawSystem);
     
     // Player systems
     Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
-    // Scene::AddSystem(new PlayerBreathSystem);
-    // Scene::AddSystem(new PlayerAdrenalinSystem);
     Scene::AddSystem(new PlayerFeetMoveSystem);
     Scene::AddSystem(new PlayerDirectionSystem);
     Scene::AddSystem(new PlayerDrawSystem);
+    // Scene::AddSystem(new PlayerBreathSystem);
+    // Scene::AddSystem(new PlayerAdrenalinSystem);
     
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);
@@ -66,11 +68,9 @@ void MovementTestingScene::Init() {
     Scene::AddSystem(new ColliderResolverSystem);
     
     // Draw systems
-    Scene::AddSystem(new TerrainDrawSystem);
-    Scene::AddSystem(new ZombieDrawSystem);
 
     // Debug systems
-    Scene::AddSystem(new SoundDrawSystem);
+    // Scene::AddSystem(new SoundDrawSystem);
     // Scene::AddSystem(new TargetDrawSystem);
     // Scene::AddSystem(new ZombieStatsDrawSystem);
     
