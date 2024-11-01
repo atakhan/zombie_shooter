@@ -1,0 +1,8 @@
+#ifndef SRC_SCENES_PLAYER_ZOMBIE_SCENE_COLLIDER_SYSTEMS_BOOTSTRAP_H
+#define SRC_SCENES_PLAYER_ZOMBIE_SCENE_COLLIDER_SYSTEMS_BOOTSTRAP_H
+
+#include "CircleCircleColliderSystem.h"
+#include "CircleRectangleColliderSystem.h"
+#include "ColliderResolverSystem.h"
+
+#endif // SRC_SCENES_PLAYER_ZOMBIE_SCENE_COLLIDER_SYSTEMS_BOOTSTRAP_H

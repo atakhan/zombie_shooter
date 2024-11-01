@@ -1,22 +1,18 @@
-#ifndef SRC_SCENES_PLAYER_ZOMBIE_SCENE_PLAYER_ZOMBIE_SCENE_H
-#define SRC_SCENES_PLAYER_ZOMBIE_SCENE_PLAYER_ZOMBIE_SCENE_H
+#ifndef SRC_SCENES_MOVEMENTS_SCENE_MOVEMENTS_SCENE_H
+#define SRC_SCENES_MOVEMENTS_SCENE_MOVEMENTS_SCENE_H
 
 #include <string>
 #include <iostream>
+
 #include <raylib-cpp.hpp>
 
 #include "../../core/Bootstrap.h"
 
-#include "PlayerZombieSceneMaps.h"
+#include "MovementsSceneMaps.h"
 
-#include "player/Bootstrap.h"
-#include "zombie/Bootstrap.h"
-#include "collider/Bootstrap.h"
-#include "debug/Bootstrap.h"
-
-class PlayerZombieScene : public Scene {
+class MovementsScene : public Scene {
   public:
-    PlayerZombieScene(int index, bool isContinue, float width, float height, std::string title) 
+    MovementsScene(int index, bool isContinue, float width, float height, std::string title) 
       : Scene(index, isContinue, width, height, title) {};
 
     void Init() override;
@@ -28,4 +24,4 @@ class PlayerZombieScene : public Scene {
     std::vector<std::vector<int>> GetWallsMap(int index);
 };
 
-#endif // SRC_SCENES_PLAYER_ZOMBIE_SCENE_PLAYER_ZOMBIE_SCENE_H
+#endif // SRC_SCENES_MOVEMENTS_SCENE_MOVEMENTS_SCENE_H

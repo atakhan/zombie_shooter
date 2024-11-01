@@ -1,5 +1,5 @@
-#ifndef MENU_CONTROL_SYSTEM_H
-#define MENU_CONTROL_SYSTEM_H
+#ifndef SRC_SCENES_MANAGE_SCENES_SCENE_MENU_SYSTEMS_MENU_CONTROL_SYSTEM_H
+#define SRC_SCENES_MANAGE_SCENES_SCENE_MENU_SYSTEMS_MENU_CONTROL_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -17,6 +17,7 @@ class MenuControlSystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
 
     void DrawMenuItem(Entity *uiElement, MenuComponent *menu, MenuItemComponent *menuItem);
+    void DrawTextLine(const char *text, Vector2 pos, MenuComponent *menu);
 };
 
-#endif // MENU_CONTROL_SYSTEM_H
+#endif // SRC_SCENES_MANAGE_SCENES_SCENE_MENU_SYSTEMS_MENU_CONTROL_SYSTEM_H

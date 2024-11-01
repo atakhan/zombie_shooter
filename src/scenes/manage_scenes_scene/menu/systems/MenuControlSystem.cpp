@@ -74,27 +74,35 @@ void MenuControlSystem::Update(std::vector<Entity*> *entities) {
 }
 
 
+void MenuControlSystem::DrawTextLine(const char *text, Vector2 pos, MenuComponent *menu) {
+    DrawTextEx(
+        GetFontDefault(),
+        text,
+        pos,
+        menu->textSize_,
+        menu->textSpacing_,
+        menu->color_
+    );
+}
+
 void MenuControlSystem::DrawMenuItem(Entity *uiElement, MenuComponent *menu, MenuItemComponent *menuItem) {
-        BaseUIComponent *baseUI = uiElement->GetComponent<BaseUIComponent>();
-        TextComponent *text = uiElement->GetComponent<TextComponent>();
-        ColPositionComponent *colNum = uiElement->GetComponent<ColPositionComponent>();
-        RowPositionComponent *rowNum = uiElement->GetComponent<RowPositionComponent>();
-        
-        if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
-            DrawRectangle(
-                baseUI->position_.x * colNum->value_,
-                baseUI->position_.y + menu->textSize_ * rowNum->value_,
-                text->text_.length() * 10.0f,
-                menu->textSize_,
-                GREEN
-            );
-        }
-        UiTools::DrawTextLine(
-            text->text_.c_str(),
-            (Vector2){
-                position->position_.x + colNum->value_,
-                position->position_.y + (menu->textSize_ * rowNum->value_)
-            },
-            menu
+    BaseUIComponent *baseUI = uiElement->GetComponent<BaseUIComponent>();
+    
+    if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
+        DrawRectangle(
+            baseUI->position_.x * menuItem->col_,
+            baseUI->position_.y + menu->textSize_ * menuItem->row_,
+            menuItem->text_.length() * 10.0f,
+            menu->textSize_,
+            menu->selectedColor_
         );
     }
+    DrawTextLine(
+        menuItem->text_.c_str(),
+        (Vector2){
+            baseUI->position_.x + menuItem->col_,
+            baseUI->position_.y + (menu->textSize_ * menuItem->row_)
+        },
+        menu
+    );
+}

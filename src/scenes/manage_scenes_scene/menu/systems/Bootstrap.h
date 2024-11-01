@@ -2,5 +2,6 @@
 #define SRC_SCENES_MANAGE_SCENES_SCENE_MENU_SUSTEMS_BOOTSTRAP_H
 
 #include "MenuControlSystem.h"
+#include "UIDrawSystem.h"
 
 #endif // SRC_SCENES_MANAGE_SCENES_SCENE_MENU_SUSTEMS_BOOTSTRAP_H
