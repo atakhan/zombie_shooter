@@ -13,7 +13,7 @@ void ManageScenesScene::Init() {
         R6G6B6A8, R0G0B7A8,
         (Vector2){30.0f, 100.0f}
     );
-    Entity *menuEntity = CreateMenu(menu);
+    Entity *menuEntity = Tools::CreateMenu(menu);
     Scene::AddEntity(menuEntity);
 
     float colNum = 1.0f;
@@ -27,7 +27,7 @@ void ManageScenesScene::Init() {
             colNum,
             rowNum
         );
-        Entity *menuItemEntity = CreateMenuItem(menu, menuItem);
+        Entity *menuItemEntity = Tools::CreateMenuItem(menu, menuItem);
         if (menuItem) {
             Scene::AddEntity(menuItemEntity);
             rowNum = rowNum + 1.0f;
@@ -84,20 +84,4 @@ void ManageScenesScene::Draw() {
         }
         system->Draw(&entities_);
     }
-}
-
-Entity* ManageScenesScene::CreateMenu(MenuComponent* menu) {
-    Entity *entity = new Entity();
-    entity->AddComponent<MenuComponent>(*menu);
-    
-    return entity;
-}
-
-Entity* ManageScenesScene::CreateMenuItem(MenuComponent *menu, MenuItemComponent *menuItem) {
-    Entity *entity = new Entity();
-    entity->AddComponent<MenuItemComponent>(
-        MenuItemComponent(*menuItem)
-    );
-
-    return entity;
 }

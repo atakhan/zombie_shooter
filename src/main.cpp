@@ -6,7 +6,6 @@
 
 #include "Config.h"
 
-// Scene
 #include "scenes/Bootstrap.h"
 
 

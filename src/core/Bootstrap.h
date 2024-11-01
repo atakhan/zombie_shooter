@@ -2,7 +2,7 @@
 #define CORE_BOOTSTRAP_H
 
 #include "Colors.h"
-#include "Component.h"
+#include "Components.h"
 #include "Entity.h"
 #include "Game.h"
 #include "Scene.h"

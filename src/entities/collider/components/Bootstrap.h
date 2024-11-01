@@ -1,0 +1,7 @@
+#ifndef SRC_ENTITIES_COLLIDER_COMPONENTS_BOOTSTRAP_H
+#define SRC_ENTITIES_COLLIDER_COMPONENTS_BOOTSTRAP_H
+
+#include "CircleColliderComponent.h"
+#include "RectangleColliderComponent.h"
+
+#endif // SRC_ENTITIES_COLLIDER_COMPONENTS_BOOTSTRAP_H

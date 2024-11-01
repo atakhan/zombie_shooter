@@ -21,8 +21,8 @@ void PlayerZombieScene::Init() {
     Scene::AddEntity(mapEntity);
 
     // Player entity
-    Scene::AddEntity(SceneTools::CreatePlayer(
-        MapTools::GetPlayerSpawnPositionFromMap(mapEntity),
+    Scene::AddEntity(Tools::CreatePlayer(
+        Tools::GetPlayerSpawnPositionFromMap(mapEntity),
         Config::PLAYER_HEALTH,
         Config::PLAYER_STRENGTH,
         Config::PLAYER_AGILITY,
@@ -32,17 +32,17 @@ void PlayerZombieScene::Init() {
     
     GenerateMapEntities(mapEntity, spawnMap, wallsMap);
 
-    // ui entities
-    Scene::AddEntity(UiTools::CreateUITextEntity(
-        (Vector2){10.0f, 10.0f},
-        Config::GAME_TITLE,
-        16.0f, 1, 1, 3.0f, RED
-    ));
-    Scene::AddEntity(UiTools::CreateUITextEntity(
-        (Vector2){10.0f, 10.0f},
-        Scene::title_,
-        16.0f, 1, 2, 3.0f, RED
-    ));
+    // // ui entities
+    // Scene::AddEntity(Tools::CreateUITextEntity(
+    //     (Vector2){10.0f, 10.0f},
+    //     Config::GAME_TITLE,
+    //     16.0f, 1, 1, 3.0f, RED
+    // ));
+    // Scene::AddEntity(Tools::CreateUITextEntity(
+    //     (Vector2){10.0f, 10.0f},
+    //     Scene::title_,
+    //     16.0f, 1, 2, 3.0f, RED
+    // ));
 
     // Systems
     // Map systems
@@ -74,7 +74,7 @@ void PlayerZombieScene::Init() {
     
     // UI draw systems
     // Scene::AddUISystem(new DebugUIDrawSystem);
-    Scene::AddUISystem(new UIDrawSystem);
+    // Scene::AddUISystem(new UIDrawSystem);
 
     // Init Systems
     for (auto& system : systems_) {
@@ -148,7 +148,7 @@ void PlayerZombieScene::GenerateMapEntities(Entity *mapEntity, std::vector<std::
                     (y * Config::MAP_CELL_HEIGHT) + (Config::MAP_CELL_HEIGHT / 2)
                 };
                 
-                Scene::AddEntity(SceneTools::CreateZombie(
+                Scene::AddEntity(Tools::CreateZombie(
                     PositionComponent(pos),
                     TargetComponent(pos),
                     HealthComponent(Config::ZOMBIE_HEALTH),
@@ -164,14 +164,9 @@ void PlayerZombieScene::GenerateMapEntities(Entity *mapEntity, std::vector<std::
                     (y * Config::MAP_CELL_HEIGHT)
                 };
                 
-                Scene::AddEntity(MapTools::CreateWall(
+                Scene::AddEntity(Tools::CreateWall(
                     PositionComponent(pos), 
                     HealthComponent(Config::DEFAULT_WALL_HEALTH),
-                    SoundReflectComponent({
-                        {10, 100},
-                        {20, 50},
-                        {30, 10},
-                    }),
                     RectangleColliderComponent(
                         Config::MAP_CELL_WIDTH,
                         Config::MAP_CELL_HEIGHT

@@ -14,6 +14,7 @@
 #include "player/Bootstrap.h"
 #include "zombie/Bootstrap.h"
 #include "collider/Bootstrap.h"
+#include "map/Bootstrap.h"
 #include "debug/Bootstrap.h"
 
 class PlayerZombieScene : public Scene {
