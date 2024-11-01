@@ -1,16 +1,15 @@
 // Config.h
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef SRC_CONFIG_H
+#define SRC_CONFIG_H
 
 #include <string>
 #include <raylib-cpp.hpp>
-#include "utils/Bootstrap.h"
 
 class Config {
 public:
 // GENERAL CONFIGS
     static const char* GAME_TITLE;
-    static const char * WINDOW_TITLE;
+    static const char* WINDOW_TITLE;
     static const int WINDOW_WIDTH;
     static const int WINDOW_HEIGHT;
     static const float MAP_CELL_WIDTH;
@@ -92,4 +91,4 @@ public:
 
 };
 
-#endif // CONFIG_H
+#endif // SRC_CONFIG_H

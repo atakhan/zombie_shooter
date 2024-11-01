@@ -2,12 +2,13 @@
 #include <iostream>
 #include <string>
 
-#include "Config.h"
 #include "core/Bootstrap.h"
-#include "components/Bootstrap.h"
-#include "systems/Bootstrap.h"
-#include "scenes/Bootstrap.h"
-#include "utils/Bootstrap.h"
+
+#include "Config.h"
+
+// Scene
+#include "scenes/manage_scenes_scene/ManageScenesScene.h"
+#include "scenes/player_zombie_scene/PlayerZombieScene.h"
 
 int main() {
     Game *game = new Game(
@@ -16,9 +17,9 @@ int main() {
     
     // // SCENE MANAGER index 0
     game->AddScene(new ManageScenesScene(0, true, 10, 10, "choose a scene"));
-    game->AddScene(new MovementTestingScene(1, false, 20, 20, "Movement Testing Scene"));
-    game->AddScene(new PlayerZombieScene(2, false, 20, 20, "player vs zombie scene"));
-    game->AddScene(new HumanTrainingScene(3, false, 10, 10, "try to create a human entity scene"));
+    game->AddScene(new PlayerZombieScene(1, false, 20, 20, "player vs zombie scene"));
+    // game->AddScene(new MovementTestingScene(1, false, 20, 20, "Movement Testing Scene"));
+    // game->AddScene(new HumanTrainingScene(3, false, 10, 10, "try to create a human entity scene"));
     
     game->Init();
 

@@ -1,5 +1,6 @@
 // Config.cpp
 #include "Config.h"
+#include "core/Bootstrap.h"
 
 // GAME CONFIGS
 const char* Config::GAME_TITLE              = "Zombie RPG";
