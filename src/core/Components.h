@@ -43,4 +43,13 @@ struct ColorComponent {
     ColorComponent(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : value_(raylib::Color(r, g, b, a)) {}
 };
 
+
+struct TargetComponent {
+    Vector2 position_;
+    bool active_;
+
+    TargetComponent(float x, float y) : position_((Vector2){x, y}), active_(true) {}
+    TargetComponent(Vector2 pos) : position_(pos), active_(true) {}
+};
+
 #endif // SRC_CORE_COMPONENTS_H

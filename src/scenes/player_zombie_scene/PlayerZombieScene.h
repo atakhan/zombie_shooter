@@ -7,15 +7,10 @@
 
 #include "../../Config.h"
 #include "../../core/Bootstrap.h"
+#include "../../entities/Bootstrap.h"
 #include "../Tools.h"
 
 #include "PlayerZombieSceneMaps.h"
-
-#include "player/Bootstrap.h"
-#include "zombie/Bootstrap.h"
-#include "collider/Bootstrap.h"
-#include "map/Bootstrap.h"
-#include "debug/Bootstrap.h"
 
 class PlayerZombieScene : public Scene {
   public:

@@ -8,7 +8,9 @@
 
 #include "../../Config.h"
 #include "../../core/Bootstrap.h"
+#include "../../entities/Bootstrap.h"
 #include "../Tools.h"
+
 
 #include "MovementsSceneMaps.h"
 

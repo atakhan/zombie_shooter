@@ -1,5 +1,5 @@
-#ifndef ZOMBIE_MOVE_SYSTEM_H
-#define ZOMBIE_MOVE_SYSTEM_H
+#ifndef SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_MOVE_SYSTEM_H
+#define SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_MOVE_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -21,4 +21,4 @@ class ZombieMoveSystem : public System {
     // void MoveTo(TargetComponent *targetPos, PositionComponent *curPos, float speed);
 };
 
-#endif // ZOMBIE_MOVE_SYSTEM_H
+#endif // SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_MOVE_SYSTEM_H

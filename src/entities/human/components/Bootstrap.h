@@ -2,6 +2,5 @@
 #define SRC_SCENES_MANAGE_SCENES_SCENE_HUMAN_COMPONENTS_BOOTSTRAP_H
 
 #include "HumanComponent.h"
-#include "StaminaComponent.h"
 
 #endif // SRC_SCENES_MANAGE_SCENES_SCENE_HUMAN_COMPONENTS_BOOTSTRAP_H

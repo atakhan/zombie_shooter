@@ -16,7 +16,6 @@ void HumanTargetingSystem::Update(std::vector<Entity*> *entities) {
             continue;
         }
         HumanComponent* human = entity->GetComponent<HumanComponent>();
-        StaminaComponent* stamina = entity->GetComponent<StaminaComponent>();
 
         if (!human->isTargetReached_) {
             if (TargetReached(human->target_, human->position_)) {
@@ -27,7 +26,7 @@ void HumanTargetingSystem::Update(std::vector<Entity*> *entities) {
             human->isTargetReached_ = false;
         }
 
-        if (stamina->current_ > (stamina->max_ / 2) && human->currentStatus_ == HumanComponent::Status::IDLE) {
+        if (human->currentStatus_ == HumanComponent::Status::IDLE) {
             human->currentStatus_ = HumanComponent::Status::WALK;
             human->target_ = FindTarget(human, entities);
             human->isTargetReached_ = false;

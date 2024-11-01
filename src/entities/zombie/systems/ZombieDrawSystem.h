@@ -1,5 +1,5 @@
-#ifndef ZOMBIE_DRAW_SYSTEM_H
-#define ZOMBIE_DRAW_SYSTEM_H
+#ifndef SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_DRAW_SYSTEM_H
+#define SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_DRAW_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -17,4 +17,4 @@ class ZombieDrawSystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
 };
 
-#endif // ZOMBIE_DRAW_SYSTEM_H
+#endif // SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_DRAW_SYSTEM_H

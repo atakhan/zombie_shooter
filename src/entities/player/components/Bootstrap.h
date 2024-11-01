@@ -11,6 +11,5 @@
 #include "SoundComponent.h"
 #include "SpeedComponent.h"
 #include "StaminaComponent.h"
-#include "TargetComponent.h"
 
 #endif // SRC_SCENES_PLAYER_ZOMBIE_SCENE_PLAYER_COMPONENTS_BOOTSTRAP_H

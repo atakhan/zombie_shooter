@@ -1,5 +1,5 @@
-#ifndef ZOMBIE_TARGETING_SYSTEM_H
-#define ZOMBIE_TARGETING_SYSTEM_H
+#ifndef SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_TARGETING_SYSTEM_H
+#define SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_TARGETING_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -23,4 +23,4 @@ class ZombieTargetingSystem : public System {
     bool TargetReachable(Vector2 targetPos, Vector2 curPos, float zombieRadius, TerrainComponent *terrain, WallsMapComponent *wallsMap);
 };
 
-#endif // ZOMBIE_TARGETING_SYSTEM_H
+#endif // SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_TARGETING_SYSTEM_H
