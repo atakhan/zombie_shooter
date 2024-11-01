@@ -3,7 +3,7 @@
 void ManageScenesScene::Init() {
     Scene::continue_ = true;
     // Scene title
-    Scene::AddEntity(CreateScene(
+    Scene::AddEntity(Tools::CreateScene(
         Config::GAME_TITLE,
         Scene::title_
     ));
@@ -84,14 +84,6 @@ void ManageScenesScene::Draw() {
         }
         system->Draw(&entities_);
     }
-}
-
-
-Entity* ManageScenesScene::CreateScene(const std::string& gameTitle, const std::string& sceneTitle) {
-    Entity *sceneEntity = new Entity();
-    sceneEntity->AddComponent<SceneComponent>(SceneComponent(sceneTitle));
-    sceneEntity->AddComponent<GameTitleComponent>(GameTitleComponent(gameTitle));
-    return sceneEntity;
 }
 
 Entity* ManageScenesScene::CreateMenu(MenuComponent* menu) {

@@ -3,10 +3,12 @@
 
 #include <vector>
 #include <raylib-cpp.hpp>
+#include <iostream>
 
-#include "../../Config.h"
-#include "../../core/Bootstrap.h"
-#include "../../components/Bootstrap.h"
+#include "../../../../Config.h"
+#include "../../../../core/Bootstrap.h"
+#include "../components/Bootstrap.h"
+
 
 class ZombieDrawSystem : public System {
   public:

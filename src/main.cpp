@@ -7,8 +7,8 @@
 #include "Config.h"
 
 // Scene
-#include "scenes/manage_scenes_scene/ManageScenesScene.h"
-#include "scenes/player_zombie_scene/PlayerZombieScene.h"
+#include "scenes/Bootstrap.h"
+
 
 int main() {
     Game *game = new Game(

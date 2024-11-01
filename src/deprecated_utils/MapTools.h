@@ -13,26 +13,6 @@
 
 class MapTools {  
   public:
-    // CREATE GAME
-    static Entity* CreateMap(
-        std::vector<std::vector<int>> spawnMap,
-        std::vector<std::vector<int>> wallsMap,
-        float cellWidth, 
-        float cellHeight
-    ) {
-        Entity *mapEntity = new Entity();
-        mapEntity->AddComponent<TerrainComponent>(TerrainComponent(
-            spawnMap.at(0).size(), // width
-            spawnMap.size(), // height
-            cellWidth,
-            cellHeight
-        ));
-
-        mapEntity->AddComponent<SpawnMapComponent>(SpawnMapComponent(spawnMap));
-        mapEntity->AddComponent<WallsMapComponent>(WallsMapComponent(wallsMap));
-
-        return mapEntity;
-    }
 
     static Vector2 GetPlayerSpawnPositionFromMap(Entity *entity) {
         SpawnMapComponent *spawnMap = entity->GetComponent<SpawnMapComponent>();
@@ -68,14 +48,6 @@ class MapTools {
         wall->AddComponent<RectangleColliderComponent>(rectCollider);
 
         return wall;
-    }
-    
-    static float AngleBetweenVectors(const Vector2& mousePos, const Vector2& playerPos) {        
-        float dx = mousePos.x - playerPos.x;
-        float dy = playerPos.y - mousePos.y;
-        float theta_radians = atan2f(dy, dx);
-        
-        return theta_radians * (-180.0/3.141592653589793238463);
     }
 };
 

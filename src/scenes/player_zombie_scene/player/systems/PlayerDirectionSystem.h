@@ -16,6 +16,8 @@ class PlayerDirectionSystem : public System {
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
+
+    float AngleBetweenVectors(const Vector2& mousePos, const Vector2& playerPos);
 };
 
 #endif // PLAYER_DIRECTION_SYSTEM_H

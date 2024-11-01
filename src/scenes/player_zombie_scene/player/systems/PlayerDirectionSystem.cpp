@@ -50,7 +50,7 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
     float mousePosY = mousePos.y;
 
     // Вычисляем целевой угол
-    float targetRotation = MapTools::AngleBetweenVectors({mousePosX, mousePosY}, playerPosition->position_);
+    float targetRotation = AngleBetweenVectors(mousePos, playerPosition->position_);
     targetRotation = NormalizeAngle(targetRotation); // Нормализуем целевой угол
 
     // Плавное вращение с интерполяцией
@@ -70,4 +70,12 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
 
     // Обновляем позицию мыши
     playerDirection->mousePos_ = {mousePosX, mousePosY};
+}
+
+float PlayerDirectionSystem::AngleBetweenVectors(const Vector2& mousePos, const Vector2& playerPos) {
+    float dx = mousePos.x - playerPos.x;
+    float dy = playerPos.y - mousePos.y;
+    float theta_radians = atan2f(dy, dx);
+
+    return theta_radians * (-180.0/3.141592653589793238463);
 }

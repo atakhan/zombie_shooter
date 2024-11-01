@@ -2,10 +2,10 @@
 
 void MovementsScene::Init() {
     // Scene entity
-    // Scene::AddEntity(SceneTools::CreateScene(
-    //     Config::GAME_TITLE,
-    //     Scene::title_
-    // ));
+    Scene::AddEntity(Tools::CreateScene(
+        Config::GAME_TITLE,
+        Scene::title_
+    ));
 
     // // Create Map
     // int mapIndex = 1;

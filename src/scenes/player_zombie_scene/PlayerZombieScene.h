@@ -5,7 +5,9 @@
 #include <iostream>
 #include <raylib-cpp.hpp>
 
+#include "../../Config.h"
 #include "../../core/Bootstrap.h"
+#include "../Tools.h"
 
 #include "PlayerZombieSceneMaps.h"
 

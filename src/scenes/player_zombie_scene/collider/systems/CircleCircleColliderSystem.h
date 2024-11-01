@@ -8,7 +8,6 @@
 
 #include "../../../../Config.h"
 #include "../../../../core/Bootstrap.h"
-
 #include "../components/Bootstrap.h"
 
 class CircleCircleColliderSystem : public System {

@@ -2,7 +2,7 @@
 
 void PlayerZombieScene::Init() {
     // Scene entity
-    Scene::AddEntity(SceneTools::CreateScene(
+    Scene::AddEntity(Tools::CreateScene(
         Config::GAME_TITLE,
         Scene::title_
     ));
@@ -12,7 +12,7 @@ void PlayerZombieScene::Init() {
     std::vector<std::vector<int>> wallsMap = PlayerZombieSceneMaps::GetWallsMap(mapIndex);
 
     // Map entity
-    Entity *mapEntity = MapTools::CreateMap(
+    Entity *mapEntity = Tools::CreateMap(
         spawnMap,
         wallsMap,
         Config::MAP_CELL_WIDTH,

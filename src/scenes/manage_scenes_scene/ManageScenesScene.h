@@ -4,7 +4,9 @@
 #include <string>
 #include <raylib-cpp.hpp>
 
+#include "../../Config.h"
 #include "../../core/Bootstrap.h"
+#include "../Tools.h"
 #include "./menu/Bootstrap.h"
 
 class ManageScenesScene : public Scene {
@@ -25,7 +27,6 @@ class ManageScenesScene : public Scene {
     void Update(int *currentSceneIndex) override;
     void Draw() override;
 
-    Entity* CreateScene(const std::string& gameTitle, const std::string& sceneTitle);
     Entity* CreateMenu(MenuComponent* menu);
     Entity* CreateMenuItem(MenuComponent *menu, MenuItemComponent *menuItem);
 };

@@ -5,9 +5,12 @@
 #include <raylib-cpp.hpp>
 #include <iostream>
 
-#include "../../Config.h"
-#include "../../core/Bootstrap.h"
-#include "../../components/Bootstrap.h"
+#include "../../../../Config.h"
+#include "../../../../core/Bootstrap.h"
+#include "../../map/components/Bootstrap.h"
+#include "../components/Bootstrap.h"
+#include "../../player/components/Bootstrap.h"
+#include "../../collider/components/Bootstrap.h"
 
 class ZombieTargetingSystem : public System {
   public:
