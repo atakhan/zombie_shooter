@@ -1,8 +1,13 @@
 #ifndef SRC_SCENES_TOOLS_H
 #define SRC_SCENES_TOOLS_H
 
+#include <string>
 #include "../core/Bootstrap.h"
 #include "../entities/Bootstrap.h"
+#include "../entities/scene/components/SceneComponent.h"
+#include "../entities/scene/components/GameTitleComponent.h"
+#include "../entities/player/components/Bootstrap.h"
+#include "../entities/zombie/components/Bootstrap.h"
 
 class Tools {
   public:
@@ -10,7 +15,7 @@ class Tools {
         Entity *sceneEntity = new Entity();
         sceneEntity->AddComponent<SceneComponent>(SceneComponent(sceneTitle));
         sceneEntity->AddComponent<GameTitleComponent>(GameTitleComponent(gameTitle));
-        
+
         return sceneEntity;
     }
 
@@ -211,4 +216,4 @@ class Tools {
 };
 
 
-#endif  // SRC_SCENES_BOOTSTRAP_H
+#endif  // SRC_SCENES_TOOLS_H

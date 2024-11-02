@@ -1,5 +1,5 @@
-#ifndef DEBUG_UI_DRAW_SYSTEM_H
-#define DEBUG_UI_DRAW_SYSTEM_H
+#ifndef SRC_ENTITIES_DEBUG_SYSTEMS_DEBUG_UI_DRAW_SYSTEM_H
+#define SRC_ENTITIES_DEBUG_SYSTEMS_DEBUG_UI_DRAW_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -15,4 +15,4 @@ class DebugUIDrawSystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
 };
 
-#endif // DEBUG_UI_DRAW_SYSTEM_H
+#endif // SRC_ENTITIES_DEBUG_SYSTEMS_DEBUG_UI_DRAW_SYSTEM_H

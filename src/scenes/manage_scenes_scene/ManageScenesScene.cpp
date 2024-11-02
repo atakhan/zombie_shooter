@@ -3,10 +3,11 @@
 void ManageScenesScene::Init() {
     Scene::continue_ = true;
     // Scene title
-    Scene::AddEntity(Tools::CreateScene(
+    Entity *scene = Tools::CreateScene(
         Config::GAME_TITLE,
         Scene::title_
-    ));
+    );
+    Scene::AddEntity(scene);
 
     MenuComponent *mainMenu = new MenuComponent(
         1,
@@ -22,7 +23,7 @@ void ManageScenesScene::Init() {
     int index = 0;
     for (auto& scene : *scenes_) {
         if (scene == nullptr) { continue; }
-        
+
         MenuItemComponent* menuItem = new MenuItemComponent(
             mainMenu->menuIndex_,
             index,

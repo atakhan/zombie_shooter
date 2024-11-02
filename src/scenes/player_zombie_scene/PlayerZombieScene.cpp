@@ -147,14 +147,10 @@ void PlayerZombieScene::GenerateMapEntities(Entity *mapEntity, std::vector<std::
                     (x * Config::MAP_CELL_WIDTH) + (Config::MAP_CELL_WIDTH / 2),
                     (y * Config::MAP_CELL_HEIGHT) + (Config::MAP_CELL_HEIGHT / 2)
                 };
-                
                 Scene::AddEntity(Tools::CreateZombie(
                     PositionComponent(pos),
                     TargetComponent(pos),
-                    HealthComponent(Config::ZOMBIE_HEALTH),
-                    AttackComponent(Config::ZOMBIE_STRENGTH, Config::ZOMBIE_ATTACK_RADIUS),
-                    SpeedComponent(Config::ZOMBIE_AGILITY),
-                    SoundComponent(Config::SOUND_MAX_RADIUS)
+                    HealthComponent(Config::ZOMBIE_HEALTH)
                 ));
             }
             // Walls spawn point
