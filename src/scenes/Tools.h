@@ -104,11 +104,10 @@ class Tools {
         return entity;
     }
 
-    static Entity* CreateMenuItem(MenuComponent *menu, MenuItemComponent *menuItem) {
+    static Entity* CreateMenuItem(BaseUIComponent baseUi, MenuItemComponent menuItem) {
         Entity *entity = new Entity();
-        entity->AddComponent<MenuItemComponent>(
-            MenuItemComponent(*menuItem)
-        );
+        entity->AddComponent<MenuItemComponent>(menuItem);
+        entity->AddComponent<BaseUIComponent>(baseUi);
 
         return entity;
     }
@@ -141,8 +140,8 @@ class Tools {
         
         if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
             DrawRectangle(
-                position->position_.x * menuItem->col_,
-                position->position_.y + menu->textSize_ * menuItem->row_,
+                menu->position_.x * menuItem->col_,
+                menu->position_.y + menu->textSize_ * menuItem->row_,
                 menuItem->text_.length() * 10.0f,
                 menu->textSize_,
                 text->accentColor_
@@ -154,7 +153,7 @@ class Tools {
             menuItem->text_.c_str(),
             (Vector2){
                 position->position_.x + menuItem->col_,
-                position->position_.y + (menu->textSize_ * menuItem->row_)
+                position->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_
             },
             menu->textSize_,
             menu->textSpacing_,

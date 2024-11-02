@@ -1,38 +1,47 @@
 #include "ManageScenesScene.h"
 
 void ManageScenesScene::Init() {
+    std::cout << "ManageScenesScene::Init" << std::endl;
     Scene::continue_ = true;
     // Scene title
     Scene::AddEntity(Tools::CreateScene(
         Config::GAME_TITLE,
         Scene::title_
     ));
-    
-    MenuComponent* menu = new MenuComponent(
-        20.0f, 2.0f, 10.0f,
+
+    MenuComponent *mainMenu = new MenuComponent(
+        1,
+        32.0f, 8.0f, 10.0f,
         R6G6B6A8, R0G0B7A8,
         (Vector2){30.0f, 100.0f}
     );
-    Entity *menuEntity = Tools::CreateMenu(menu);
-    Scene::AddEntity(menuEntity);
+
+    Scene::AddEntity(Tools::CreateMenu(mainMenu));
 
     float colNum = 1.0f;
     float rowNum = 1.0f;
     int index = 0;
     for (auto& scene : *scenes_) {
         if (scene == nullptr) { continue; }
+        
         MenuItemComponent* menuItem = new MenuItemComponent(
+            mainMenu->menuIndex_,
             index,
             scene->GetTitle(),
             colNum,
             rowNum
         );
-        Entity *menuItemEntity = Tools::CreateMenuItem(menu, menuItem);
-        if (menuItem) {
-            Scene::AddEntity(menuItemEntity);
-            rowNum = rowNum + 1.0f;
-            index++;
-        }
+
+        BaseUIComponent* baseUi = new BaseUIComponent((Vector2){
+            mainMenu->position_.x * colNum,
+            mainMenu->position_.y + mainMenu->textSize_ * rowNum
+        });
+        
+        Entity *menuItemEntity = Tools::CreateMenuItem(*baseUi, *menuItem);
+        Scene::AddEntity(menuItemEntity);
+
+        rowNum = rowNum + 1.0f;
+        index++;
     }
     
     Scene::AddSystem(new MenuControlSystem());
@@ -48,6 +57,7 @@ void ManageScenesScene::Init() {
 
 void ManageScenesScene::Update(int *currentSceneIndex) {
     if (*currentSceneIndex == index_) {
+        // std::cout << "ManageScenesScene::Update and it is current" << std::endl;
         MenuComponent *menu = nullptr;
         for (auto& entity : entities_) {
             if (entity->HasComponent<MenuComponent>()) {

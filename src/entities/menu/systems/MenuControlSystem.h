@@ -15,9 +15,6 @@ class MenuControlSystem : public System {
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
-
-    void DrawMenuItem(Entity *uiElement, MenuComponent *menu, MenuItemComponent *menuItem);
-    void DrawTextLine(const char *text, Vector2 pos, MenuComponent *menu);
 };
 
 #endif // SRC_SCENES_MANAGE_SCENES_SCENE_MENU_SYSTEMS_MENU_CONTROL_SYSTEM_H

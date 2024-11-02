@@ -4,6 +4,7 @@
 #include <raylib-cpp.hpp>
 
 struct MenuComponent {
+    unsigned int menuIndex_;
     bool chooseEvent_;
     int currentItemIndex_;
     float textSize_;
@@ -13,8 +14,9 @@ struct MenuComponent {
     Color selectedColor_;
     Vector2 position_;
 
-    MenuComponent(float size, float textSpacing, float lineSpacing, Color color, Color selected, Vector2 pos) 
-        : currentItemIndex_(0) 
+    MenuComponent(unsigned int menuIndex, float size, float textSpacing, float lineSpacing, Color color, Color selected, Vector2 pos) 
+        : menuIndex_(menuIndex)
+        , currentItemIndex_(0) 
         , chooseEvent_(false) 
         , textSize_(size) 
         , textSpacing_(textSpacing) 

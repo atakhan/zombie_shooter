@@ -5,13 +5,15 @@
 #include <string>
 
 struct MenuItemComponent {
-    int menuItemIndex_;
+    unsigned int menuIndex_;
     std::string text_;
+    int menuItemIndex_;
     float row_;
     float col_;
 
-    MenuItemComponent(int menuItemIndex, std::string text, float row, float col) 
-        : menuItemIndex_(menuItemIndex)
+    MenuItemComponent(unsigned int menuIndex, int menuItemIndex, std::string text, float row, float col) 
+        : menuIndex_(menuIndex)
+        , menuItemIndex_(menuItemIndex)
         , text_(text)
         , row_(row)
         , col_(col)

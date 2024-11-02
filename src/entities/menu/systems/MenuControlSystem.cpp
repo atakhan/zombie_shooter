@@ -6,22 +6,31 @@ void MenuControlSystem::Init(std::vector<Entity*> *entities) {
 }
 
 void MenuControlSystem::Draw(std::vector<Entity*> *entities) {
-    MenuComponent *menu = nullptr;
-    int currentItemIndex = 0;
-    for (auto& entity : *entities) {
-        if (entity->HasComponent<MenuComponent>()) {
-            menu = entity->GetComponent<MenuComponent>();
-        }
-    }
 
-    if (menu) {
-        for (auto& entity : *entities) {
-            MenuItemComponent *menuItem = entity->GetComponent<MenuItemComponent>();
-            BaseUIComponent *baseUi = entity->GetComponent<BaseUIComponent>();
-            if (menuItem && baseUi) {
-                DrawMenuItem(entity, menu, menuItem);
+    for (auto& entity : *entities) {
+        MenuComponent *menu = entity->GetComponent<MenuComponent>();
+        
+        if (menu) {
+            for (auto& entity : *entities) {
+                MenuItemComponent *menuItem = entity->GetComponent<MenuItemComponent>();
+                if (menuItem) {
+                    if (menu->menuIndex_ == menuItem->menuIndex_) {
+                        BaseUIComponent *baseUi = entity->GetComponent<BaseUIComponent>();
+                        if (menuItem && menu && baseUi) {
+                            std::cout << "all components found: lets draw menu item" << std::endl;
+                            Tools::DrawMenuItem(baseUi, menu, menuItem);
+                        } else {
+                            std::cout << "BaseUIComponent not found" << std::endl;
+                        }
+                    }
+                } else {
+                    std::cout << "MenuItemComponent not found" << std::endl;
+                }
             }
+        } else {
+            std::cout << "MenuComponent not found" << std::endl;
         }
+
     }
 }
 
@@ -71,38 +80,4 @@ void MenuControlSystem::Update(std::vector<Entity*> *entities) {
         }
     }
 
-}
-
-
-void MenuControlSystem::DrawTextLine(const char *text, Vector2 pos, MenuComponent *menu) {
-    DrawTextEx(
-        GetFontDefault(),
-        text,
-        pos,
-        menu->textSize_,
-        menu->textSpacing_,
-        menu->color_
-    );
-}
-
-void MenuControlSystem::DrawMenuItem(Entity *uiElement, MenuComponent *menu, MenuItemComponent *menuItem) {
-    BaseUIComponent *baseUI = uiElement->GetComponent<BaseUIComponent>();
-    
-    if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
-        DrawRectangle(
-            baseUI->position_.x * menuItem->col_,
-            baseUI->position_.y + menu->textSize_ * menuItem->row_,
-            menuItem->text_.length() * 10.0f,
-            menu->textSize_,
-            menu->selectedColor_
-        );
-    }
-    DrawTextLine(
-        menuItem->text_.c_str(),
-        (Vector2){
-            baseUI->position_.x + menuItem->col_,
-            baseUI->position_.y + (menu->textSize_ * menuItem->row_)
-        },
-        menu
-    );
 }
