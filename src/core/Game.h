@@ -1,6 +1,6 @@
 // Game.h
-#ifndef GAME_H
-#define GAME_H
+#ifndef SRC_CORE_GAME_H
+#define SRC_CORE_GAME_H
 
 #include <vector>
 #include "Scene.h"
@@ -26,4 +26,4 @@ public:
     bool ShouldExit();
 };
 
-#endif // GAME_H
+#endif // SRC_CORE_GAME_H

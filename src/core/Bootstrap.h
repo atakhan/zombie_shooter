@@ -1,5 +1,5 @@
-#ifndef CORE_BOOTSTRAP_H
-#define CORE_BOOTSTRAP_H
+#ifndef SRC_CORE_BOOTSTRAP_H
+#define SRC_CORE_BOOTSTRAP_H
 
 #include "Colors.h"
 #include "Components.h"
@@ -8,4 +8,4 @@
 #include "Scene.h"
 #include "System.h"
 
-#endif // CORE_BOOTSTRAP_H
+#endif // SRC_CORE_BOOTSTRAP_H

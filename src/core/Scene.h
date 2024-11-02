@@ -1,6 +1,6 @@
 // Scene.h
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef SRC_CORE_SCENE_H
+#define SRC_CORE_SCENE_H
 
 #include <raylib-cpp.hpp>
 #include <algorithm>
@@ -49,4 +49,4 @@ public:
     std::string GetTitle();
 };
 
-#endif // SCENE_H
+#endif // SRC_CORE_SCENE_H

@@ -1,6 +1,6 @@
 // Entity.h
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef SRC_CORE_ENTITY_H
+#define SRC_CORE_ENTITY_H
 
 #include <unordered_map>
 #include <typeindex>
@@ -43,4 +43,4 @@ public:
         }
     }
 };
-#endif // ENTITY_H
+#endif // SRC_CORE_ENTITY_H

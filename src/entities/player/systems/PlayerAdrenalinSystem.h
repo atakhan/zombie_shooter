@@ -7,7 +7,7 @@
 
 #include "../../../Config.h"
 #include "../../../core/Bootstrap.h"
-#include "../../player/components/Bootstrap.h"
+#include "../components/Bootstrap.h"
 #include "../../zombie/components/Bootstrap.h"
 
 

@@ -1,7 +1,6 @@
 #include "ManageScenesScene.h"
 
 void ManageScenesScene::Init() {
-    std::cout << "ManageScenesScene::Init" << std::endl;
     Scene::continue_ = true;
     // Scene title
     Scene::AddEntity(Tools::CreateScene(

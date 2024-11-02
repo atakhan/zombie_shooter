@@ -59,24 +59,19 @@ void MenuControlSystem::Update(std::vector<Entity*> *entities) {
         }
 
         if (IsKeyReleased(KEY_UP)) {
-            std::cout << "KEY UP PRESSED" << std::endl;
+            
             int currentIndex = menu->currentItemIndex_;
             int newIndex = menu->currentItemIndex_ - 1;
-            std::cout << "oldIndex: " << currentIndex << "; newIndex: " << newIndex << std::endl;
             menu->currentItemIndex_ = (newIndex < 0) ? menuItemsCount-1 : newIndex;
         } else
         if (IsKeyReleased(KEY_DOWN)) {
-            std::cout << "KEY DOWN PRESSED" << std::endl;
             int currentIndex = menu->currentItemIndex_;
             int newIndex = menu->currentItemIndex_ + 1;
-            std::cout << "oldIndex: " << currentIndex << "; newIndex: " << newIndex << std::endl;
             menu->currentItemIndex_ = (newIndex >= menuItemsCount) ? 0 : newIndex;
         } else
         if (IsKeyReleased(KEY_ENTER)) {
-            std::cout << "KEY ENTER PRESSED" << std::endl;
             int currentIndex = menu->currentItemIndex_;
             menu->chooseEvent_ = true;
-            std::cout << "currentIndex: " << currentIndex << std::endl;
         }
     }
 

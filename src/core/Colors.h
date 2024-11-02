@@ -1,5 +1,5 @@
-#ifndef CORE_COLORS_H
-#define CORE_COLORS_H
+#ifndef SRC_CORE_COLORS_H
+#define SRC_CORE_COLORS_H
 
 #include <raylib-cpp.hpp>
 
@@ -94,4 +94,4 @@
 #define RED_3_4     R3G0B0A4
 #define GREEN_3_4   R0G3B0A4
 
-#endif // CORE_COLORS_H
+#endif // SRC_CORE_COLORS_H

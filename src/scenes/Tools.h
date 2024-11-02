@@ -116,49 +116,52 @@ class Tools {
     static Entity* CreateZombie(
         PositionComponent pos,
         TargetComponent targetPos,
-        HealthComponent health, 
-        AttackComponent attack,
-        SpeedComponent speed,
-        SoundComponent sound
+        HealthComponent health
     ) {
         Entity *zombie = new Entity();
         zombie->AddComponent<ZombieComponent>(ZombieComponent());
         zombie->AddComponent<PositionComponent>(pos);
         zombie->AddComponent<TargetComponent>(targetPos);
         zombie->AddComponent<HealthComponent>(health);
-        zombie->AddComponent<AttackComponent>(attack);
-        zombie->AddComponent<SpeedComponent>(speed);
-        zombie->AddComponent<SoundComponent>(sound);
         zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent(health.health_));
 
         return zombie;
     }
 
-    static void DrawMenuItem(Entity *uiElement, MenuComponent *menu, MenuItemComponent *menuItem) {
-        PositionComponent *position = uiElement->GetComponent<PositionComponent>();
-        TextComponent *text = uiElement->GetComponent<TextComponent>();
-        
+    static void DrawMenuItem(BaseUIComponent *baseUi, MenuComponent *menu, MenuItemComponent *menuItem) {
         if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
             DrawRectangle(
-                menu->position_.x * menuItem->col_,
-                menu->position_.y + menu->textSize_ * menuItem->row_,
+                baseUi->position_.x + menuItem->col_,
+                baseUi->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_,
                 menuItem->text_.length() * 10.0f,
                 menu->textSize_,
-                text->accentColor_
+                menu->selectedColor_
+            );
+            DrawTextEx(
+                GetFontDefault(),
+                menuItem->text_.c_str(),
+                (Vector2){
+                    baseUi->position_.x + menuItem->col_,
+                    baseUi->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_
+                },
+                menu->textSize_,
+                menu->textSpacing_,
+                menu->selectedColor_
+            );
+        } else {
+            DrawTextEx(
+                GetFontDefault(),
+                menuItem->text_.c_str(),
+                (Vector2){
+                    baseUi->position_.x + menuItem->col_,
+                    baseUi->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_
+                },
+                menu->textSize_,
+                menu->textSpacing_,
+                menu->color_
             );
         }
 
-        DrawTextEx(
-            GetFontDefault(),
-            menuItem->text_.c_str(),
-            (Vector2){
-                position->position_.x + menuItem->col_,
-                position->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_
-            },
-            menu->textSize_,
-            menu->textSpacing_,
-            menu->color_
-        );
     }
 
     static Entity* CreateUITextEntity(
