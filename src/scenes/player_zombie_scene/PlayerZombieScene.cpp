@@ -55,8 +55,8 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new PlayerCameraSystem);
     Scene::AddSystem(new PlayerBreathSystem);
     Scene::AddSystem(new PlayerAdrenalinSystem);
-    Scene::AddSystem(new PlayerFeetMoveSystem);
-    Scene::AddSystem(new PlayerDirectionSystem);
+    // Scene::AddSystem(new PlayerFeetMoveSystem);
+    // Scene::AddSystem(new PlayerDirectionSystem);
     
     // Collider systems
     Scene::AddSystem(new CircleCircleColliderSystem);
@@ -68,10 +68,11 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new ZombieDrawSystem);
 
     // Debug systems
-    // Scene::AddSystem(new SoundDrawSystem);
-    // Scene::AddSystem(new TargetDrawSystem);
-    // Scene::AddSystem(new ZombieStatsDrawSystem);
+    Scene::AddSystem(new SoundDrawSystem);
+    Scene::AddSystem(new TargetDrawSystem);
+    Scene::AddSystem(new ZombieStatsDrawSystem);
     
+    // 
     // UI draw systems
     // Scene::AddUISystem(new DebugUIDrawSystem);
     // Scene::AddUISystem(new UIDrawSystem);

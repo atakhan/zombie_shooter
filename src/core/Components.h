@@ -52,4 +52,17 @@ struct TargetComponent {
     TargetComponent(Vector2 pos) : position_(pos), active_(true) {}
 };
 
+struct SoundComponent {
+    float maxRadius;
+    float currentRadius;
+    float minRadius;
+    float isActive;
+    
+    SoundComponent(float radius)
+        : minRadius(0.0f)
+        , maxRadius(radius)
+        , currentRadius(radius)
+        , isActive(true) {}
+};
+
 #endif // SRC_CORE_COMPONENTS_H

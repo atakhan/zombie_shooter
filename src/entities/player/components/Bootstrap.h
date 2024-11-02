@@ -8,7 +8,6 @@
 #include "DirectionComponent.h"
 #include "FeetComponent.h"
 #include "PlayerComponent.h"
-#include "SoundComponent.h"
 #include "SpeedComponent.h"
 #include "StaminaComponent.h"
 

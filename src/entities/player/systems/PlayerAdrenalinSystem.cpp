@@ -20,6 +20,7 @@ void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
     if (player == nullptr) { return; }
 
 
+    PlayerComponent *playerComponent = player->GetComponent<PlayerComponent>();
     PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
     HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
     AdrenalinComponent *adrenalin = player->GetComponent<AdrenalinComponent>();
@@ -27,7 +28,7 @@ void PlayerAdrenalinSystem::Update(std::vector<Entity*> *entities) {
     if (!playerPosition || !playerHealth || !adrenalin) { return; }
 
     
-    if (debug_) {
+    if (this->debug_) {
         std::cout << "PlayerAdrenalinSystem : update : " << std::endl;
         std::cout << "min: " << adrenalin->min_ << std::endl;
         std::cout << "max: " << adrenalin->max_ << std::endl;

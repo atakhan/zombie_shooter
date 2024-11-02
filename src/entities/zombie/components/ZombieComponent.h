@@ -10,6 +10,8 @@ struct ZombieComponent {
     };
     bool isAlive;
     Status currentState;
+
+    ZombieComponent() : currentState(Status::WALK) {}
 };
 
 #endif // SRC_ENTITIES_ZOMBIE_COMPONENTS_ZOMBIE_COMPONENT_H

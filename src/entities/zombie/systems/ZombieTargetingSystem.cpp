@@ -4,7 +4,22 @@ void ZombieTargetingSystem::Init(std::vector<Entity*> *entities) {
     std::cout << "Zombie targeting System Initialized" << std::endl;
 }
 
-void ZombieTargetingSystem::Draw(std::vector<Entity*> *entities) {}
+void ZombieTargetingSystem::Draw(std::vector<Entity*> *entities) {
+    for (auto& entity : *entities) {
+        if (!entity->HasComponent<ZombieComponent>()) {
+            continue;
+        }
+        ZombieComponent* zombie = entity->GetComponent<ZombieComponent>();
+        TargetComponent* target = entity->GetComponent<TargetComponent>();
+        PositionComponent* zombiePos = entity->GetComponent<PositionComponent>();
+        HealthComponent* zombieRadius = entity->GetComponent<HealthComponent>();
+        CircleColliderComponent* collider = entity->GetComponent<CircleColliderComponent>();
+        
+        if (target && zombiePos) {
+            DrawLineV(zombiePos->position_, target->position_, RAYWHITE);
+        }
+    }
+}
 
 void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
     Entity *terrain = GetEntityByComponent<TerrainComponent>(entities);
@@ -29,11 +44,9 @@ void ZombieTargetingSystem::Update(std::vector<Entity*> *entities) {
         TargetComponent* target = entity->GetComponent<TargetComponent>();
         PositionComponent* zombiePos = entity->GetComponent<PositionComponent>();
         HealthComponent* zombieRadius = entity->GetComponent<HealthComponent>();
-        SpeedComponent* speed = entity->GetComponent<SpeedComponent>();
-        AttackComponent* attack = entity->GetComponent<AttackComponent>();
         CircleColliderComponent* collider = entity->GetComponent<CircleColliderComponent>();
         
-        if (target && zombiePos && zombieRadius && speed && attack && collider) {
+        if (target && zombiePos && zombieRadius && collider) {
             bool hearBreath = CheckCollisionCircles(
                 zombiePos->position_,
                 zombieRadius->health_,

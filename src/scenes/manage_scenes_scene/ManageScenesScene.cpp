@@ -33,7 +33,7 @@ void ManageScenesScene::Init() {
         );
 
         BaseUIComponent* baseUi = new BaseUIComponent((Vector2){
-            mainMenu->position_.x * colNum,
+            mainMenu->position_.x,
             mainMenu->position_.y + mainMenu->textSize_ * rowNum
         });
         

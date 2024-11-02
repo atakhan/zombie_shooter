@@ -8,6 +8,7 @@
 #include "../../../Config.h"
 #include "../../../core/Bootstrap.h"
 #include "../components/Bootstrap.h"
+#include "../../player/components/Bootstrap.h"
 
 
 class ZombieMoveSystem : public System {
@@ -18,7 +19,7 @@ class ZombieMoveSystem : public System {
     // bool GetRandomHalfProbability(int percent);
     
     // PositionComponent *FindFood(PositionComponent *zombie_position, PositionComponent *player_position, float zombie_radius, float player_sound_radius);
-    // void MoveTo(TargetComponent *targetPos, PositionComponent *curPos, float speed);
+    void MoveTo(TargetComponent *targetPos, PositionComponent *curPos, float speed);
 };
 
 #endif // SRC_ENTITIES_ZOMBIE_SYSTEMS_ZOMBIE_MOVE_SYSTEM_H

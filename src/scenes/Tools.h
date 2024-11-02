@@ -70,6 +70,23 @@ class Tools {
         return player;
     }
 
+    // CREATE ZOMBIES
+    static Entity* CreateZombie(
+        PositionComponent pos,
+        TargetComponent targetPos,
+        HealthComponent health
+    ) {
+        Entity *zombie = new Entity();
+        zombie->AddComponent<ZombieComponent>(ZombieComponent());
+        zombie->AddComponent<PositionComponent>(pos);
+        zombie->AddComponent<TargetComponent>(targetPos);
+        zombie->AddComponent<HealthComponent>(health);
+        zombie->AddComponent<SoundComponent>(60.0f);
+        zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent(health.health_));
+
+        return zombie;
+    }
+
     static Vector2 GetPlayerSpawnPositionFromMap(Entity *entity) {
         SpawnMapComponent *spawnMap = entity->GetComponent<SpawnMapComponent>();
         TerrainComponent *terrain = entity->GetComponent<TerrainComponent>();
@@ -119,36 +136,13 @@ class Tools {
         return entity;
     }
 
-    // CREATE ZOMBIES
-    static Entity* CreateZombie(
-        PositionComponent pos,
-        TargetComponent targetPos,
-        HealthComponent health
-    ) {
-        Entity *zombie = new Entity();
-        zombie->AddComponent<ZombieComponent>(ZombieComponent());
-        zombie->AddComponent<PositionComponent>(pos);
-        zombie->AddComponent<TargetComponent>(targetPos);
-        zombie->AddComponent<HealthComponent>(health);
-        zombie->AddComponent<CircleColliderComponent>(CircleColliderComponent(health.health_));
-
-        return zombie;
-    }
-
     static void DrawMenuItem(BaseUIComponent *baseUi, MenuComponent *menu, MenuItemComponent *menuItem) {
         if (menuItem->menuItemIndex_ == menu->currentItemIndex_) {
-            DrawRectangle(
-                baseUi->position_.x + menuItem->col_,
-                baseUi->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_,
-                menuItem->text_.length() * 10.0f,
-                menu->textSize_,
-                menu->selectedColor_
-            );
             DrawTextEx(
                 GetFontDefault(),
                 menuItem->text_.c_str(),
                 (Vector2){
-                    baseUi->position_.x + menuItem->col_,
+                    baseUi->position_.x,
                     baseUi->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_
                 },
                 menu->textSize_,
@@ -160,7 +154,7 @@ class Tools {
                 GetFontDefault(),
                 menuItem->text_.c_str(),
                 (Vector2){
-                    baseUi->position_.x + menuItem->col_,
+                    baseUi->position_.x,
                     baseUi->position_.y + (menu->textSize_ * menuItem->row_) + menu->lineSpacing_
                 },
                 menu->textSize_,
