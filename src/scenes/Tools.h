@@ -3,7 +3,9 @@
 
 #include <string>
 #include "../core/Bootstrap.h"
-#include "../entities/Bootstrap.h"
+#include "../entities/Bootstrap.h" // TODO! not includes
+
+// FIX: bootstrap upper not load a files (not all), bellow is a fix of this problem
 #include "../entities/scene/components/SceneComponent.h"
 #include "../entities/scene/components/GameTitleComponent.h"
 #include "../entities/player/components/Bootstrap.h"
