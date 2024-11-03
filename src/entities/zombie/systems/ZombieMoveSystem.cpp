@@ -47,6 +47,5 @@ void ZombieMoveSystem::MoveTo(TargetComponent *targetPos, PositionComponent *cur
         Vector2 direction = { distanceX / distance, distanceY / distance };
         curPos->position_.x += direction.x * speed;
         curPos->position_.y += direction.y * speed;
-        std::cout << "Moving towards target: (" << curPos->position_.x << ", " << curPos->position_.y << ")" << std::endl;
     }
 }

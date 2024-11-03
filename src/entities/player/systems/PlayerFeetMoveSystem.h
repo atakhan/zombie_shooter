@@ -16,11 +16,10 @@ class PlayerFeetMoveSystem : public System {
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void IncreaseSoundRadius(SoundComponent *sound);
-    void DecreaseSoundRadius(SoundComponent *sound);
+    void SetDefaultPosition(FeetComponent* feet, HealthComponent *playerHealth, PositionComponent *playerPosition);
+    void SetRotationCenter(FeetComponent* feet);
+
     void Idle(SoundComponent *sound);
-    
-    bool NeedRotate(FeetComponent *feet, DirectionComponent *direction);
     void MoveRight(FeetComponent *feet, PositionComponent *body, DirectionComponent *direction);
     void MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
     void MoveTop(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
