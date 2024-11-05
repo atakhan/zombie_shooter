@@ -52,6 +52,17 @@ struct TargetComponent {
     TargetComponent(Vector2 pos) : position_(pos), active_(true) {}
 };
 
+struct CircleComponent {
+    float radius_;
+    Vector2 position_;
+
+    CircleComponent() : radius_(0.0f), position_({0.0f, 0.0f}){};
+    CircleComponent(float radius, Vector2 position) 
+        : radius_(radius)
+        , position_(position)
+        {}
+};
+
 struct SoundComponent {
     float maxRadius;
     float currentRadius;

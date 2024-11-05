@@ -59,7 +59,8 @@ class Tools {
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
-        player->AddComponent<FeetComponent>(FeetComponent());
+        player->AddComponent<LeftFootComponent>(LeftFootComponent());
+        player->AddComponent<RightFootComponent>(RightFootComponent());
 
         CameraComponent camera = CameraComponent();
         player->AddComponent<CameraComponent>(camera);

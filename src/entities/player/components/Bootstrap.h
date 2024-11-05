@@ -7,7 +7,9 @@
 #include "CameraComponent.h"
 #include "DirectionComponent.h"
 #include "FeetComponent.h"
+#include "LeftFootComponent.h"
 #include "PlayerComponent.h"
+#include "RightFootComponent.h"
 #include "SpeedComponent.h"
 #include "StaminaComponent.h"
 

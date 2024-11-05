@@ -7,7 +7,7 @@ void MovementsScene::Init() {
         Scene::title_
     ));
 
-    int mapIndex = 3;
+    int mapIndex = 1;
     std::vector<std::vector<int>> spawnMap = MovementsSceneMaps::GetSpawnMap(mapIndex);
     std::vector<std::vector<int>> wallsMap = MovementsSceneMaps::GetWallsMap(mapIndex);
 
@@ -51,8 +51,8 @@ void MovementsScene::Init() {
     // Player systems
     // Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
-    Scene::AddSystem(new PlayerFeetMoveSystem);
     Scene::AddSystem(new PlayerDirectionSystem);
+    Scene::AddSystem(new PlayerMoveSystem);
     // Scene::AddSystem(new PlayerBreathSystem);
     // Scene::AddSystem(new PlayerAdrenalinSystem);
 

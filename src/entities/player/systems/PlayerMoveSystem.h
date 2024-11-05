@@ -1,5 +1,5 @@
-#ifndef PLAYER_FEET_MOVE_SYSTEM_H
-#define PLAYER_FEET_MOVE_SYSTEM_H
+#ifndef PLAYER_MOVE_SYSTEM_H
+#define PLAYER_MOVE_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -10,7 +10,7 @@
 #include "../components/Bootstrap.h"
 
 
-class PlayerFeetMoveSystem : public System {
+class PlayerMoveSystem : public System {
   public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
@@ -19,11 +19,12 @@ class PlayerFeetMoveSystem : public System {
     void SetDefaultPosition(FeetComponent* feet, HealthComponent *playerHealth, PositionComponent *playerPosition);
     void SetRotationCenter(FeetComponent* feet);
 
-    void Idle(SoundComponent *sound);
-    void MoveRight(FeetComponent *feet, PositionComponent *body, DirectionComponent *direction);
+    void Idle(LeftFootComponent* leftFoot, PositionComponent *playerPosition);
+    void Move(LeftFootComponent *leftFoot, PositionComponent *playerPosition);
+    void MoveRight(PositionComponent *playerPosition, LeftFootComponent *leftFoot, RightFootComponent *rightFoot);
     void MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
     void MoveTop(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
     void MoveBottom(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
 };
 
-#endif // PLAYER_FEET_MOVE_SYSTEM_H
+#endif // PLAYER_MOVE_SYSTEM_H
