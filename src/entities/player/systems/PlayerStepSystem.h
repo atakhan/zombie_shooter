@@ -7,6 +7,7 @@
 
 #include "../../../Config.h"
 #include "../../../core/Bootstrap.h"
+#include "../../../scenes/Tools.h"
 #include "../components/Bootstrap.h"
 
 

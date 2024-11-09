@@ -47,7 +47,13 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
     { return; }
     
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        cout << "key right pressed" << endl;
+        if (leftFoot->pos_.x < leftFoot->goalPosition_.x) {
+            leftFoot->pos_.x += 60.0f * GetFrameTime();
+        } else {
+            cout << "right step" << endl;
+            leftFoot->goalPosition_ = Tools::MovePosToRight(leftFoot->idlePos_, 20.0f);
+            leftFoot->idlePos_ = leftFoot->goalPosition_;
+        }
     } else
     if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
         cout << "key left pressed" << endl;
