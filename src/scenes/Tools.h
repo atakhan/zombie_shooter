@@ -59,8 +59,8 @@ class Tools {
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
-        player->AddComponent<LeftFootComponent>(LeftFootComponent());
-        player->AddComponent<RightFootComponent>(RightFootComponent());
+        player->AddComponent<LeftFootComponent>(LeftFootComponent(pos));
+        player->AddComponent<RightFootComponent>(RightFootComponent(pos));
 
         CameraComponent camera = CameraComponent();
         player->AddComponent<CameraComponent>(camera);
@@ -104,7 +104,6 @@ class Tools {
                 }
             }
         }
-        std::cout << "spawn point not found. set custom pos 0,0" << std::endl;
         return (Vector2){0.0f,0.0f};
     }
 
@@ -166,49 +165,20 @@ class Tools {
 
     }
 
-    static Entity* CreateUITextEntity(
-            Vector2 pos, 
-            std::string text,
-            float textSize, 
-            float colPos, 
-            float rowPos, 
-            float textSpacing, 
-            Color primaryColor,
-            Color accentColor
-    ) {
-        Entity *element = new Entity();
-        // element->AddComponent<BaseUIComponent>(BaseUIComponent());
-        // element->AddComponent<PositionComponent>(PositionComponent(pos));
-        // element->AddComponent<TextComponent>(TextComponent(textSize, textSpacing, 1.0f, primaryColor, accentColor));
-        // element->AddComponent<ColPositionComponent>(ColPositionComponent(colPos));
-        // element->AddComponent<RowPositionComponent>(RowPositionComponent(rowPos));
-
-        return element;
+    static Vector2 MovePosToLeft(Vector2 pos, float value) {
+        return (Vector2) {pos.x - value, pos.y};
     }
 
-    static void DrawUITextEntity(Entity *uiElement) {
-        // PositionComponent *position = uiElement->GetComponent<PositionComponent>();
-        // TextComponent *text = uiElement->GetComponent<TextComponent>();
-        // TextSizeComponent *textSize = uiElement->GetComponent<TextSizeComponent>();
-        // ColPositionComponent *colNum = uiElement->GetComponent<ColPositionComponent>();
-        // RowPositionComponent *rowNum = uiElement->GetComponent<RowPositionComponent>();
-        // TextSpacingComponent *textSpacing = uiElement->GetComponent<TextSpacingComponent>();
-        // ColorComponent *color = uiElement->GetComponent<ColorComponent>();
-        // // PaddingComponent *padding = uiElement->GetComponent<PaddingComponent>();
+    static Vector2 MovePosToRight(Vector2 pos, float value) {
+        return (Vector2) {pos.x + value, pos.y};
+    }
 
-        // if (position && text && textSize && colNum && rowNum && textSpacing && color) {
-        //     DrawTextEx(
-        //         GetFontDefault(),
-        //         text->text_.c_str(),
-        //         (Vector2){
-        //             position->position_.x * colNum->value_,
-        //             position->position_.y + textSize->value_ * rowNum->value_
-        //         },
-        //         textSize->value_,
-        //         textSpacing->value_,
-        //         color->value_
-        //     );
-        // }
+    static Vector2 MovePosToTop(Vector2 pos, float value) {
+        return (Vector2) {pos.x, pos.y - value};
+    }
+
+    static Vector2 MovePosToBottom(Vector2 pos, float value) {
+        return (Vector2) {pos.x, pos.y + value};
     }
 };
 

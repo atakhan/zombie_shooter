@@ -2,7 +2,17 @@
 #define SRC_COMPONENTS_PLAYER_COMPONENT_H
 
 struct PlayerComponent {
-    bool isAlive;
+    enum state {
+        IDLE,
+        HALT,
+        WALK,
+        RUN,
+        ATTACK
+    };
+    bool isAlive_;
+    state currentState_;
+
+    PlayerComponent() : isAlive_(true), currentState_(IDLE) {};
 };
 
 #endif // SRC_COMPONENTS_PLAYER_COMPONENT_H

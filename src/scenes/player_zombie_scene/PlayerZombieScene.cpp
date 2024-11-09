@@ -51,7 +51,7 @@ void PlayerZombieScene::Init() {
     Scene::AddSystem(new ZombieTargetingSystem);
     
     // Player systems
-    Scene::AddSystem(new PlayerControlSystem);
+    Scene::AddSystem(new PlayerBasicControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
     Scene::AddSystem(new PlayerBreathSystem);
     Scene::AddSystem(new PlayerAdrenalinSystem);

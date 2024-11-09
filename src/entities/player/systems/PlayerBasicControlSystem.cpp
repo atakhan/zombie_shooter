@@ -1,11 +1,11 @@
-#include "PlayerControlSystem.h"
+#include "PlayerBasicControlSystem.h"
 #include <iostream>
 
-void PlayerControlSystem::Init(std::vector<Entity*> *entities) {
+void PlayerBasicControlSystem::Init(std::vector<Entity*> *entities) {
     std::cout << "Player Control System Initialized" << std::endl;
 }
 
-void PlayerControlSystem::Draw(std::vector<Entity*> *entities) {
+void PlayerBasicControlSystem::Draw(std::vector<Entity*> *entities) {
     for (auto& entity : *entities) {
         if (entity == nullptr) { continue; }
         
@@ -27,7 +27,7 @@ void PlayerControlSystem::Draw(std::vector<Entity*> *entities) {
     }
 }
 
-void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
+void PlayerBasicControlSystem::Update(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     if (player == nullptr) { return; }
 
@@ -105,38 +105,38 @@ void PlayerControlSystem::Update(std::vector<Entity*> *entities) {
     }
 }
 
-void PlayerControlSystem::IncreaseSoundRadius(SoundComponent *sound) {
+void PlayerBasicControlSystem::IncreaseSoundRadius(SoundComponent *sound) {
     if (sound->currentRadius < sound->maxRadius) {
         sound->currentRadius = sound->currentRadius + Config::SOUND_RADIUS_STEP;
     }
 }
 
-void PlayerControlSystem::DecreaseSoundRadius(SoundComponent *sound) {
+void PlayerBasicControlSystem::DecreaseSoundRadius(SoundComponent *sound) {
     if (sound->currentRadius > sound->minRadius) {
         sound->currentRadius = sound->currentRadius - Config::SOUND_RADIUS_STEP;
     }
 }
 
-void PlayerControlSystem::Idle(SoundComponent *sound) {
+void PlayerBasicControlSystem::Idle(SoundComponent *sound) {
     DecreaseSoundRadius(sound);
 }
 
-void PlayerControlSystem::MoveRight(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
+void PlayerBasicControlSystem::MoveRight(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
     position->position_.x = position->position_.x + speed->speed_;
     IncreaseSoundRadius(sound);
 }
 
-void PlayerControlSystem::MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
+void PlayerBasicControlSystem::MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
     position->position_.x = position->position_.x - speed->speed_;
     IncreaseSoundRadius(sound);
 }
 
-void PlayerControlSystem::MoveTop(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
+void PlayerBasicControlSystem::MoveTop(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
     position->position_.y = position->position_.y - speed->speed_;
     IncreaseSoundRadius(sound);
 }
 
-void PlayerControlSystem::MoveBottom(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
+void PlayerBasicControlSystem::MoveBottom(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed) {
     position->position_.y = position->position_.y + speed->speed_;
     IncreaseSoundRadius(sound);
 }

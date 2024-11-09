@@ -4,8 +4,9 @@
 #include "PlayerAdrenalinSystem.h"
 #include "PlayerBreathSystem.h"
 #include "PlayerCameraSystem.h"
-#include "PlayerControlSystem.h"
+#include "PlayerBasicControlSystem.h"
 #include "PlayerDirectionSystem.h"
-#include "PlayerMoveSystem.h"
+#include "PlayerFeetToBodyRelativeSystem.h"
+#include "PlayerStepSystem.h"
 
 #endif // SRC_SCENES_PLAYER_ZOMBIE_SCENE_PLAYER_SYSTEMS_BOOTSTRAP_H

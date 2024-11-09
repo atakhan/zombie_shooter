@@ -6,17 +6,17 @@
 #include "../../../core/Components.h"
 
 struct LeftFootComponent {
-    Rectangle bone_;
-    Vector2 origin_;
+    float radius_;
+    Vector2 pos_;
+    Vector2 idlePos_;
     Vector2 goalPosition_;
-    float rotation_;
     bool moving_;
 
-    LeftFootComponent()
-        : bone_({0.0f, 0.0f, 0.0f, 0.0f})
-        , origin_({ 0.0f, 0.0f })
-        , goalPosition_({ 0.0f, 0.0f })
-        , rotation_(0.0f)
+    LeftFootComponent(Vector2 pos)
+        : radius_(10.0f)
+        , pos_(pos)
+        , goalPosition_(pos)
+        , idlePos_(pos)
         , moving_(false)
         {};
 };

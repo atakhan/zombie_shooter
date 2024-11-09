@@ -31,35 +31,26 @@ void MovementsScene::Init() {
     ));
     
     GenerateMapEntities(mapEntity, spawnMap, wallsMap);
-
-    // // ui entities
-    // Scene::AddEntity(UiTools::CreateUITextEntity(
-    //     (Vector2){10.0f, 10.0f},
-    //     Config::GAME_TITLE,
-    //     16.0f, 1, 1, 3.0f, RED
-    // ));
-    // Scene::AddEntity(UiTools::CreateUITextEntity(
-    //     (Vector2){10.0f, 10.0f},
-    //     Scene::title_,
-    //     16.0f, 1, 2, 3.0f, RED
-    // ));
-
     // Systems
     // Map systems
     Scene::AddSystem(new TerrainDrawSystem);
-
+    
+    
     // Player systems
     // Scene::AddSystem(new PlayerControlSystem);
     Scene::AddSystem(new PlayerCameraSystem);
     Scene::AddSystem(new PlayerDirectionSystem);
-    Scene::AddSystem(new PlayerMoveSystem);
+    
+    // WARNING! UNDER CONSTRUCTION!
+    Scene::AddSystem(new PlayerStepSystem);
+    Scene::AddSystem(new PlayerFeetToBodyRelativeSystem);
+
     // Scene::AddSystem(new PlayerBreathSystem);
     // Scene::AddSystem(new PlayerAdrenalinSystem);
-
-    // Collider systems
-    Scene::AddSystem(new CircleCircleColliderSystem);
-    Scene::AddSystem(new CircleRectangleColliderSystem);
-    Scene::AddSystem(new ColliderResolverSystem);
+    // // Collider systems
+    // Scene::AddSystem(new CircleCircleColliderSystem);
+    // Scene::AddSystem(new CircleRectangleColliderSystem);
+    // Scene::AddSystem(new ColliderResolverSystem);
 
 
     // Init Systems

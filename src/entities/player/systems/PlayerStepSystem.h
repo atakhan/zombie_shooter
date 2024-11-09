@@ -1,5 +1,5 @@
-#ifndef PLAYER_CONTROL_SYSTEM_H
-#define PLAYER_CONTROL_SYSTEM_H
+#ifndef PLAYER_STEP_SYSTEM_H
+#define PLAYER_STEP_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -10,19 +10,19 @@
 #include "../components/Bootstrap.h"
 
 
-class PlayerControlSystem : public System {
+class PlayerStepSystem : public System {
   public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void IncreaseSoundRadius(SoundComponent *sound);
-    void DecreaseSoundRadius(SoundComponent *sound);
-    void Idle(SoundComponent *sound);
-    void MoveRight(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
+    void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
+
+    void Move(LeftFootComponent *leftFoot, PositionComponent *playerPosition);
+    void MoveRight(PositionComponent *playerPosition, LeftFootComponent *leftFoot, RightFootComponent *rightFoot);
     void MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
     void MoveTop(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
     void MoveBottom(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
 };
 
-#endif // PLAYER_CONTROL_SYSTEM_H
+#endif // PLAYER_STEP_SYSTEM_H
