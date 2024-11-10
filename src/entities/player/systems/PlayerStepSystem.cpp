@@ -44,7 +44,7 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
 
 
     float collisionRadius = 1.0f;
-    float stepValue = 20.0f;
+    float stepValue = 40.0f;
     if (playerComponent->currentState_ == PlayerComponent::WALK) {
         cout << "player state WALK " << endl;
         speed->speed_ = speed->speed_ * 0.5f;
