@@ -16,8 +16,8 @@ void PlayerStepSystem::Draw(std::vector<Entity*> *entities) {
     PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
 
     if (leftFoot) {        
-        DrawCircle(leftFoot->pos_.x, leftFoot->pos_.y, leftFoot->radius_, BLUE);
-        DrawCircle(rightFoot->pos_.x, rightFoot->pos_.y, leftFoot->radius_, VIOLET);
+        DrawCircleV(leftFoot->pos_, leftFoot->radius_, BLUE);
+        DrawCircleV(rightFoot->pos_, leftFoot->radius_, VIOLET);
         // DrawCircle(leftFoot->bone_.x, leftFoot->bone_.y, 10.0f, BLUE);
         // DrawRectanglePro(rightFoot->bone_, rightFoot->origin_, rightFoot->rotation_, GREEN);
         // DrawCircleV(leftFoot->goalPosition_, 5.0f, YELLOW);
@@ -36,6 +36,8 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
     if (player == nullptr) { return; }
 
     PlayerComponent *playerComponent = player->GetComponent<PlayerComponent>();
+
+
     DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
     PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
     HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
@@ -45,15 +47,54 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
 
     if (!playerPosition || !playerHealth || !leftFoot || !rightFoot || !playerDirection || !speed)
     { return; }
+
+
+    float collisionRadius = 5.0f;
+    float stepValue = 20.0f;
+    if (playerComponent->currentState_ == PlayerComponent::WALK) {
+        cout << "player state WALK " << endl;
+        speed->speed_ = speed->speed_ * 0.5f;
+        stepValue = 10.0f;
+    } else
+    if (playerComponent->currentState_ == PlayerComponent::RUN) {
+        cout << "player state RUN " << endl;
+        speed->speed_ = speed->speed_ * 2.0f;
+        stepValue = 20.0f;
+    }
     
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        if (leftFoot->pos_.x < leftFoot->goalPosition_.x) {
-            leftFoot->pos_.x += 60.0f * GetFrameTime();
-        } else {
-            cout << "right step" << endl;
-            leftFoot->goalPosition_ = Tools::MovePosToRight(leftFoot->idlePos_, 20.0f);
-            leftFoot->idlePos_ = leftFoot->goalPosition_;
+        if (!leftFoot->moving_ && !rightFoot->moving_) {
+            leftFoot->moving_ = true;
         }
+        
+        if (leftFoot->moving_) {
+            if (CheckCollisionCircles(
+                leftFoot->pos_, collisionRadius, 
+                leftFoot->goalPosition_, collisionRadius
+            )) {
+                leftFoot->idlePos_ = leftFoot->goalPosition_;
+                leftFoot->goalPosition_ = Tools::MovePosToRight(leftFoot->goalPosition_, stepValue);
+                leftFoot->moving_ = false;
+                rightFoot->moving_ = true;
+            } else {
+                leftFoot->pos_.x += 60.0f * GetFrameTime();
+            }
+        }
+
+        if (rightFoot->moving_) {
+            if (CheckCollisionCircles(
+                rightFoot->pos_, collisionRadius, 
+                rightFoot->goalPosition_, collisionRadius
+            )) {
+                rightFoot->idlePos_ = rightFoot->goalPosition_;
+                rightFoot->goalPosition_ = Tools::MovePosToRight(rightFoot->goalPosition_, stepValue);
+                leftFoot->moving_ = true;
+                rightFoot->moving_ = false;
+            } else {
+                rightFoot->pos_.x += 60.0f * GetFrameTime();
+            }
+        }
+
     } else
     if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
         cout << "key left pressed" << endl;
@@ -64,7 +105,26 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
     if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
         cout << "key down pressed" << endl;
     } else {
-        Idle(leftFoot, rightFoot, playerComponent);
+        if (leftFoot->moving_) {
+            if (!CheckCollisionCircles(leftFoot->pos_, collisionRadius, leftFoot->goalPosition_, collisionRadius)) {
+                if (!CheckCollisionCircles(leftFoot->pos_, collisionRadius, leftFoot->idlePos_, collisionRadius)) {
+                    leftFoot->pos_.x -= 60.0f * GetFrameTime();
+                } else {
+                    leftFoot->moving_ = false;
+                    leftFoot->pos_ = leftFoot->idlePos_;
+                }
+            }
+        }
+        if (rightFoot->moving_) {
+            if (!CheckCollisionCircles(rightFoot->pos_, collisionRadius, rightFoot->goalPosition_, collisionRadius)) {
+                if (!CheckCollisionCircles(rightFoot->pos_, collisionRadius, rightFoot->idlePos_, collisionRadius)) {
+                    rightFoot->pos_.x -= 60.0f * GetFrameTime();
+                } else {
+                    rightFoot->moving_ = false;
+                    rightFoot->pos_ = rightFoot->idlePos_;
+                }
+            }
+        }
     }
 }
 
