@@ -43,6 +43,7 @@ void MovementsScene::Init() {
     
     // WARNING! UNDER CONSTRUCTION!
     Scene::AddSystem(new PlayerStepSystem);
+    Scene::AddSystem(new PlayerBodySystem);
     Scene::AddSystem(new PlayerFeetToBodyRelativeSystem);
 
     // Scene::AddSystem(new PlayerBreathSystem);

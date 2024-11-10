@@ -22,12 +22,6 @@ void PlayerStepSystem::Draw(std::vector<Entity*> *entities) {
         // DrawRectanglePro(rightFoot->bone_, rightFoot->origin_, rightFoot->rotation_, GREEN);
         // DrawCircleV(leftFoot->goalPosition_, 5.0f, YELLOW);
     }
-
-    // !TODO: exclude this procedure to own system?
-    // DRAW PLAYER BODY 
-    if (playerPosition && health) {
-        DrawCircleV(playerPosition->position_, 5.0f, RED);
-    }
 }
 
 void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
@@ -49,7 +43,7 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
     { return; }
 
 
-    float collisionRadius = 5.0f;
+    float collisionRadius = 1.0f;
     float stepValue = 20.0f;
     if (playerComponent->currentState_ == PlayerComponent::WALK) {
         cout << "player state WALK " << endl;

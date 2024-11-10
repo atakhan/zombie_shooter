@@ -8,5 +8,6 @@
 #include "PlayerDirectionSystem.h"
 #include "PlayerFeetToBodyRelativeSystem.h"
 #include "PlayerStepSystem.h"
+#include "PlayerBodySystem.h"
 
 #endif // SRC_SCENES_PLAYER_ZOMBIE_SCENE_PLAYER_SYSTEMS_BOOTSTRAP_H
