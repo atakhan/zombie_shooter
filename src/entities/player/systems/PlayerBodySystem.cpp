@@ -36,10 +36,9 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
 
     if (!playerPosition || !playerHealth || !leftFoot || !rightFoot || !playerDirection || !speed)
     { return; }
-    
+
     float xDiff = abs(leftFoot->pos_.x - rightFoot->pos_.x);
     float yDiff = abs(leftFoot->pos_.y - rightFoot->pos_.y);
-    cout << "x diff: " << xDiff << "; y diff: " << yDiff << "; " << std::endl;
     playerPosition->position_ = {
         leftFoot->pos_.x + (xDiff / 2),
         leftFoot->pos_.y + (yDiff / 2)

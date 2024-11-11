@@ -46,7 +46,11 @@ void PlayerFeetToBodyRelativeSystem::Update(std::vector<Entity*> *entities) {
     LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
     RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
     
-    if (!playerPosition || !leftFoot || !rightFoot || !playerDirection) 
+    if (!playerPosition || !leftFoot || !rightFoot || !playerDirection)
     { return; }
 
+    if (!leftFoot->moving_ && !rightFoot->moving_) {
+        leftFoot->idlePos_ = Tools::MovePosToLeft(playerPosition->position_, 20.0f);
+        rightFoot->idlePos_ = Tools::MovePosToRight(playerPosition->position_, 20.0f);
+    }
 }

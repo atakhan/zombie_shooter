@@ -164,22 +164,6 @@ class Tools {
         }
 
     }
-
-    static Vector2 MovePosToLeft(Vector2 pos, float value) {
-        return (Vector2) {pos.x - value, pos.y};
-    }
-
-    static Vector2 MovePosToRight(Vector2 pos, float value) {
-        return (Vector2) {pos.x + value, pos.y};
-    }
-
-    static Vector2 MovePosToTop(Vector2 pos, float value) {
-        return (Vector2) {pos.x, pos.y - value};
-    }
-
-    static Vector2 MovePosToBottom(Vector2 pos, float value) {
-        return (Vector2) {pos.x, pos.y + value};
-    }
 };
 
 
