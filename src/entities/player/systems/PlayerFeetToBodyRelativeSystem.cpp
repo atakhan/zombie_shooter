@@ -16,8 +16,8 @@ void PlayerFeetToBodyRelativeSystem::Init(std::vector<Entity*> *entities) {
     if (!playerPosition || !leftFoot  || !playerDirection) 
     { return; }
 
-    leftFoot->idlePos_ = Tools::MovePosToLeft(playerPosition->position_, 20.0f);
-    rightFoot->idlePos_ = Tools::MovePosToRight(playerPosition->position_, 20.0f);
+    leftFoot->idlePos_ = (Vector2){playerPosition->position_.x - 20.0f, playerPosition->position_.y};
+    rightFoot->idlePos_ = (Vector2){playerPosition->position_.x + 20.0f, playerPosition->position_.y};
 }
 
 void PlayerFeetToBodyRelativeSystem::Draw(std::vector<Entity*> *entities) {
@@ -49,8 +49,9 @@ void PlayerFeetToBodyRelativeSystem::Update(std::vector<Entity*> *entities) {
     if (!playerPosition || !leftFoot || !rightFoot || !playerDirection)
     { return; }
 
+    // TODO: выставлять idle pos в зависимости от направления
     if (!leftFoot->moving_ && !rightFoot->moving_) {
-        leftFoot->idlePos_ = Tools::MovePosToLeft(playerPosition->position_, 20.0f);
-        rightFoot->idlePos_ = Tools::MovePosToRight(playerPosition->position_, 20.0f);
+        leftFoot->idlePos_ = (Vector2){playerPosition->position_.x - 20.0f, playerPosition->position_.y};
+        rightFoot->idlePos_ = (Vector2){playerPosition->position_.x + 20.0f, playerPosition->position_.y};
     }
 }

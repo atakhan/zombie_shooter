@@ -1,5 +1,6 @@
 include
 lib
 bin
+vendor/**
 .idea
 .vscode
