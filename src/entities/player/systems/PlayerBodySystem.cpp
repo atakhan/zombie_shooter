@@ -16,7 +16,6 @@ void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
 
     if (health && body && leftFoot && rightFoot) {        
         DrawCircleV(body->pos_, 5.0f, GREEN);
-        DrawLineV(leftFoot->pos_, rightFoot->pos_, GREEN);
     }
 }
 

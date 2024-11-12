@@ -35,36 +35,127 @@ void PlayerFeetSystem::Update(std::vector<Entity*> *entities) {
     PlayerComponent *playerComponent = player->GetComponent<PlayerComponent>();
     PlayerBodyComponent *body = player->GetComponent<PlayerBodyComponent>();
     DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
-    HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
     LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
     RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
-    SpeedComponent *speed = player->GetComponent<SpeedComponent>();
 
-    if (!body || !playerHealth || !leftFoot || !rightFoot || !playerDirection || !speed)
-    { return; }
+    // // Feet targeting logic
+    // if (leftFoot && rightFoot) {
+        
+    //     float stepValue = 50.0f;
+    //     float collisionRadius = 10.0f;
 
-    // Move logic
-    if (leftFoot && rightFoot) {
-        // move feet to the goal by comparing feet pos and goal pos
-        if (leftFoot->moving_) {
-            if (leftFoot->goalPosition_.x < leftFoot->pos_.x) {
-                leftFoot->pos_.x -= 60.0f * GetFrameTime();
-            }
-            if (leftFoot->goalPosition_.x > leftFoot->pos_.x) {
-                leftFoot->pos_.x += 60.0f * GetFrameTime();
-            }
-        }
+    //     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+    //         LeftFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(leftFoot->pos_.x > leftFoot->goalPosition_.x),
+    //             {leftFoot->idlePos_.x + stepValue, leftFoot->idlePos_.y}
+    //         );
+    //         RightFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(rightFoot->pos_.x > rightFoot->goalPosition_.x),
+    //             {rightFoot->idlePos_.x + stepValue, rightFoot->idlePos_.y}
+    //         );
+    //     }
 
-        if (rightFoot->moving_) {
-            if (rightFoot->goalPosition_.y < rightFoot->pos_.y) {
-                rightFoot->pos_.y -= 60.0f * GetFrameTime();
-            }
-            if (rightFoot->goalPosition_.y > rightFoot->pos_.y) {
-                rightFoot->pos_.y += 60.0f * GetFrameTime();
-            }
+    //     else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+    //         LeftFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(leftFoot->pos_.x < leftFoot->goalPosition_.x),
+    //             {leftFoot->idlePos_.x - stepValue, leftFoot->idlePos_.y}
+    //         );
+    //         RightFoot(
+    //             leftFoot, rightFoot, 
+    //             (bool)(rightFoot->pos_.x < rightFoot->goalPosition_.x),
+    //             {rightFoot->idlePos_.x - stepValue, rightFoot->idlePos_.y}
+    //         );
+    //     }
+
+    //     else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+    //         LeftFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(leftFoot->pos_.y < leftFoot->goalPosition_.y),
+    //             {leftFoot->idlePos_.x, leftFoot->idlePos_.y - stepValue}
+    //         );
+    //         RightFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(rightFoot->pos_.y < rightFoot->goalPosition_.y),
+    //             {rightFoot->idlePos_.x, rightFoot->idlePos_.y - stepValue}
+    //         );
+    //     }
+
+    //     else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+    //         LeftFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(leftFoot->pos_.y > leftFoot->goalPosition_.y),
+    //             {leftFoot->idlePos_.x, leftFoot->idlePos_.y + stepValue}
+    //         );
+    //         RightFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(rightFoot->pos_.y > rightFoot->goalPosition_.y),
+    //             {rightFoot->idlePos_.x, rightFoot->idlePos_.y + stepValue}
+    //         );
+    //     } else {
+    //         LeftFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(leftFoot->pos_.y > leftFoot->goalPosition_.y),
+    //             leftFoot->goalPosition_
+    //         );
+    //         RightFoot(
+    //             leftFoot, rightFoot,
+    //             (bool)(rightFoot->pos_.y > rightFoot->goalPosition_.y),
+    //             rightFoot->goalPosition_
+    //         );
+    //     }
+    // }
+
+    // // Move logic
+    // if (leftFoot && rightFoot) {
+    //     // move feet to the goal by comparing feet pos and goal pos
+    //     if (leftFoot->moving_) {
+    //         if (leftFoot->goalPosition_.x < leftFoot->pos_.x) {
+    //             leftFoot->pos_.x -= 60.0f * GetFrameTime();
+    //         }
+    //         if (leftFoot->goalPosition_.x > leftFoot->pos_.x) {
+    //             leftFoot->pos_.x += 60.0f * GetFrameTime();
+    //         }
+    //     }
+
+    //     if (rightFoot->moving_) {
+    //         if (rightFoot->goalPosition_.y < rightFoot->pos_.y) {
+    //             rightFoot->pos_.y -= 60.0f * GetFrameTime();
+    //         }
+    //         if (rightFoot->goalPosition_.y > rightFoot->pos_.y) {
+    //             rightFoot->pos_.y += 60.0f * GetFrameTime();
+    //         }
+    //     }
+    // }
+    
+}
+
+void PlayerFeetSystem::LeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool goalReached, Vector2 newGoalPos) {
+    if (leftFoot->moving_) {
+        if (goalReached) {
+            leftFoot->goalPosition_ = newGoalPos;
+            leftFoot->idlePos_ = leftFoot->goalPosition_;
+            leftFoot->moving_ = false;
+            rightFoot->moving_ = true;
+        } else {
+            rightFoot->moving_ = false;
         }
     }
-    
+}
+
+void PlayerFeetSystem::RightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool goalReached, Vector2 newGoalPos) {
+    if (rightFoot->moving_) {
+        if (goalReached) {
+            rightFoot->goalPosition_ = newGoalPos;
+            rightFoot->idlePos_ = rightFoot->goalPosition_;
+            rightFoot->moving_ = false;
+            leftFoot->moving_ = true;
+        } else {
+            leftFoot->moving_ = false;
+        }
+    }
 }
 
 

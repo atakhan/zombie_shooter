@@ -22,9 +22,10 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
     DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
     LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
     RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
+    SpeedComponent *speed = player->GetComponent<SpeedComponent>();
     PlayerBodyComponent *body = player->GetComponent<PlayerBodyComponent>();
 
-    if (!body || !leftFoot || !rightFoot || !playerDirection)
+    if (!body || !leftFoot || !rightFoot || !playerDirection || !speed)
     { return; }
 
     float collisionRadius = 10.0f;
@@ -65,12 +66,14 @@ void PlayerStepSystem::MoveRight(LeftFootComponent *leftFoot, RightFootComponent
     MoveLeftFoot(
         leftFoot, rightFoot,
         (leftFoot->pos_.x > leftFoot->goalPosition_.x),
-        {leftFoot->idlePos_.x + stepValue, leftFoot->idlePos_.y}
+        {leftFoot->idlePos_.x + stepValue, leftFoot->idlePos_.y}, 
+        {leftFoot->pos_.x + (60.0f * GetFrameTime()), leftFoot->pos_.y}
     );
     MoveRightFoot(
         leftFoot, rightFoot,
         (rightFoot->pos_.x > rightFoot->goalPosition_.x),
-        {rightFoot->idlePos_.x + stepValue, rightFoot->idlePos_.y}
+        {rightFoot->idlePos_.x + stepValue, rightFoot->idlePos_.y}, 
+        {rightFoot->pos_.x + (60.0f * GetFrameTime()), rightFoot->pos_.y}
     );
 }
 
@@ -78,12 +81,14 @@ void PlayerStepSystem::MoveLeft(LeftFootComponent *leftFoot, RightFootComponent 
     MoveLeftFoot(
         leftFoot, rightFoot,
         (leftFoot->pos_.x < leftFoot->goalPosition_.x),
-        {leftFoot->idlePos_.x - stepValue, leftFoot->idlePos_.y}
+        {leftFoot->idlePos_.x - stepValue, leftFoot->idlePos_.y}, 
+        {leftFoot->pos_.x - (60.0f * GetFrameTime()), leftFoot->pos_.y}
     );
     MoveRightFoot(
         leftFoot, rightFoot, 
         (rightFoot->pos_.x < rightFoot->goalPosition_.x),
-        {rightFoot->idlePos_.x - stepValue, rightFoot->idlePos_.y}
+        {rightFoot->idlePos_.x - stepValue, rightFoot->idlePos_.y}, 
+        {rightFoot->pos_.x - (60.0f * GetFrameTime()), rightFoot->pos_.y}
     );
 }
 
@@ -91,12 +96,14 @@ void PlayerStepSystem::MoveUp(LeftFootComponent *leftFoot, RightFootComponent *r
     MoveLeftFoot(
         leftFoot, rightFoot,
         (leftFoot->pos_.y < leftFoot->goalPosition_.y),
-        {leftFoot->idlePos_.x, leftFoot->idlePos_.y - stepValue}
+        {leftFoot->idlePos_.x, leftFoot->idlePos_.y - stepValue},
+        {leftFoot->pos_.x, leftFoot->pos_.y - (60.0f * GetFrameTime())}
     );
     MoveRightFoot(
         leftFoot, rightFoot,
         (rightFoot->pos_.y < rightFoot->goalPosition_.y),
-        {rightFoot->idlePos_.x, rightFoot->idlePos_.y - stepValue}
+        {rightFoot->idlePos_.x, rightFoot->idlePos_.y - stepValue},
+        {rightFoot->pos_.x, rightFoot->pos_.y - (60.0f * GetFrameTime())}
     );
 }
 
@@ -104,16 +111,24 @@ void PlayerStepSystem::MoveDown(LeftFootComponent *leftFoot, RightFootComponent 
     MoveLeftFoot(
         leftFoot, rightFoot,
         (leftFoot->pos_.y > leftFoot->goalPosition_.y),
-        {leftFoot->idlePos_.x, leftFoot->idlePos_.y + stepValue}
+        {leftFoot->idlePos_.x, leftFoot->idlePos_.y + stepValue}, 
+        {leftFoot->pos_.x, leftFoot->pos_.y + (60.0f * GetFrameTime())}
     );
     MoveRightFoot(
         leftFoot, rightFoot,
         (rightFoot->pos_.y > rightFoot->goalPosition_.y),
-        {rightFoot->idlePos_.x, rightFoot->idlePos_.y + stepValue}
+        {rightFoot->idlePos_.x, rightFoot->idlePos_.y + stepValue},
+        {rightFoot->pos_.x, rightFoot->pos_.y + (60.0f * GetFrameTime())}
     );
 }
 
-void PlayerStepSystem::MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoalPos) {
+void PlayerStepSystem::MoveLeftFoot(
+    LeftFootComponent *leftFoot, 
+    RightFootComponent *rightFoot, 
+    bool condition, 
+    Vector2 newGoalPos, 
+    Vector2 newPos
+) {
     if (leftFoot->moving_) {
         if (condition) {
             leftFoot->goalPosition_ = newGoalPos;
@@ -121,47 +136,40 @@ void PlayerStepSystem::MoveLeftFoot(LeftFootComponent *leftFoot, RightFootCompon
             leftFoot->moving_ = false;
             rightFoot->moving_ = true;
         } else {
+            leftFoot->pos_ = newPos;
+            leftFoot->idlePos_ = newPos;
             rightFoot->moving_ = false;
         }
     }
 }
 
-void PlayerStepSystem::MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoalPos) {
+void PlayerStepSystem::MoveRightFoot(
+    LeftFootComponent *leftFoot, 
+    RightFootComponent *rightFoot, 
+    bool condition, 
+    Vector2 newGoalPos, 
+    Vector2 newPos
+) {
     if (rightFoot->moving_) {
         if (condition) {
             rightFoot->goalPosition_ = newGoalPos;
             rightFoot->idlePos_ = rightFoot->goalPosition_;
-            rightFoot->moving_ = false;
             leftFoot->moving_ = true;
+            rightFoot->moving_ = false;
         } else {
+            rightFoot->pos_ = newPos;
+            rightFoot->idlePos_ = newPos;
             leftFoot->moving_ = false;
         }
     }
 }
 
 void PlayerStepSystem::Idle(LeftFootComponent* leftFoot, RightFootComponent* rightFoot, PlayerComponent* player, float collisionRadius) {
-    leftFoot->pos_ = leftFoot->idlePos_;
-    rightFoot->pos_ = rightFoot->idlePos_;
     player->currentState_ = PlayerComponent::IDLE;
-    // leftFoot->moving_ = false;
     if (leftFoot->moving_) {
-        if (!CheckCollisionCircles(leftFoot->pos_, collisionRadius, leftFoot->goalPosition_, collisionRadius)) {
-            if (!CheckCollisionCircles(leftFoot->pos_, collisionRadius, leftFoot->idlePos_, collisionRadius)) {
-                leftFoot->pos_.x -= 60.0f * GetFrameTime();
-            } else {
-                leftFoot->moving_ = false;
-                leftFoot->pos_ = leftFoot->idlePos_;
-            }
-        }
+        leftFoot->goalPosition_ = leftFoot->idlePos_;
     }
     if (rightFoot->moving_) {
-        if (!CheckCollisionCircles(rightFoot->pos_, collisionRadius, rightFoot->goalPosition_, collisionRadius)) {
-            if (!CheckCollisionCircles(rightFoot->pos_, collisionRadius, rightFoot->idlePos_, collisionRadius)) {
-                rightFoot->pos_.x -= 60.0f * GetFrameTime();
-            } else {
-                rightFoot->moving_ = false;
-                rightFoot->pos_ = rightFoot->idlePos_;
-            }
-        }
+        rightFoot->goalPosition_ = rightFoot->idlePos_;
     }
 }
