@@ -36,17 +36,11 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
     if (!body || !playerHealth || !leftFoot || !rightFoot || !playerDirection || !speed)
     { return; }
 
-    SetPosition(leftFoot, rightFoot, body);
-    
-}
-
-void PlayerBodySystem::SetPosition(LeftFootComponent* leftFoot, RightFootComponent* rightFoot, PlayerBodyComponent* body) {
-    float xDiff = abs(leftFoot->pos_.x - rightFoot->pos_.x);
-    float yDiff = abs(leftFoot->pos_.y - rightFoot->pos_.y);
     body->pos_ = {
-        leftFoot->pos_.x + (xDiff / 2),
-        leftFoot->pos_.y + (yDiff / 2)
+        leftFoot->pos_.x + (abs(leftFoot->pos_.x - rightFoot->pos_.x) / 2),
+        leftFoot->pos_.y + (abs(leftFoot->pos_.y - rightFoot->pos_.y) / 2)
     };
+    
 }
 
 void PlayerBodySystem::Idle(LeftFootComponent* leftFoot, RightFootComponent* rightFoot, PlayerComponent* player) {

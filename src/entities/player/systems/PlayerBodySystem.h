@@ -18,7 +18,6 @@ class PlayerBodySystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
 
     void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
-    void SetPosition(LeftFootComponent* leftFoot, RightFootComponent* rightFoot, PlayerBodyComponent* body);
 };
 
 #endif // PLAYER_BODY_SYSTEM_H
