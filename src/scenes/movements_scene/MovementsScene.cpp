@@ -42,9 +42,10 @@ void MovementsScene::Init() {
     Scene::AddSystem(new PlayerDirectionSystem);
     
     // WARNING! UNDER CONSTRUCTION!
-    Scene::AddSystem(new PlayerStepSystem);
     Scene::AddSystem(new PlayerBodySystem);
+    Scene::AddSystem(new PlayerFeetSystem);
     Scene::AddSystem(new PlayerFeetToBodyRelativeSystem);
+    Scene::AddSystem(new PlayerStepSystem);
 
     // Scene::AddSystem(new PlayerBreathSystem);
     // Scene::AddSystem(new PlayerAdrenalinSystem);

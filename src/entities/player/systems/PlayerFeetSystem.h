@@ -1,5 +1,5 @@
-#ifndef PLAYER_STEP_SYSTEM_H
-#define PLAYER_STEP_SYSTEM_H
+#ifndef PLAYER_FEET_SYSTEM_H
+#define PLAYER_FEET_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -11,7 +11,7 @@
 #include "../components/Bootstrap.h"
 
 
-class PlayerStepSystem : public System {
+class PlayerFeetSystem : public System {
   public:
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
@@ -20,8 +20,8 @@ class PlayerStepSystem : public System {
     void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player, float collisionRadius);
     void WhoIsFirst(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool leftFirst);
 
-    void MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoal);
-    void MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoal);
+    void MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, Vector2 newGoal, Vector2 newPos);
+    void MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, Vector2 newGoal, Vector2 newPos);
 
     void MoveRight(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
     void MoveLeft(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
@@ -29,4 +29,4 @@ class PlayerStepSystem : public System {
     void MoveDown(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
     };
 
-#endif // PLAYER_STEP_SYSTEM_H
+#endif // PLAYER_FEET_SYSTEM_H

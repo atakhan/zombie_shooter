@@ -10,12 +10,12 @@ void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
     if (player == nullptr) { return; }
     
     HealthComponent *health = player->GetComponent<HealthComponent>();
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
+    PlayerBodyComponent *body = player->GetComponent<PlayerBodyComponent>();
     LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
     RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
 
-    if (health && playerPosition && leftFoot && rightFoot) {        
-        DrawCircleV(playerPosition->position_, 5.0f, GREEN);
+    if (health && body && leftFoot && rightFoot) {        
+        DrawCircleV(body->pos_, 5.0f, GREEN);
         DrawLineV(leftFoot->pos_, rightFoot->pos_, GREEN);
     }
 }
@@ -28,18 +28,23 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
     PlayerComponent *playerComponent = player->GetComponent<PlayerComponent>();
 
     DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
+    PlayerBodyComponent *body = player->GetComponent<PlayerBodyComponent>();
     HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
     LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
     RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
     SpeedComponent *speed = player->GetComponent<SpeedComponent>();
 
-    if (!playerPosition || !playerHealth || !leftFoot || !rightFoot || !playerDirection || !speed)
+    if (!body || !playerHealth || !leftFoot || !rightFoot || !playerDirection || !speed)
     { return; }
 
+    SetPosition(leftFoot, rightFoot, body);
+    
+}
+
+void PlayerBodySystem::SetPosition(LeftFootComponent* leftFoot, RightFootComponent* rightFoot, PlayerBodyComponent* body) {
     float xDiff = abs(leftFoot->pos_.x - rightFoot->pos_.x);
     float yDiff = abs(leftFoot->pos_.y - rightFoot->pos_.y);
-    playerPosition->position_ = {
+    body->pos_ = {
         leftFoot->pos_.x + (xDiff / 2),
         leftFoot->pos_.y + (yDiff / 2)
     };

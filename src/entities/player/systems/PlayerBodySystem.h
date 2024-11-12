@@ -18,12 +18,7 @@ class PlayerBodySystem : public System {
     void Draw(std::vector<Entity*> *entities) override;
 
     void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
-
-    void Move(LeftFootComponent *leftFoot, PositionComponent *playerPosition);
-    void MoveRight(PositionComponent *playerPosition, LeftFootComponent *leftFoot, RightFootComponent *rightFoot);
-    void MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
-    void MoveTop(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
-    void MoveBottom(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);
+    void SetPosition(LeftFootComponent* leftFoot, RightFootComponent* rightFoot, PlayerBodyComponent* body);
 };
 
 #endif // PLAYER_BODY_SYSTEM_H

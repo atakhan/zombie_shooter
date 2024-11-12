@@ -51,6 +51,7 @@ class Tools {
     ) {
         Entity *player = new Entity();
         player->AddComponent<PlayerComponent>(PlayerComponent());
+        player->AddComponent<PlayerBodyComponent>(PlayerBodyComponent(pos, health));
         player->AddComponent<PositionComponent>(PositionComponent(pos));
         player->AddComponent<HealthComponent>(HealthComponent(health));
         player->AddComponent<AttackComponent>(AttackComponent(strength, attackRadius));
@@ -59,8 +60,8 @@ class Tools {
         player->AddComponent<BreathSoundComponent>(BreathSoundComponent(0.5f, 55.0f));
         player->AddComponent<AdrenalinComponent>(AdrenalinComponent(1.0f, 5.0f, 0.005f));
         player->AddComponent<CircleColliderComponent>(CircleColliderComponent(health));
-        player->AddComponent<LeftFootComponent>(LeftFootComponent(pos));
-        player->AddComponent<RightFootComponent>(RightFootComponent(pos));
+        player->AddComponent<LeftFootComponent>(LeftFootComponent(pos, VIOLET));
+        player->AddComponent<RightFootComponent>(RightFootComponent(pos, DARKBLUE));
 
         CameraComponent camera = CameraComponent();
         player->AddComponent<CameraComponent>(camera);

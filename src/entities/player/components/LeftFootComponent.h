@@ -11,13 +11,15 @@ struct LeftFootComponent {
     Vector2 idlePos_;
     Vector2 goalPosition_;
     bool moving_;
+    Color color_;
 
-    LeftFootComponent(Vector2 pos)
+    LeftFootComponent(Vector2 pos, Color color)
         : radius_(10.0f)
         , pos_(pos)
         , goalPosition_(pos)
         , idlePos_(pos)
         , moving_(false)
+        , color_(color)
         {};
 };
 

@@ -17,17 +17,17 @@ void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
     if (player == nullptr) { return; }
     
     FeetComponent *feet = player->GetComponent<FeetComponent>();
-    PositionComponent *position = player->GetComponent<PositionComponent>();
+    PlayerBodyComponent *body = player->GetComponent<PlayerBodyComponent>();
     HealthComponent *health = player->GetComponent<HealthComponent>();
     DirectionComponent *direction = player->GetComponent<DirectionComponent>();
     
     DrawCircleV(direction->mousePos_, 5.0f, BLUE_3_8);
-    DrawLineV(position->position_, direction->mousePos_, WHITE);
+    DrawLineV(body->pos_, direction->mousePos_, WHITE);
     
     float width = health->health_ * 2;
     float height = health->health_ / 4;
 
-    Rectangle focusRec = {position->position_.x, position->position_.y, width, height};
+    Rectangle focusRec = {body->pos_.x, body->pos_.y, width, height};
     Vector2 focuesRecOrigin = {0.0f, height / 2};
 
     // Рисуем прямоугольник с текущим углом
@@ -38,19 +38,19 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     if (player == nullptr) { return; }
     
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
+    PlayerBodyComponent *body = player->GetComponent<PlayerBodyComponent>();
     HealthComponent *playerHealth = player->GetComponent<HealthComponent>();
     CameraComponent *camera = player->GetComponent<CameraComponent>();
     DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
 
-    if (!playerPosition || !playerHealth) { return; }
+    if (!body || !playerHealth) { return; }
 
     Vector2 mousePos = GetScreenToWorld2D(GetMousePosition(), camera->camera_);
     float mousePosX = mousePos.x;
     float mousePosY = mousePos.y;
 
     // Вычисляем целевой угол
-    float targetRotation = AngleBetweenVectors(mousePos, playerPosition->position_);
+    float targetRotation = AngleBetweenVectors(mousePos, body->pos_);
     targetRotation = NormalizeAngle(targetRotation); // Нормализуем целевой угол
 
     // Плавное вращение с интерполяцией
