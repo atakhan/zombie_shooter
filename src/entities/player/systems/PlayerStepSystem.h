@@ -17,16 +17,16 @@ class PlayerStepSystem : public System {
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
 
-    void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player, float collisionRadius);
+    void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
     void WhoIsFirst(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool leftFirst);
 
     void MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoal, Vector2 newPos);
     void MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoal, Vector2 newPos);
 
-    void MoveRight(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
-    void MoveLeft(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
-    void MoveUp(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
-    void MoveDown(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue);
+    void MoveRight(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float stepValue);
+    void MoveLeft(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float stepValue);
+    void MoveUp(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float stepValue);
+    void MoveDown(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float stepValue);
     };
 
 #endif // PLAYER_STEP_SYSTEM_H
