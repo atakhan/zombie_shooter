@@ -17,13 +17,13 @@ class PlayerStepSystem : public System {
   void Update(std::vector<Entity*> *entities) override;
   void Draw(std::vector<Entity*> *entities) override;
 
-  void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
+  void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot);
   void WhoIsFirst(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool leftFirst);
 
   void MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoal);
   void MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoal);
 
-  void Move(LeftFootComponent *leftFoot, RightFootComponent *rightFoot);
+  void Move(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *playerComponent);
 };
 
 #endif // PLAYER_STEP_SYSTEM_H
