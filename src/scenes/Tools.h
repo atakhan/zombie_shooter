@@ -2,6 +2,8 @@
 #define SRC_SCENES_TOOLS_H
 
 #include <string>
+#include <cmath> // For std::fabs
+
 #include "../core/Bootstrap.h"
 #include "../entities/Bootstrap.h" // TODO! not includes
 
@@ -163,6 +165,10 @@ class Tools {
             );
         }
 
+    }
+
+    static bool CompareFloats(float a, float b, float epsilon) {
+        return std::fabs(a - b) < epsilon;
     }
 };
 
