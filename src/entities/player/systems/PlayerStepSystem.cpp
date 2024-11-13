@@ -75,12 +75,14 @@ void PlayerStepSystem::WhoIsFirst(LeftFootComponent *leftFoot, RightFootComponen
 
 void PlayerStepSystem::MoveRight(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue) {
     MoveLeftFoot(
-        leftFoot, rightFoot, 
+        leftFoot, rightFoot,
+        (leftFoot->pos_.x > leftFoot->goalPosition_.x),
         (Vector2){leftFoot->idlePos_.x + stepValue, leftFoot->idlePos_.y}, 
         (Vector2){leftFoot->pos_.x + (60.0f * GetFrameTime()), leftFoot->pos_.y}
     );
     MoveRightFoot(
         leftFoot, rightFoot, 
+        (rightFoot->pos_.x > rightFoot->goalPosition_.x),
         (Vector2){rightFoot->idlePos_.x + stepValue, rightFoot->idlePos_.y}, 
         (Vector2){rightFoot->pos_.x + (60.0f * GetFrameTime()), rightFoot->pos_.y}
     );
@@ -89,11 +91,13 @@ void PlayerStepSystem::MoveRight(LeftFootComponent *leftFoot, RightFootComponent
 void PlayerStepSystem::MoveLeft(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue) {
     MoveLeftFoot(
         leftFoot, rightFoot, 
+        (leftFoot->pos_.x < leftFoot->goalPosition_.x),
         (Vector2){leftFoot->idlePos_.x - stepValue, leftFoot->idlePos_.y}, 
         (Vector2){leftFoot->pos_.x - (60.0f * GetFrameTime()), leftFoot->pos_.y}
     );
     MoveRightFoot(
         leftFoot, rightFoot, 
+        (rightFoot->pos_.x < rightFoot->goalPosition_.x),
         (Vector2){rightFoot->idlePos_.x - stepValue, rightFoot->idlePos_.y}, 
         (Vector2){rightFoot->pos_.x - (60.0f * GetFrameTime()), rightFoot->pos_.y}
     );
@@ -102,11 +106,13 @@ void PlayerStepSystem::MoveLeft(LeftFootComponent *leftFoot, RightFootComponent 
 void PlayerStepSystem::MoveUp(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue) {
     MoveLeftFoot(
         leftFoot, rightFoot, 
+        (leftFoot->pos_.y < leftFoot->goalPosition_.y),
         (Vector2){leftFoot->idlePos_.x, leftFoot->goalPosition_.y - stepValue}, 
         (Vector2){leftFoot->pos_.x, leftFoot->pos_.y - (60.0f * GetFrameTime())}
     );
     MoveRightFoot(
         leftFoot, rightFoot, 
+        (rightFoot->pos_.y < rightFoot->goalPosition_.y),
         (Vector2){rightFoot->idlePos_.x, rightFoot->goalPosition_.y - stepValue}, 
         (Vector2){rightFoot->pos_.x, rightFoot->pos_.y - (60.0f * GetFrameTime())}
     );
@@ -115,19 +121,21 @@ void PlayerStepSystem::MoveUp(LeftFootComponent *leftFoot, RightFootComponent *r
 void PlayerStepSystem::MoveDown(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, float collisionRadius, float stepValue) {
     MoveLeftFoot(
         leftFoot, rightFoot, 
+        (leftFoot->pos_.y > leftFoot->goalPosition_.y),
         (Vector2){leftFoot->idlePos_.x, leftFoot->goalPosition_.y + stepValue}, 
         (Vector2){leftFoot->pos_.x, leftFoot->pos_.y + (60.0f * GetFrameTime())}
     );
     MoveRightFoot(
         leftFoot, rightFoot, 
+        (rightFoot->pos_.y > rightFoot->goalPosition_.y),
         (Vector2){rightFoot->idlePos_.x, rightFoot->goalPosition_.y + stepValue}, 
         (Vector2){rightFoot->pos_.x, rightFoot->pos_.y + (60.0f * GetFrameTime())}
     );
 }
 
-void PlayerStepSystem::MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, Vector2 newGoalPos, Vector2 newPos) {
+void PlayerStepSystem::MoveLeftFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoalPos, Vector2 newPos) {
     if (leftFoot->moving_) {
-        if (leftFoot->pos_.x > leftFoot->goalPosition_.x) {
+        if (condition) {
             leftFoot->goalPosition_ = newGoalPos;
             leftFoot->idlePos_ = leftFoot->goalPosition_;
             leftFoot->moving_ = false;
@@ -139,9 +147,9 @@ void PlayerStepSystem::MoveLeftFoot(LeftFootComponent *leftFoot, RightFootCompon
     }
 }
 
-void PlayerStepSystem::MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, Vector2 newGoalPos, Vector2 newPos) {
+void PlayerStepSystem::MoveRightFoot(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, bool condition, Vector2 newGoalPos, Vector2 newPos) {
     if (rightFoot->moving_) {
-        if (rightFoot->pos_.x > rightFoot->goalPosition_.x) {
+        if (condition) {
             rightFoot->goalPosition_ = newGoalPos;
             rightFoot->idlePos_ = rightFoot->goalPosition_;
             leftFoot->moving_ = true;
