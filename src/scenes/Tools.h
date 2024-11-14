@@ -78,7 +78,7 @@ class Tools {
       ) {
             Entity *player = new Entity();
             player->AddComponent<PlayerComponent>(PlayerComponent());
-            player->AddComponent<BodyComponent>(BodyComponent(pos));
+            player->AddComponent<PlayerBodyComponent>(PlayerBodyComponent(pos));
             player->AddComponent<LeftFootComponent>(LeftFootComponent(pos));
             player->AddComponent<RightFootComponent>(RightFootComponent(pos));
 
@@ -117,8 +117,8 @@ class Tools {
                               // PLAYER SPAWN POINT
                               if (spawnMap->map_[y][x] == 1) {  
                                     return (Vector2) {
-                                    (y * terrain->cellHeight_) + (terrain->cellHeight_ / 2),
-                                    (x * terrain->cellWidth_) + (terrain->cellWidth_ / 2)
+                                          (y * terrain->cellHeight_) + (terrain->cellHeight_ / 2),
+                                          (x * terrain->cellWidth_) + (terrain->cellWidth_ / 2)
                                     };
                               }
                         }

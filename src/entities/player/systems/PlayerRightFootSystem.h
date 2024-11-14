@@ -1,5 +1,5 @@
-#ifndef PLAYER_LEFT_FOOT_SYSTEM_H
-#define PLAYER_LEFT_FOOT_SYSTEM_H
+#ifndef PLAYER_RIGHT_FOOT_SYSTEM_H
+#define PLAYER_RIGHT_FOOT_SYSTEM_H
 
 #include <vector>
 #include <raylib-cpp.hpp>
@@ -11,15 +11,15 @@
 #include "../components/Bootstrap.h"
 
 
-class PlayerLeftFootSystem : public System {
+class PlayerRightFootSystem : public System {
  public:
   void Init(std::vector<Entity*> *entities) override;
   void Update(std::vector<Entity*> *entities) override;
   void Draw(std::vector<Entity*> *entities) override;
 
-  bool GoalReached(LeftFootComponent *foot);
-  void MoveToGoal(LeftFootComponent *foot);
-  void MoveFromBody(LeftFootComponent *foot, PlayerBodyComponent *body);
+  bool GoalReached(RightFootComponent *foot);
+  void MoveToGoal(RightFootComponent *foot);
+  void MoveFromBody(RightFootComponent *foot, PlayerBodyComponent *body);
 };
 
-#endif // PLAYER_LEFT_FOOT_SYSTEM_H
+#endif // PLAYER_RIGHT_FOOT_SYSTEM_H
