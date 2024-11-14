@@ -13,7 +13,7 @@ void PlayerLeftFootSystem::Draw(std::vector<Entity*> *entities) {
 
     if (leftFoot) {
         DrawCircleV(leftFoot->pos_, leftFoot->radius_, BLUE);
-        DrawCircleV(leftFoot->goalPosition_, 4.0f, BLUE);
+        // DrawCircleV(leftFoot->goalPosition_, 4.0f, BLUE);
     }
 }
 

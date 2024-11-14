@@ -74,11 +74,13 @@ class Tools {
       }
 
       static Entity* CreatePlayerForStepMoveSystem(
-            Vector2 pos
+            Vector2 pos,
+            float rotation,
+            float limit
       ) {
             Entity *player = new Entity();
             player->AddComponent<PlayerComponent>(PlayerComponent());
-            player->AddComponent<PlayerBodyComponent>(PlayerBodyComponent(pos));
+            player->AddComponent<PlayerBodyComponent>(PlayerBodyComponent(pos, rotation, limit));
             player->AddComponent<LeftFootComponent>(LeftFootComponent(pos));
             player->AddComponent<RightFootComponent>(RightFootComponent(pos));
 

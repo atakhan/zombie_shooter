@@ -7,13 +7,17 @@
 
 struct PlayerBodyComponent {
     float radius_;
+    float rotation_;
+    float limit_; // todo: naming?
     Vector2 pos_;
     Vector2 idlePos_;
     Vector2 goalPosition_;
     bool moving_;
 
-    PlayerBodyComponent(Vector2 pos)
+    PlayerBodyComponent(Vector2 pos, float rotation, float visionLimit)
         : radius_(10.0f)
+        , rotation_(rotation)
+        , limit_(visionLimit)
         , pos_(pos)
         , goalPosition_(pos)
         , idlePos_(pos)

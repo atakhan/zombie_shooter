@@ -26,12 +26,12 @@ void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
         
         float width = 20.0f * 2;
         float height = 20.0f / 4;
-
         Rectangle focusRec = {playerBody->pos_.x, playerBody->pos_.y, width, height};
         Vector2 focuesRecOrigin = {0.0f, height / 2};
 
         // Рисуем прямоугольник с текущим углом
         DrawRectanglePro(focusRec, focuesRecOrigin, direction->rotation_, RED);
+        DrawRectanglePro(focusRec, focuesRecOrigin, playerBody->rotation_, WHITE);
     }
 }
 

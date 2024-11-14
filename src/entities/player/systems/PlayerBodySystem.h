@@ -19,6 +19,7 @@ class PlayerBodySystem : public System {
 
     void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
 
+    float GetLimitAngle(float angle);
     void Move(LeftFootComponent *leftFoot, PositionComponent *playerPosition);
     void MoveRight(PositionComponent *playerPosition, LeftFootComponent *leftFoot, RightFootComponent *rightFoot);
     void MoveLeft(SoundComponent *sound, PositionComponent *position, SpeedComponent *speed);

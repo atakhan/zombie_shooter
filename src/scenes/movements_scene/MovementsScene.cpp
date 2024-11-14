@@ -23,7 +23,9 @@ void MovementsScene::Init() {
     // Player Entity
     Scene::AddEntity(
         Tools::CreatePlayerForStepMoveSystem(
-            Tools::GetPlayerSpawnPositionFromMap(mapEntity)
+            Tools::GetPlayerSpawnPositionFromMap(mapEntity),
+            -90.0f,
+            55.0f
         )
     );
     
