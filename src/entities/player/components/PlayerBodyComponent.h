@@ -8,6 +8,7 @@
 struct PlayerBodyComponent {
     float radius_;
     float rotation_;
+    float shadowRotation_;
     float limit_; // todo: naming?
     Vector2 pos_;
     Vector2 idlePos_;
@@ -17,6 +18,7 @@ struct PlayerBodyComponent {
     PlayerBodyComponent(Vector2 pos, float rotation, float visionLimit)
         : radius_(10.0f)
         , rotation_(rotation)
+        , shadowRotation_(rotation)
         , limit_(visionLimit)
         , pos_(pos)
         , goalPosition_(pos)

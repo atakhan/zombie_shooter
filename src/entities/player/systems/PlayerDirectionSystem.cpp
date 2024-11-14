@@ -22,7 +22,7 @@ void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
     
     if (playerBody) {
         DrawCircleV(direction->mousePos_, 5.0f, BLUE_3_8);
-        DrawLineV(playerBody->pos_, direction->mousePos_, WHITE);
+        DrawLineV(playerBody->pos_, direction->mousePos_, GRAY_6_2);
         
         float width = 20.0f * 2;
         float height = 20.0f / 4;
@@ -31,7 +31,6 @@ void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
 
         // Рисуем прямоугольник с текущим углом
         DrawRectanglePro(focusRec, focuesRecOrigin, direction->rotation_, RED);
-        DrawRectanglePro(focusRec, focuesRecOrigin, playerBody->rotation_, WHITE);
     }
 }
 
