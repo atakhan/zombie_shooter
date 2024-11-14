@@ -16,8 +16,6 @@ void PlayerStepSystem::Draw(std::vector<Entity*> *entities) {
     PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
 
     if (leftFoot && rightFoot) {
-        DrawCircleV(leftFoot->pos_, leftFoot->radius_, BLUE);
-        DrawCircleV(rightFoot->pos_, leftFoot->radius_, VIOLET);
         DrawCircleV(leftFoot->goalPosition_, 4.0f, BLUE);
         DrawCircleV(rightFoot->goalPosition_, 4.0f, VIOLET);
     }
@@ -42,21 +40,7 @@ void PlayerStepSystem::Update(std::vector<Entity*> *entities) {
     float stepValue = 40.0f;
     
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        playerComponent->currentState_ = PlayerComponent::WALK;
-        WhoIsFirst(
-            leftFoot, rightFoot, 
-            (leftFoot->pos_.x < rightFoot->pos_.x)
-        );
-        MoveLeftFoot(
-            leftFoot, rightFoot,
-            (bool)(leftFoot->pos_.x > leftFoot->goalPosition_.x),
-            (Vector2){playerPosition->position_.x + stepValue, playerPosition->position_.y}
-        );
-        MoveRightFoot(
-            leftFoot, rightFoot, 
-            (bool)(rightFoot->pos_.x > rightFoot->goalPosition_.x),
-            (Vector2){playerPosition->position_.x + stepValue, playerPosition->position_.y}
-        );
+        // leftFoot->goalPosition_ = body.
     }
     else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
         playerComponent->currentState_ = PlayerComponent::WALK;

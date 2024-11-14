@@ -73,6 +73,24 @@ class Tools {
             return player;
       }
 
+      static Entity* CreatePlayerForStepMoveSystem(
+            Vector2 pos
+      ) {
+            Entity *player = new Entity();
+            player->AddComponent<PlayerComponent>(PlayerComponent());
+            player->AddComponent<BodyComponent>(BodyComponent(pos));
+            player->AddComponent<LeftFootComponent>(LeftFootComponent(pos));
+            player->AddComponent<RightFootComponent>(RightFootComponent(pos));
+
+            CameraComponent camera = CameraComponent();
+            player->AddComponent<CameraComponent>(camera);
+
+            Vector2 worldPos = GetScreenToWorld2D(GetMousePosition(), camera.camera_);
+            player->AddComponent<DirectionComponent>(DirectionComponent(0.0f, worldPos)); // degrees
+            
+            return player;
+      }
+
       // CREATE ZOMBIES
       static Entity* CreateZombie(
             PositionComponent pos,

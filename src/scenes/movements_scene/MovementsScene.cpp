@@ -21,19 +21,16 @@ void MovementsScene::Init() {
     Scene::AddEntity(mapEntity);
 
     // Player Entity
-    Scene::AddEntity(Tools::CreatePlayer(
-        Tools::GetPlayerSpawnPositionFromMap(mapEntity),
-        Config::PLAYER_HEALTH,
-        Config::PLAYER_STRENGTH,
-        Config::PLAYER_AGILITY,
-        Config::PLAYER_ATTACK_RADIUS,
-        Config::SOUND_MAX_RADIUS
-    ));
+    Scene::AddEntity(
+        Tools::CreatePlayerForStepMoveSystem(
+            Tools::GetPlayerSpawnPositionFromMap(mapEntity)
+        )
+    );
     
     GenerateMapEntities(mapEntity, spawnMap, wallsMap);
     // Systems
     // Map systems
-    Scene::AddSystem(new TerrainDrawSystem);
+    // Scene::AddSystem(new TerrainDrawSystem);
     
     
     // Player systems
@@ -42,9 +39,10 @@ void MovementsScene::Init() {
     Scene::AddSystem(new PlayerDirectionSystem);
     
     // WARNING! UNDER CONSTRUCTION!
-    Scene::AddSystem(new PlayerStepSystem);
     Scene::AddSystem(new PlayerBodySystem);
-    Scene::AddSystem(new PlayerFeetToBodyRelativeSystem);
+    // Scene::AddSystem(new PlayerLeftFootSystem);
+    // Scene::AddSystem(new PlayerStepSystem);
+    // Scene::AddSystem(new PlayerFeetToBodyRelativeSystem);
 
     // Scene::AddSystem(new PlayerBreathSystem);
     // Scene::AddSystem(new PlayerAdrenalinSystem);

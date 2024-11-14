@@ -7,6 +7,7 @@
 #include "PlayerBasicControlSystem.h"
 #include "PlayerDirectionSystem.h"
 #include "PlayerFeetToBodyRelativeSystem.h"
+#include "PlayerLeftFootSystem.h"
 #include "PlayerStepSystem.h"
 #include "PlayerBodySystem.h"
 

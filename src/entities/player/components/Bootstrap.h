@@ -3,6 +3,7 @@
 
 #include "AdrenalinComponent.h"
 #include "AttackComponent.h"
+#include "BodyComponent.h"
 #include "BreathSoundComponent.h"
 #include "CameraComponent.h"
 #include "DirectionComponent.h"

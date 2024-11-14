@@ -9,14 +9,11 @@ void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     if (player == nullptr) { return; }
     
-    HealthComponent *health = player->GetComponent<HealthComponent>();
-    PositionComponent *playerPosition = player->GetComponent<PositionComponent>();
-    LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
-    RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
+    BodyComponent *playerBody = player->GetComponent<BodyComponent>();
 
-    if (health && playerPosition && leftFoot && rightFoot) {        
-        DrawCircleV(playerPosition->position_, 5.0f, GREEN);
-        DrawLineV(leftFoot->pos_, rightFoot->pos_, GREEN);
+    if (playerBody) {        
+        DrawCircleV(playerBody->pos_, 5.0f, GREEN);
+        DrawCircleV(playerBody->goalPosition_, 2.0f, ORANGE);
     }
 }
 
