@@ -79,12 +79,11 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
     cout << "right: " << rightAngle << endl;
     cout << "------------" << endl;
     if (visionRotation > rightAngle && visionRotation < playerBody->shadowRotation_) {
-        cout << "GO TO RIGHT!" << endl;
+        IncreaseRotation(playerBody);
     }
-    if (visionRotation < leftAngle) {
-        cout << "GO TO LEFT!" << endl;
+    if (visionRotation < leftAngle || visionRotation > playerBody->shadowRotation_) {
+        DecreaseRotation(playerBody);
     }
-    if (visionRotation > leftAngle) {
     // IncreaseRotation(playerBody);
     
 
@@ -105,8 +104,16 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
 }
 
 void PlayerBodySystem::IncreaseRotation(PlayerBodyComponent *playerBody) {
-    playerBody->rotation_ += 0.3f;
+    playerBody->rotation_ += 0.8f;
     if (playerBody->rotation_ > 180.0f) {
+        playerBody->rotation_ = -180.0f;
+    }
+}
+
+
+void PlayerBodySystem::DecreaseRotation(PlayerBodyComponent *playerBody) {
+    playerBody->rotation_ -= 0.8f;
+    if (playerBody->rotation_ < -180.0f) {
         playerBody->rotation_ = -180.0f;
     }
 }

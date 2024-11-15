@@ -23,6 +23,7 @@ class PlayerBodySystem : public System {
     void MoveBodyDirectionToLeft(PlayerBodyComponent *playerBody);
     bool isPositive(float value);
     void IncreaseRotation(PlayerBodyComponent *playerBody);
+    void DecreaseRotation(PlayerBodyComponent *playerBody);
 };
 
 #endif // PLAYER_BODY_SYSTEM_H
