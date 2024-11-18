@@ -2,58 +2,62 @@
 #include <iostream>
 
 void PlayerBodySystem::Init(std::vector<Entity*> *entities) {
-    std::cout << "PlayerFeetMove System Initialized" << std::endl;
+    std::cout << "PlayerBodySystem System Initialized" << std::endl;
+    player_ = GetEntityByComponent<PlayerComponent>(entities);
+    body_ = nullptr;
+    if (player_ != nullptr) {
+        body_ = player_->GetComponent<PlayerBodyComponent>();
+    }
+    
 }
 
 void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
-    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
-    if (player == nullptr) { return; }
-    
-    PlayerBodyComponent *playerBody = player->GetComponent<PlayerBodyComponent>();
+    if (body_) {        
+        DrawCircleV(body_->pos_, 5.0f, GREEN);
+        float leftAngle = body_->rotation_ - body_->limit_;
+        float rightAngle = body_->rotation_ + body_->limit_;
 
-    if (playerBody) {        
-        DrawCircleV(playerBody->pos_, 5.0f, GREEN);
-        float leftAngle = playerBody->rotation_ - playerBody->limit_;
-        float rightAngle = playerBody->rotation_ + playerBody->limit_;
-        
         float width = 20.0f * 2;
         float height = 20.0f / 4;
-        Rectangle focusRec = {playerBody->pos_.x, playerBody->pos_.y, width, height};
+        Rectangle focusRec = {body_->pos_.x, body_->pos_.y, width, height};
         Vector2 focuesRecOrigin = {0.0f, height / 2};
         
-        DrawRectanglePro(focusRec, focuesRecOrigin, leftAngle, PINK);
-        DrawRectanglePro(focusRec, focuesRecOrigin, rightAngle, PURPLE);
-        DrawRectanglePro(focusRec, focuesRecOrigin, 180.0f, GREEN);
-        DrawRectanglePro(focusRec, focuesRecOrigin, playerBody->rotation_, WHITE);
-        DrawRectanglePro(focusRec, focuesRecOrigin, playerBody->shadowRotation_, GRAY_6_4);
+        // BODY DIRECTION 
+        DrawRectanglePro(focusRec, focuesRecOrigin, body_->rotation_, WHITE); 
+        // BODY SHADOW DIRECTION 
+        DrawRectanglePro(focusRec, focuesRecOrigin, body_->shadowRotation_, GRAY_6_4);
         
-        // DrawCircleV(playerBody->goalPosition_, 5.0f, ORANGE);
+        // LEFT LIMIT EDGE DIRECTION 
+        DrawRectanglePro(focusRec, focuesRecOrigin, leftAngle, PINK);
+        // RIGHT LIMIT EDGE DIRECTION 
+        DrawRectanglePro(focusRec, focuesRecOrigin, rightAngle, PURPLE);
+        
+        // ANGLE CONVERSION DIRECTION 
+        DrawRectanglePro(focusRec, focuesRecOrigin, 180.0f, GREEN);
+        // DrawCircleV(body_->goalPosition_, 5.0f, ORANGE);
     }
 }
 
 void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
     using namespace std;
-    Entity *player = GetEntityByComponent<PlayerComponent>(entities);
-    if (player == nullptr) { return; }
+    
+    PlayerComponent *playerComponent = player_->GetComponent<PlayerComponent>();
+    DirectionComponent *playerDirection = player_->GetComponent<DirectionComponent>();
 
-    PlayerComponent *playerComponent = player->GetComponent<PlayerComponent>();
-    PlayerBodyComponent *playerBody = player->GetComponent<PlayerBodyComponent>();
-    DirectionComponent *playerDirection = player->GetComponent<DirectionComponent>();
+    LeftFootComponent *leftFoot = player_->GetComponent<LeftFootComponent>();
+    RightFootComponent *rightFoot = player_->GetComponent<RightFootComponent>();
 
-    LeftFootComponent *leftFoot = player->GetComponent<LeftFootComponent>();
-    RightFootComponent *rightFoot = player->GetComponent<RightFootComponent>();
-
-    if (!playerBody || !leftFoot || !rightFoot || !playerDirection)
+    if (!body_ || !leftFoot || !rightFoot || !playerDirection)
     { return; }
 
     float xDiff = abs(leftFoot->pos_.x - rightFoot->pos_.x);
     float yDiff = abs(leftFoot->pos_.y - rightFoot->pos_.y);
-    playerBody->pos_ = {
+    body_->pos_ = {
         leftFoot->pos_.x + (xDiff / 2),
         leftFoot->pos_.y + (yDiff / 2)
     };
 
-    float bodyRotation = playerBody->rotation_;
+    float bodyRotation = body_->rotation_;
     float visionRotation = playerDirection->rotation_;
 
     // if (visionRotation)
@@ -61,17 +65,17 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
     // cout << "body rotation in degrees: " << bodyRotation << endl;
     // cout << "vision rotation in radians: " << visionRotation << endl;
 
-    float leftAngle = GetLimitAngle(playerBody->rotation_ - playerBody->limit_);
-    float rightAngle = GetLimitAngle(playerBody->rotation_ + playerBody->limit_);
+    float leftAngle = GetLimitAngle(body_->rotation_ - body_->limit_);
+    float rightAngle = GetLimitAngle(body_->rotation_ + body_->limit_);
 
-    if (isPositive(playerBody->rotation_)) {
-        playerBody->shadowRotation_ = (-180) + playerBody->rotation_;
+    if (isPositive(body_->rotation_)) {
+        body_->shadowRotation_ = (-180) + body_->rotation_;
     } else {
-        playerBody->shadowRotation_ = (180) + playerBody->rotation_;
+        body_->shadowRotation_ = (180) + body_->rotation_;
     }
 
     cout << "range: " << leftAngle << ", "<< rightAngle << endl;
-    cout << "antibody : " << playerBody->shadowRotation_ << endl;
+    cout << "antibody : " << body_->shadowRotation_ << endl;
     cout << "vision && body: " << visionRotation << ", " << bodyRotation << endl;
     cout << "right: " << rightAngle << endl;
     cout << "------------" << endl;
@@ -81,41 +85,41 @@ void PlayerBodySystem::Update(std::vector<Entity*> *entities) {
         cout << "POSITIVE" << endl;
         if (visionRotation > leftAngle) {
             cout << "visionRotation > leftAngle" << endl;
-            if (visionRotation > playerBody->shadowRotation_) {
-                RotateToLeft(playerBody);
+            if (visionRotation > body_->shadowRotation_) {
+                RotateToLeft(body_);
             }
         } else {
             cout << "visionRotation <= leftAngle" << endl;
-            RotateToLeft(playerBody);
+            RotateToLeft(body_);
         }
         
         if (visionRotation > rightAngle) {
             cout << "visionRotation > rightAngle" << endl;
-            // cout << "RotateToRight(playerBody) POSITIVE" << endl;
-            RotateToRight(playerBody);
+            // cout << "RotateToRight(body_) POSITIVE" << endl;
+            RotateToRight(body_);
         } else {
             cout << "visionRotation <= rightAngle" << endl;
-            if (visionRotation < playerBody->shadowRotation_) {
-                RotateToRight(playerBody);
+            if (visionRotation < body_->shadowRotation_) {
+                RotateToRight(body_);
             }
         }
     }
     else {
         cout << "NEGATIVE" << endl;
         // if (visionRotation > leftAngle) {
-        //     if (visionRotation > playerBody->shadowRotation_) {
-        //         RotateToLeft(playerBody);
+        //     if (visionRotation > body_->shadowRotation_) {
+        //         RotateToLeft(body_);
         //     }
         // } else {
-        //     RotateToLeft(playerBody);
+        //     RotateToLeft(body_);
         // }
         
         // if (visionRotation > rightAngle) {
-        //     // cout << "RotateToRight(playerBody) POSITIVE" << endl;
-        //     RotateToRight(playerBody);
+        //     // cout << "RotateToRight(body_) POSITIVE" << endl;
+        //     RotateToRight(body_);
         // } else {
-        //     if (visionRotation < playerBody->shadowRotation_) {
-        //         RotateToRight(playerBody);
+        //     if (visionRotation < body_->shadowRotation_) {
+        //         RotateToRight(body_);
         //     }
         // }
     }

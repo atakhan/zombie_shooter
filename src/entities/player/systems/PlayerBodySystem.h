@@ -13,6 +13,9 @@
 
 class PlayerBodySystem : public System {
   public:
+    Entity *player_;
+    PlayerBodyComponent *body_;
+
     void Init(std::vector<Entity*> *entities) override;
     void Update(std::vector<Entity*> *entities) override;
     void Draw(std::vector<Entity*> *entities) override;
