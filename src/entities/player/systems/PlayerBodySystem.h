@@ -12,21 +12,28 @@
 
 
 class PlayerBodySystem : public System {
-  public:
-    Entity *player_;
-    PlayerBodyComponent *body_;
+ public:
+  Entity *player_;
+  PlayerBodyComponent *body_;
+  LeftFootComponent *leftFoot_;
+  RightFootComponent *rightFoot_;
+  DirectionComponent *direction_;
+  float leftAngle_;
+  float rightAngle_;
 
-    void Init(std::vector<Entity*> *entities) override;
-    void Update(std::vector<Entity*> *entities) override;
-    void Draw(std::vector<Entity*> *entities) override;
+  void Init(std::vector<Entity*> *entities) override;
+  void Update(std::vector<Entity*> *entities) override;
+  void Draw(std::vector<Entity*> *entities) override;
 
-    float GetLimitAngle(float angle);
-    void Idle(LeftFootComponent *leftFoot, RightFootComponent *rightFoot, PlayerComponent *player);
-    void MoveBodyDirectionToRight(PlayerBodyComponent *playerBody);
-    void MoveBodyDirectionToLeft(PlayerBodyComponent *playerBody);
-    bool isPositive(float value);
-    void RotateToLeft(PlayerBodyComponent *playerBody);
-    void RotateToRight(PlayerBodyComponent *playerBody);
+  float GetLimitAngle(float angle);
+  void Idle(PlayerComponent *player);
+  void SetLeftRightLimits();
+  bool isPositive(float value);
+  void LocateBody();
+  void SetShadowRotation();
+  void RotateBody();
+  void RotateToLeft();
+  void RotateToRight();
 };
 
 #endif // PLAYER_BODY_SYSTEM_H

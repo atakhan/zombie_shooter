@@ -15,7 +15,7 @@ float NormalizeAngle(float angle) {
 void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
     Entity *player = GetEntityByComponent<PlayerComponent>(entities);
     if (player == nullptr) { return; }
-    
+
     FeetComponent *feet = player->GetComponent<FeetComponent>();
     PlayerBodyComponent *playerBody = player->GetComponent<PlayerBodyComponent>();
     DirectionComponent *direction = player->GetComponent<DirectionComponent>();
@@ -45,8 +45,6 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
     if (!playerBody) { return; }
 
     Vector2 mousePos = GetScreenToWorld2D(GetMousePosition(), camera->camera_);
-    float mousePosX = mousePos.x;
-    float mousePosY = mousePos.y;
 
     // Вычисляем целевой угол
     float targetRotation = AngleBetweenVectors(mousePos, playerBody->pos_);
@@ -68,7 +66,7 @@ void PlayerDirectionSystem::Update(std::vector<Entity*> *entities) {
     }
 
     // Обновляем позицию мыши
-    playerDirection->mousePos_ = {mousePosX, mousePosY};
+    playerDirection->mousePos_ = {mousePos.x, mousePos.y};
 }
 
 float PlayerDirectionSystem::AngleBetweenVectors(const Vector2& mousePos, const Vector2& playerPos) {
