@@ -12,6 +12,7 @@ void PlayerBodySystem::Init(std::vector<Entity*> *entities) {
         body_ = player_->GetComponent<PlayerBodyComponent>();
         leftFoot_ = player_->GetComponent<LeftFootComponent>();
         rightFoot_ = player_->GetComponent<RightFootComponent>();
+        direction_ = player_->GetComponent<DirectionComponent>();
         leftAngle_ = body_->rotation_ - body_->limit_;
         rightAngle_ = body_->rotation_ + body_->limit_;
     }
@@ -72,26 +73,35 @@ void PlayerBodySystem::SetShadowRotation() {
     }
 }
 
-// TODO bugs bugs...
 void PlayerBodySystem::RotateBody() {
-    if (!isPositive(direction_->rotation_)) {
-        if (direction_->rotation_ > leftAngle_) {
-            if (direction_->rotation_ > body_->shadowRotation_) {
+    if (isNegative(body_->rotation_)) {
+        if (!isPositive(direction_->rotation_)) {
+            if (direction_->rotation_ > leftAngle_) {
+                if (direction_->rotation_ > body_->shadowRotation_) {
+                    RotateToLeft();
+                }
+            } else {
                 RotateToLeft();
             }
-        } else {
-            RotateToLeft();
-        }
 
-        // if (direction_->rotation_ > rightAngle_) {
-        //     RotateToRight();
-        // } else {
-        //     if (direction_->rotation_ < body_->shadowRotation_) {
-        //         RotateToRight();
-        //     }
-        // }
-    }
-    else {
+            // if (direction_->rotation_ > rightAngle_) {
+            //     RotateToRight();
+            // } else {
+            //     if (direction_->rotation_ < body_->shadowRotation_) {
+            //         RotateToRight();
+            //     }
+            // }
+        }
+        else {
+            if (direction_->rotation_ > leftAngle_) {
+                if (direction_->rotation_ < body_->shadowRotation_) {
+                    RotateToLeft();
+                }
+            } else {
+
+            }
+        }
+        
     }
 }
 
@@ -103,6 +113,7 @@ void PlayerBodySystem::RotateToRight() {
 }
 
 void PlayerBodySystem::RotateToLeft() {
+    std::cout << "RotateToLeft" << std::endl;
     body_->rotation_ -= 0.8f;
     if (body_->rotation_ < -180.0f) {
         body_->rotation_ = -179.0f;
@@ -110,7 +121,11 @@ void PlayerBodySystem::RotateToLeft() {
 }
 
 bool PlayerBodySystem::isPositive(float value) {
-    return value > 0.0f;
+    return value >= 0.0f;
+}
+
+bool PlayerBodySystem::isNegative(float value) {
+    return value < 0.0f;
 }
 
 float PlayerBodySystem::GetLimitAngle(float angle) {

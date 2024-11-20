@@ -29,6 +29,7 @@ class PlayerBodySystem : public System {
   void Idle(PlayerComponent *player);
   void SetLeftRightLimits();
   bool isPositive(float value);
+  bool isNegative(float value);
   void LocateBody();
   void SetShadowRotation();
   void RotateBody();
