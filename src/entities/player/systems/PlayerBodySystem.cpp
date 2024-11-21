@@ -74,35 +74,26 @@ void PlayerBodySystem::SetShadowRotation() {
 }
 
 void PlayerBodySystem::RotateBody() {
-    if (isNegative(body_->rotation_)) {
-        if (!isPositive(direction_->rotation_)) {
-            if (direction_->rotation_ > leftAngle_) {
-                if (direction_->rotation_ > body_->shadowRotation_) {
-                    RotateToLeft();
-                }
-            } else {
-                RotateToLeft();
-            }
-
-            // if (direction_->rotation_ > rightAngle_) {
-            //     RotateToRight();
-            // } else {
-            //     if (direction_->rotation_ < body_->shadowRotation_) {
-            //         RotateToRight();
-            //     }
-            // }
-        }
-        else {
-            if (direction_->rotation_ > leftAngle_) {
-                if (direction_->rotation_ < body_->shadowRotation_) {
-                    RotateToLeft();
-                }
-            } else {
-
-            }
-        }
-        
+    if (direction_->rotation_ > leftAngle_) {
+        std::cout << "vis > left, ";
     }
+    if (direction_->rotation_ < leftAngle_) {
+        std::cout << "vis < left, ";
+    }
+    if (direction_->rotation_ > rightAngle_) {
+        std::cout << "vis > right, ";
+    }
+    if (direction_->rotation_ < rightAngle_) {
+        std::cout << "vis < right, ";
+    }
+    if (direction_->rotation_ > body_->shadowRotation_) {
+        std::cout << "vis > shadow, ";
+    }
+    if (direction_->rotation_ < body_->shadowRotation_) {
+        std::cout << "vis < shadow, ";
+    }
+
+    std::cout << std::endl;
 }
 
 void PlayerBodySystem::RotateToRight() {
@@ -115,8 +106,8 @@ void PlayerBodySystem::RotateToRight() {
 void PlayerBodySystem::RotateToLeft() {
     std::cout << "RotateToLeft" << std::endl;
     body_->rotation_ -= 0.8f;
-    if (body_->rotation_ < -180.0f) {
-        body_->rotation_ = -179.0f;
+    if (body_->rotation_ < -179.0f) {
+        body_->rotation_ = 179.0f;
     }
 }
 

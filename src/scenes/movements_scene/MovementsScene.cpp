@@ -22,7 +22,7 @@ void MovementsScene::Init() {
 
     // Player Entity
     float angleLimit = 55.0f;
-    float defaultAngle = 0.0f;
+    float defaultAngle = 40.0f;
     Scene::AddEntity(
         Tools::CreatePlayerForStepMoveSystem(
             Tools::GetPlayerSpawnPositionFromMap(mapEntity),
@@ -44,8 +44,8 @@ void MovementsScene::Init() {
     
     // WARNING! UNDER CONSTRUCTION!
     Scene::AddSystem(new PlayerBodySystem);
-    Scene::AddSystem(new PlayerLeftFootSystem);
-    Scene::AddSystem(new PlayerRightFootSystem);
+    // Scene::AddSystem(new PlayerLeftFootSystem);
+    // Scene::AddSystem(new PlayerRightFootSystem);
     // Scene::AddSystem(new PlayerStepSystem);
     // Scene::AddSystem(new PlayerFeetToBodyRelativeSystem);
 
