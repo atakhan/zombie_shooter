@@ -24,8 +24,8 @@ void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
         DrawCircleV(direction->mousePos_, 5.0f, BLUE_3_8);
         DrawLineV(playerBody->pos_, direction->mousePos_, GRAY_6_2);
         
-        float width = 20.0f * 2;
-        float height = 20.0f / 4;
+        float width = 80.0f;
+        float height = 2.5f;
         Rectangle focusRec = {playerBody->pos_.x, playerBody->pos_.y, width, height};
         Vector2 focuesRecOrigin = {0.0f, height / 2};
 

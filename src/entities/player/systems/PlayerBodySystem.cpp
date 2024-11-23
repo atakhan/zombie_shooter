@@ -23,10 +23,15 @@ void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
         // DRAW BODY
         DrawCircleV(body_->pos_, 5.0f, GREEN);
 
-        float width = 20.0f * 2;
-        float height = 20.0f / 4;
+        float width = 40.0f;
+        float height = 5.0f;
         Rectangle focusRec = {body_->pos_.x, body_->pos_.y, width, height};
         Vector2 focuesRecOrigin = {0.0f, height / 2};
+        
+        float width2 = 80.0f;
+        float height2 = 2.5f;
+        Rectangle focusRec2 = {body_->pos_.x, body_->pos_.y, width2, height2};
+        Vector2 focuesRecOrigin2 = {0.0f, height2 / 2};
 
         // BODY DIRECTION
         DrawRectanglePro(focusRec, focuesRecOrigin, body_->rotation_, WHITE);
@@ -37,7 +42,7 @@ void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
         // RIGHT LIMIT EDGE DIRECTION
         DrawRectanglePro(focusRec, focuesRecOrigin, rightAngle_, PURPLE);
         // ANGLE CONVERSION DIRECTION
-        DrawRectanglePro(focusRec, focuesRecOrigin, 180.0f, GREEN);
+        DrawRectanglePro(focusRec2, focuesRecOrigin2, 180.0f, GREEN);
         // DrawCircleV(body_->goalPosition_, 5.0f, ORANGE);
     }
 }
@@ -61,8 +66,8 @@ void PlayerBodySystem::LocateBody() {
 }
 
 void PlayerBodySystem::SetLeftRightLimits() {
-    leftAngle_ = body_->rotation_ - body_->limit_;
-    rightAngle_ = body_->rotation_ + body_->limit_;
+    leftAngle_ = GetLimitAngle(body_->rotation_ - body_->limit_);
+    rightAngle_ = GetLimitAngle(body_->rotation_ + body_->limit_);
 }
 
 void PlayerBodySystem::SetShadowRotation() {
@@ -74,24 +79,73 @@ void PlayerBodySystem::SetShadowRotation() {
 }
 
 void PlayerBodySystem::RotateBody() {
-    if (direction_->rotation_ > leftAngle_) {
-        std::cout << "vis > left, ";
+    float vis = direction_->rotation_;
+    float shadow = body_->shadowRotation_;
+    float body = body_->rotation_;
+
+    if (isNegative(rightAngle_)) {
+        if (isNegative(vis)) {
+            if (vis > rightAngle_) {
+                std::cout << "move right (-v>-r), ";
+            }
+        } else {
+            if (vis < shadow) {
+                std::cout << "move right (+v<+s), ";
+            }
+        }
+    } else {
+        if (isNegative(vis)) {
+            if (vis < shadow) {
+                std::cout << "move right (-v<+s), ";
+            }
+        } else {
+            if (vis > rightAngle_) {
+                std::cout << "move right (+v>+r), ";
+            }
+        }
     }
-    if (direction_->rotation_ < leftAngle_) {
-        std::cout << "vis < left, ";
-    }
-    if (direction_->rotation_ > rightAngle_) {
-        std::cout << "vis > right, ";
-    }
-    if (direction_->rotation_ < rightAngle_) {
-        std::cout << "vis < right, ";
-    }
-    if (direction_->rotation_ > body_->shadowRotation_) {
-        std::cout << "vis > shadow, ";
-    }
-    if (direction_->rotation_ < body_->shadowRotation_) {
-        std::cout << "vis < shadow, ";
-    }
+
+    // std::cout << "body: " << body;
+    // std::cout << ", shad: " << shadow;
+    // std::cout << ", left: " << leftAngle_;
+    // std::cout << ", right: " << rightAngle_;
+    // std::cout << ", vis: " << vis;
+    
+    // if (vis < rightAngle_) {
+    //     std::cout << "move right, ";
+    // }
+    // if (vis > leftAngle_) {
+    //     std::cout << "vis > left, ";
+    // } else {
+    //     std::cout << "vis < left, ";
+    // }
+    
+    // if (vis > rightAngle_) {
+    //     std::cout << "vis > right, ";
+    // } else {
+    //     std::cout << "vis < right, ";
+    // }
+
+    // if (vis > shadow) {
+    //     std::cout << "vis > shadow, ";
+    // } else {
+    //     std::cout << "vis < shadow, ";
+    // }
+    
+    // if (vis < 0.0f) {
+    //     std::cout << "vis neg, ";
+    // } else {
+    //     std::cout << "vis pos, ";
+    // }
+
+    // std::cout << "vis: " << vis;
+    // std::cout << ", right: " << rightAngle_ << ", ";
+    // std::cout << ", left: " << leftAngle_ << ", ";
+
+    // std::cout << "left: " << leftAngle_ << ", right: " << rightAngle_ << ", ";
+    // std::cout << "vis - body " << vis - body_->rotation_;
+    // std::cout << "outside view, ";
+    // std::cout << "inside view, ";
 
     std::cout << std::endl;
 }
