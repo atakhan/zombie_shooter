@@ -9,6 +9,7 @@
 #include "./player/Bootstrap.h"
 #include "./scene/Bootstrap.h"
 #include "./sound/Bootstrap.h"
+#include "./test/Bootstrap.h"
 #include "./zombie/Bootstrap.h"
 
 #endif  // SRC_ENTITIES_BOOTSTRAP_H
