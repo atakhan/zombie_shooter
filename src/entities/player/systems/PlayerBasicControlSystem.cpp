@@ -18,7 +18,7 @@ void PlayerBasicControlSystem::Draw(std::vector<Entity*> *entities) {
                     position->position_.x,
                     position->position_.y,
                     health->health_,
-                    R7G7B0A3
+                    MCOLOR_YELLOW
                 );
             }
 

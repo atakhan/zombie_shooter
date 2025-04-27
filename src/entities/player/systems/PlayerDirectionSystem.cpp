@@ -21,8 +21,8 @@ void PlayerDirectionSystem::Draw(std::vector<Entity*> *entities) {
     DirectionComponent *direction = player->GetComponent<DirectionComponent>();
     
     if (playerBody) {
-        DrawCircleV(direction->mousePos_, 5.0f, BLUE_3_8);
-        DrawLineV(playerBody->pos_, direction->mousePos_, GRAY_6_2);
+        DrawCircleV(direction->mousePos_, 5.0f, MCOLOR_BLUE);
+        DrawLineV(playerBody->pos_, direction->mousePos_, MCOLOR_GRAY_X11_GRAY);
         
         float width = 80.0f;
         float height = 2.5f;

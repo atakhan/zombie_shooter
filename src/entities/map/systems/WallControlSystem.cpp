@@ -38,7 +38,7 @@ void WallControlSystem::DrawSpawnMapColors(TerrainComponent* terrain, SpawnMapCo
             y * terrain->cellHeight_,
             terrain->cellWidth_, 
             terrain->cellHeight_,
-            R0G0B3A1
+            MCOLOR_BABY_BLUE
         );
     } else
     if (spawnMap->map_[y][x] == 2) {  // ZOMBIE SPAWN POINT
@@ -47,7 +47,7 @@ void WallControlSystem::DrawSpawnMapColors(TerrainComponent* terrain, SpawnMapCo
             y * terrain->cellHeight_,
             terrain->cellWidth_, 
             terrain->cellHeight_,
-            R3G0B0A1
+            MCOLOR_RED_CRAYOLA
         );
     }
 }
@@ -58,7 +58,7 @@ void WallControlSystem::DrawWallsColors(TerrainComponent* terrain, WallsMapCompo
             y * terrain->cellHeight_, 
             terrain->cellWidth_, 
             terrain->cellHeight_,
-            R1G1B1A2
+            MCOLOR_GRAY_X11_GRAY
         );
     }
 }
@@ -69,7 +69,7 @@ void WallControlSystem::DrawFloorColors(TerrainComponent* terrain, WallsMapCompo
             y * terrain->cellHeight_, 
             terrain->cellWidth_, 
             terrain->cellHeight_,
-            R1G1B1A4
+            MCOLOR_GRAY_X11_GRAY
         );
     }
 }

@@ -15,7 +15,7 @@ void PlayerBreathSystem::Draw(std::vector<Entity*> *entities) {
             position->position_.x,
             position->position_.y,
             breathSound->current_,
-            GRAY_6_2
+            MCOLOR_GRAY_X11_GRAY
         );
     }
 }

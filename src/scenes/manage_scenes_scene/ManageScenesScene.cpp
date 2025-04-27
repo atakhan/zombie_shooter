@@ -12,7 +12,7 @@ void ManageScenesScene::Init() {
     MenuComponent *mainMenu = new MenuComponent(
         1,
         32.0f, 8.0f, 10.0f,
-        R6G6B6A8, R0G0B7A8,
+        MCOLOR_GRAY_X11_GRAY, MCOLOR_BLUE,
         (Vector2){30.0f, 100.0f}
     );
 

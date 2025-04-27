@@ -36,7 +36,7 @@ void PlayerBodySystem::Draw(std::vector<Entity*> *entities) {
         // BODY DIRECTION
         DrawRectanglePro(focusRec, focuesRecOrigin, body_->rotation_, WHITE);
         // BODY SHADOW DIRECTION
-        DrawRectanglePro(focusRec, focuesRecOrigin, body_->shadowRotation_, GRAY_6_4);
+        DrawRectanglePro(focusRec, focuesRecOrigin, body_->shadowRotation_, MCOLOR_GRANITE_GRAY);
         // LEFT LIMIT EDGE DIRECTION
         DrawRectanglePro(focusRec, focuesRecOrigin, leftAngle_, PINK);
         // RIGHT LIMIT EDGE DIRECTION

@@ -15,20 +15,20 @@ const float Config::DEFAULT_FONT_SIZE       = 16.0f;
 const float Config::DEFAULT_PADDING         = 0.0f;
 const float Config::DEFAULT_LINE_SPACING    = 22.0f;
 const float Config::DEFAULT_TEXT_SPACING    = 1.0f;
-const Color Config::DEFAULT_UI_TEXT_COLOR   = GRAY_1_8;
-const Color Config::DEFAULT_FONT_COLOR      = GRAY_6_8;
+const Color Config::DEFAULT_UI_TEXT_COLOR   = MCOLOR_RED;
+const Color Config::DEFAULT_FONT_COLOR      = MCOLOR_RED;
 
 // STYLE CONFIGS
-const Color Config::PLAYER_SPAWN_CELL_COLOR = BLUE_3_3;
-const Color Config::TERRAIN_DEFAULT_COLOR   = GREEN_3_4;
+const Color Config::PLAYER_SPAWN_CELL_COLOR = MCOLOR_RED;
+const Color Config::TERRAIN_DEFAULT_COLOR   = MCOLOR_RED;
 const Color Config::PLAYER_COLOR            = RAYWHITE;
-const Color Config::HUMAN_COLOR             = BLUE_3_8;
-const Color Config::ZOMBIE_COLOR            = RED_3_8;
-const Color Config::ATTACK_RADIUS_COLOR     = RED_7_2;
-const Color Config::SOUND_RADIUS_COLOR      = GRAY_6_1;
-const Color Config::SMELL_RADIUS_COLOR      = YELLOW_3_8;
-const Color Config::PATH_COLOR              = GRAY_6_4;
-const Color Config::TARGET_COLOR            = RED_3_4;
+const Color Config::HUMAN_COLOR             = MCOLOR_RED;
+const Color Config::ZOMBIE_COLOR            = MCOLOR_RED;
+const Color Config::ATTACK_RADIUS_COLOR     = MCOLOR_RED;
+const Color Config::SOUND_RADIUS_COLOR      = MCOLOR_RED;
+const Color Config::SMELL_RADIUS_COLOR      = MCOLOR_RED;
+const Color Config::PATH_COLOR              = MCOLOR_RED;
+const Color Config::TARGET_COLOR            = MCOLOR_RED;
 
 // WALL CONFIGS
 const float Config::DEFAULT_WALL_HEALTH     = 100.0f;
